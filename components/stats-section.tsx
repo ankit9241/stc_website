@@ -11,9 +11,9 @@ const StatsSection = () => {
             ABOUT US
           </span>
         </div>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold mt-2 mb-4 text-gray-800 leading-tight break-words">
-          SHAPING MINDS,<br /> INSPIRING FUTURES
-        </h1>
+        <h2 className="mt-4 text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
+              Shaping Minds <br /><span className="text-blue-600">Inspiring Futures</span>
+            </h2>
         <p className="text-gray-600 text-base sm:text-lg md:text-xl font-light leading-relaxed">
           Student Technical Council is a reimagined and upgraded version of the former Technology Club, established with the vision of creating a centralized, well-structured platform that caters to the diverse academic and professional aspirations of students. Recognizing the need for more specialized focus areas, the Student Senate was formed to streamline operations and maximize impact by dividing its responsibilities into three dedicated verticals.<br /><br />
         </p>
