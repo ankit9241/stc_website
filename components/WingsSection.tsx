@@ -9,7 +9,7 @@ const wings = [
     id: 1,
     title: 'DISHA',
     subtitle: 'CAREER GROWTH AND TRAINING CELL',
-    icon: './first.svg',
+    logo: '/images/disha-logo.png',
     color: '#453CD5',
     description: 'DISHA empowers students with skills, exposure, and support for their professional growth through comprehensive training and development programs.',
     path: '/wings/disha'
@@ -18,7 +18,7 @@ const wings = [
     id: 2,
     title: 'ARTHNITI',
     subtitle: 'ENTREPRENEURSHIP AND INNOVATION CELL',
-    icon: './second.svg',
+    logo: '/images/arthniti-logo.png',
     color: '#E53E3E',
     description: 'ARTHNITI promotes entrepreneurship and business skills, offering mentorship, workshops, and networking opportunities for students to develop their ideas.',
     path: '/wings/arthniti'
@@ -27,7 +27,7 @@ const wings = [
     id: 3,
     title: 'TATVA',
     subtitle: 'TECHNOLOGY AND RESEARCH CELL',
-    icon: './third.svg',
+    logo: '/images/tatva_nobg.png',
     color: '#3182CE',
     description: 'TATVA nurtures technical expertise and promotes a research-oriented mindset among students through innovative projects and collaborative learning.',
     path: '/wings/tatva'
@@ -107,16 +107,17 @@ const WingsSection = () => {
             >
               <div className="h-full bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
                 <div className="h-full p-8 flex flex-col">
-                  {/* Icon */}
+                  {/* Logo */}
                   <div className="mb-6">
-                    <div className="w-16 h-16 rounded-xl bg-blue-50 flex items-center justify-center border border-blue-100">
-                      <img 
-                        src={wing.icon} 
-                        alt={wing.title} 
-                        className="w-8 h-8 object-contain"
-                        style={{ filter: 'drop-shadow(0 2px 4px rgba(59, 130, 246, 0.2))' }}
-                      />
-                    </div>
+                    <img 
+                      src={wing.logo} 
+                      alt={`${wing.title} Logo`} 
+                      className="w-24 h-24 object-contain"
+                      style={{ 
+                        filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1))',
+                        transition: 'transform 0.3s ease-in-out'
+                      }}
+                    />
                   </div>
                   
                   {/* Title */}

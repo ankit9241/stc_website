@@ -12,7 +12,33 @@ export const metadata: Metadata = {
   description: "Empowering Students Through Innovation - Official website of Student Technical Council, IIT Patna",
   keywords: "IIT Patna, Student Technical Council, DISHA, ARTHNITI, TATVA, student government, technology, innovation",
   authors: [{ name: "Student Technical Council IIT Patna" }],
-  generator: 'Vatsal Srivastava'
+  generator: 'Vatsal Srivastava',
+  icons: {
+    icon: '/images/stc-logo.jpg',
+    shortcut: '/images/stc-logo.jpg',
+    apple: '/images/stc-logo.jpg',
+  },
+  openGraph: {
+    title: 'Student Technical Council - IIT Patna',
+    description: 'Empowering Students Through Innovation',
+    url: 'https://yourwebsite.com', // Replace with your actual website URL
+    siteName: 'STC IIT Patna',
+    images: [
+      {
+        url: '/images/stc-logo.jpg',
+        width: 800,
+        height: 600,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Student Technical Council - IIT Patna',
+    description: 'Empowering Students Through Innovation',
+    images: ['/images/stc-logo.jpg'],
+  },
 }
 
 export const viewport: Viewport = {
