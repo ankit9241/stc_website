@@ -45,7 +45,7 @@ const CompanyCards = ({ company: internshipCompanies }: CompanyCardsProps) => {
             className={`group cursor-pointer border-0 shadow-md hover:shadow-xl transition-all duration-500 transform ${
               hoveredCompany === null 
                 ? "hover:-translate-y-2" 
-                : hoveredCompany === index 
+                : hoveredCompany === index  
                   ? "scale-105 -translate-y-2 shadow-2xl z-10" 
                   : "scale-95 opacity-60"
             } bg-gradient-to-br from-white to-gray-50 hover:from-blue-50 hover:to-white`}
