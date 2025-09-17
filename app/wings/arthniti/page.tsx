@@ -176,7 +176,7 @@ export default function ArthnitiPage() {
       </div>
 
       {/* About ARTHNITI */}
-      <section className="py-20">
+      <section className="py-20" id="about">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
             <div>
@@ -227,7 +227,7 @@ export default function ArthnitiPage() {
       </section>
 
       {/* Sub Clubs */}
-      <section className="py-20">
+      <section className="py-20" id="sub-clubs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">ARTHNITI Sub-Clubs</h2>

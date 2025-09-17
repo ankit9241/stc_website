@@ -4,6 +4,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { Navigation } from "@/components/navigation"
 import { FooterWrapper } from "@/components/footer-wrapper"
+import VideoTransition from "@/components/video-transition"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -167,10 +168,12 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.variable} font-sans antialiased`}>
-        <Navigation />
-        <main className="min-h-screen">{children}</main>
-        <FooterWrapper />
+      <body className={`${inter.variable} font-sans antialiased overflow-x-hidden`}>
+        <VideoTransition>
+          <Navigation />
+          <main className="min-h-screen">{children}</main>
+          <FooterWrapper />
+        </VideoTransition>
       </body>
     </html>
   )

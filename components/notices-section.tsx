@@ -7,7 +7,7 @@ const notices = [
   {
     id: 1,
     title: "HACK N TECH Hackathon Results Announced",
-    date: "2025-03-08",
+    date: "2025-05-24",
     excerpt: "Congratulations to all participants! Winners have been announced for the 24-hour coding marathon.",
     category: "Events",
     urgent: false,
