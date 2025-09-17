@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Inter, Poppins } from "next/font/google"
 import "./globals.css"
 import { Navigation } from "@/components/navigation"
@@ -17,8 +17,12 @@ export const metadata: Metadata = {
   description: "Empowering Students Through Innovation - Official website of Student Technical Council, IIT Patna",
   keywords: "IIT Patna, Student Technical Council, DISHA, ARTHNITI, TATVA, student government, technology, innovation",
   authors: [{ name: "Student Technical Council IIT Patna" }],
-  viewport: "width=device-width, initial-scale=1",
-    generator: 'Vatsal Srivastava'
+  generator: 'Vatsal Srivastava'
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 }
 
 export default function RootLayout({
