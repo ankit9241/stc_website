@@ -6,7 +6,7 @@ import CoreValues from "@/components/coreValues"
 import FaQ from "@/components/FaQ"
 export default function HomePage() {
   return (
-    <div>
+    <div className="min-h-screen bg-white pt-16">
       <HeroSection />
       <StatsSection/>
       <WingsSection/>

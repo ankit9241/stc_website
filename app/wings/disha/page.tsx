@@ -1,7 +1,11 @@
+"use client";
+
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Users, FileText, MessageSquare, Award, Search, Network, GraduationCap, Building } from "lucide-react"
+import { Users, FileText, MessageSquare, Award, Search, Network, GraduationCap, Building, ArrowRight, Mail } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
+import { useCallback } from "react";
 
 const subClubs = [
   {
@@ -61,31 +65,93 @@ const subClubs = [
 ]
 
 export default function DishaPage() {
+  const scrollToSection = useCallback((id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-red-50 pt-16">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-100 via-blue-500 to-blue-100 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-        <div className="w-20 h-20 bg-white bg-opacity-20 rounded-3xl flex items-center justify-center mx-auto mb-6">
-          <Users className="w-10 h-10 text-white" />
+      <div className="relative overflow-hidden pt-24 pb-12 md:pt-28 md:pb-16 lg:pt-32 lg:pb-20">
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 opacity-5" style={{
+          backgroundImage: 'radial-gradient(circle at 10% 20%, #EF4444 0.5px, transparent 0.5px)',
+          backgroundSize: '20px 20px',
+        }}></div>
+      
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row-reverse items-center justify-between gap-12">
+            {/* Content */}
+            <div className="text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
+              <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-red-100 text-red-800 border border-red-200 mb-6">
+                <Users className="w-4 h-4 mr-2" />
+                <span className="tracking-wider">CAREER GROWTH & TRAINING CELL</span>
+              </div>
+              
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                <span className="text-red-600">DISHA</span> - Guiding Your Professional Journey
+                
+              <div className="mt-4">
+                <a href="mailto:disha@iitp.ac.in" className="inline-flex items-center text-sm bg-red-50 hover:bg-red-100 text-red-700 px-3 py-1.5 rounded-full border border-red-100 transition-colors">
+                  <Mail className="w-3.5 h-3.5 mr-1.5" />
+                  disha@iitp.ac.in
+                </a>
+              </div>
+              </h1>
+              
+              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                We provide comprehensive career development programs, skill-building workshops, and industry connections
+                to help you navigate your professional path with confidence.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Button 
+                  onClick={() => scrollToSection('sub-clubs')}
+                  className="bg-red-600 hover:bg-red-700 text-white transition-colors"
+                >
+                  Explore Programs
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+                <Button 
+                  onClick={() => scrollToSection('about')}
+                  variant="outline" 
+                  className="border-gray-300 text-gray-700 hover:bg-gray-50"
+                >
+                  Learn More
+                </Button>
+              </div>
+            </div>
+            
+            {/* DISHA Logo Image */}
+            <div className="relative w-full max-w-md">
+              <div className="w-full bg-transparent flex items-center justify-center p-2">
+                <div className="relative w-full flex items-center justify-center">
+                  <Image
+                    src="/images/disha-logo.png"
+                    alt="DISHA Logo"
+                    width={800}
+                    height={800}
+                    priority
+                    className="w-full h-auto object-contain"
+                    onError={(e) => {
+                      // Fallback to placeholder if image fails to load
+                      const target = e.target as HTMLImageElement;
+                      target.onerror = null;
+                      target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%233b82f6'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E";
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div> 
         </div>
-        <h1 className="text-5xl font-bold  mb-6">DISHA</h1>
-            <p className="text-lg font-semibold mb-2 opacity-90 flex items-center justify-center gap-2">
-              <span className="inline-block bg-white bg-opacity-20 rounded px-3 py-1 text-green-100 tracking-wide">
-              disha@iitp.ac.in
-              </span>
-            </p>
-        <h2 className="text-2xl font-semibold mb-4 opacity-90">Career Growth & Training Cell</h2>
-        <p className="text-xl max-w-3xl mx-auto opacity-90">
-          Empowering students with the skills, exposure, and support needed to excel in their professional journey
-        </p>
-          </div>
-        </div>
-      </section>
+      </div>
 
       {/* About DISHA */}
-      <section className="py-20">
+      <section className="py-20" id="about">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
             <div>
@@ -106,27 +172,27 @@ export default function DishaPage() {
                 placements, DISHA stands as a pillar of career support, development, and direction.
               </p>
             </div>
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 rounded-3xl p-8">
+            <div className="bg-gradient-to-br from-red-50 to-red-100 border-2 border-red-200 rounded-3xl p-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Key Focus Areas</h3>
               <ul className="space-y-4">
                 <li className="flex items-center">
-                  <div className="w-3 h-3 bg-blue-500 rounded-full mr-4"></div>
+                  <div className="w-3 h-3 bg-red-500 rounded-full mr-4"></div>
                   <span className="text-gray-700">Career counseling and guidance</span>
                 </li>
                 <li className="flex items-center">
-                  <div className="w-3 h-3 bg-blue-500 rounded-full mr-4"></div>
+                  <div className="w-3 h-3 bg-red-500 rounded-full mr-4"></div>
                   <span className="text-gray-700">Industry-ready skill development</span>
                 </li>
                 <li className="flex items-center">
-                  <div className="w-3 h-3 bg-blue-500 rounded-full mr-4"></div>
+                  <div className="w-3 h-3 bg-red-500 rounded-full mr-4"></div>
                   <span className="text-gray-700">Internship and placement support</span>
                 </li>
                 <li className="flex items-center">
-                  <div className="w-3 h-3 bg-blue-500 rounded-full mr-4"></div>
+                  <div className="w-3 h-3 bg-red-500 rounded-full mr-4"></div>
                   <span className="text-gray-700">Professional networking</span>
                 </li>
                 <li className="flex items-center">
-                  <div className="w-3 h-3 bg-blue-500 rounded-full mr-4"></div>
+                  <div className="w-3 h-3 bg-red-500 rounded-full mr-4"></div>
                   <span className="text-gray-700">Alumni mentorship programs</span>
                 </li>
               </ul>
@@ -136,7 +202,7 @@ export default function DishaPage() {
       </section>
 
       {/* Sub Clubs */}
-      <section className="py-20 bg-white">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">DISHA Sub-Clubs</h2>
@@ -155,8 +221,8 @@ export default function DishaPage() {
                 >
                   <CardContent className="p-6">
                     <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                        <IconComponent className="w-6 h-6 text-blue-600" />
+                      <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
+                        <IconComponent className="w-6 h-6 text-red-600" />
                       </div>
                       <h3 className="text-lg font-bold text-gray-900">{club.name}</h3>
                     </div>
@@ -168,7 +234,7 @@ export default function DishaPage() {
                       <ul className="space-y-1">
                         {club.activities.map((activity, actIndex) => (
                           <li key={actIndex} className="flex items-center text-sm text-gray-600">
-                            <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></div>
+                            <div className="w-1.5 h-1.5 bg-red-500 rounded-full mr-2"></div>
                             {activity}
                           </li>
                         ))}
@@ -183,22 +249,22 @@ export default function DishaPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+      <section className="py-20 bg-gradient-to-r from-red-600 to-red-700 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Accelerate Your Career?</h2>
-          <p className="text-xl mb-8 opacity-90">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Accelerate Your Career?</h2>
+          <p className="text-xl mb-10 opacity-90 max-w-2xl mx-auto">
             Join DISHA and take the first step towards your professional success
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/participation">
-              <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 text-lg">
+              <Button size="lg" className="bg-white text-red-600 hover:bg-gray-100 px-8 py-3 text-lg hover:text-red-700">
                 Join DISHA
               </Button>
             </Link>
             <Link href="/contact">
               <Button
                 size="lg"
-                className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 text-lg"
+                className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-red-600 px-8 py-3 text-lg"
               >
                 Learn More
               </Button>

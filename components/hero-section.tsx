@@ -17,7 +17,7 @@ const slides = [
 		description: "State-of-the-art facilities fostering innovation and excellence",
 	},
 ]
-
+ 
 export function HeroSection() {
 	const [currentSlide, setCurrentSlide] = useState(0)
 	const [isLoaded, setIsLoaded] = useState(false)
@@ -39,9 +39,9 @@ export function HeroSection() {
 	}
 
 	return (
-		<section className="relative min-h-screen flex items-center justify-center overflow-hidden px-2 sm:px-4">
+		<section className="relative isolate min-h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 mt-8 w-full pb-28 sm:pb-32">
 			{/* Background Video/Image Slideshow */}
-			<div className="absolute inset-0 z-10">
+			<div className="absolute inset-0 z-0">
 				{slides.map((slide, index) => (
 					<div
 						key={index}
@@ -79,54 +79,32 @@ export function HeroSection() {
 			>
 				{/* Animated Logo/Badge */}
 				<div className="mb-6 sm:mb-8 flex justify-center">
-					<div className="relative">
-						<div className="w-14 h-14 sm:w-20 sm:h-20 bg-gradient-to-br from-blue-400 to-[#453CD5] rounded-3xl flex items-center justify-center shadow-2xl animate-pulse">
-							<span className="text-white font-bold text-xl sm:text-2xl">SS</span>
-						</div>
-						<div className="absolute -top-2 -right-2 w-4 h-4 sm:w-6 sm:h-6 bg-gradient-to-br from-orange-400 to-orange-500 rounded-3xl animate-bounce"></div>
+					<div className="w-14 h-14 sm:w-20 sm:h-20 rounded-3xl flex items-center justify-center overflow-hidden">
+						<img 
+							src="/images/stc-logo.jpg" 
+							alt="STC Logo" 
+							className="w-full h-full object-cover"
+						/>
 					</div>
 				</div>
 
-				<h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-gray-800 via-[#453CD5] to-gray-800 bg-clip-text text-transparent">
-					Student  Technical Council 
-				</h1>
-				<h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium mb-3 sm:mb-4 text-[#453CD5]">IIT Patna Hybrid Programs</h2>
-				<p className="text-lg sm:text-2xl md:text-3xl lg:text-4xl mb-6 sm:mb-8 font-semibold bg-gradient-to-r from-black via-[#453CD5] to-black bg-clip-text text-transparent">
+				<div>
+					<h1 className="font-space-grotesk text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 sm:mb-6 text-[#0f2a4d] leading-[1.1] tracking-tight font-bold">
+						Student Technical Council
+					</h1>
+					<h3 className="font-space-grotesk text-xl sm:text-1xl md:text-2xl lg:text-3xl mb-6 sm:mb-8 text-[#1a4b8c] tracking-wide font-semibold">IIT Patna Hybrid Programs</h3>
+				</div>
+				<p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-6 sm:mb-8 font-medium text-[#2c5282] tracking-normal leading-relaxed">
 					Empowering Students Through Innovation
 				</p>
-				<p className="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 max-w-3xl mx-auto text-gray-600 leading-relaxed">
-					A reimagined platform with three specialized wings -  <span className="bg-gradient-to-r from-[#453CD5] via-blue-700 to-[#453CD5] bg-clip-text text-transparent font-semibold text-lg sm:text-2xl">DISHA, ARTHNITI, and TATVA </span> -  fostering career
+				<p className="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 max-w-3xl mx-auto text-gray-700 leading-relaxed">
+					A reimagined platform with three specialized wings - <span className="text-[#1a4b8c] font-semibold">DISHA, ARTHNITI, and TATVA</span> - fostering career
 					development, entrepreneurship, and technological innovation at IIT Patna.
 				</p>
 
-				{/* CTA Buttons */}
-				<div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-10 sm:mb-16">
-					<button
-						className="bg-[#453CD5] py-3 sm:py-4 rounded-lg text-white px-6 sm:px-10 flex items-center gap-2"
-						onClick={() => {
-							window.scrollBy({ top: window.innerHeight, left: 0, behavior: "smooth" })
-						}}
-					>
-						Learn More
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							className="w-5 h-5 ml-2"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={2}
-								d="M19 9l-7 7-7-7"
-							/>
-						</svg>
-					</button>
-				</div>
 
 				{/* Quick Info Cards */}
-				<div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
+				<div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto mb-6 sm:mb-8">
 					{[
 						{ label: "Active Wings", value: "3", icon: "" },
 						{ label: "Sub-Clubs", value: "24+", icon: "" },
@@ -162,25 +140,10 @@ export function HeroSection() {
 				</div>
 			</div>
 
-			{/* Slide Indicators */}
-			<div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-3 z-20">
-				{slides.map((_, index) => (
-					<button
-						key={index}
-						onClick={() => setCurrentSlide(index)}
-						className={`w-2 h-2 sm:w-3 sm:h-3 rounded-3xl transition-all duration-200 ${
-							index === currentSlide ? "bg-[#453CD5] scale-125" : "bg-blue-300 hover:bg-[#453CD5]"
-						}`}
-					/>
-				))}
-			</div>
-
-			{/* Scroll Indicator */}
-			<div className="absolute bottom-2 sm:bottom-4 right-4 sm:right-10 transform -translate-x-1/2 z-20 animate-bounce">
-				<div className="w-4 h-8 sm:w-6 sm:h-10 border-2 border-[#453CD5] rounded-full flex justify-center">
-					<div className="w-1 h-2 sm:w-1 sm:h-3 bg-[#453CD5] rounded-full mt-1 sm:mt-2 animate-pulse"></div>
-				</div>
-			</div>
+			{/* Bottom fade to separate from next section */}
+			<div className="pointer-events-none absolute bottom-0 left-0 right-0 h-16 sm:h-20 z-30 bg-gradient-to-b from-transparent to-white" />
+		
+			
 		</section>
 	)
 }

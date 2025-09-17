@@ -3,13 +3,16 @@ import { Target, Eye, Award, Users } from "lucide-react"
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gray-50 overflow-x-hidden">
+    <div className="w-full min-h-screen bg-gray-50 pt-16 overflow-x-hidden">
+      <div className="w-full max-w-full overflow-hidden">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-10 md:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
-          <div className="text-center">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 break-words leading-tight">About Student Technical Council</h1>
-            <p className="text-base md:text-lg lg:text-xl max-w-3xl mx-auto opacity-90 break-words leading-relaxed">
+          <div className="text-center max-w-4xl mx-auto">
+            <span className="inline-block text-sm font-medium tracking-wider text-white mb-4 px-4 py-1.5 bg-white/10 rounded-full border border-white/30">
+              ABOUT US
+            </span>
+            <p className="mt-5 text-base md:text-lg lg:text-xl max-w-3xl mx-auto text-white/90 break-words leading-relaxed">
               A reimagined and upgraded platform that caters to diverse academic and professional aspirations of
               students through three specialized wings.
             </p>
@@ -137,6 +140,7 @@ export default function AboutPage() {
           </Card>
         </div>
       </section>
+      </div>
     </div>
   )
 }
