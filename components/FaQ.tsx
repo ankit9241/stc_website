@@ -28,7 +28,7 @@ const FaQ: React.FC = () => {
     {
       question: "How can companies collaborate with Student Technical Council?",
       answer:
-        "Companies can partner with us for recruitment, workshops, mentorship programs, and sponsorships. Contact our industry relations team at disha@iitp.ac.in for collaboration opportunities.",
+        "Companies can partner with us for recruitment, workshops, mentorship programs, and sponsorships. Contact our industry relations team at stc@iitp.ac.in for collaboration opportunities.",
     },
     {
       question: "What is the time commitment for participation?",
@@ -39,13 +39,13 @@ const FaQ: React.FC = () => {
 
   return (
     <div>
-      <section className="py-16 lg:py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-semibold text-gray-900 mb-4">
+      <section className="py-20 min-h-[80vh] bg-gradient-to-br from-blue-50 via-white to-purple-50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-8 lg:px-0">
+          <div className="text-center mb-14">
+            <h2 className="text-4xl font-extrabold text-gray-900 mb-3 tracking-tight drop-shadow-sm">
               Frequently Asked Questions
             </h2>
-            <p className="text-lg lg:text-xl text-gray-600">
+            <p className="text-xl text-gray-500 font-medium">
               Quick answers to common inquiries
             </p>
           </div>
@@ -59,30 +59,28 @@ const FaQ: React.FC = () => {
               return (
                 <div
                   key={index}
-                  className="bg-white p-6 rounded-lg border-2 border-gray-200"
+                  className={`rounded-2xl border border-gray-200 bg-white/80 shadow-md overflow-hidden transition-all duration-300 group ${isOpen ? 'ring-2 ring-blue-400/40' : ''}`}
                 >
                   <button
                     id={btnId}
                     aria-controls={contentId}
                     aria-expanded={isOpen}
                     onClick={() => toggleFAQ(index)}
-                    className="w-full text-left flex items-start justify-between gap-4"
+                    className="w-full flex items-center justify-between px-7 py-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60 transition-colors duration-200 group-hover:bg-blue-50/60"
                     type="button"
                   >
-                    <h3 className="text-xl font-semibold text-gray-900">
+                    <span className="text-lg sm:text-xl font-semibold text-gray-900 transition-colors duration-200 group-hover:text-blue-700 group-focus-visible:text-blue-700">
                       {faq.question}
-                    </h3>
-
+                    </span>
                     <span
-                      className={`ml-4 transform transition-transform duration-200 ${
-                        isOpen ? "rotate-180" : ""
+                      className={`ml-4 flex-shrink-0 rounded-full bg-blue-100/60 p-1 transition-all duration-300 ${
+                        isOpen ? "rotate-180 shadow-md" : "shadow"
                       }`}
                       aria-hidden="true"
                     >
-                      {/* simple chevron */}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 text-gray-500"
+                        className="h-6 w-6 text-blue-500 group-hover:text-blue-700 transition-colors duration-200"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -96,17 +94,20 @@ const FaQ: React.FC = () => {
                       </svg>
                     </span>
                   </button>
-
-                  {/* Answer area */}
                   <div
                     id={contentId}
                     role="region"
                     aria-labelledby={btnId}
-                    className={`mt-3 text-gray-500 transition-all duration-200 ${
-                      isOpen ? "block" : "hidden"
+                    className={`px-7 overflow-hidden transition-all duration-400 ease-in-out ${
+                      isOpen ? "max-h-40 py-4 opacity-100" : "max-h-0 py-0 opacity-0"
                     }`}
+                    style={{
+                      transitionProperty: 'max-height, opacity, padding',
+                    }}
                   >
-                    <p>{faq.answer}</p>
+                    <p className="text-gray-600 text-base leading-relaxed">
+                      {faq.answer}
+                    </p>
                   </div>
                 </div>
               );
