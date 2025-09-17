@@ -4,6 +4,33 @@ import { Calendar, MapPin, Users, Trophy, Clock, Target } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import CompanyCards from "@/components/CompanyCards"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Events & Competitions",
+  description: "Discover exciting technical events, hackathons, workshops, and competitions organized by Student Technical Council IIT Patna. Join us for innovation and learning opportunities.",
+  keywords: [
+    "STC events",
+    "IIT Patna hackathons", 
+    "technical competitions",
+    "coding contests",
+    "workshops",
+    "seminars",
+    "student events",
+    "innovation competitions",
+    "tech talks",
+    "internship drives"
+  ],
+  openGraph: {
+    title: "Events & Competitions - Student Technical Council IIT Patna",
+    description: "Join exciting technical events, hackathons, and competitions. Showcase your skills and learn from industry experts.",
+    images: ['/images/hack-n-tech-poster.jpg'],
+  },
+  twitter: {
+    title: "Events & Competitions - Student Technical Council IIT Patna", 
+    description: "Join exciting technical events, hackathons, and competitions. Showcase your skills and learn from industry experts.",
+  },
+}
 
 const hackathonWinners = [
   {

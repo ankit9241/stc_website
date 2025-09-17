@@ -2,6 +2,30 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Users, Lightbulb, Code, ArrowRight } from "lucide-react"
 import Link from "next/link"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Our Wings",
+  description: "Explore the three specialized wings of Student Technical Council IIT Patna: DISHA, ARTHNITI, and TATVA.",
+  keywords: [
+    "STC wings IIT Patna",
+    "DISHA",
+    "ARTHNITI",
+    "TATVA",
+    "student technical wings",
+    "skill development",
+    "career training"
+  ],
+  openGraph: {
+    title: "Our Wings - Student Technical Council IIT Patna",
+    description: "Discover our three specialized wings: DISHA, ARTHNITI, and TATVA.",
+    images: ['/images/stc.jpg'],
+  },
+  twitter: {
+    title: "Our Wings - Student Technical Council IIT Patna",
+    description: "Discover our three specialized wings: DISHA for career growth, ARTHNITI for competitive programming, and TATVA for research & innovation.",
+  },
+}
 
 const wings = [
   {

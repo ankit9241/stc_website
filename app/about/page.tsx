@@ -1,5 +1,29 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Target, Eye, Award, Users } from "lucide-react"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description: "Learn about Student Technical Council IIT Patna - a reimagined platform with three specialized wings: DISHA, ARTHNITI, and TATVA, catering to diverse academic and professional aspirations.",
+  keywords: [
+    "about STC IIT Patna",
+    "student technical council",
+    "vision mission",
+    "DISHA ARTHNITI TATVA",
+    "student organization IIT Patna",
+    "technical excellence",
+    "innovation leadership"
+  ],
+  openGraph: {
+    title: "About Student Technical Council - IIT Patna",
+    description: "Learn about our reimagined platform with three specialized wings: DISHA, ARTHNITI, and TATVA, empowering students through technical excellence.",
+    images: ['/images/stc.jpg'],
+  },
+  twitter: {
+    title: "About Student Technical Council - IIT Patna",
+    description: "Learn about our reimagined platform with three specialized wings: DISHA, ARTHNITI, and TATVA, empowering students through technical excellence.",
+  },
+}
 
 export default function AboutPage() {
   return (
