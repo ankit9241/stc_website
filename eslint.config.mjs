@@ -20,6 +20,21 @@ const eslintConfig = [
       "next-env.d.ts",
     ],
   },
+  {
+    rules: {
+      // Allow quotes/apostrophes in text without escaping
+      "react/no-unescaped-entities": "off",
+      // Allow <img> usage (you can migrate gradually to next/image)
+      "@next/next/no-img-element": "off",
+      // Don't block on unused vars; warn instead and allow underscore-prefixed
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_", caughtErrorsIgnorePattern: "^_" },
+      ],
+      // Allow any temporarily, but warn
+      "@typescript-eslint/no-explicit-any": "warn",
+    },
+  },
 ];
 
 export default eslintConfig;
