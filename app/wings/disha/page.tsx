@@ -80,7 +80,7 @@ export default function DishaPage() {
         <div className="absolute inset-0 opacity-5" style={{
           backgroundImage: 'radial-gradient(circle at 10% 20%, #EF4444 0.5px, transparent 0.5px)',
           backgroundSize: '20px 20px',
-        }}></div>
+        }} />
       
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row-reverse items-center justify-between gap-12">
@@ -91,17 +91,28 @@ export default function DishaPage() {
                 <span className="tracking-wider">CAREER GROWTH & TRAINING CELL</span>
               </div>
               
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                <span className="text-red-600">DISHA</span> - Guiding Your Professional Journey
-                
+              <div className="flex items-center justify-center lg:justify-start mb-6">
+                {/* Logo for mobile and medium screens */}
+                <div className="lg:hidden flex-shrink-0">
+                  <Image
+                    src="/images/disha-logo.png"
+                    alt="DISHA Logo"
+                    width={120}
+                    height={120}
+                    className="w-24 h-24 md:w-32 md:h-32 object-contain mr-4"
+                  />
+                </div>
+                <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
+                  <span className="text-red-600">DISHA</span> - Guiding Your Professional Journey
+                </h1>
+              </div>
+              
               <div className="mt-4">
                 <a href="mailto:disha@iitp.ac.in" className="inline-flex items-center text-sm bg-red-50 hover:bg-red-100 text-red-700 px-3 py-1.5 rounded-full border border-red-100 transition-colors">
                   <Mail className="w-3.5 h-3.5 mr-1.5" />
                   disha@iitp.ac.in
                 </a>
               </div>
-              </h1>
-              
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
                 We provide comprehensive career development programs, skill-building workshops, and industry connections
                 to help you navigate your professional path with confidence.
@@ -125,8 +136,8 @@ export default function DishaPage() {
               </div>
             </div>
             
-            {/* DISHA Logo Image */}
-            <div className="relative w-full max-w-md">
+            {/* DISHA Logo Image - Hidden on mobile, visible on lg screens and up */}
+            <div className="hidden lg:block relative w-full max-w-md">
               <div className="w-full bg-transparent flex items-center justify-center p-2">
                 <div className="relative w-full flex items-center justify-center">
                   <Image
@@ -273,5 +284,5 @@ export default function DishaPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }

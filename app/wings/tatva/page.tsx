@@ -98,16 +98,28 @@ export default function TatvaPage() {
                 <span className="tracking-wider">TECHNOLOGY & RESEARCH CELL</span>
               </div>
               
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                <span className="text-[#0d9488]">TATVA</span> - Innovation Through Technology
-                
+              <div className="flex items-center justify-center lg:justify-start mb-6">
+                {/* Logo for mobile and medium screens */}
+                <div className="lg:hidden flex-shrink-0">
+                  <Image
+                    src="/images/tatva_nobg.png"
+                    alt="TATVA Logo"
+                    width={120}
+                    height={120}
+                    className="w-24 h-24 md:w-32 md:h-32 object-contain mr-4"
+                  />
+                </div>
+                <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
+                  <span className="text-[#0d9488]">TATVA</span> - Innovation Through Technology
+                </h1>
+              </div>
+              
               <div className="mt-4">
                 <a href="mailto:tatva@iitp.ac.in" className="inline-flex items-center text-sm bg-[#e6f7f5] hover:bg-[#ccf0eb] text-[#0d9488] px-3 py-1.5 rounded-full border border-[#99f6e4] transition-colors">
                   <Mail className="w-3.5 h-3.5 mr-1.5" />
                   tatva@iitp.ac.in
                 </a>
               </div>
-              </h1>
               
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
                 We foster technical excellence and research innovation through hands-on projects, workshops,
@@ -132,8 +144,8 @@ export default function TatvaPage() {
               </div>
             </div>
             
-            {/* TATVA Logo Image */}
-            <div className="relative w-full max-w-md">
+            {/* TATVA Logo Image - Hidden on mobile, visible on lg screens and up */}
+            <div className="hidden lg:block relative w-full max-w-md">
               <div className="w-full bg-transparent flex items-center justify-center p-2">
                 <div className="relative w-full flex items-center justify-center">
                   <Image

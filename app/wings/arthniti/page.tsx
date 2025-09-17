@@ -3,6 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Lightbulb, ArrowRight, Target, Presentation, TrendingUp, Users, Network, DollarSign, Calendar, Mail } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
 import { useCallback } from "react";
 
@@ -85,16 +86,28 @@ export default function ArthnitiPage() {
                 <span className="tracking-wider">ENTREPRENEURSHIP & INNOVATION CELL</span>
               </div>
               
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                <span className="text-amber-600">ARTHNITI</span> - Igniting Entrepreneurial Spirit
-                
+              <div className="flex items-center justify-center lg:justify-start mb-6">
+                {/* Logo for mobile and medium screens */}
+                <div className="lg:hidden flex-shrink-0">
+                  <Image
+                    src="/images/arthniti-logo.png"
+                    alt="ARTHNITI Logo"
+                    width={120}
+                    height={120}
+                    className="w-24 h-24 md:w-32 md:h-32 object-contain mr-4"
+                  />
+                </div>
+                <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
+                  <span className="text-amber-600">ARTHNITI</span> - Igniting Entrepreneurial Spirit
+                </h1>
+              </div>
+              
               <div className="mt-4">
                 <a href="mailto:arthniti@iitp.ac.in" className="inline-flex items-center text-sm bg-amber-50 hover:bg-amber-100 text-amber-700 px-3 py-1.5 rounded-full border border-amber-100 transition-colors">
                   <Mail className="w-3.5 h-3.5 mr-1.5" />
                   arthniti@iitp.ac.in
                 </a>
               </div>
-              </h1>
               
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
                 We provide comprehensive entrepreneurship development programs, startup incubation, and 
@@ -117,18 +130,46 @@ export default function ArthnitiPage() {
                 </Button>
               </div>
             </div>
-            {/* ARTHNITI Logo Image */}
-            <div className="relative w-full max-w-md">
-              <img 
-                src="/images/arthniti-logo.png" 
-                alt="ARTHNITI Logo" 
-                className="relative z-10 h-full w-full object-cover rounded-lg"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.onerror = null;
-                  target.src = '/images/arthniti-logo.png';
-                }}
-              />
+            {/* ARTHNITI Logo Image - Hidden on mobile, visible on lg screens and up */}
+            <div className="hidden md:block lg:hidden relative w-full max-w-md">
+              <div className="w-full bg-transparent flex items-center justify-center p-2">
+                <div className="relative w-full flex items-center justify-center">
+                  <Image
+                    src="/images/arthniti-logo.png"
+                    alt="ARTHNITI Logo"
+                    width={800}
+                    height={800}
+                    priority
+                    className="w-full h-auto object-contain"
+                    onError={(e) => {
+                      // Fallback to placeholder if image fails to load
+                      const target = e.target as HTMLImageElement;
+                      target.onerror = null;
+                      target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F59E0B'%3E%3Cpath d='M12 2L4 9v12h16V9l-8-7zM12 4.5l6 5.25v9.75H6V9.75l6-5.25z'/%3E%3C/svg%3E";
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="hidden lg:block relative w-full max-w-md">
+              <div className="w-full bg-transparent flex items-center justify-center p-2">
+                <div className="relative w-full flex items-center justify-center">
+                  <Image
+                    src="/images/arthniti-logo.png"
+                    alt="ARTHNITI Logo"
+                    width={800}
+                    height={800}
+                    priority
+                    className="w-full h-auto object-contain"
+                    onError={(e) => {
+                      // Fallback to placeholder if image fails to load
+                      const target = e.target as HTMLImageElement;
+                      target.onerror = null;
+                      target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23F59E0B'%3E%3Cpath d='M12 2L4 9v12h16V9l-8-7zM12 4.5l6 5.25v9.75H6V9.75l6-5.25z'/%3E%3C/svg%3E";
+                    }}
+                  />
+                </div>
+              </div>
             </div>
           </div> 
         </div>
