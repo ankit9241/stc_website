@@ -62,9 +62,17 @@ export function NoticesSection() {
   return (
     <section id="notices-section" className="py-16 w-[100vw] lg:py-20 bg-gray-50">
       <div className="max-w-[80vw] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-left mb-12 lg:mb-16">
-          <h1 className="text-[#453CD5] mb-10 tracking-widest font-semibold ">NEWS AND UPDATES</h1>
-          <h2 className="text-6xl font-semibold text-gray-900 mb-4">LATEST NEWS <br/> AND UPDATES</h2>
+        {/* Section Header - styled like WingsSection */}
+        <div className="text-center max-w-4xl mx-auto mb-12 lg:mb-16">
+          <span className="inline-block text-sm font-medium tracking-wider text-blue-600 mb-4 px-4 py-1.5 bg-blue-50 rounded-full border border-blue-100">
+            NEWS AND UPDATES
+          </span>
+          <h2 className="mt-2 sm:mt-4 text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
+            Latest <span className="text-blue-600">News</span> and Updates
+          </h2>
+          <p className="mt-5 text-lg text-gray-600 max-w-2xl mx-auto">
+            Stay informed with important announcements, events, and opportunities from STC.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">

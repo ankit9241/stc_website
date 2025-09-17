@@ -33,8 +33,11 @@ const wings = [
     subtitle: "Career Growth & Training Cell",
     description:
       "Empowering students with skills, exposure, and support needed to excel in their professional journey. Serves as a bridge between students and industry through internships, training programs, and placement assistance.",
-    icon: Users,
-    color: "from-blue-500 to-blue-600",
+    logo: "/images/disha-logo.png",
+    button: "from-red-400 to-red-500",
+    dot: "bg-red-400",
+    subtitleText: "text-red-600",
+    iconColor: "text-red-600",
     features: [
       "Resume & Portfolio Building",
       "Mock Interviews & GD",
@@ -50,8 +53,11 @@ const wings = [
     subtitle: "Entrepreneurship & Innovation Cell",
     description:
       "Dedicated to promoting entrepreneurship and business skills among students. Provides platforms for idea development, mentorship, and networking to transform innovative ideas into successful ventures.",
-    icon: Lightbulb,
-    color: "from-green-500 to-green-600",
+    logo: "/images/arthniti-logo.png",
+    button: "from-amber-400 to-amber-500",
+    dot: "bg-amber-400",
+    subtitleText: "text-amber-600",
+    iconColor: "text-amber-600",
     features: [
       "Startup Ideation & Validation",
       "Business Model & Strategy",
@@ -67,8 +73,11 @@ const wings = [
     subtitle: "Technology & Research Cell",
     description:
       "Nurtures technical expertise and promotes research-oriented mindset. Bridges academic learning and real-world technology applications through workshops, hackathons, and collaborative research.",
-    icon: Code,
-    color: "from-purple-500 to-purple-600",
+    logo: "/images/tatva_nobg.png",
+    button: "from-teal-400 to-teal-500",
+    dot: "bg-teal-400",
+    subtitleText: "text-teal-600",
+    iconColor: "text-teal-600",
     features: [
       "Web Development (WebWizer)",
       "Robotics (Mech-X)",
@@ -83,7 +92,7 @@ const wings = [
 
 export default function WingsPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pt-16">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -108,7 +117,6 @@ export default function WingsPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {wings.map((wing, index) => {
-              const IconComponent = wing.icon
               return (
                 <Card
                   key={index}
@@ -117,12 +125,17 @@ export default function WingsPage() {
                   <CardContent className="p-8 h-full flex flex-col">
                     <div className="text-center mb-6">
                       <div
-                        className={`w-20 h-20 bg-gradient-to-r ${wing.color} rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg`}
+                        className={`w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg bg-white`}
                       >
-                        <IconComponent className="w-10 h-10 text-white" />
+                        {/* Wing Logo */}
+                        <img
+                          src={wing.logo}
+                          alt={`${wing.name} Logo`}
+                          className="w-16 h-16 object-contain"
+                        />
                       </div>
                       <h3 className="text-2xl font-bold text-gray-900 mb-2">{wing.name}</h3>
-                      <p className="text-blue-600 font-semibold">{wing.subtitle}</p>
+                      <p className={`${wing.subtitleText} font-semibold`}>{wing.subtitle}</p>
                     </div>
 
                     <p className="text-gray-700 mb-6 leading-relaxed flex-grow">{wing.description}</p>
@@ -132,7 +145,7 @@ export default function WingsPage() {
                       <ul className="space-y-2">
                         {wing.features.map((feature, featureIndex) => (
                           <li key={featureIndex} className="flex items-center text-sm text-gray-600">
-                            <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
+                            <div className={`w-2 h-2 ${wing.dot} rounded-full mr-3`}></div>
                             {feature}
                           </li>
                         ))}
@@ -141,7 +154,7 @@ export default function WingsPage() {
 
                     <Link href={wing.link} className="mt-auto">
                       <Button
-                        className={`w-full bg-gradient-to-r ${wing.color} hover:shadow-lg text-white transform hover:scale-105 transition-all duration-200`}
+                        className={`w-full bg-gradient-to-r ${wing.button} hover:shadow-lg text-white transform hover:scale-105 transition-all duration-200`}
                       >
                         Explore {wing.name}
                         <ArrowRight className="w-4 h-4 ml-2" />

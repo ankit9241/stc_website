@@ -2,6 +2,18 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Users, UserPlus, Award, Crown, Star, ArrowRight, CheckCircle } from "lucide-react"
 import Link from "next/link"
+import { Metadata } from "next"
+
+const metadata: Metadata = {
+  title: "Participation - Student Technical Council IIT Patna",
+  description: "Explore the various levels of participation within the Student Technical Council IIT Patna.",
+  keywords: [
+    "STC participation",
+    "student involvement",
+    "IIT Patna",
+    "technical council",
+  ],
+}
 
 const participationLevels = [
   {
@@ -105,7 +117,7 @@ const coreValues = [
 
 export default function ParticipationPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pt-16">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -139,7 +151,7 @@ export default function ParticipationPage() {
                       {/* Level Info */}
                       <div className={`bg-gradient-to-r ${level.color} text-white p-8 flex flex-col justify-center`}>
                         <div className="flex items-center mb-4">
-                          <div className="w-12 h-12 bg-white bg-opacity-20 rounded-lg flex items-center justify-center mr-4">
+                          <div className="w-12 h-12 bg-white text-black bg-opacity-20 rounded-lg flex items-center justify-center mr-4">
                             <IconComponent className="w-6 h-6" />
                           </div>
                           <div>
@@ -149,7 +161,7 @@ export default function ParticipationPage() {
                         </div>
                         <p className="text-sm opacity-90 mb-4">{level.description}</p>
                         <div className="bg-white bg-opacity-20 rounded-lg p-3">
-                          <p className="text-sm font-semibold">Focus: {level.focus}</p>
+                          <p className="text-sm font-semibold text-black/90">Focus: {level.focus}</p>
                         </div>
                       </div>
 

@@ -4,7 +4,7 @@ import Link from "next/link"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Our Team",
+  title: "Our Team - Student Technical Council IIT Patna",
   description: "Meet the dedicated team members of Student Technical Council IIT Patna. Our leadership team and wing coordinators driving innovation and technical excellence.",
   keywords: [
     "STC team IIT Patna",
@@ -802,7 +802,7 @@ function TeamMemberCard({ member }: { member: any }) {
 
 export default function TeamPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pt-16">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

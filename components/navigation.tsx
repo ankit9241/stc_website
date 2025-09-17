@@ -2,20 +2,89 @@
 
 import type React from "react"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Menu, X, Download, ChevronDown } from "lucide-react"
+import { Menu, X, Download } from "lucide-react"
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [isMounted, setIsMounted] = useState(false)
   const pathname = usePathname()
-  const wingsButtonRef = useRef<HTMLButtonElement | null>(null)
-  const wingsDropdownRef = useRef<HTMLDivElement | null>(null)
+  
+  // Determine the theme based on the current route
+  let theme = {
+    bg: 'bg-gray-100',
+    accent: 'blue',
+    gradient: 'from-blue-500 to-blue-700',
+    border: 'border-gray-200',
+    hover: 'hover:bg-blue-100',
+    active: 'bg-blue-200',
+    text: 'text-gray-900',
+    navText: 'text-gray-800 hover:text-gray-900',
+    navHover: 'hover:bg-blue-50',
+    navActive: 'bg-blue-100 text-gray-900 font-medium',
+    navBg: 'bg-white/90 backdrop-blur-sm shadow-sm'
+  }
+
+  if (pathname?.includes('disha')) {
+    theme = {
+      bg: 'bg-red-50',
+      accent: 'red',
+      gradient: 'from-red-500 to-red-600',
+      border: 'border-red-200',
+      hover: 'hover:bg-red-100',
+      active: 'bg-red-200',
+      text: 'text-gray-900',
+      navText: 'text-gray-800 hover:text-gray-900',
+      navHover: 'hover:bg-red-50',
+      navActive: 'bg-red-100 text-gray-900 font-medium',
+      navBg: 'bg-white/90 backdrop-blur-sm shadow-sm'
+    }
+  } else if (pathname?.includes('arthniti')) {
+    theme = {
+      bg: 'bg-amber-50',
+      accent: 'amber',
+      gradient: 'from-amber-500 to-amber-600',
+      border: 'border-amber-200',
+      hover: 'hover:bg-amber-100',
+      active: 'bg-amber-200',
+      text: 'text-gray-900',
+      navText: 'text-gray-800 hover:text-gray-900',
+      navHover: 'hover:bg-amber-50',
+      navActive: 'bg-amber-100 text-gray-900 font-medium',
+      navBg: 'bg-white/90 backdrop-blur-sm shadow-sm'
+    }
+  } else if (pathname?.includes('tatva')) {
+    theme = {
+      bg: 'bg-teal-50',
+      accent: 'teal',
+      gradient: 'from-teal-500 to-teal-600',
+      border: 'border-teal-200',
+      hover: 'hover:bg-teal-100',
+      active: 'bg-teal-200',
+      text: 'text-gray-900',
+      navText: 'text-gray-800 hover:text-gray-900',
+      navHover: 'hover:bg-teal-50',
+      navActive: 'bg-teal-100 text-gray-900 font-medium',
+      navBg: 'bg-white/90 backdrop-blur-sm shadow-sm'
+    }
+  }
+
+  // Map accent to concrete Tailwind classes (avoid dynamic class names).
+  const accentBtnClass = (() => {
+    switch (theme.accent) {
+      case 'red':
+        return 'bg-red-600 hover:bg-red-700'
+      case 'amber':
+        return 'bg-amber-600 hover:bg-amber-700'
+      case 'teal':
+        return 'bg-teal-600 hover:bg-teal-700'
+      default:
+        return 'bg-blue-600 hover:bg-blue-700'
+    }
+  })()
 
   useEffect(() => {
     setIsMounted(true)
@@ -26,32 +95,13 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Dropdown now uses click effect only, no hover effect
   const navItems = [
     { href: "/", label: "Home" },
-    {
-      href: "/wings",
-      label: "Wings",
-      dropdown: [
-        { href: "/wings/disha", label: "DISHA" },
-        { href: "/wings/arthniti", label: "ARTHNITI" },
-        { href: "/wings/tatva", label: "TATVA" },
-      ],
-      // Add a flag to indicate click-activated dropdown
-      clickDropdown: true,
-    },
+    { href: "/wings", label: "Wings" },
     { href: "/team", label: "Our Team" },
     { href: "/events", label: "Events" },
     { href: "/contact", label: "Contact Us" },
   ]
-
-  // Move dropdown a bit upper by adjusting mt-1 to mt-0 or negative margin
-  const dropdownMenuClass = "absolute top-full left-0 -mt-10 w-48 bg-white rounded-lg shadow-lg border border-[#453CD5]/20 py-2 z-50"
-
-  // Add click support for dropdowns
-  const handleDropdownToggle = (href: string) => {
-    setActiveDropdown((prev) => (prev === href ? null : href))
-  }
 
   const handleDownloadBrochure = () => {
     const link = document.createElement("a")
@@ -81,199 +131,129 @@ export function Navigation() {
     return pathname === "/" && window.location.hash === "#notices"
   }
 
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    if (!activeDropdown) return;
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        wingsButtonRef.current &&
-        wingsDropdownRef.current &&
-        !wingsButtonRef.current.contains(event.target as Node) &&
-        !wingsDropdownRef.current.contains(event.target as Node)
-      ) {
-        setActiveDropdown(null);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [activeDropdown]);
+  // No dropdowns; simplified navigation
 
   return (
-    <nav
-      className={`sticky top-0 w-full z-40 transition-all duration-300 ${
-      isScrolled ? "bg-white/20 backdrop-blur-md shadow-lg border-b border-[#453CD5]/10" : "bg-white/90 backdrop-blur-sm"
-      }`}
-    >
-      <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="flex justify-between items-center h-20">
-        {/* Logo Section */}
-        <Link href="/" className="flex items-center space-x-3 group">
-        <div className="relative flex-shrink-0">
-          <div className="w-12 h-12 bg-gradient-to-br from-[#453CD5] to-blue-600 rounded-xl flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200 shadow-lg">
-          <span className="text-white font-bold text-lg">SS</span>
-          </div>
-          <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-br from-orange-400 to-orange-500 rounded-full animate-pulse"></div>
-        </div>
-        <div className="hidden sm:flex flex-col justify-center">
-          <h1 className="text-xl font-bold text-[#453CD5] group-hover:text-blue-600 transition-colors leading-tight">
-          Student Technical Council
-          </h1>
-          <p className="text-sm text-[#453CD5] font-medium leading-tight">IIT Patna Hybrid Programs</p>
-        </div>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center space-x-1">
-        {navItems.map((item) => (
-          <div key={item.href} className="relative flex items-center">
-          {item.dropdown ? (
-            <div className="relative">
-              <button
-                ref={item.href === "/wings" ? wingsButtonRef : undefined}
-                onClick={() =>
-                  setActiveDropdown(
-                    activeDropdown === item.href ? null : item.href
-                  )
-                }
-                className={`flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 whitespace-nowrap ${
-                  (pathname.startsWith(item.href) || (item.href === "/wings" && activeDropdown === "/wings"))
-                    ? "text-[#453CD5] bg-[#453CD5]/10"
-                    : "text-gray-700"
-                }`}
-              >
-                {item.label}
-                <ChevronDown className="w-4 h-4 ml-1 text-[#453CD5]" />
-              </button>
-              {activeDropdown === item.href && (
-                <div
-                  ref={item.href === "/wings" ? wingsDropdownRef : undefined}
-                  className="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-[#453CD5]/20 py-2 z-50"
-                >
-                  {item.dropdown.map((dropdownItem) => (
-                    <Link
-                      key={dropdownItem.href}
-                      href={dropdownItem.href}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#453CD5]/10 hover:text-[#453CD5] transition-colors"
-                    >
-                      {dropdownItem.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${theme.navBg} ${isScrolled ? 'py-2' : 'py-4'} border-b ${theme.border}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo Section */}
+          <Link href="/" className="flex items-center space-x-3 group">
+            <div className="relative flex-shrink-0 w-12 h-12 rounded-xl overflow-hidden transform group-hover:scale-105 transition-transform duration-200 shadow-lg">
+              <img 
+                src="/images/stc-logo.jpg" 
+                alt="STC Logo"
+                className="w-full h-full object-cover"
+              />
             </div>
-          ) : item.label === "Notices" ? (
-            <button
-              onClick={handleNoticesClick}
-              className={`relative px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 whitespace-nowrap ${
-                isNoticesActive()
-                  ? "text-[#453CD5] bg-[#453CD5]/10"
-                  : "text-gray-700 hover:text-[#453CD5] hover:bg-[#453CD5]/10"
-              }`}
-            >
-              {item.label}
-            </button>
-          ) : (
-            <Link
-              href={item.href}
-              className={`relative px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 whitespace-nowrap ${
-                pathname === item.href
-                  ? "text-[#453CD5] bg-[#453CD5]/10"
-                  : "text-gray-700 hover:text-[#453CD5] hover:bg-[#453CD5]/10"
-              }`}
-            >
-              {item.label}
-              {pathname === item.href && (
-                <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-[#453CD5] rounded-full"></div>
-              )}
-            </Link>
-          )}
-          </div>
-        ))}
-        </div>
-        <div className="hidden lg:flex ml-6 items-center">
-        <Button
-          size="sm"
-          onClick={handleDownloadBrochure}
-          className="bg-[#453CD5] hover:bg-[#453CD5] text-white shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 px-4 py-2 h-10 flex items-center gap-2"
-        >
-          <Download className="w-4 h-4 text-white" />
-          <span className="whitespace-nowrap">Download Brochure</span>
-        </Button>
-        </div>
+            <div className="hidden sm:flex flex-col justify-center">
+              <h1 className="text-lg font-bold text-[#0f2a4d] group-hover:text-[#1a4b8c] transition-colors leading-tight">
+                Student Technical Council
+              </h1>
+              <p className="text-xs text-[#1a4b8c] font-medium leading-tight">IIT Patna Hybrid Programs</p>
+            </div>
+          </Link>
 
-        {/* Mobile menu button */}
-        <div className="lg:hidden flex items-center space-x-2">
-        <Button
-          size="sm"
-          onClick={handleDownloadBrochure}
-          className="bg-gradient-to-r from-[#453CD5] to-blue-600 text-white text-xs px-3 py-2 h-8"
-        >
-          <Download className="w-3 h-3 mr-1 text-[#453CD5]" />
-          Brochure
-        </Button>
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="p-2 rounded-lg text-gray-700 hover:text-[#453CD5] hover:bg-[#453CD5]/10 transition-colors flex items-center justify-center"
-          aria-label="Toggle mobile menu"
-        >
-          {isOpen ? <X className="h-6 w-6 text-[#453CD5]" /> : <Menu className="h-6 w-6 text-[#453CD5]" />}
-        </button>
-        </div>
-      </div>
-
-      {/* Mobile Navigation */}
-      <div
-        className={`lg:hidden transition-all duration-300 ease-in-out overflow-hidden ${
-        isOpen ? "max-h-screen opacity-100 pb-4 overflow-y-auto" : "max-h-0 opacity-0"
-        }`}
-      >
-        <div className="pt-4 space-y-2">
-        {navItems.map((item) => (
-          <div key={item.href}>
-          {item.label === "Notices" ? (
-            <button
-            onClick={handleNoticesClick}
-            className={`block w-full text-left px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
-              isNoticesActive()
-              ? "text-[#453CD5] bg-[#453CD5]/10 border-l-4 border-[#453CD5]"
-              : "text-gray-700 hover:text-[#453CD5] hover:bg-[#453CD5]/10"
-            }`}
-            >
-            {item.label}
-            </button>
-          ) : (
-            <Link
-            href={item.href}
-            className={`block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
-              pathname === item.href || pathname.startsWith(item.href)
-              ? "text-[#453CD5] bg-[#453CD5]/10 border-l-4 border-[#453CD5]"
-              : "text-gray-700 hover:text-[#453CD5] hover:bg-[#453CD5]/10"
-            }`}
-            onClick={() => setIsOpen(false)}
-            >
-            {item.label}
-            </Link>
-          )}
-          {item.dropdown && (
-            <div className="ml-4 mt-2 space-y-1">
-            {item.dropdown.map((dropdownItem) => (
-              <Link
-              key={dropdownItem.href}
-              href={dropdownItem.href}
-              className="block px-4 py-2 text-sm text-gray-600 hover:text-[#453CD5] hover:bg-[#453CD5]/10 rounded-lg transition-colors"
-              onClick={() => setIsOpen(false)}
-              >
-              {dropdownItem.label}
-              </Link>
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-1">
+            {navItems.map((item) => (
+              <div key={item.href} className="relative flex items-center">
+                {item.label === "Notices" ? (
+                  <button
+                    onClick={handleNoticesClick}
+                    className={`relative px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 whitespace-nowrap ${
+                      isNoticesActive()
+                        ? `text-white bg-${theme.accent}-600`
+                        : `text-gray-300 ${theme.hover} hover:text-white`
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ) : (
+                  <Link
+                    href={item.href}
+                    className={`relative px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 whitespace-nowrap ${
+                      (item.href === '/' ? pathname === '/' : pathname.startsWith(item.href))
+                        ? `${theme.navActive} font-semibold`
+                        : `${theme.navText} ${theme.navHover}`
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                )}
+              </div>
             ))}
-            </div>
-          )}
+            
+            {/* Download Brochure Button */}
+            <button
+              onClick={handleDownloadBrochure}
+              className={`ml-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white ${accentBtnClass} transition-colors duration-200`}
+            >
+              <Download className="w-4 h-4 mr-2" />
+              Brochure
+            </button>
           </div>
-        ))}
+
+          {/* Mobile menu button */}
+          <div className="lg:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            >
+              <span className="sr-only">Open main menu</span>
+              {isOpen ? (
+                <X className="block h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Menu className="block h-6 w-6" aria-hidden="true" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* Mobile menu, show/hide based on menu state */}
+      <div className={`lg:hidden ${isOpen ? 'block' : 'hidden'}`}>
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-900">
+          {navItems.map((item) => (
+            <div key={item.href}>
+              {item.label === 'Notices' ? (
+                <button
+                  onClick={(e) => {
+                    handleNoticesClick(e)
+                    setIsOpen(false)
+                  }}
+                  className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium ${
+                    isNoticesActive()
+                      ? `text-white bg-${theme.accent}-600`
+                      : `text-gray-300 hover:bg-${theme.accent}-800 hover:text-white`
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ) : (
+                <Link
+                  href={item.href}
+                  className={`block px-3 py-2 rounded-md text-sm font-medium ${
+                    (item.href === '/' ? pathname === '/' : pathname.startsWith(item.href))
+                      ? `text-white bg-${theme.accent}-600`
+                      : `text-gray-300 hover:bg-${theme.accent}-800 hover:text-white`
+                  }`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              )}
+            </div>
+          ))}
+          
+          <button
+            onClick={handleDownloadBrochure}
+            className={`w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white ${accentBtnClass} mt-2`}
+          >
+            <Download className="w-4 h-4 mr-2" />
+            Download Brochure
+          </button>
+        </div>
       </div>
     </nav>
   )

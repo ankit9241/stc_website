@@ -1,7 +1,11 @@
+"use client";
+
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Code, Globe, Palette, Smartphone, BarChart, Brain, Shield, Trophy } from "lucide-react"
+import { Code, Globe, Palette, Smartphone, BarChart, Brain, Shield, Trophy, ArrowRight, Mail } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
+import { useCallback } from "react";
 
 const subClubs = [
   {
@@ -68,31 +72,105 @@ const subClubs = [
 ]
 
 export default function TatvaPage() {
+  const scrollToSection = useCallback((id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-teal-50 pt-16">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-purple-200 via-purple-600 to-purple-200 text-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="w-20 h-20 bg-white bg-opacity-20 rounded-3xl flex items-center justify-center mx-auto mb-6">
-              <Code className="w-10 h-10 text-white" />
+      <div className="relative overflow-hidden pt-24 pb-12 md:pt-28 md:pb-16 lg:pt-32 lg:pb-20">
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 opacity-5" style={{
+          backgroundImage: 'radial-gradient(circle at 10% 20%, #0D9488 0.5px, transparent 0.5px)',
+          backgroundSize: '20px 20px',
+        }}></div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row-reverse items-center justify-between gap-12">
+            {/* Content */}
+            <div className="text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
+              <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-teal-100 text-teal-800 border border-teal-200 mb-6">
+                <Code className="w-4 h-4 mr-2" />
+                <span className="tracking-wider">TECHNOLOGY & RESEARCH CELL</span>
+              </div>
+              
+              <div className="flex items-center justify-center lg:justify-start mb-6">
+                {/* Logo for mobile and medium screens */}
+                <div className="lg:hidden flex-shrink-0">
+                  <Image
+                    src="/images/tatva_nobg.png"
+                    alt="TATVA Logo"
+                    width={120}
+                    height={120}
+                    className="w-24 h-24 md:w-32 md:h-32 object-contain mr-4"
+                  />
+                </div>
+                <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
+                  <span className="text-[#0d9488]">TATVA</span> - Innovation Through Technology
+                </h1>
+              </div>
+              
+              <div className="mt-4">
+                <a href="mailto:tatva@iitp.ac.in" className="inline-flex items-center text-sm bg-[#e6f7f5] hover:bg-[#ccf0eb] text-[#0d9488] px-3 py-1.5 rounded-full border border-[#99f6e4] transition-colors">
+                  <Mail className="w-3.5 h-3.5 mr-1.5" />
+                  tatva@iitp.ac.in
+                </a>
+              </div>
+              
+              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                We foster technical excellence and research innovation through hands-on projects, workshops,
+                and collaborative learning in cutting-edge technologies.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Button 
+                  onClick={() => scrollToSection('sub-clubs')}
+                  className="bg-[#0d9488] hover:bg-[#0f766e] text-white transition-colors"
+                >
+                  Explore Programs
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+                <Button 
+                  onClick={() => scrollToSection('about')}
+                  variant="outline" 
+                  className="border-gray-300 text-gray-700 hover:bg-gray-50"
+                >
+                  Learn More
+                </Button>
+              </div>
             </div>
-            <h1 className="text-5xl font-bold mb-6">TATVA</h1>
-            <p className="text-lg font-semibold mb-2 opacity-90 flex items-center justify-center gap-2">
-              <span className="inline-block bg-white bg-opacity-20 rounded px-3 py-1 text-green-100 tracking-wide">
-              tatva@iitp.ac.in
-              </span>
-            </p>
-            <h2 className="text-2xl font-semibold mb-4 opacity-90">Technology & Research Cell</h2>
-            <p className="text-xl max-w-3xl mx-auto opacity-90">
-              Nurturing technical expertise and promoting research-oriented mindset through innovation and collaboration
-            </p>
-          </div>
+            
+            {/* TATVA Logo Image - Hidden on mobile, visible on lg screens and up */}
+            <div className="hidden lg:block relative w-full max-w-md">
+              <div className="w-full bg-transparent flex items-center justify-center p-2">
+                <div className="relative w-full flex items-center justify-center">
+                  <Image
+                    src="/images/tatva_nobg.png"
+                    alt="TATVA Logo"
+                    width={800}
+                    height={800}
+                    priority
+                    className="w-full h-auto object-contain rounded-lg"
+                    onError={(e) => {
+                      // Fallback to placeholder if image fails to load
+                      const target = e.target as HTMLImageElement;
+                      target.onerror = null;
+                      target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238B5CF6'%3E%3Cpath d='M12 2L1 12h3v9h6v-6h4v6h6v-9h3L12 2zm0 2.8L18 10v9h-2v-6H8v6H6v-9l6-5.2z'/%3E%3C/svg%3E";
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div> 
         </div>
-      </section>
+      </div>
 
       {/* About TATVA */}
-      <section className="py-20">
+      <section className="py-20" id="about">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
             <div>
@@ -113,27 +191,27 @@ export default function TatvaPage() {
                 and more.
               </p>
             </div>
-            <div className="bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-purple-300 rounded-3xl p-8">
+            <div className="bg-gradient-to-br from-[#49cfbc] to-[#e6f7f5] rounded-3xl border-2 border-[#99f6e4] p-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Technology Domains</h3>
               <ul className="space-y-4">
                 <li className="flex items-center">
-                  <div className="w-3 h-3 bg-purple-500 rounded-full mr-4"></div>
+                  <div className="w-3 h-3 bg-[#0d9488] rounded-full mr-4"></div>
                   <span className="text-gray-700">Web and Mobile Development</span>
                 </li>
                 <li className="flex items-center">
-                  <div className="w-3 h-3 bg-purple-500 rounded-full mr-4"></div>
+                  <div className="w-3 h-3 bg-[#0d9488] rounded-full mr-4"></div>
                   <span className="text-gray-700">Artificial Intelligence & Machine Learning</span>
                 </li>
                 <li className="flex items-center">
-                  <div className="w-3 h-3 bg-purple-500 rounded-full mr-4"></div>
+                  <div className="w-3 h-3 bg-[#0d9488] rounded-full mr-4"></div>
                   <span className="text-gray-700">Data Science & Analytics</span>
                 </li>
                 <li className="flex items-center">
-                  <div className="w-3 h-3 bg-purple-500 rounded-full mr-4"></div>
+                  <div className="w-3 h-3 bg-[#0d9488] rounded-full mr-4"></div>
                   <span className="text-gray-700">Cybersecurity & Ethical Hacking</span>
                 </li>
                 <li className="flex items-center">
-                  <div className="w-3 h-3 bg-purple-500 rounded-full mr-4"></div>
+                  <div className="w-3 h-3 bg-[#0d9488] rounded-full mr-4"></div>
                   <span className="text-gray-700">Robotics & Automation</span>
                 </li>
               </ul>
@@ -143,7 +221,7 @@ export default function TatvaPage() {
       </section>
 
       {/* Sub Clubs */}
-      <section className="py-20 bg-white">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">TATVA Sub-Clubs</h2>
@@ -160,12 +238,12 @@ export default function TatvaPage() {
                 >
                   <CardContent className="p-6">
                     <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-purple-100 rounded-3xl flex items-center justify-center mr-4">
-                        <IconComponent className="w-6 h-6 text-purple-600" />
+                      <div className="w-12 h-12 bg-[#e6f7f5] rounded-lg flex items-center justify-center mr-4">
+                        <IconComponent className="w-6 h-6 text-[#0d9488]" />
                       </div>
                       <div>
                         <h3 className="text-lg font-bold text-gray-900">{club.name}</h3>
-                        <p className="text-sm text-purple-600 font-medium">{club.subtitle}</p>
+                        <p className="text-sm text-[#0d9488] font-medium">{club.subtitle}</p>
                       </div>
                     </div>
 
@@ -176,7 +254,7 @@ export default function TatvaPage() {
                       <ul className="space-y-1">
                         {club.activities.map((activity, actIndex) => (
                           <li key={actIndex} className="flex items-center text-sm text-gray-600">
-                            <div className="w-1.5 h-1.5 bg-purple-500 rounded-full mr-2"></div>
+                            <div className="w-1.5 h-1.5 bg-[#0d9488] rounded-full mr-2"></div>
                             {activity}
                           </li>
                         ))}
@@ -191,7 +269,7 @@ export default function TatvaPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-purple-600 to-purple-800 text-white">
+      <section className="py-20 bg-gradient-to-r from-[#0d9488] to-[#0f766e] text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Dive into Technology?</h2>
           <p className="text-xl mb-8 opacity-90">
@@ -199,14 +277,14 @@ export default function TatvaPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/participation">
-              <Button size="lg" className="bg-white text-purple-600 hover:bg-gray-100 px-8 py-3 text-lg">
+              <Button size="lg" className="bg-white text-[#0d9488] hover:bg-gray-100 px-8 py-3 text-lg hover:text-[#0f766e]">
                 Join TATVA
               </Button>
             </Link>
             <Link href="/contact">
               <Button
                 size="lg"
-                className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-purple-600 px-8 py-3 text-lg"
+                className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-[#0d9488] px-8 py-3 text-lg"
               >
                 Learn More
               </Button>
