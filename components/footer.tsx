@@ -48,9 +48,10 @@ export default function Footer() {
           {/* Logo and Description */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-3 mb-4">
-              <img src="/images/stc-logo.jpg" alt="STC Logo" className="w-12 h-12 rounded-lg" />
+              <img src="/images/stc-logo.jpg" alt="STC Logo" className="w-14 h-14 rounded-lg" />
               <div>
                 <h3 className="text-xl font-bold">Student Technical Council</h3>
+                <p className="text-xs font-semibold">For Hybrid programs</p>
                 <p className={accentColor}>IIT Patna</p>
               </div>
             </div>
@@ -106,7 +107,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className={`w-4 h-4 ${accentColor}`} />
-                <span className="text-gray-300 text-sm">stc@iitp.ac.in</span>
+                <span className="text-gray-300 text-sm">stciitphybrid@iitp.ac.in</span>
               </div>
             </div>
           </div>
