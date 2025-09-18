@@ -79,7 +79,7 @@ const wings = [
     subtitleText: "text-teal-600",
     iconColor: "text-teal-600",
     features: [
-      "Web Development (WebWisaer)",
+      "Web Development (WebWiser)",
       "Robotics (Mech-X)",
       "Design (Pixelerate)",
       "App Development (Appistry)",
