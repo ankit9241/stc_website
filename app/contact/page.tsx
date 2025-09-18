@@ -72,7 +72,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Address</h3>
                     <p className="text-gray-600">
-                      Student Technical Council
+                      Student Technical Council, Hybrid Programmes
                       <br />
                       Indian Institute of Technology Patna
                       <br />
@@ -108,8 +108,15 @@ export default function ContactPage() {
                       stciitphybrid@iitp.ac.in
                     </p>
                     <p className="text-gray-600">
-                      tpc@iitp-cep.in
+                    tatva@iitp.ac.in
                     </p>
+                    <p className="text-gray-600">
+                    disha@iitp.ac.in
+                    </p>
+                    <p className="text-gray-600">
+                    arthniti@iitp.ac.in
+                    </p>
+                    
                   </div>
                 </div>
 
