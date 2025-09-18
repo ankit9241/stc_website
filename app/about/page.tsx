@@ -136,7 +136,7 @@ export default function AboutPage() {
               <div className="flex flex-col lg:flex-row items-center gap-6 md:gap-8">
                 <div className="flex-shrink-0 mb-4 lg:mb-0">
                   <img
-                    src="/public/Screenshot 2025-09-16 163544.png"
+                    src="/gautam.png"
                     alt="TPC Head"
                     className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full object-cover border-4 border-blue-200 mx-auto lg:mx-0"
                   />

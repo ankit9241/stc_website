@@ -124,7 +124,7 @@ export default function RootLayout({
     url: 'https://stciitphybrid.in',
     logo: 'https://stciitphybrid.in/images/stc.jpg',
     image: 'https://stciitphybrid.in/images/stc.jpg',
-    mail: 'stciitphybrid@iitp.ac.in',
+    mail: 'stc@iitp.ac.in',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Bihta',
