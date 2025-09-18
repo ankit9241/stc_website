@@ -37,8 +37,8 @@ const CoreValues = () => {
       </div>
       {/* Content */}
       <div className="flex w-full lg:w-[500px] max-w-2xl flex-col items-start gap-8">
-        <span className="inline-block text-sm font-medium tracking-wider text-blue-600 mb-3 px-4 py-1.5 bg-blue-50 rounded-full border border-blue-100">
-            Our Values
+        <span className="inline-block text-sm font-bold tracking-wider text-blue-600 mb-3 px-4 py-1.5 bg-blue-50 rounded-full border border-blue-100">
+            OUR VALUES
           </span>
           <h2 className="mt-2 sm:mt-4 text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
             Our <span className="text-blue-600">Core Values</span> that Shape us.

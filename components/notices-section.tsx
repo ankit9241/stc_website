@@ -64,7 +64,7 @@ export function NoticesSection() {
       <div className="max-w-[80vw] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header - styled like WingsSection */}
         <div className="text-center max-w-4xl mx-auto mb-12 lg:mb-16">
-          <span className="inline-block text-sm font-medium tracking-wider text-blue-600 mb-4 px-4 py-1.5 bg-blue-50 rounded-full border border-blue-100">
+          <span className="inline-block text-sm font-bold tracking-wider text-blue-600 mb-4 px-4 py-1.5 bg-blue-50 rounded-full border border-blue-100">
             NEWS AND UPDATES
           </span>
           <h2 className="mt-2 sm:mt-4 text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
@@ -79,7 +79,7 @@ export function NoticesSection() {
           {notices.slice(0, 5).map((notice) => (
             <Card
               key={notice.id}
-              className={`group hover:shadow-xl transition-all rounded-sm  duration-300 transform hover:-translate-y-2 ${
+              className={`group hover:shadow-xl transition-all rounded-3xl  duration-300 transform hover:-translate-y-2 ${
               notice.urgent ? "bg-red-50/30" : ""
               }`}
               style={{
