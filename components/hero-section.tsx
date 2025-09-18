@@ -105,14 +105,14 @@ export function HeroSection() {
 						>
 							{/* Glowing background effect on hover */}
 							<div
-								className="pointer-events-none z-2 absolute inset-0 border-2 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
+								className="pointer-events-none z-2 absolute inset-0 border-2 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 "
 								style={{
 									background:
-										"radial-gradient(circle at 50% 50%, rgba(69,60,213,0.25) 0%, rgba(69,60,213,0.10) 60%, transparent 100%)",
+										"radial-gradient(circle at 50% 50%, rgba(69,60,213,0.05) 0%, rgba(69,60,213,0.10) 60%, transparent 100%)",
 									filter: "blur(30px)",
 								}}
 							/>
-							<div className="relative z-10 bg-white/10 rounded-3xl backdrop-blur-sm">
+							<div className="relative z-10 bg-transparent rounded-3xl backdrop-blur-sm">
 								<div className="z-9 text-xl sm:text-2xl mb-2">{stat.icon}</div>
 								<div className="z-9 text-xl sm:text-2xl md:text-3xl font-bold text-[#453CD5] mb-1">
 									{stat.value}

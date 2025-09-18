@@ -237,13 +237,24 @@ export default function ClubsPage() {
               </Button>
             </Link>
             <a
-            href="/STC.pdf"
-            download
-            target="_blank"
-            className={`ml-2 inline-flex items-center px-4 py-2 border border-transparent text-lg rounded-md text-white ${accentBtnClass} transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-white hover:text-blue-600 hover:border-white`}
+              href="/STC.pdf"
+              download
+              target="_blank"
+              className={`
+              ml-22 border border-amber-50 sm:ml-2 
+              inline-flex items-center 
+              px-4 py-2 
+              min-w-[10vw] 
+              text-lg rounded-md 
+              text-white ${accentBtnClass} 
+              transition-all duration-300 ease-in-out 
+              transform hover:scale-105 
+              hover:bg-white hover:text-blue-600 hover:border-white
+              w-[50vw] sm:w-auto justify-center
+              `}
             >
-            <Download className="w-4 h-4 mr-2" />
-            Download Brochure
+              <Download className="w-4 h-4 mr-2" />
+              <span className="truncate"> Brochure</span>
             </a>
           </div>
         </div>

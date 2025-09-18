@@ -61,7 +61,7 @@ export function NoticesSection() {
 
   return (
     <section id="notices-section" className="py-16 w-[100vw] lg:py-20 bg-gray-50">
-      <div className="max-w-[80vw] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[90vw] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header - styled like WingsSection */}
         <div className="text-center max-w-4xl mx-auto mb-12 lg:mb-16">
           <span className="inline-block text-sm font-bold tracking-wider text-blue-600 mb-4 px-4 py-1.5 bg-blue-50 rounded-full border border-blue-100">
@@ -131,7 +131,7 @@ export function NoticesSection() {
                 ) : (
                   <h1 className="flex justify-center items-center text-[#453CD5] font-semibold text-lg group-hover:text-[#453CD5] transition-colors cursor-pointer">
                     Coming Soon
-                    <ArrowRight className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" />
+                    {/* <ArrowRight className="w-4 h-4 ml-1 mt-0.5 transform group-hover:translate-x-1 transition-transform" /> */}
                   </h1>
                 )}
               </div>
