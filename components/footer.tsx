@@ -94,6 +94,9 @@ export default function Footer() {
               <Link href="/contact" className={`text-gray-300 ${hoverColor} transition-colors`}>
                 Contact Us
               </Link>
+              <Link href="/about" className={`text-gray-300 ${hoverColor} transition-colors`}>
+                About Us
+              </Link>
             </div>
           </div>
 
