@@ -9,7 +9,7 @@ import { useCallback } from "react";
 
 const subClubs = [
   {
-    name: "WebWizer",
+    name: "WebWiser",
     subtitle: "Web Development Club",
     description: "Hands-on workshops and projects on modern web technologies, frameworks, and full-stack development.",
     icon: Globe,
