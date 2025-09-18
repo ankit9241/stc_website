@@ -8,6 +8,7 @@ import { FooterWrapper } from "@/components/footer-wrapper"
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://stc.iitp.ac.in'), // Replace with your actual production URL
   title: "Student Technical Council - IIT Patna",
   description: "Empowering Students Through Innovation - Official website of Student Technical Council, IIT Patna",
   keywords: "IIT Patna, Student Technical Council, DISHA, ARTHNITI, TATVA, student government, technology, innovation",
