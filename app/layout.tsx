@@ -170,8 +170,8 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} font-sans antialiased overflow-x-hidden`}>
         <VideoTransition>
-          <Navigation />
-          <main className="min-h-screen">{children}</main>
+        <Navigation />
+        <main className="min-h-screen">{children}</main>
           <FooterWrapper />
         </VideoTransition>
       </body>

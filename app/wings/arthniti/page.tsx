@@ -94,7 +94,7 @@ export default function ArthnitiPage() {
                     alt="ARTHNITI Logo"
                     width={120}
                     height={120}
-                    className="w-20 h-20 md:w-24 md:h-24 object-contain"
+                    className="w-24 h-24 md:w-28 md:h-28 object-contain"
                   />
                 </div>
                 <h1 className="text-3xl md:text-4xl font-bold text-gray-900 text-center">
