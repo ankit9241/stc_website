@@ -185,13 +185,15 @@ export function Navigation() {
             ))}
             
             {/* Download Brochure Button */}
-            <button
-              onClick={handleDownloadBrochure}
+            <a
+              href="/STC.pdf"
+              download
+              target="_blank"
               className={`ml-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white ${accentBtnClass} transition-colors duration-200`}
             >
               <Download className="w-4 h-4 mr-2" />
               Brochure
-            </button>
+            </a>
           </div>
 
           {/* Mobile menu button */}
