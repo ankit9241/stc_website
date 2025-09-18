@@ -78,7 +78,7 @@ const clubs = [
 ]
 
 export default function ClubsPage() {
-      let theme = {
+      const theme = {
     bg: 'bg-gray-100',
     accent: 'blue',
     gradient: 'from-blue-500 to-blue-700',
@@ -104,7 +104,7 @@ export default function ClubsPage() {
         return 'bg-blue-600 hover:bg-blue-700'
     }
   })()
-  const handleDownloadBrochure = () => {
+  const _handleDownloadBrochure = () => {
     // Create a link element and trigger download
     const link = document.createElement("a")
     link.href = "/student-senate-brochure.pdf"

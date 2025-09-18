@@ -71,7 +71,7 @@ export default function VideoTransition({ children }: VideoTransitionProps) {
     return () => document.removeEventListener('click', handleLinkClick)
   }, [pathname, router])
 
-  const handleVideoEnd = () => {
+  const _handleVideoEnd = () => {
     // Only end transition if minimum time has passed
     setTimeout(() => setIsTransitioning(false), 200)
   }

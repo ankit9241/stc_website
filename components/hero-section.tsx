@@ -1,9 +1,9 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, ArrowRight, Users, Award, TrendingUp } from "lucide-react"
-import Link from "next/link"
+// import { Button } from "@/components/ui/button"
+// import { ChevronLeft, ChevronRight, ArrowRight, Users, Award, TrendingUp } from "lucide-react"
+// import Link from "next/link"
 
 const slides = [
 	{
@@ -30,11 +30,11 @@ export function HeroSection() {
 		return () => clearInterval(timer)
 	}, [])
 
-	const nextSlide = () => {
+	const _nextSlide = () => {
 		setCurrentSlide((prev) => (prev + 1) % slides.length)
 	}
 
-	const prevSlide = () => {
+	const _prevSlide = () => {
 		setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
 	}
 

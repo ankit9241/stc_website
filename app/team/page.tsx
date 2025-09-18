@@ -62,7 +62,7 @@ const coreTeam = [
   },
 ]
 
-const teamMembers = [
+const _teamMembers = [
   // Creatives Team Members
   {
     name: "Shivam Kumar",
@@ -479,7 +479,7 @@ const teamMembers = [
   },
 ]
 
-const teamLeads = [
+const _teamLeads = [
   // Creatives Team
   {
     name: "Satyam Kumar",
@@ -561,7 +561,7 @@ const teamLeads = [
   },
 ]
 
-const technicalLeads = [
+const _technicalLeads = [
   // WebWiser (Web Dev) Team
   {
     name: "Hridyanand Gupta",
@@ -703,7 +703,7 @@ const technicalLeads = [
   },
 ]
 
-const specializedTeams = [
+const _specializedTeams = [
   // Session & Webinar Team
   {
     name: "Kumar Aayush",
@@ -765,7 +765,17 @@ const specializedTeams = [
   },
 ]
 
-function TeamMemberCard({ member }: { member: any }) {
+interface TeamMember {
+  name: string;
+  designation: string;
+  department: string;
+  image: string;
+  email: string;
+  linkedin: string;
+  team?: string;
+}
+
+function TeamMemberCard({ member }: { member: TeamMember }) {
   return (
     <Card className="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
       <CardContent className="p-6 text-center">

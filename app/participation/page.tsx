@@ -4,7 +4,7 @@ import { Users, UserPlus, Award, Crown, Star, ArrowRight, CheckCircle } from "lu
 import Link from "next/link"
 import { Metadata } from "next"
 
-const metadata: Metadata = {
+const _metadata: Metadata = {
   title: "Participation - Student Technical Council IIT Patna",
   description: "Explore the various levels of participation within the Student Technical Council IIT Patna.",
   keywords: [

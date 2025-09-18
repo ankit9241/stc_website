@@ -103,7 +103,7 @@ export function Navigation() {
     { href: "/contact", label: "Contact Us" },
   ]
 
-  const handleDownloadBrochure = () => {
+  const _handleDownloadBrochure = () => {
     const link = document.createElement("a")
     link.href = "./STC.pdf"
     link.download = "STC.pdf"
