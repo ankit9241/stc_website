@@ -788,10 +788,17 @@ function TeamMemberCard({ member }: { member: any }) {
           <Link
             href={`mailto:${member.email}`}
             className="p-2 bg-blue-100 rounded-full hover:bg-blue-200 transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <Mail className="w-4 h-4 text-blue-600" />
           </Link>
-          <Link href={member.linkedin} className="p-2 bg-blue-100 rounded-full hover:bg-blue-200 transition-colors">
+          <Link 
+            href={member.linkedin} 
+            className="p-2 bg-blue-100 rounded-full hover:bg-blue-200 transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Linkedin className="w-4 h-4 text-blue-600" />
           </Link>
         </div>
