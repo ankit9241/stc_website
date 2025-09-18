@@ -2,7 +2,7 @@
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Users, Code, Briefcase, TrendingUp, Globe, Lightbulb } from "lucide-react"
+import { Users, Code, Briefcase, TrendingUp, Globe, Lightbulb, Download } from "lucide-react"
 import Link from "next/link"
 
 const clubs = [
@@ -78,6 +78,32 @@ const clubs = [
 ]
 
 export default function ClubsPage() {
+      let theme = {
+    bg: 'bg-gray-100',
+    accent: 'blue',
+    gradient: 'from-blue-500 to-blue-700',
+    border: 'border-gray-200',
+    hover: 'hover:bg-blue-100',
+    active: 'bg-blue-200',
+    text: 'text-gray-900',
+    navText: 'text-gray-800 hover:text-gray-900',
+    navHover: 'hover:bg-blue-50',
+    navActive: 'bg-blue-100 text-gray-900 font-medium',
+    navBg: 'bg-white/90 backdrop-blur-sm shadow-sm'
+  }
+
+    const accentBtnClass = (() => {
+    switch (theme.accent) {
+      case 'red':
+        return 'bg-red-600 hover:bg-red-700'
+      case 'amber':
+        return 'bg-amber-600 hover:bg-amber-700'
+      case 'teal':
+        return 'bg-teal-600 hover:bg-teal-700'
+      default:
+        return 'bg-blue-600 hover:bg-blue-700'
+    }
+  })()
   const handleDownloadBrochure = () => {
     // Create a link element and trigger download
     const link = document.createElement("a")
@@ -210,13 +236,15 @@ export default function ClubsPage() {
                 Get Involved
               </Button>
             </Link>
-            <Button
-              size="lg"
-              onClick={handleDownloadBrochure}
-              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 text-lg transform hover:scale-105 transition-all duration-200"
+            <a
+            href="/STC.pdf"
+            download
+            target="_blank"
+            className={`ml-2 inline-flex items-center px-4 py-2 border border-transparent text-lg rounded-md text-white ${accentBtnClass} transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-white hover:text-blue-600 hover:border-white`}
             >
-              Download Brochure
-            </Button>
+            <Download className="w-4 h-4 mr-2" />
+            Download Brochure
+            </a>
           </div>
         </div>
       </section>

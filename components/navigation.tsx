@@ -248,13 +248,15 @@ export function Navigation() {
             </div>
           ))}
           
-          <button
-            onClick={handleDownloadBrochure}
-            className={`w-full flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white ${accentBtnClass} mt-2`}
-          >
-            <Download className="w-4 h-4 mr-2" />
-            Download Brochure
-          </button>
+          <a
+              href="/STC.pdf"
+              download
+              target="_blank"
+              className={`ml-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white ${accentBtnClass} transition-colors duration-200`}
+            >
+              <Download className="w-4 h-4 mr-2" />
+              Brochure
+            </a>
         </div>
       </div>
     </nav>
