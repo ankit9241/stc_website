@@ -1,6 +1,31 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Linkedin, Mail } from "lucide-react"
 import Link from "next/link"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Our Team - Student Technical Council IIT Patna",
+  description: "Meet the dedicated team members of Student Technical Council IIT Patna. Our leadership team and wing coordinators driving innovation and technical excellence.",
+  keywords: [
+    "STC team IIT Patna",
+    "student council members",
+    "leadership team",
+    "DISHA team",
+    "ARTHNITI team", 
+    "TATVA team",
+    "student leaders",
+    "core team members"
+  ],
+  openGraph: {
+    title: "Our Team - Student Technical Council IIT Patna",
+    description: "Meet our dedicated team members driving innovation and technical excellence at IIT Patna.",
+    images: ['/images/stc.jpg'],
+  },
+  twitter: {
+    title: "Our Team - Student Technical Council IIT Patna",
+    description: "Meet our dedicated team members driving innovation and technical excellence at IIT Patna.",
+  },
+}
 
 const coreTeam = [
   {

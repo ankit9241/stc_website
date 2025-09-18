@@ -23,8 +23,8 @@ const CoreValues = () => {
   return (
     <section className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-[115px] px-4 sm:px-6 lg:px-[100px] py-12 lg:py-[120px]">
       {/* Image: hidden on small screens, visible on desktops */}
-      <div className="hidden lg:flex relative h-[621px] w-[530px] flex-shrink-0">
-        <div className="absolute left-0 top-0 h-[621px] w-[450px]">
+      <div className="hidden lg:flex relative h-[720px] w-[530px] flex-shrink-0">
+        <div className="absolute left-0 top-0 h-[720px] w-[450px]">
             <Image 
                 src="/images/hackathon-collage.jpg"
                 alt="Student with laptop"

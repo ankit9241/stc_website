@@ -144,7 +144,7 @@ export default function ClubsPage() {
                       </ul>
                     </div>
 
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">Learn More</Button>
+                    {/* <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">Learn More</Button> */}
                   </CardContent>
                 </Card>
               )

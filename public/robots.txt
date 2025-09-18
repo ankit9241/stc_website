@@ -1,0 +1,50 @@
+# Robots.txt for Student Technical Council IIT Patna
+# Domain: stciitphybrid.in
+
+# Allow all web crawlers to access all content
+User-agent: *
+Allow: /
+
+# Disallow access to sensitive or unnecessary directories
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /.well-known/
+Disallow: /temp/
+Disallow: /private/
+
+# Allow access to important static assets
+Allow: /images/
+Allow: /icons/
+Allow: /favicon.ico
+Allow: /*.css
+Allow: /*.js
+
+# Sitemap location
+Sitemap: https://stciitphybrid.in/sitemap.xml
+
+# Crawl-delay (optional - set to 1 second to be respectful)
+Crawl-delay: 1
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots (optional)
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
