@@ -89,8 +89,7 @@ export default function AboutPage() {
                   <h3 className="text-xl md:text-2xl font-bold text-gray-900 break-words leading-tight">Our Vision</h3>
                 </div>
                 <p className="text-gray-700 leading-relaxed text-base md:text-lg lg:text-xl break-words">
-                  To be recognized as the leading placement cell that consistently produces industry-ready professionals
-                  who contribute meaningfully to technological advancement and societal progress.
+                To be recognized as a leading student body that consistently fosters technically proficient, innovation-driven individuals who contribute meaningfully to technological advancement and societal progress.
                 </p>
               </CardContent>
             </Card>
