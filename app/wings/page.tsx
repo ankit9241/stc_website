@@ -45,6 +45,8 @@ const wings = [
       "Internship Search & Referral",
       "Career Guidance & Counselling",
       "Alumni Networking & Mentorship",
+      "Interview Resources",
+      "Resume Building & Profile Optimization",
     ],
     link: "/wings/disha",
   },
@@ -65,6 +67,8 @@ const wings = [
       "Incubation & Mentorship",
       "Funding & Grants Guidance",
       "Entrepreneurship Events",
+      "Freelancing",
+      "CapitalX"
     ],
     link: "/wings/arthniti",
   },
@@ -80,6 +84,8 @@ const wings = [
     iconColor: "text-teal-600",
     features: [
       "Web Development (WebWiser)",
+      "Competitive Programming (CodeRED)",
+      "Cybersecurity (HackShield)",
       "Robotics (Mech-X)",
       "Design (Pixelerate)",
       "App Development (Appistry)",
