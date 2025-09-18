@@ -31,7 +31,7 @@ const coreTeam = [
   {
     name: "Gautam Kumar",
     designation: "President",
-    department: "Technology Club",
+    department: "Student Technical Council",
     image: "/placeholder.svg?height=300&width=300",
     email: "#",
     linkedin: "#",
@@ -39,7 +39,7 @@ const coreTeam = [
   {
     name: "Aryan Singh",
     designation: "Vice President",
-    department: "Technology Club",
+    department: "Student Technical Council",
     image: "/placeholder.svg?height=300&width=300",
     email: "aryan.singh@iitp.ac.in",
     linkedin: "#",
@@ -47,7 +47,7 @@ const coreTeam = [
   {
     name: "Ritu Raj",
     designation: "General Secretary",
-    department: "Technology Club",
+    department: "Student Technical Council",
     image: "/placeholder.svg?height=300&width=300",
     email: "ritu.raj@iitp.ac.in",
     linkedin: "#",
@@ -55,7 +55,7 @@ const coreTeam = [
   {
     name: "Hridyanand Gupta",
     designation: "Tresurer",
-    department: "Technology Club",
+    department: "Student Technical Council",
     image: "/placeholder.svg?height=300&width=300",
     email: "hridyanand.gupta@iitp.ac.in",
     linkedin: "#",
