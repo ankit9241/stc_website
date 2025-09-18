@@ -70,35 +70,77 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <div className="grid grid-cols-2 gap-x-8 gap-y-2">
-              <Link href="/" className={`text-gray-300 ${hoverColor} transition-colors`}>
-                Home
-              </Link>
-              <Link href="/wings" className={`text-gray-300 ${hoverColor} transition-colors`}>
-                Our Wings
-              </Link>
-              <Link href="/team" className={`text-gray-300 ${hoverColor} transition-colors`}>
-                Our Team
-              </Link>
-              <Link href="/events" className={`text-gray-300 ${hoverColor} transition-colors`}>
-                Events
-              </Link>
-              <Link href="/clubs" className={`text-gray-300 ${hoverColor} transition-colors`}>
-                Student Clubs
-              </Link>
-              <Link href="/participation" className={`text-gray-300 ${hoverColor} transition-colors`}>
-                Participation
-              </Link>
-              <Link href="/contact" className={`text-gray-300 ${hoverColor} transition-colors`}>
-                Contact Us
-              </Link>
-              <Link href="/about" className={`text-gray-300 ${hoverColor} transition-colors`}>
-                About Us
-              </Link>
+            <div>
+              <h4 className={`text-lg font-semibold mb-4 ${accentColor}`}>Quick Links</h4>
+              <nav>
+              <ul className="grid grid-cols-2 gap-x-8 gap-y-2">
+                <li>
+                <Link
+                  href="/"
+                  className={`flex items-center gap-2 text-gray-300 rounded-md px-2 py-1 transition-all duration-200 hover:bg-white/10 hover:${accentColor} focus:outline-none focus:ring-2 focus:ring-${theme.accent}-400`}
+                >
+                  Home
+                </Link>
+                </li>
+                <li>
+                <Link
+                  href="/wings"
+                  className={`flex items-center gap-2 text-gray-300 rounded-md px-2 py-1 transition-all duration-200 hover:bg-white/10 hover:${accentColor} focus:outline-none focus:ring-2 focus:ring-${theme.accent}-400`}
+                >
+                  Our Wings
+                </Link>
+                </li>
+                <li>
+                <Link
+                  href="/team"
+                  className={`flex items-center gap-2 text-gray-300 rounded-md px-2 py-1 transition-all duration-200 hover:bg-white/10 hover:${accentColor} focus:outline-none focus:ring-2 focus:ring-${theme.accent}-400`}
+                >
+                  Our Team
+                </Link>
+                </li>
+                <li>
+                <Link
+                  href="/events"
+                  className={`flex items-center gap-2 text-gray-300 rounded-md px-2 py-1 transition-all duration-200 hover:bg-white/10 hover:${accentColor} focus:outline-none focus:ring-2 focus:ring-${theme.accent}-400`}
+                >
+                  Events
+                </Link>
+                </li>
+                <li>
+                <Link
+                  href="/clubs"
+                  className={`flex items-center gap-2 text-gray-300 rounded-md px-2 py-1 transition-all duration-200 hover:bg-white/10 hover:${accentColor} focus:outline-none focus:ring-2 focus:ring-${theme.accent}-400`}
+                >
+                  Student Clubs
+                </Link>
+                </li>
+                <li>
+                <Link
+                  href="/participation"
+                  className={`flex items-center gap-2 text-gray-300 rounded-md px-2 py-1 transition-all duration-200 hover:bg-white/10 hover:${accentColor} focus:outline-none focus:ring-2 focus:ring-${theme.accent}-400`}
+                >
+                  Participation
+                </Link>
+                </li>
+                <li>
+                <Link
+                  href="/contact"
+                  className={`flex items-center gap-2 text-gray-300 rounded-md px-2 py-1 transition-all duration-200 hover:bg-white/10 hover:${accentColor} focus:outline-none focus:ring-2 focus:ring-${theme.accent}-400`}
+                >
+                  Contact Us
+                </Link>
+                </li>
+                <li>
+                <Link
+                  href="/about"
+                  className={`flex items-center gap-2 text-gray-300 rounded-md px-2 py-1 transition-all duration-200 hover:bg-white/10 hover:${accentColor} focus:outline-none focus:ring-2 focus:ring-${theme.accent}-400`}
+                >
+                  About Us
+                </Link>
+                </li>
+              </ul>
+              </nav>
             </div>
-          </div>
 
           {/* Contact Info */}
           <div>
