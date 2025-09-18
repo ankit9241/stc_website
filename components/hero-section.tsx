@@ -57,20 +57,6 @@ export function HeroSection() {
 				))}
 			</div>
 
-			{/* Navigation Arrows */}
-			<button
-				onClick={prevSlide}
-				className="absolute left-2 sm:left-6 top-1/2 transform -translate-y-1/2 z-20 p-2 sm:p-3 rounded-3xl bg-[#453CD5]/20 backdrop-blur-sm hover:bg-[#453CD5]/30 transition-all duration-200 group"
-			>
-				<ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-[#453CD5] group-hover:text-blue-700" />
-			</button>
-			<button
-				onClick={nextSlide}
-				className="absolute right-2 sm:right-6 top-1/2 transform -translate-y-1/2 z-20 p-2 sm:p-3 rounded-3xl bg-[#453CD5]/20 backdrop-blur-sm hover:bg-[#453CD5]/30 transition-all duration-200 group"
-			>
-				<ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-[#453CD5] group-hover:text-blue-700" />
-			</button>
-
 			{/* Main Content */}
 			<div
 				className={`relative z-20 text-center w-full max-w-5xl mx-auto px-2 sm:px-4 transition-all duration-1000 ${
