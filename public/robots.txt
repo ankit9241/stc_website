@@ -1,4 +1,4 @@
-# Robots.txt for Student Technical Council IIT Patna
+# Robots.txt for STC IITP - Student Technical Council IIT Patna Hybrid
 # Domain: stciitphybrid.in
 
 # Allow all web crawlers to access all content
@@ -12,13 +12,26 @@ Disallow: /admin/
 Disallow: /.well-known/
 Disallow: /temp/
 Disallow: /private/
+Disallow: /*?*utm_*
+Disallow: /*?*ref=*
 
 # Allow access to important static assets
 Allow: /images/
 Allow: /icons/
 Allow: /favicon.ico
+Allow: /manifest.json
 Allow: /*.css
 Allow: /*.js
+
+# Important pages for indexing
+Allow: /about
+Allow: /events
+Allow: /team
+Allow: /wings
+Allow: /contact
+Allow: /wings/disha
+Allow: /wings/arthniti
+Allow: /wings/tatva
 
 # Sitemap location
 Sitemap: https://stciitphybrid.in/sitemap.xml

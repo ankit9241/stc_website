@@ -1,0 +1,35 @@
+{
+  "name": "STC IITP - Student Technical Council IIT Patna",
+  "short_name": "STC IITP",
+  "description": "Official Student Technical Council IIT Patna Hybrid Programs",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/stc.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/stc.jpg", 
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "technology", "productivity"],
+  "lang": "en-US",
+  "scope": "/",
+  "screenshots": [
+    {
+      "src": "/images/stc.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "label": "STC IITP Homepage"
+    }
+  ]
+}

@@ -4,26 +4,36 @@ import Link from "next/link"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Our Team - Student Technical Council IIT Patna",
-  description: "Meet the dedicated team members of Student Technical Council IIT Patna. Our leadership team and wing coordinators driving innovation and technical excellence.",
+  title: "Our Team",
+  description: "Meet the dedicated team members of STC IITP - Student Technical Council IIT Patna. Our leadership team and wing coordinators driving innovation and technical excellence.",
   keywords: [
-    "STC team IIT Patna",
+    "STC IITP team",
+    "Student Technical Council team",
+    "IIT Patna student leaders",
+    "STC hybrid team",
+    "leadership team IITP",
+    "DISHA team members",
+    "ARTHNITI team leaders", 
+    "TATVA team coordinators",
     "student council members",
-    "leadership team",
-    "DISHA team",
-    "ARTHNITI team", 
-    "TATVA team",
-    "student leaders",
-    "core team members"
+    "core team STC IITP",
+    "technical leaders IITP",
+    "student executives"
   ],
   openGraph: {
-    title: "Our Team - Student Technical Council IIT Patna",
-    description: "Meet our dedicated team members driving innovation and technical excellence at IIT Patna.",
+    title: "Our Team",
+    description: "Meet our dedicated team members of Student Technical Council IIT Patna driving innovation and technical excellence.",
     images: ['/images/stc.jpg'],
+    url: '/team',
   },
   twitter: {
-    title: "Our Team - Student Technical Council IIT Patna",
-    description: "Meet our dedicated team members driving innovation and technical excellence at IIT Patna.",
+    title: "Our Team | STC IITP",
+    description: "Meet our dedicated team members of Student Technical Council IIT Patna driving innovation and technical excellence.",
+    card: 'summary_large_image',
+    images: ['/images/stc.jpg'],
+  },
+  alternates: {
+    canonical: '/team',
   },
 }
 

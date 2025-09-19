@@ -30,6 +30,36 @@ export default function VideoTransition({ children }: VideoTransitionProps) {
     }
   }, [isInitialLoad])
 
+  // Prevent scrolling when transitioning
+  useEffect(() => {
+    if (isTransitioning) {
+      // Disable scrolling
+      document.body.style.overflow = 'hidden'
+      document.documentElement.style.overflow = 'hidden'
+      
+      // Prevent touch scrolling on mobile
+      const preventTouchScroll = (e: TouchEvent) => {
+        e.preventDefault()
+      }
+      
+      // Prevent wheel scrolling on desktop
+      const preventWheelScroll = (e: WheelEvent) => {
+        e.preventDefault()
+      }
+      
+      document.addEventListener('touchmove', preventTouchScroll, { passive: false })
+      document.addEventListener('wheel', preventWheelScroll, { passive: false })
+      
+      return () => {
+        // Re-enable scrolling
+        document.body.style.overflow = 'unset'
+        document.documentElement.style.overflow = 'unset'
+        document.removeEventListener('touchmove', preventTouchScroll)
+        document.removeEventListener('wheel', preventWheelScroll)
+      }
+    }
+  }, [isTransitioning])
+
   useEffect(() => {
     // Detect route changes and show transition BEFORE page changes
     if (!isInitialLoad && pathname !== currentPath) {

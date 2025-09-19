@@ -8,27 +8,37 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Events & Competitions",
-  description: "Discover exciting technical events, hackathons, workshops, and competitions organized by Student Technical Council IIT Patna. Join us for innovation and learning opportunities.",
+  description: "Discover exciting technical events, hackathons, workshops, and competitions by STC IITP - Student Technical Council IIT Patna. Join innovation and learning opportunities.",
   keywords: [
-    "STC events",
-    "IIT Patna hackathons", 
-    "technical competitions",
-    "coding contests",
-    "workshops",
-    "seminars",
-    "student events",
+    "STC IITP events",
+    "IIT Patna hackathons",
+    "STC hybrid events", 
+    "technical competitions IITP",
+    "coding contests STC",
+    "workshops STC IITP",
+    "seminars IIT Patna",
+    "student events IITP",
     "innovation competitions",
-    "tech talks",
-    "internship drives"
+    "tech talks STC",
+    "internship drives IITP",
+    "STC IITP competitions",
+    "Student Technical Council events",
+    "technical festivals IITP"
   ],
   openGraph: {
-    title: "Events & Competitions - Student Technical Council IIT Patna",
-    description: "Join exciting technical events, hackathons, and competitions. Showcase your skills and learn from industry experts.",
+    title: "Events & Competitions",
+    description: "Join exciting technical events, hackathons, and competitions by Student Technical Council IIT Patna. Showcase your skills and learn from industry experts.",
     images: ['/images/hack-n-tech-poster.jpg'],
+    url: '/events',
   },
   twitter: {
-    title: "Events & Competitions - Student Technical Council IIT Patna", 
-    description: "Join exciting technical events, hackathons, and competitions. Showcase your skills and learn from industry experts.",
+    title: "Events & Competitions | STC IITP",
+    description: "Join exciting technical events, hackathons, and competitions by Student Technical Council IIT Patna. Showcase your skills and learn from industry experts.",
+    card: 'summary_large_image',
+    images: ['/images/hack-n-tech-poster.jpg'],
+  },
+  alternates: {
+    canonical: '/events',
   },
 }
 

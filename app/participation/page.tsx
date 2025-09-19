@@ -4,15 +4,32 @@ import { Users, UserPlus, Award, Crown, Star, ArrowRight, CheckCircle } from "lu
 import Link from "next/link"
 import { Metadata } from "next"
 
-const metadata: Metadata = {
-  title: "Participation - Student Technical Council IIT Patna",
-  description: "Explore the various levels of participation within the Student Technical Council IIT Patna.",
+export const metadata: Metadata = {
+  title: "Participation & Membership",
+  description: "Join STC IITP - Student Technical Council IIT Patna Hybrid Programs. Explore participation levels, membership benefits, and opportunities in DISHA, ARTHNITI, and TATVA wings.",
   keywords: [
-    "STC participation",
-    "student involvement",
-    "IIT Patna",
-    "technical council",
+    "STC IITP participation",
+    "STC membership",
+    "join STC IITP",
+    "student involvement STC",
+    "STC IITP registration",
+    "Student Technical Council membership",
+    "IIT Patna student participation",
+    "STC hybrid participation",
+    "technical council joining",
+    "DISHA ARTHNITI TATVA membership",
+    "STC IITP opportunities",
+    "student council participation"
   ],
+  openGraph: {
+    title: "Participation & Membership",
+    description: "Join STC IITP and explore various participation levels in Student Technical Council IIT Patna Hybrid Programs.",
+    images: ['/images/stc.jpg'],
+  },
+  twitter: {
+    title: "Participation & Membership | STC IITP",
+    description: "Join STC IITP and explore various participation levels in Student Technical Council IIT Patna Hybrid Programs.",
+  },
 }
 
 const participationLevels = [

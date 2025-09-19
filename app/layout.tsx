@@ -11,33 +11,43 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 export const metadata: Metadata = {
   metadataBase: new URL('https://stciitphybrid.in'),
   title: {
-    default: "Student Technical Council - IIT Patna | Empowering Students Through Innovation",
-    template: "%s | Student Technical Council - IIT Patna"
+    default: "STC IITP | Student Technical Council IIT Patna Hybrid Programs",
+    template: "%s | STC IITP - Student Technical Council IIT Patna"
   },
-  description: "Official website of Student Technical Council hybrid IIT Patna. Empowering students through innovation with our wings DISHA, ARTHNITI, and TATVA. Join us in technical excellence and leadership development.",
+  description: "STC IITP - Official Student Technical Council IIT Patna Hybrid Programs. STC Hybrid offers technical excellence through DISHA, ARTHNITI, and TATVA wings. Join Student Technical Council Hybrid for innovation and leadership.",
   keywords: [
+    "STC IITP",
+    "STC IIT Patna",
+    "STC Hybrid",
     "Student Technical Council",
+    "Student Technical Council IIT Patna",
+    "Student Technical Council Hybrid",
+    "Student Technical Council IITP",
     "STC",
     "IIT Patna",
-    "DISHA",
-    "ARTHNITI",
-    "TATVA",
-    "student government",
-    "technology",
-    "innovation",
-    "technical events",
-    "hackathons",
-    "workshops",
-    "webinars",
-    "Hybrid programs",
-    "student programs",
-    "Hybrid course",
-    "student leadership",
+    "IITP",
+    "DISHA STC",
+    "ARTHNITI STC", 
+    "TATVA STC",
+    "STC wings",
+    "student government IITP",
+    "technology council",
+    "innovation hub",
+    "technical events IIT Patna",
+    "hackathons IITP",
+    "workshops STC",
+    "webinars hybrid",
+    "webinars STC",
+    "hybrid programs IIT Patna",
+    "student programs IITP",
+    "hybrid course IIT",
+    "student leadership council",
     "IIT Patna clubs",
-    "technical clubs",
-    "engineering students",
-    "computer science",
-    "technology events"
+    "technical clubs IITP",
+    "computer science events",
+    "technology events hybrid",
+    "STC events",
+    "IIT Patna student council"
   ],
   authors: [{ name: "Student Technical Council IIT Patna", url: "https://stciitphybrid.in" }],
   creator: "Student Technical Council IIT Patna",
@@ -57,41 +67,40 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://stciitphybrid.in',
-    siteName: 'Student Technical Council - IIT Patna',
-    title: 'Student Technical Council - IIT Patna | Empowering Students Through Innovation',
-    description: 'Official website of Student Technical Council, IIT Patna. Empowering students through innovation with our wings DISHA, ARTHNITI, and TATVA.',
+    siteName: 'STC IITP - Student Technical Council for Hybrid Programs IIT Patna',
+    title: 'STC IITP | Student Technical Council for Hybrid Programs IIT Patna',
+    description: 'STC IITP - Official Student Technical Council for Hybrid Programs IIT Patna. Technical excellence through DISHA, ARTHNITI, and TATVA wings.',
     images: [
       {
         url: '/images/stc.jpg',
-        width: 1026,
-        height: 1025,
-        alt: 'Student Technical Council IIT Patna Logo',
+        width: 1200,
+        height: 630,
+        alt: 'STC IITP - Student Technical Council Logo',
         type: 'image/jpeg',
       }
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Student Technical Council - IIT Patna | Empowering Students Through Innovation',
-    description: 'Official website of Student Technical Council, IIT Patna. Empowering students through innovation with our wings DISHA, ARTHNITI, and TATVA.',
+    title: 'STC IITP | Student Technical Council for Hybrid Programs IIT Patna',
+    description: 'STC IITP - Official Student Technical Council for Hybrid Programs IIT Patna. Technical excellence through DISHA, ARTHNITI, and TATVA wings.',
     images: ['/images/stc.jpg'],
     creator: '@stc_iitpatna',
     site: '@stc_iitpatna',
   },
-  // verification: {
-  //   google: 'your-google-verification-code',
-  //   yandex: 'your-yandex-verification-code',
-  //   yahoo: 'your-yahoo-verification-code',
-  // },
   category: 'education',
   classification: 'Student Organization',
   icons: {
     icon: [
-      { url: '/images/stc.jpg', type: 'image/jpeg' },
-      { url: '/images/stc.jpg', type: 'image/jpeg' }
+      { url: '/images/stc.jpg', sizes: '32x32', type: 'image/jpeg' },
+      { url: '/images/stc.jpg', sizes: '16x16', type: 'image/jpeg' },
+      { url: '/images/stc.jpg', sizes: '192x192', type: 'image/jpeg' }
     ],
+    shortcut: '/images/stc.jpg',
     apple: [
-      { url: '/images/stc.jpg', type: 'image/jpeg' }
+      { url: '/images/stc.jpg', sizes: '180x180', type: 'image/jpeg' },
+      { url: '/images/stc.jpg', sizes: '152x152', type: 'image/jpeg' },
+      { url: '/images/stc.jpg', sizes: '144x144', type: 'image/jpeg' }
     ],
     other: [
       {
@@ -100,7 +109,7 @@ export const metadata: Metadata = {
       },
     ],
   },
-  // manifest: '/manifest.json',
+  manifest: '/manifest.json',
   alternates: {
     canonical: 'https://stciitphybrid.in',
   },
@@ -119,44 +128,82 @@ export default function RootLayout({
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'EducationalOrganization',
-    name: 'Student Technical Council - IIT Patna',
-    description: 'Official Student Technical Council hybrid of Indian Institute of Technology Patna, empowering students through innovation and technical excellence.',
+    name: 'STC IITP - Student Technical Council for Hybrid Programs IIT Patna',
+    alternateName: ['STC IITP', 'STC Hybrid', 'Student Technical Council Hybrid', 'Student Technical Council IITP'],
+    description: 'Official Student Technical Council IIT Patna Hybrid Programs offering technical excellence through DISHA, ARTHNITI, and TATVA wings.',
     url: 'https://stciitphybrid.in',
     logo: 'https://stciitphybrid.in/images/stc.jpg',
     image: 'https://stciitphybrid.in/images/stc.jpg',
-    mail: 'stciitphybrid@iitp.ac.in',
+    email: 'stciitphybrid@iitp.ac.in',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Bihta',
       addressRegion: 'Bihar',
       addressCountry: 'India',
-      postalCode: '801106'
+      postalCode: '801106',
+      streetAddress: 'Indian Institute of Technology Patna'
     },
     parentOrganization: {
       '@type': 'EducationalOrganization',
       name: 'Indian Institute of Technology Patna',
-      url: 'https://www.iitp.ac.in'
+      url: 'https://www.iitp.ac.in',
+      sameAs: 'https://en.wikipedia.org/wiki/Indian_Institute_of_Technology_Patna'
     },
     department: [
       {
         '@type': 'Organization',
         name: 'DISHA',
-        description: 'Career Growth & Training Cell - Empowering students with the skills, exposure, and support needed to excel in their professional journey'
+        description: 'Career Growth & Training Cell - Empowering students with skills and professional development',
+        url: 'https://stciitphybrid.in/wings/disha'
       },
       {
         '@type': 'Organization',
         name: 'ARTHNITI',
-        description: 'Entrepreneurship & Innovation Cell - Nurturing future innovators and startup enthusiasts through comprehensive entrepreneurship support'
+        description: 'Entrepreneurship & Innovation Cell - Supporting startup culture and innovation',
+        url: 'https://stciitphybrid.in/wings/arthniti'
       },
       {
         '@type': 'Organization',
         name: 'TATVA',
-        description: 'Technology & Research Cell - Nurturing technical expertise and promoting research-oriented mindset through innovation and collaboration'
+        description: 'Technology & Research Cell - Promoting technical expertise and research',
+        url: 'https://stciitphybrid.in/wings/tatva'
       }
     ],
     sameAs: [
       "https://www.linkedin.com/company/stc-iitp-hybrid-programs",
-      "https://www.instagram.com/stc_iitp_cet"
+      "https://www.instagram.com/stc_iitp_cet",
+    ],
+    mainEntity: [
+      {
+        '@type': 'WebPage',
+        name: 'About STC IITP',
+        url: 'https://stciitphybrid.in/about',
+        description: 'Learn about Student Technical Council for hybrid programs IIT Patna'
+      },
+      {
+        '@type': 'WebPage', 
+        name: 'Events',
+        url: 'https://stciitphybrid.in/events',
+        description: 'Technical events and competitions by STC IITP'
+      },
+      {
+        '@type': 'WebPage',
+        name: 'Our Team',
+        url: 'https://stciitphybrid.in/team',
+        description: 'Meet the STC IITP team members'
+      },
+      {
+        '@type': 'WebPage',
+        name: 'Wings',
+        url: 'https://stciitphybrid.in/wings',
+        description: 'STC IITP wings - DISHA, ARTHNITI, TATVA'
+      },
+      {
+        '@type': 'WebPage',
+        name: 'Contact',
+        url: 'https://stciitphybrid.in/contact',
+        description: 'Contact STC IITP for collaborations and queries'
+      }
     ]
   }
 

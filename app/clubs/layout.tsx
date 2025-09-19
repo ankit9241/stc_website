@@ -1,26 +1,40 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Clubs & Communities",
-  description: "Discover various clubs and communities under Student Technical Council IIT Patna. Join coding clubs, business clubs, and innovation communities to enhance your skills.",
+  title: "Clubs & Societies",
+  description: "Explore various clubs under STC IITP - Student Technical Council IIT Patna. Join Coding Club, Entrepreneurship Cell, Finance Club, and more. Enhance your skills and career prospects.",
   keywords: [
-    "STC clubs IIT Patna",
-    "coding club",
-    "business club", 
-    "entrepreneurship club",
-    "technical communities",
-    "student clubs",
-    "skill development clubs",
-    "innovation communities"
+    "STC IITP clubs",
+    "IIT Patna clubs",
+    "Student Technical Council clubs",
+    "coding club STC IITP",
+    "entrepreneurship cell IITP",
+    "finance club IIT Patna",
+    "technical clubs IITP",
+    "STC hybrid clubs",
+    "student societies IITP",
+    "programming club",
+    "startup cell IIT Patna",
+    "investment club IITP",
+    "tech clubs IIT Patna",
+    "student organizations STC",
+    "business club IITP",
+    "innovation communities IIT Patna"
   ],
   openGraph: {
-    title: "Clubs & Communities - Student Technical Council IIT Patna",
-    description: "Join various clubs and communities to enhance your technical and professional skills at IIT Patna.",
+    title: "Clubs & Societies",
+    description: "Discover diverse clubs under Student Technical Council IIT Patna. Join coding, entrepreneurship, finance, and technical clubs to enhance your career.",
     images: ['/images/stc.jpg'],
+    url: '/clubs',
   },
   twitter: {
-    title: "Clubs & Communities - Student Technical Council IIT Patna", 
-    description: "Join various clubs and communities to enhance your technical and professional skills at IIT Patna.",
+    title: "Clubs & Societies | STC IITP",
+    description: "Discover diverse clubs under Student Technical Council IIT Patna. Join coding, entrepreneurship, finance, and technical clubs to enhance your career.",
+    card: 'summary_large_image',
+    images: ['/images/stc.jpg'],
+  },
+  alternates: {
+    canonical: '/clubs',
   },
 }
 

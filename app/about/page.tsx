@@ -3,25 +3,36 @@ import { Target, Eye, Award, Users } from "lucide-react"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "About Us",
-  description: "Learn about Student Technical Council IIT Patna - a reimagined platform with three specialized wings: DISHA, ARTHNITI, and TATVA, catering to diverse academic and professional aspirations.",
+  title: "About Us | STC IITP",
+  description: "Learn about STC IITP - Student Technical Council IIT Patna Hybrid. Discover our vision, mission, and three specialized wings: DISHA, ARTHNITI, and TATVA for diverse academic and professional growth.",
   keywords: [
-    "about STC IIT Patna",
-    "student technical council",
-    "vision mission",
-    "DISHA ARTHNITI TATVA",
+    "about STC IITP",
+    "Student Technical Council IIT Patna",
+    "STC hybrid about",
+    "vision mission STC IITP",
+    "DISHA ARTHNITI TATVA wings",
     "student organization IIT Patna",
-    "technical excellence",
-    "innovation leadership"
+    "technical excellence IITP",
+    "innovation leadership",
+    "STC IITP history",
+    "student council about",
+    "IIT Patna student body",
+    "technical community IITP"
   ],
   openGraph: {
-    title: "About Student Technical Council - IIT Patna",
-    description: "Learn about our reimagined platform with three specialized wings: DISHA, ARTHNITI, and TATVA, empowering students through technical excellence.",
+    title: "About Us | STC IITP",
+    description: "Learn about Student Technical Council IIT Patna Hybrid - our vision, mission, and specialized wings DISHA, ARTHNITI, and TATVA empowering students.",
     images: ['/images/stc.jpg'],
+    url: '/about',
   },
   twitter: {
-    title: "About Student Technical Council - IIT Patna",
-    description: "Learn about our reimagined platform with three specialized wings: DISHA, ARTHNITI, and TATVA, empowering students through technical excellence.",
+    title: "About Us | STC IITP",
+    description: "Learn about Student Technical Council IIT Patna Hybrid - our vision, mission, and specialized wings DISHA, ARTHNITI, and TATVA empowering students.",
+    card: 'summary_large_image',
+    images: ['/images/stc.jpg'],
+  },
+  alternates: {
+    canonical: '/about',
   },
 }
 

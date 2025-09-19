@@ -6,24 +6,36 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Our Wings",
-  description: "Explore the three specialized wings of Student Technical Council IIT Patna: DISHA, ARTHNITI, and TATVA.",
+  description: "Explore the three specialized wings of STC IITP - Student Technical Council IIT Patna: DISHA for career growth, ARTHNITI for entrepreneurship, and TATVA for research & innovation.",
   keywords: [
-    "STC wings IIT Patna",
-    "DISHA",
-    "ARTHNITI",
-    "TATVA",
+    "STC IITP wings",
+    "Student Technical Council wings",
+    "DISHA STC IITP",
+    "ARTHNITI STC IITP",
+    "TATVA STC IITP",
+    "IIT Patna wings",
     "student technical wings",
-    "skill development",
-    "career training"
+    "skill development IITP",
+    "career training STC",
+    "entrepreneurship wing",
+    "research wing IITP",
+    "innovation wing STC",
+    "STC hybrid wings"
   ],
   openGraph: {
-    title: "Our Wings - Student Technical Council IIT Patna",
-    description: "Discover our three specialized wings: DISHA, ARTHNITI, and TATVA.",
+    title: "Our Wings",
+    description: "Discover our three specialized wings: DISHA for career growth, ARTHNITI for entrepreneurship, and TATVA for research & innovation.",
     images: ['/images/stc.jpg'],
+    url: '/wings',
   },
   twitter: {
-    title: "Our Wings - Student Technical Council IIT Patna",
-    description: "Discover our three specialized wings: DISHA for career growth, ARTHNITI for competitive programming, and TATVA for research & innovation.",
+    title: "Our Wings | STC IITP",
+    description: "Discover our three specialized wings: DISHA for career growth, ARTHNITI for entrepreneurship, and TATVA for research & innovation.",
+    card: 'summary_large_image',
+    images: ['/images/stc.jpg'],
+  },
+  alternates: {
+    canonical: '/wings',
   },
 }
 
