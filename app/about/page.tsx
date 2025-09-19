@@ -100,8 +100,7 @@ export default function AboutPage() {
                   <h3 className="text-xl md:text-2xl font-bold text-gray-900 break-words leading-tight">Our Vision</h3>
                 </div>
                 <p className="text-gray-700 leading-relaxed text-base md:text-lg lg:text-xl break-words">
-                  To be recognized as the leading placement cell that consistently produces industry-ready professionals
-                  who contribute meaningfully to technological advancement and societal progress.
+                To be recognized as a leading student body that consistently fosters technically proficient, innovation-driven individuals who contribute meaningfully to technological advancement and societal progress.
                 </p>
               </CardContent>
             </Card>
@@ -147,7 +146,7 @@ export default function AboutPage() {
               <div className="flex flex-col lg:flex-row items-center gap-6 md:gap-8">
                 <div className="flex-shrink-0 mb-4 lg:mb-0">
                   <img
-                    src="/public/Screenshot 2025-09-16 163544.png"
+                    src="/gautam.png"
                     alt="TPC Head"
                     className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full object-cover border-4 border-blue-200 mx-auto lg:mx-0"
                   />
@@ -155,18 +154,14 @@ export default function AboutPage() {
                 <div className="flex-1">
                   <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-3 md:mb-4 break-words leading-tight">Message from the President</h3>
                   <blockquote className="text-gray-700 text-base md:text-lg lg:text-xl leading-relaxed mb-3 md:mb-4 break-words">
-                    "At IIT Patna's Training and Placement Cell, we don't just focus on placing students; we focus on
-                    building careers. Our commitment extends beyond the placement season to ensure that every student is
-                    equipped with the skills and confidence needed to thrive in today's dynamic professional landscape.
+                    "At IIT Patna's Student Technical Council (STC), Hybrid Programmes represent our commitment to bridging the gap between theoretical knowledge and practical application. These flagship initiatives are crafted to foster innovation, interdisciplinary collaboration, and industry readiness among students.
                     <br />
                     <br />
-                    We take pride in our holistic approach that combines rigorous training, industry exposure, and
-                    personalized mentoring. Our success is measured not just by placement statistics, but by the
-                    long-term career growth and satisfaction of our alumni."
+                    Through Hybrid Programmes, STC creates dynamic platforms where students interact with domain experts, participate in hands-on sessions, and tackle real-world challenges. By combining online flexibility with offline engagement, we aim to build a future-ready student community that is technically strong, creatively driven, and empowered to lead in an ever-evolving tech ecosystem."
                   </blockquote>
                   <div className="text-right">
                     <p className="font-semibold text-gray-900 break-words text-base md:text-lg">Mr. Gautam Kashyap</p>
-                    <p className="text-blue-600 break-words text-base md:text-lg">President, Student Technical Council</p>
+                    <p className="text-blue-600 break-words text-base md:text-lg">President, STC Hybrid Programmes</p>
                     <p className="text-gray-600 break-words text-base md:text-lg">IIT Patna</p>
                   </div>
                 </div>

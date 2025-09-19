@@ -75,7 +75,7 @@ export default function DishaPage() {
   return (
     <div className="min-h-screen bg-red-50 pt-16">
       {/* Hero Section */}
-      <div className="relative overflow-hidden pt-24 pb-12 md:pt-28 md:pb-16 lg:pt-32 lg:pb-20">
+      <div className="relative overflow-hidden pt-20 pb-12 md:pt-24 md:pb-16 lg:pt-32 lg:pb-20">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-5" style={{
           backgroundImage: 'radial-gradient(circle at 10% 20%, #EF4444 0.5px, transparent 0.5px)',
@@ -91,17 +91,28 @@ export default function DishaPage() {
                 <span className="tracking-wider">CAREER GROWTH & TRAINING CELL</span>
               </div>
               
-              <div className="flex items-center justify-center lg:justify-start mb-6">
-                {/* Logo for mobile and medium screens */}
-                <div className="lg:hidden flex-shrink-0">
+              {/* Mobile Layout - Logo above text */}
+              <div className="lg:hidden mb-6">
+                <div className="flex justify-center mb-4">
                   <Image
                     src="/images/disha-logo.png"
                     alt="DISHA Logo"
                     width={120}
                     height={120}
-                    className="w-24 h-24 md:w-32 md:h-32 object-contain mr-4"
+                    className="w-28 h-28 md:w-28 md:h-28 object-contain"
                   />
                 </div>
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-900 text-center">
+                  <span className="text-red-600">DISHA</span>
+                  <br />
+                  <span className="text-lg md:text-xl font-medium text-gray-600 mt-2 block">
+                    Guiding Your Professional Journey
+                  </span>
+                </h1>
+              </div>
+
+              {/* Desktop Layout - Logo and text side by side */}
+              <div className="hidden lg:flex items-center justify-start mb-6">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
                   <span className="text-red-600">DISHA</span> - Guiding Your Professional Journey
                 </h1>
@@ -113,15 +124,16 @@ export default function DishaPage() {
                   disha@iitp.ac.in
                 </a>
               </div>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+              <p className="text-base md:text-lg text-gray-600 mb-6 md:mb-8 leading-relaxed">
                 We provide comprehensive career development programs, skill-building workshops, and industry connections
                 to help you navigate your professional path with confidence.
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
                 <Button 
                   onClick={() => scrollToSection('sub-clubs')}
-                  className="bg-red-600 hover:bg-red-700 text-white transition-colors"
+                  className="bg-red-600 hover:bg-red-700 text-white transition-colors w-full sm:w-auto"
+                  size="lg"
                 >
                   Explore Programs
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -129,7 +141,8 @@ export default function DishaPage() {
                 <Button 
                   onClick={() => scrollToSection('about')}
                   variant="outline" 
-                  className="border-gray-300 text-gray-700 hover:bg-gray-50"
+                  className="border-gray-300 text-gray-700 hover:bg-gray-50 w-full sm:w-auto"
+                  size="lg"
                 >
                   Learn More
                 </Button>

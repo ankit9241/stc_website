@@ -28,7 +28,7 @@ const FaQ: React.FC = () => {
     {
       question: "How can companies collaborate with Student Technical Council?",
       answer:
-        "Companies can partner with us for recruitment, workshops, mentorship programs, and sponsorships. Contact our industry relations team at stciitphybrid@iitp.ac.in for collaboration opportunities.",
+        "Companies can collaborate with us through recruitment, workshops, mentorship, or sponsorships. For opportunities, contact our industry relations team at stciitphybrid@iitp.ac.in",
     },
     {
       question: "What is the time commitment for participation?",
@@ -50,69 +50,71 @@ const FaQ: React.FC = () => {
             </p>
           </div>
 
-          <div className="space-y-6">
+            <div className="space-y-6">
             {faqs.map((faq, index) => {
               const isOpen = openIndex === index;
               const contentId = `faq-${index}-content`;
               const btnId = `faq-${index}-btn`;
 
               return (
-                <div
-                  key={index}
-                  className={`rounded-2xl border border-gray-200 bg-white/80 shadow-md overflow-hidden transition-all duration-300 group ${isOpen ? 'ring-2 ring-blue-400/40' : ''}`}
+              <div
+                key={index}
+                className={`rounded-2xl border border-gray-200 bg-white/80 shadow-md overflow-hidden transition-all duration-300 group ${isOpen ? 'ring-2 ring-blue-400/40' : ''}`}
+              >
+                <button
+                id={btnId}
+                aria-controls={contentId}
+                aria-expanded={isOpen}
+                onClick={() => toggleFAQ(index)}
+                className="w-full flex items-center justify-between px-7 py-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60 transition-colors duration-200 group-hover:bg-blue-50/60"
+                type="button"
                 >
-                  <button
-                    id={btnId}
-                    aria-controls={contentId}
-                    aria-expanded={isOpen}
-                    onClick={() => toggleFAQ(index)}
-                    className="w-full flex items-center justify-between px-7 py-6 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/60 transition-colors duration-200 group-hover:bg-blue-50/60"
-                    type="button"
+                <span className="text-lg sm:text-xl font-semibold text-gray-900 transition-colors duration-200 group-hover:text-blue-700 group-focus-visible:text-blue-700">
+                  {faq.question}
+                </span>
+                <span
+                  className={`ml-4 flex-shrink-0 rounded-full bg-blue-100/60 p-1 transition-all duration-300 ${
+                  isOpen ? "rotate-180 shadow-md" : "shadow"
+                  }`}
+                  aria-hidden="true"
+                >
+                  <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 text-blue-500 group-hover:text-blue-700 transition-colors duration-200"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                   >
-                    <span className="text-lg sm:text-xl font-semibold text-gray-900 transition-colors duration-200 group-hover:text-blue-700 group-focus-visible:text-blue-700">
-                      {faq.question}
-                    </span>
-                    <span
-                      className={`ml-4 flex-shrink-0 rounded-full bg-blue-100/60 p-1 transition-all duration-300 ${
-                        isOpen ? "rotate-180 shadow-md" : "shadow"
-                      }`}
-                      aria-hidden="true"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 text-blue-500 group-hover:text-blue-700 transition-colors duration-200"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 9l-7 7-7-7"
-                        />
-                      </svg>
-                    </span>
-                  </button>
-                  <div
-                    id={contentId}
-                    role="region"
-                    aria-labelledby={btnId}
-                    className={`px-7 overflow-hidden transition-all duration-400 ease-in-out ${
-                      isOpen ? "max-h-40 py-4 opacity-100" : "max-h-0 py-0 opacity-0"
-                    }`}
-                    style={{
-                      transitionProperty: 'max-height, opacity, padding',
-                    }}
-                  >
-                    <p className="text-gray-600 text-base leading-relaxed">
-                      {faq.answer}
-                    </p>
-                  </div>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                  </svg>
+                </span>
+                </button>
+                <div
+                id={contentId}
+                role="region"
+                aria-labelledby={btnId}
+                className={`px-7 overflow-hidden transition-all duration-400 ease-in-out ${
+                  isOpen
+                  ? "max-h-60 sm:max-h-40 py-4 opacity-100"
+                  : "max-h-0 py-0 opacity-0"
+                }`}
+                style={{
+                  transitionProperty: 'max-height, opacity, padding',
+                }}
+                >
+                <p className="text-gray-600 text-base leading-relaxed">
+                  {faq.answer}
+                </p>
                 </div>
+              </div>
               );
             })}
-          </div>
+            </div>
         </div>
       </section>
     </div>

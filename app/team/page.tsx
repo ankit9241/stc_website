@@ -41,38 +41,38 @@ const coreTeam = [
   {
     name: "Gautam Kumar",
     designation: "President",
-    department: "Student Technical Council",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "#",
-    linkedin: "#",
+    department: "Student Technical Council - CEP",
+    image: "/gautam.png",
+    email: "gautam_2312res266@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/gautamkumar266/",
   },
   {
     name: "Aryan Singh",
     designation: "Vice President",
-    department: "Student Technical Council",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "aryan.singh@iitp.ac.in",
-    linkedin: "#",
+    department: "Student Technical Council - CEP",
+    image: "/aryan.png",
+    email: "aryan_2312res179@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/aryan-singh-358556245/",
   },
   {
     name: "Ritu Raj",
     designation: "General Secretary",
-    department: "Student Technical Council",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "ritu.raj@iitp.ac.in",
-    linkedin: "#",
+    department: "Student Technical Council - CEP",
+    image: "/Ritu.png",
+    email: "ritu_2312res532@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/ritu-raj-9321b5294/",
   },
   {
     name: "Hridyanand Gupta",
     designation: "Tresurer",
-    department: "Student Technical Council",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "hridyanand.gupta@iitp.ac.in",
-    linkedin: "#",
+    department: "Student Technical Council - CEP",
+    image: "/hridyanand.png",
+    email: "hridayanand_2312res301@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/hridayanand-gupta-abb501304/",
   },
 ]
 
-const teamMembers = [
+const _teamMembers = [
   // Creatives Team Members
   {
     name: "Shivam Kumar",
@@ -489,7 +489,7 @@ const teamMembers = [
   },
 ]
 
-const teamLeads = [
+const _teamLeads = [
   // Creatives Team
   {
     name: "Satyam Kumar",
@@ -571,7 +571,7 @@ const teamLeads = [
   },
 ]
 
-const technicalLeads = [
+const _technicalLeads = [
   // WebWiser (Web Dev) Team
   {
     name: "Hridyanand Gupta",
@@ -713,7 +713,7 @@ const technicalLeads = [
   },
 ]
 
-const specializedTeams = [
+const _specializedTeams = [
   // Session & Webinar Team
   {
     name: "Kumar Aayush",
@@ -775,7 +775,17 @@ const specializedTeams = [
   },
 ]
 
-function TeamMemberCard({ member }: { member: any }) {
+interface TeamMember {
+  name: string;
+  designation: string;
+  department: string;
+  image: string;
+  email: string;
+  linkedin: string;
+  team?: string;
+}
+
+function TeamMemberCard({ member }: { member: TeamMember }) {
   return (
     <Card className="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
       <CardContent className="p-6 text-center">
@@ -798,10 +808,17 @@ function TeamMemberCard({ member }: { member: any }) {
           <Link
             href={`mailto:${member.email}`}
             className="p-2 bg-blue-100 rounded-full hover:bg-blue-200 transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <Mail className="w-4 h-4 text-blue-600" />
           </Link>
-          <Link href={member.linkedin} className="p-2 bg-blue-100 rounded-full hover:bg-blue-200 transition-colors">
+          <Link 
+            href={member.linkedin} 
+            className="p-2 bg-blue-100 rounded-full hover:bg-blue-200 transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Linkedin className="w-4 h-4 text-blue-600" />
           </Link>
         </div>

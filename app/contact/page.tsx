@@ -72,7 +72,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Address</h3>
                     <p className="text-gray-600">
-                      Student Technical Council
+                      Student Technical Council, Hybrid Programmes
                       <br />
                       Indian Institute of Technology Patna
                       <br />
@@ -108,8 +108,15 @@ export default function ContactPage() {
                       stciitphybrid@iitp.ac.in
                     </p>
                     <p className="text-gray-600">
-                      tpc@iitp-cep.in
+                    tatva@iitp.ac.in
                     </p>
+                    <p className="text-gray-600">
+                    disha@iitp.ac.in
+                    </p>
+                    <p className="text-gray-600">
+                    arthniti@iitp.ac.in
+                    </p>
+                    
                   </div>
                 </div>
 
@@ -278,17 +285,15 @@ export default function ContactPage() {
 
             {/* Interactive Google Map */}
             <div className="relative" style={{ height: "450px" }}>
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3598.4756989094887!2d85.13542731498!3d25.59413998374!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ed5690c5c9c6a9%3A0x8040be5d8c7e0b0!2sIndian%20Institute%20of%20Technology%20Patna!5e0!3m2!1sen!2sin!4v1635000000000!5m2!1sen!2sin"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="IIT Patna Campus Location"
-                className="w-full h-full"
-              ></iframe>
+<iframe
+  src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3637.5842304021667!2d84.8487250754359!3d25.535599977494698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjXCsDMyJzA4LjIiTiA4NMKwNTEnMDQuNyJF!5e1!3m2!1sen!2sus!4v1758220612066!5m2!1sen!2sus"
+  width="1400"
+  height="450"
+  style={{ border: 0 }}
+  allowFullScreen
+  loading="lazy"
+  referrerPolicy="no-referrer-when-downgrade"
+/>
 
               {/* Map Overlay Info */}
               <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow-lg p-4 max-w-sm">
