@@ -9,16 +9,21 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/images/stc.jpg",
+      "src": "/images/stc-logo.jpg",
       "sizes": "192x192",
       "type": "image/jpeg",
       "purpose": "any maskable"
     },
     {
-      "src": "/images/stc.jpg", 
+      "src": "/images/stc-logo.jpg", 
       "sizes": "512x512",
       "type": "image/jpeg",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
     }
   ],
   "categories": ["education", "technology", "productivity"],

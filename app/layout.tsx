@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     description: 'STC IITP - Official Student Technical Council for Hybrid Programs IIT Patna. Technical excellence through DISHA, ARTHNITI, and TATVA wings.',
     images: [
       {
-        url: '/images/stc.jpg',
+        url: '/images/stc-logo.jpg',
         width: 1200,
         height: 630,
         alt: 'STC IITP - Student Technical Council Logo',
@@ -84,7 +84,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'STC IITP | Student Technical Council for Hybrid Programs IIT Patna',
     description: 'STC IITP - Official Student Technical Council for Hybrid Programs IIT Patna. Technical excellence through DISHA, ARTHNITI, and TATVA wings.',
-    images: ['/images/stc.jpg'],
+    images: ['/images/stc-logo.jpg'],
     creator: '@stc_iitpatna',
     site: '@stc_iitpatna',
   },
@@ -92,26 +92,32 @@ export const metadata: Metadata = {
   classification: 'Student Organization',
   icons: {
     icon: [
-      { url: '/images/stc.jpg', sizes: '32x32', type: 'image/jpeg' },
-      { url: '/images/stc.jpg', sizes: '16x16', type: 'image/jpeg' },
-      { url: '/images/stc.jpg', sizes: '192x192', type: 'image/jpeg' }
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/images/stc-logo.jpg', sizes: '32x32', type: 'image/jpeg' },
+      { url: '/images/stc-logo.jpg', sizes: '16x16', type: 'image/jpeg' },
+      { url: '/images/stc-logo.jpg', sizes: '192x192', type: 'image/jpeg' },
+      { url: '/images/stc-logo.jpg', sizes: '512x512', type: 'image/jpeg' }
     ],
-    shortcut: '/images/stc.jpg',
+    shortcut: '/favicon.ico',
     apple: [
-      { url: '/images/stc.jpg', sizes: '180x180', type: 'image/jpeg' },
-      { url: '/images/stc.jpg', sizes: '152x152', type: 'image/jpeg' },
-      { url: '/images/stc.jpg', sizes: '144x144', type: 'image/jpeg' }
+      { url: '/images/stc-logo.jpg', sizes: '180x180', type: 'image/jpeg' },
     ],
     other: [
       {
-        rel: 'apple-touch-icon-precomposed',
-        url: '/images/stc.jpg',
-      },
-    ],
+        rel: 'mask-icon',
+        url: '/images/stc-logo.jpg',
+        color: '#1e40af'
+      }
+    ]
   },
   manifest: '/manifest.json',
   alternates: {
     canonical: 'https://stciitphybrid.in',
+  },
+  other: {
+    'msapplication-TileColor': '#2563eb',
+    'msapplication-TileImage': '/images/stc-logo.jpg',
+    'theme-color': '#2563eb',
   },
 }
 
@@ -210,6 +216,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/images/stc-logo.jpg" type="image/jpeg" />
+        <link rel="apple-touch-icon" href="/images/stc-logo.jpg" />
+        <meta name="msapplication-TileColor" content="#2563eb" />
+        <meta name="msapplication-TileImage" content="/images/stc-logo.jpg" />
+        <meta name="theme-color" content="#2563eb" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
