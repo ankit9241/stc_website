@@ -202,19 +202,47 @@ export default function ParticipationPage() {
           </div>
 
           {/* Growth Flow */}
-          <div className="mt-16 text-center">
-            <h3 className="text-2xl font-bold text-gray-900 mb-8">Growth Flow</h3>
-            <div className="bg-white rounded-xl p-8 shadow-lg">
-              <div className="flex flex-wrap justify-center items-center gap-4 text-lg font-semibold text-gray-700">
-                <span className="bg-blue-100 text-blue-700 px-4 py-2 rounded-lg">Participant</span>
-                <ArrowRight className="w-5 h-5 text-gray-400" />
-                <span className="bg-green-100 text-green-700 px-4 py-2 rounded-lg">Volunteer</span>
-                <ArrowRight className="w-5 h-5 text-gray-400" />
-                <span className="bg-purple-100 text-purple-700 px-4 py-2 rounded-lg">Executive</span>
-                <ArrowRight className="w-5 h-5 text-gray-400" />
-                <span className="bg-orange-100 text-orange-700 px-4 py-2 rounded-lg">Coordinator</span>
-                <ArrowRight className="w-5 h-5 text-gray-400" />
-                <span className="bg-red-100 text-red-700 px-4 py-2 rounded-lg">Advisory</span>
+          <div className="mt-16">
+            <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Growth Flow</h3>
+            <div className="bg-white rounded-xl p-6 sm:p-8 shadow-lg">
+              <div className="flex flex-col sm:flex-row sm:flex-wrap sm:justify-center items-center gap-2 sm:gap-4 text-lg font-semibold text-gray-700">
+                <div className="flex items-center">
+                  <span className="bg-blue-100 text-blue-700 px-4 py-2 rounded-lg whitespace-nowrap">Participant</span>
+                  <ArrowRight className="w-5 h-5 text-gray-400 mx-2 sm:block hidden" />
+                </div>
+                <div className="sm:hidden w-6 h-6 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 5v14m0 0l-4-4m4 4l4-4"/>
+                  </svg>
+                </div>
+                <div className="flex items-center">
+                  <span className="bg-green-100 text-green-700 px-4 py-2 rounded-lg whitespace-nowrap">Volunteer</span>
+                  <ArrowRight className="w-5 h-5 text-gray-400 mx-2 sm:block hidden" />
+                </div>
+                <div className="sm:hidden w-6 h-6 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 5v14m0 0l-4-4m4 4l4-4"/>
+                  </svg>
+                </div>
+                <div className="flex items-center">
+                  <span className="bg-purple-100 text-purple-700 px-4 py-2 rounded-lg whitespace-nowrap">Executive</span>
+                  <ArrowRight className="w-5 h-5 text-gray-400 mx-2 sm:block hidden" />
+                </div>
+                <div className="sm:hidden w-6 h-6 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 5v14m0 0l-4-4m4 4l4-4"/>
+                  </svg>
+                </div>
+                <div className="flex items-center">
+                  <span className="bg-orange-100 text-orange-700 px-4 py-2 rounded-lg whitespace-nowrap">Coordinator</span>
+                  <ArrowRight className="w-5 h-5 text-gray-400 mx-2 sm:block hidden" />
+                </div>
+                <div className="sm:hidden w-6 h-6 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 5v14m0 0l-4-4m4 4l4-4"/>
+                  </svg>
+                </div>
+                <span className="bg-red-100 text-red-700 px-4 py-2 rounded-lg whitespace-nowrap">Advisory</span>
               </div>
             </div>
           </div>

@@ -1,15 +1,22 @@
 "use client"
-
 import React, { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { MapPin, Phone, Mail, Clock, Send, ExternalLink } from "lucide-react"
+import { MapPin, Phone, Mail, Send, ExternalLink, Car, Bus, Plane, ClipboardList, AlertTriangle, Satellite, Globe, Clock } from "lucide-react"
 import FaQ from "@/components/FaQ"
 
+interface FormData {
+  name: string;
+  email: string;
+  company: string;
+  subject: string;
+  message: string;
+}
+
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     company: "",
@@ -81,10 +88,11 @@ export default function ContactPage() {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    })
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }))
   }
 
   return (
@@ -143,8 +151,10 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-                    <p className="text-gray-600">stc@iitp.ac.in</p>
-                    <p className="text-gray-600">tpc@iitp-cep.in</p>
+                    <p className="text-gray-600">stciitphybrid@iitp.ac.in</p>
+                    <p className="text-gray-600">tatva@iitp.ac.in</p>
+                    <p className="text-gray-600">arthniti@iitp.ac.in</p>
+                    <p className="text-gray-600">disha@iitp.ac.in</p>
                   </div>
                 </div>
 
@@ -163,14 +173,14 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Quick Contact Cards */}
+              {/* Quick Contact Cards
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Card className="border-l-4 border-l-blue-600">
                   <CardContent className="p-4">
                     <h4 className="font-semibold text-gray-900 mb-2">For Students</h4>
                     <p className="text-sm text-gray-600 mb-2">Join wings and participation inquiries</p>
-                    <a href="mailto:stc@iitp.ac.in" className="text-blue-600 text-sm hover:underline">
-                      stc@iitp.ac.in
+                    <a href="mailto:stciitphybrid@iitp.ac.in" className="text-blue-600 text-sm hover:underline">
+                      stciitphybrid@iitp.ac.in
                     </a>
                   </CardContent>
                 </Card>
@@ -178,12 +188,12 @@ export default function ContactPage() {
                   <CardContent className="p-4">
                     <h4 className="font-semibold text-gray-900 mb-2">For Industry</h4>
                     <p className="text-sm text-gray-600 mb-2">Partnership and collaboration opportunities</p>
-                    <a href="mailto:stc@iitp.ac.in" className="text-green-600 text-sm hover:underline">
-                      stc@iitp.ac.in
+                    <a href="mailto:stciitphybrid@iitp.ac.in" className="text-green-600 text-sm hover:underline">
+                      stciitphybrid@iitp.ac.in
                     </a>
                   </CardContent>
                 </Card>
-              </div>
+              </div> */}
             </div>
 
             {/* Contact Form */}
@@ -353,7 +363,7 @@ export default function ContactPage() {
       </section>
 
       {/* Map Section */}
-      <section className="py-20 bg-white">
+      <section className="bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Visit Our Campus</h2>
@@ -366,7 +376,7 @@ export default function ContactPage() {
               <div className="flex items-center justify-between">
                 <h3 className="text-xl font-bold">VISIT OUR CAMPUS</h3>
                 <a
-                  href="https://maps.google.com/maps?q=Indian+Institute+of+Technology+Patna,+Bihta,+Patna,+Bihar&hl=en&sll=25.5941,85.1376&sspn=0.1,0.1&t=m&z=15"
+                  href="https://www.google.com/maps?q=25.5356,84.8513&z=15"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center text-sm text-blue-200 hover:text-white transition-colors"
@@ -380,19 +390,19 @@ export default function ContactPage() {
             {/* Interactive Google Map */}
             <div className="relative" style={{ height: "450px" }}>
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3598.4756989094887!2d85.13542731498!3d25.59413998374!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ed5690c5c9c6a9%3A0x8040be5d8c7e0b0!2sIndian%20Institute%20of%20Technology%20Patna!5e0!3m2!1sen!2sin!4v1635000000000!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3599.9999999999995!2d84.8487093!3d25.5356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDMyJzA4LjIiTiA4NMKwNTEnMDQuNyJF!5e0!3m2!1sen!2sin!4v1635000000000!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="IIT Patna Campus Location"
+                title="Location: 25.5356° N, 84.8513° E"
                 className="w-full h-full"
               ></iframe>
 
               {/* Map Overlay Info */}
-              <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow-lg p-4 max-w-sm">
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white rounded-lg shadow-lg p-4 max-w-sm w-11/12 sm:w-auto">
                 <div className="flex items-start space-x-3">
                   <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
                     <MapPin className="w-4 h-4 text-white" />
@@ -401,8 +411,8 @@ export default function ContactPage() {
                     <h4 className="font-semibold text-gray-900 text-sm">Indian Institute of Technology, Patna</h4>
                     <p className="text-xs text-gray-600 mt-1">Bihta, Patna - 801106, Bihar, India</p>
                     <div className="flex items-center mt-2 space-x-4 text-xs text-gray-500">
-                      <span>📍 Campus Location</span>
-                      <span>🚗 Parking Available</span>
+                      <span className="flex items-center"><MapPin className="w-3 h-3 mr-1" /> Campus Location</span>
+                      <span className="flex items-center"><Car className="w-3 h-3 mr-1" /> Parking Available</span>
                     </div>
                   </div>
                 </div>
@@ -413,13 +423,13 @@ export default function ContactPage() {
             <div className="bg-gray-50 px-4 py-3 border-t">
               <div className="flex items-center justify-between text-xs text-gray-500">
                 <div className="flex items-center space-x-4">
-                  <span>📍 Map Data</span>
-                  <span>📋 Terms</span>
-                  <span>⚠️ Report a map error</span>
+                  <span className="flex items-center"><MapPin className="w-3 h-3 mr-1" /> Map Data</span>
+                  <span className="flex items-center"><ClipboardList className="w-3 h-3 mr-1" /> Terms</span>
+                  <span className="flex items-center"><AlertTriangle className="w-3 h-3 mr-1" /> Report a map error</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <span>🛰️ Satellite</span>
-                  <span>🗺️ Terrain</span>
+                  <span className="flex items-center"><Satellite className="w-3 h-3 mr-1" /> Satellite</span>
+                  <span className="flex items-center"><Globe className="w-3 h-3 mr-1" /> Terrain</span>
                 </div>
               </div>
             </div>
@@ -430,7 +440,7 @@ export default function ContactPage() {
             <Card>
               <CardContent className="p-6 text-center">
                 <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl">🚗</span>
+                  <Car className="w-6 h-6 text-blue-600" />
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">By Car</h3>
                 <p className="text-sm text-gray-600">
@@ -442,7 +452,7 @@ export default function ContactPage() {
             <Card>
               <CardContent className="p-6 text-center">
                 <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl">🚌</span>
+                  <Bus className="w-6 h-6 text-green-600" />
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">By Bus</h3>
                 <p className="text-sm text-gray-600">
@@ -454,7 +464,7 @@ export default function ContactPage() {
             <Card>
               <CardContent className="p-6 text-center">
                 <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl">✈️</span>
+                  <Plane className="w-6 h-6 text-purple-600" />
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">By Air</h3>
                 <p className="text-sm text-gray-600">
@@ -467,7 +477,7 @@ export default function ContactPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 ">
+      <section>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FaQ />
         </div>
