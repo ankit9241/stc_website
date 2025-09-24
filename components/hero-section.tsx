@@ -1,60 +1,29 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 // import { Button } from "@/components/ui/button"
-// import { ChevronLeft, ChevronRight, ArrowRight, Users, Award, TrendingUp } from "lucide-react"
+// import { ArrowRight, Users, Award, TrendingUp } from "lucide-react"
 // import Link from "next/link"
 
-const slides = [
-	{
-		image: "/07.jpg?height=600&width=1200",
-		title: "IIT Patna Campus",
-		description: "State-of-the-art facilities fostering innovation and excellence",
-	},
-	{
-		image: "/07.jpg?height=600&width=1200",
-		title: "IIT Patna Campus",
-		description: "State-of-the-art facilities fostering innovation and excellence",
-	},
-]
+const heroImage = "/07.jpg"
  
 export function HeroSection() {
-	const [currentSlide, setCurrentSlide] = useState(0)
 	const [isLoaded, setIsLoaded] = useState(false)
 
 	useEffect(() => {
 		setIsLoaded(true)
-		const timer = setInterval(() => {
-			setCurrentSlide((prev) => (prev + 1) % slides.length)
-		}, 5000)
-		return () => clearInterval(timer)
 	}, [])
-
-	const _nextSlide = () => {
-		setCurrentSlide((prev) => (prev + 1) % slides.length)
-	}
-
-	const _prevSlide = () => {
-		setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
-	}
 
 	return (
 		<section className="relative isolate min-h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 mt-8 w-full pb-28 sm:pb-32">
-			{/* Background Video/Image Slideshow */}
+			{/* Background Image */}
 			<div className="absolute inset-0 z-0">
-				{slides.map((slide, index) => (
+				<div className="absolute inset-0">
 					<div
-						key={index}
-						className={`absolute inset-0 transition-all duration-500 ${
-							index === currentSlide ? "opacity-20" : "opacity-0"
-						}`}
-					>
-						<div
-							className="w-full h-full bg-cover bg-center"
-							style={{ backgroundImage: `url(${slide.image})` }}
-						/>
-					</div>
-				))}
+						className="w-full h-full bg-cover bg-center opacity-25"
+						style={{ backgroundImage: `url(${heroImage})` }}
+					/>
+				</div>
 			</div>
 
 			{/* Main Content */}
@@ -64,7 +33,7 @@ export function HeroSection() {
 				}`}
 			>
 				{/* Animated Logo/Badge */}
-				<div className="mb-6 sm:mb-8 flex justify-center">
+				<div className="mb-6 sm:mb-8 mt-4 flex justify-center">
 					<div className="w-14 h-14 sm:w-20 sm:h-20 rounded-3xl flex items-center justify-center overflow-hidden">
 						<img 
 							src="/images/stc-logo.jpg" 
@@ -84,17 +53,16 @@ export function HeroSection() {
 					Empowering Students Through Innovation
 				</p>
 				<p className="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 max-w-3xl mx-auto text-gray-700 leading-relaxed">
-					A reimagined platform with three specialized wings - <span className="text-[#1a4b8c] font-semibold">DISHA, ARTHNITI, and TATVA</span> - fostering career
+					A reimagined platform with three specialized wings - <span className="text-[#1a4b8c] font-semibold"><b>DISHA</b>, <b>ARTHNITI</b>,</span> and <span className="text-[#1a4b8c] font-semibold"><b>TATVA</b></span> - fostering career
 					development, entrepreneurship, and technological innovation at IIT Patna.
 				</p>
 
 
 				{/* Quick Info Cards */}
-				<div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto mb-6 sm:mb-8">
+				<div className="grid grid-cols-2 sm:grid-cols-2 gap-4 sm:gap-6 max-w-2xl mx-auto mb-6 sm:mb-8">
 					{[
 						{ label: "Active Wings", value: "3", icon: "" },
-						{ label: "Sub-Clubs", value: "24+", icon: "" },
-						{ label: "Launch Year", value: "2025", icon: "" },
+						{ label: "Sub-Clubs", value: "24+", icon: "" }
 					].map((stat, index) => (
 						<div
 							key={index}
@@ -114,7 +82,7 @@ export function HeroSection() {
 							/>
 							<div className="relative z-10 bg-transparent rounded-3xl backdrop-blur-sm">
 								<div className="z-9 text-xl sm:text-2xl mb-2">{stat.icon}</div>
-								<div className="z-9 text-xl sm:text-2xl md:text-3xl font-bold text-[#453CD5] mb-1">
+								<div className="z-9 text-xl sm:text-2xl md:text-3xl font-bold text-[#1a4b8c] mb-1">
 									{stat.value}
 								</div>
 								<div className="z-9 text-xs sm:text-sm text-gray-600 font-semibold">
@@ -126,9 +94,6 @@ export function HeroSection() {
 				</div>
 			</div>
 
-			{/* Bottom fade to separate from next section */}
-			<div className="pointer-events-none absolute bottom-0 left-0 right-0 h-16 sm:h-20 z-30 bg-gradient-to-b from-transparent to-white" />
-		
 			
 		</section>
 	)

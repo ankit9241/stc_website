@@ -1,7 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card"
 // import { Button } from "@/components/ui/button"
-import { Calendar, ArrowRight, Bell } from "lucide-react"
+import { Calendar, ArrowRight, Bell, Award, Briefcase, Calendar as CalendarIcon, Megaphone, GraduationCap } from "lucide-react"
 import Link from "next/link"
+import React from 'react'
 
 const notices = [
   {
@@ -39,8 +40,9 @@ const notices = [
 ]
 
 export function NoticesSection() {
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
+  const formatDate = (dateString: string | undefined) => {
+    if (!dateString) return 'Date not available';
+    const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "short",
@@ -48,27 +50,27 @@ export function NoticesSection() {
     })
   }
 
-  const getCategoryColor = (category: string) => {
-    const colors = {
-      Elections: "bg-red-100 text-red-800",
-      Events: "bg-blue-100 text-blue-800",
-      Opportunities: "bg-green-100 text-green-800",
-      Workshops: "bg-purple-100 text-purple-800",
-      Career: "bg-orange-100 text-orange-800",
+  const getCategoryIcon = (category: string) => {
+    const icons = {
+      Elections: <Megaphone className="w-4 h-4" />,
+      Events: <CalendarIcon className="w-4 h-4" />,
+      Opportunities: <Award className="w-4 h-4" />,
+      Workshops: <GraduationCap className="w-4 h-4" />,
+      Career: <Briefcase className="w-4 h-4" />,
     }
-    return colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800"
+    return icons[category as keyof typeof icons] || <Calendar className="w-4 h-4" />
   }
 
   return (
-    <section id="notices-section" className="py-16 w-[100vw] lg:py-20 bg-gray-50">
-      <div className="max-w-[90vw] mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="notices-section" className="py-16 lg:py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header - styled like WingsSection */}
         <div className="text-center max-w-4xl mx-auto mb-12 lg:mb-16">
           <span className="inline-block text-sm font-bold tracking-wider text-blue-600 mb-4 px-4 py-1.5 bg-blue-50 rounded-full border border-blue-100">
             NEWS AND UPDATES
           </span>
           <h2 className="mt-2 sm:mt-4 text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
-            Latest <span className="text-blue-600">News</span> and Updates
+            Latest <span className="text-blue-600">News</span> and <span className="text-blue-600">Updates</span>
           </h2>
           <p className="mt-5 text-lg text-gray-600 max-w-2xl mx-auto">
             Stay informed with important announcements, events, and opportunities from STC.
@@ -79,59 +81,52 @@ export function NoticesSection() {
           {notices.slice(0, 5).map((notice) => (
             <Card
               key={notice.id}
-              className={`group hover:shadow-xl transition-all rounded-3xl  duration-300 transform hover:-translate-y-2 ${
-              notice.urgent ? "bg-red-50/30" : ""
+              className={`bg-white transition-all duration-300 transform hover:-translate-y-0.5 rounded-xl overflow-hidden border border-blue-200 ${
+                notice.urgent 
+                  ? "ring-2 ring-red-200" 
+                  : "hover:shadow-md hover:border-blue-100"
               }`}
               style={{
-              borderWidth: "2px",
-              borderStyle: "solid",
-              borderColor: notice.urgent
-                ? "#fecaca" 
-                : getCategoryColor(notice.category).includes("red")
-                ? "#fecaca"
-                : getCategoryColor(notice.category).includes("blue")
-                ? "#bfdbfe"
-                : getCategoryColor(notice.category).includes("green")
-                ? "#bbf7d0"
-                : getCategoryColor(notice.category).includes("purple")
-                ? "#ddd6fe"
-                : getCategoryColor(notice.category).includes("orange")
-                ? "#fed7aa"
-                : "#e5e7eb", 
+                boxShadow: '0 4px 12px -2px rgba(56, 132, 255, 0.08), 0 1px 3px 0 rgba(0, 0, 0, 0.04)',
+                transition: 'all 0.2s ease-in-out'
               }}
             >
-              <CardContent className="p-6">
-              <div className="flex items-start justify-between mb-4">
-                <span
-                className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getCategoryColor(notice.category)}`}
-                >
-                {notice.category}
-                </span>
+              <CardContent className="p-5 flex flex-col h-full group">
+              <div className="flex justify-between items-center mb-3">
+                <div className="inline-flex items-center bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full text-xs font-medium tracking-wide border border-blue-100 shadow-sm">
+                  <span className="mr-2">
+                    {getCategoryIcon(notice.category)}
+                  </span>
+                  {notice.category.toUpperCase()}
+                </div>
                 {notice.urgent && <Bell className="w-4 h-4 text-red-500 animate-pulse" />}
               </div>
 
-              <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-[#453CD5] transition-colors line-clamp-2">
+              <h3 className="text-base font-bold text-gray-900 mb-2 line-clamp-2">
                 {notice.title}
               </h3>
 
-              <p className="text-gray-600 text-sm mb-4 line-clamp-3">{notice.excerpt}</p>
+              <p className="text-gray-600 text-sm mb-3 line-clamp-2 flex-grow">{notice.excerpt}</p>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center text-sm text-gray-500">
-                <Calendar className="w-4 h-4 mr-2" />
-                {formatDate(notice.date)}
-                </div>
+              <div className="flex items-center justify-between mt-3 pt-2 border-t border-gray-100">
+                {notice.category === "Events" && notice.title.includes("Hackathon") ? (
+                  <div className="flex items-center text-xs text-gray-500">
+                    <Calendar className="w-3.5 h-3.5 mr-1.5" />
+                    {formatDate(notice.date)}
+                  </div>
+                ) : (
+                  <div className="h-4"></div>
+                )}
                 {notice.category === "Events" && notice.title.includes("Hackathon") ? (
                   <Link href="/events" passHref>
-                    <h1 className="flex justify-center items-center text-[#453CD5] font-semibold text-lg group-hover:text-[#453CD5] transition-colors cursor-pointer">
+                    <h1 className="flex items-center text-blue-600 text-sm font-medium group-hover:text-blue-700 transition-colors duration-200 cursor-pointer hover:underline">
                       Read More
-                      <ArrowRight className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-3.5 h-3.5 ml-1 transform group-hover:translate-x-0.5 transition-transform" />
                     </h1>
                   </Link>
                 ) : (
-                  <h1 className="flex justify-center items-center text-[#453CD5] font-semibold text-lg group-hover:text-[#453CD5] transition-colors cursor-pointer">
+                  <h1 className="flex items-center text-gray-400 text-sm font-medium cursor-default">
                     Coming Soon
-                    {/* <ArrowRight className="w-4 h-4 ml-1 mt-0.5 transform group-hover:translate-x-1 transition-transform" /> */}
                   </h1>
                 )}
               </div>

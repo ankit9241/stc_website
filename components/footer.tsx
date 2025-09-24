@@ -69,79 +69,109 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
             <div>
               <h4 className={`text-lg font-semibold mb-4 ${accentColor}`}>Quick Links</h4>
               <nav>
-              <ul className="grid grid-cols-2 gap-x-8 gap-y-2">
+              <ul className="grid grid-cols-2 gap-x-8 gap-y-4">
                 <li>
                 <Link
                   href="/"
-                  className={`flex items-center gap-2 text-gray-300 rounded-md px-2 py-1 transition-all duration-200 hover:bg-white/10 hover:${accentColor} focus:outline-none focus:ring-2 focus:ring-${theme.accent}-400`}
+                  className={`group relative text-gray-300 hover:text-${theme.accent}-400 transition-all duration-300`}
                 >
-                  Home
+                  <span className="relative flex items-center">
+                    <span className="group-hover:translate-x-1 transition-transform duration-300">
+                      Home
+                    </span>
+                  </span>
                 </Link>
                 </li>
                 <li>
                 <Link
                   href="/wings"
-                  className={`flex items-center gap-2 text-gray-300 rounded-md px-2 py-1 transition-all duration-200 hover:bg-white/10 hover:${accentColor} focus:outline-none focus:ring-2 focus:ring-${theme.accent}-400`}
+                  className={`group relative text-gray-300 hover:text-${theme.accent}-400 transition-all duration-300`}
                 >
-                  Our Wings
+                  <span className="relative flex items-center">
+                    <span className="group-hover:translate-x-1 transition-transform duration-300">
+                      Our Wings
+                    </span>
+                  </span>
                 </Link>
                 </li>
                 <li>
                 <Link
                   href="/team"
-                  className={`flex items-center gap-2 text-gray-300 rounded-md px-2 py-1 transition-all duration-200 hover:bg-white/10 hover:${accentColor} focus:outline-none focus:ring-2 focus:ring-${theme.accent}-400`}
+                  className={`group relative text-gray-300 hover:text-${theme.accent}-400 transition-all duration-300`}
                 >
-                  Our Team
+                  <span className="relative flex items-center">
+                    <span className="group-hover:translate-x-1 transition-transform duration-300">
+                      Our Team
+                    </span>
+                  </span>
                 </Link>
                 </li>
                 <li>
                 <Link
                   href="/events"
-                  className={`flex items-center gap-2 text-gray-300 rounded-md px-2 py-1 transition-all duration-200 hover:bg-white/10 hover:${accentColor} focus:outline-none focus:ring-2 focus:ring-${theme.accent}-400`}
+                  className={`group relative text-gray-300 hover:text-${theme.accent}-400 transition-all duration-300`}
                 >
-                  Events
+                  <span className="relative flex items-center">
+                    <span className="group-hover:translate-x-1 transition-transform duration-300">
+                      Events
+                    </span>
+                  </span>
                 </Link>
                 </li>
                 <li>
                 <Link
                   href="/clubs"
-                  className={`flex items-center gap-2 text-gray-300 rounded-md px-2 py-1 transition-all duration-200 hover:bg-white/10 hover:${accentColor} focus:outline-none focus:ring-2 focus:ring-${theme.accent}-400`}
+                  className={`group relative text-gray-300 hover:text-${theme.accent}-400 transition-all duration-300`}
                 >
-                  Student Clubs
+                  <span className="relative flex items-center">
+                    <span className="group-hover:translate-x-1 transition-transform duration-300">
+                      Student Clubs
+                    </span>
+                  </span>
                 </Link>
                 </li>
                 <li>
                 <Link
                   href="/participation"
-                  className={`flex items-center gap-2 text-gray-300 rounded-md px-2 py-1 transition-all duration-200 hover:bg-white/10 hover:${accentColor} focus:outline-none focus:ring-2 focus:ring-${theme.accent}-400`}
+                  className={`group relative text-gray-300 hover:text-${theme.accent}-400 transition-all duration-300`}
                 >
-                  Participation
+                  <span className="relative flex items-center">
+                    <span className="group-hover:translate-x-1 transition-transform duration-300">
+                      Participation
+                    </span>
+                  </span>
                 </Link>
                 </li>
                 <li>
                 <Link
                   href="/contact"
-                  className={`flex items-center gap-2 text-gray-300 rounded-md px-2 py-1 transition-all duration-200 hover:bg-white/10 hover:${accentColor} focus:outline-none focus:ring-2 focus:ring-${theme.accent}-400`}
+                  className={`group relative text-gray-300 hover:text-${theme.accent}-400 transition-all duration-300`}
                 >
-                  Contact Us
+                  <span className="relative flex items-center">
+                    <span className="group-hover:translate-x-1 transition-transform duration-300">
+                      Contact Us
+                    </span>
+                  </span>
                 </Link>
                 </li>
                 <li>
                 <Link
                   href="/about"
-                  className={`flex items-center gap-2 text-gray-300 rounded-md px-2 py-1 transition-all duration-200 hover:bg-white/10 hover:${accentColor} focus:outline-none focus:ring-2 focus:ring-${theme.accent}-400`}
+                  className={`group relative text-gray-300 hover:text-${theme.accent}-400 transition-all duration-300`}
                 >
-                  About Us
+                  <span className="relative flex items-center">
+                    <span className="group-hover:translate-x-1 transition-transform duration-300">
+                      About Us
+                    </span>
+                  </span>
                 </Link>
                 </li>
               </ul>
               </nav>
             </div>
-
           {/* Contact Info */}
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
