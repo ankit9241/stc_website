@@ -2,7 +2,7 @@
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Code, Globe, Palette, Smartphone, BarChart, Brain, Shield, Trophy, ArrowRight, Mail } from "lucide-react"
+import { Code, Globe, Palette, Smartphone, BarChart, Brain, Shield, Trophy, ArrowRight, Mail, Newspaper } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useCallback } from "react";
@@ -69,6 +69,13 @@ const subClubs = [
     icon: Trophy,
     activities: ["Coding contests", "Algorithm training", "Problem solving", "Programming competitions"],
   },
+  {
+    name: "Tech Hub",
+    subtitle: "Tech News & Updates Club",
+    description: "Tech News Hub, your centralized platform for staying updated with the latest tech stories, trends, and breakthroughs. Be informed, be inspired, and be ahead!",
+    icon: Newspaper,
+    activities: ["Latest tech news", "Daily technology updates", "Trends, breakthroughs and stories", "Be informed, be inspired, be ahead!"],
+  }
 ]
 
 export default function TatvaPage() {
