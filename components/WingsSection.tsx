@@ -58,7 +58,7 @@ const WingsSection = () => {
   } as const;
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-white py-20 sm:py-28 px-4 sm:px-6 lg:px-8">
+    <div className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-white py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-radial from-blue-100 to-transparent opacity-70"></div>

@@ -2,7 +2,7 @@ import React from 'react'
 
 const StatsSection = () => {
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-gray-50 rounded-2xl shadow-md w-full px-4 py-8 sm:px-6 sm:py-10 md:px-10 md:py-12 mt-8 md:mt-12">
+    <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-gray-50 rounded-2xl shadow-md w-full px-4 pt-8 sm:px-6 sm:pt-10 md:px-10 md:pt-12 mt-8 md:mt-12">
       {/* left section */}
       <div className="flex-1 w-full">
         {/* Section Header - match WingsSection style */}

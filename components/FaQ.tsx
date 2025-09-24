@@ -39,7 +39,7 @@ const FaQ: React.FC = () => {
 
   return (
     <div>
-      <section className="py-20 min-h-[80vh] bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <section className="py-20 min-h-[80vh]">
         <div className="max-w-3xl mx-auto px-4 sm:px-8 lg:px-0">
           <div className="text-center mb-14">
             <h2 className="text-4xl font-extrabold text-gray-900 mb-3 tracking-tight drop-shadow-sm">
