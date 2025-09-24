@@ -200,7 +200,7 @@ export function Navigation() {
           <div className="lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200"
             >
               <span className="sr-only">Open main menu</span>
               {isOpen ? (
@@ -213,21 +213,25 @@ export function Navigation() {
         </div>
       </div>
 
-      {/* Mobile menu, show/hide based on menu state */}
-      <div className={`lg:hidden ${isOpen ? 'block' : 'hidden'}`}>
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-900">
+      {/* Mobile menu with animations */}
+      <div className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+        isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+      }`}>
+        <div className={`px-4 pt-2 pb-4 space-y-2 sm:px-6 bg-blue-50 shadow-lg transform transition-transform duration-300 ${
+          isOpen ? 'translate-y-0' : '-translate-y-4'
+        }`}>
           {navItems.map((item) => (
             <div key={item.href}>
-              {item.label === 'Notices' ? (
+              {item.label === 'Notices' ? ( 
                 <button
                   onClick={(e) => {
                     handleNoticesClick(e)
                     setIsOpen(false)
                   }}
-                  className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium ${
+                  className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 transform hover:translate-x-1 ${
                     isNoticesActive()
-                      ? `text-white bg-${theme.accent}-600`
-                      : `text-gray-300 hover:bg-${theme.accent}-800 hover:text-white`
+                      ? `text-${theme.accent}-700 font-bold`
+                      : `text-gray-700 hover:text-${theme.accent}-600`
                   }`}
                 >
                   {item.label}
@@ -235,10 +239,10 @@ export function Navigation() {
               ) : (
                 <Link
                   href={item.href}
-                  className={`block px-3 py-2 rounded-md text-sm font-medium ${
+                  className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 transform hover:translate-x-1 ${
                     (item.href === '/' ? pathname === '/' : pathname.startsWith(item.href))
-                      ? `text-white bg-${theme.accent}-600`
-                      : `text-gray-300 hover:bg-${theme.accent}-800 hover:text-white`
+                      ? `text-${theme.accent}-700 font-bold`
+                      : `text-gray-600 hover:text-${theme.accent}-600`
                   }`}
                   onClick={() => setIsOpen(false)}
                 >
@@ -248,15 +252,17 @@ export function Navigation() {
             </div>
           ))}
           
-          <a
+          <div className="pt-2">
+            <a
               href="/STC.pdf"
               download
               target="_blank"
-              className={`ml-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white ${accentBtnClass} transition-colors duration-200`}
+              className={`w-full inline-flex justify-center items-center px-4 py-3 border border-transparent text-sm font-medium rounded-lg text-white ${accentBtnClass} transition-colors duration-200`}
             >
-              <Download className="w-4 h-4 mr-2" />
-              Brochure
+              <Download className="w-5 h-5 mr-2" />
+              Download Brochure
             </a>
+          </div>
         </div>
       </div>
     </nav>

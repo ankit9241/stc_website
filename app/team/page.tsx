@@ -48,7 +48,7 @@ const coreTeam = [
   },
   {
     name: "Aryan Singh",
-    designation: "Vice President",
+    designation: "Vice-President",
     department: "Student Technical Council - CEP",
     image: "/aryan.png",
     email: "aryan_2312res179@iitp.ac.in",
@@ -64,7 +64,7 @@ const coreTeam = [
   },
   {
     name: "Hridyanand Gupta",
-    designation: "Tresurer",
+    designation: "Treasurer",
     department: "Student Technical Council - CEP",
     image: "/hridyanand.png",
     email: "hridayanand_2312res301@iitp.ac.in",
