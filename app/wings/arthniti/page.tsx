@@ -128,16 +128,13 @@ export default function ArthnitiPage() {
                 <Button 
                   onClick={() => scrollToSection('sub-clubs')}
                   className="bg-amber-600 hover:bg-amber-700 text-white transition-colors w-full sm:w-auto"
-                  size="lg"
                 >
                   Explore Programs
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
                 <Button 
                   onClick={() => scrollToSection('about')}
-                  variant="outline" 
-                  className="border-gray-300 text-gray-700 hover:bg-gray-50 w-full sm:w-auto"
-                  size="lg"
+                  className="border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:text-gray-900 w-full sm:w-auto transition-colors"
                 >
                   Learn More
                 </Button>
@@ -295,13 +292,12 @@ export default function ArthnitiPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/participation">
-              <Button size="lg" className="bg-white text-amber-600 hover:bg-gray-100 px-8 py-3 text-lg hover:text-amber-700">
+              <Button className="bg-white text-amber-600 hover:bg-gray-100 px-8 py-3 text-lg hover:text-amber-700">
                 Join ARTHNITI
               </Button>
             </Link>
             <Link href="/contact">
-              <Button
-                size="lg"
+              <Button                
                 className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-amber-600 px-8 py-3 text-lg"
               >
                 Learn More

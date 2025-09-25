@@ -103,6 +103,7 @@ const wings = [
       "App Development (Appistry)",
       "Data Analytics (Analytical Arena)",
       "AI & ML (Synapse)",
+      "Tech News and Updates (TechHub)",
     ],
     link: "/wings/tatva",
   },
