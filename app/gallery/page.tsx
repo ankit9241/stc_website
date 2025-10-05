@@ -3,7 +3,7 @@
 import React, { useState, useRef } from 'react'
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Play, X, ChevronLeft, ChevronRight, Award, Users, Film, SquareChevronRight } from "lucide-react"
 import Image from 'next/image'
@@ -340,6 +340,9 @@ const GalleryPage = () => {
       {/* Image Modal */}
       <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
         <DialogContent className="max-w-7xl w-full h-[95vh] p-0 border-0 bg-transparent">
+          <DialogTitle className="sr-only">
+            {selectedImage?.title || 'Image Viewer'}
+          </DialogTitle>
           <div className="relative w-full h-full bg-black/95 rounded-xl overflow-hidden backdrop-blur-sm">
             {selectedImage && (
               <>
@@ -414,8 +417,11 @@ const GalleryPage = () => {
 
       {/* Video Modal */}
       <Dialog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
-        <DialogContent className="max-w-7xl w-full p-0 border-0 bg-transparent">
-          <div className="relative w-full aspect-video bg-black/95 rounded-xl overflow-hidden backdrop-blur-sm">
+        <DialogContent className="max-w-7xl w-full p-0 h-[95vh] border-0 bg-transparent">
+          <DialogTitle className="sr-only">
+            {selectedVideo?.title || 'Video Player'}
+          </DialogTitle>
+          <div className="relative w-full h-full aspect-video bg-black/95 rounded-xl overflow-hidden backdrop-blur-sm">
             {selectedVideo && (
               <>
                 <video
