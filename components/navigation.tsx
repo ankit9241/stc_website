@@ -100,6 +100,7 @@ export function Navigation() {
     { href: "/wings", label: "Wings" },
     { href: "/team", label: "Our Team" },
     { href: "/events", label: "Events" },
+    { href: "/gallery", label: "Gallery" },
     { href: "/contact", label: "Contact Us" },
   ]
 

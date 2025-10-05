@@ -55,6 +55,13 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://stciitphybrid.in/gallery</loc>
+    <lastmod>2025-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Wings Section -->
   <url>
     <loc>https://stciitphybrid.in/wings</loc>

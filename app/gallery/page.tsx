@@ -1,0 +1,464 @@
+"use client"
+
+import React, { useState, useRef } from 'react'
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
+import { Play, X, ChevronLeft, ChevronRight, Award, Users, Film, SquareChevronRight } from "lucide-react"
+import Image from 'next/image'
+
+const galleryData = {
+  // events: {
+  //   title: "Events & Activities",
+  //   icon: <Calendar className="w-5 h-5" />,
+  //   items: [
+  //     {
+  //       type: "image",
+  //       src: "/images/hack-n-tech-poster.jpg",
+  //       title: "Hack-n-Tech 2024",
+  //       description: "Annual hackathon bringing together innovators from across the nation",
+  //       category: "Hackathon"
+  //     },
+  //     {
+  //       type: "image",
+  //       src: "/images/internship-drive-poster.jpg", 
+  //       title: "Internship Drive",
+  //       description: "Career opportunities with top companies",
+  //       category: "Career Development"
+  //     },
+  //     {
+  //       type: "image",
+  //       src: "/images/hackathon-collage.jpg",
+  //       title: "Hackathon Moments",
+  //       description: "Capturing the essence of innovation and collaboration",
+  //       category: "Events"
+  //     },
+  //     {
+  //       type: "video",
+  //       src: "/videos/hackntech.mp4",
+  //       thumbnail: "/images/hack-n-tech-poster.jpg",
+  //       title: "Hack-n-Tech Highlights",
+  //       description: "Experience the energy and innovation of our flagship hackathon event",
+  //       category: "Events"
+  //     }
+  //   ]
+  // },
+  hackNtech: {
+    title: "Hack-N-Tech 2025",
+    icon: <SquareChevronRight className='w-5 h-5'/>,
+    items: [
+      {
+        type: "video",
+        src: "/videos/hackntech.mp4",
+        title: "Hack-n-Tech Winnners",
+        description: "Winners of Hack-N-Tech Hackathon 2025",
+        category: "Hackathon"
+      },
+      {
+        type: "image",
+        src: "/hackNtech/img1.jpg",
+        title: "Hackathon moments",
+        description: "Experience the energy and innovation of our hackathon event",
+        category: "Hackathon"
+      },
+      {
+        type: "image",
+        src: "/hackNtech/img2.jpg",
+        title: "Hackathon moments",
+        description: "Having questions?",
+        category: "Hackathon"
+      },
+      {
+        type: "image",
+        src: "/hackNtech/img3.jpg",
+        title: "Hackathon moments",
+        description: "Meet some members",
+        category: "Hackathon"
+      },
+      {
+        type: "image",
+        src: "/hackNtech/img4.jpg",
+        title: "Hackathon moments",
+        description: "Some sponsor moments from Hack-N-Tech Hackathon 2025",
+        category: "Hackathon"
+      },
+      {
+        type: "image",
+        src: "/hackNtech/img5.jpg",
+        title: "Hackathon moments",
+        description: "Just code or having fun?",
+        category: "Hackathon"
+      },
+      {
+        type: "image",
+        src: "/hackNtech/img6.jpg",
+        title: "Hackathon moments",
+        description: "Having fun is important!!!",
+        category: "Hackathon"
+      },
+      {
+        type: "image",
+        src: "/hackNtech/img7.jpg",
+        title: "Hackathon moments",
+        description: "Again having fun",
+        category: "Hackathon"
+      },
+      {
+        type: "image",
+        src: "/hackNtech/img8.jpg",
+        title: "Hackathon moments",
+        description: "Want to see all participants?",
+        category: "Hackathon"
+      },
+      {
+        type: "video",
+        src: "/hackNtech/vdo1.mp4",
+        title: "Hackathon moments",
+        description: "Selfie time!",
+        category: "Hackathon"
+      },
+      {
+        type: "video",
+        src: "/hackNtech/vdo2.mp4",
+        title: "Hackathon moments",
+        description: "Merchandise?",
+        category: "Hackathon"
+      },
+      {
+        type: "video",
+        src: "/hackNtech/vdo3.mp4",
+        title: "Hackathon moments",
+        description: "Post hackathon celebration",
+        category: "Hackathon"
+      }
+    ]
+  },
+  achievements: {
+    title: "Achievements & Recognition",
+    icon: <Award className="w-5 h-5" />,
+    items: [
+      {
+        type: "image",
+        src: "/images/hackathon-winner.jpg",
+        title: "Hackathon Winners",
+        description: "Celebrating our champions of innovation",
+        category: "Achievement"
+      },
+      {
+        type: "image",
+        src: "/images/hackathon-first-runner.jpg",
+        title: "First Runner Up",
+        description: "Excellence in technical innovation",
+        category: "Achievement"
+      },
+      {
+        type: "image",
+        src: "/images/hackathon-second-runner.jpg",
+        title: "Second Runner Up",
+        description: "Outstanding performance in competition",
+        category: "Achievement"
+      }
+    ]
+  },
+  partnerships: {
+    title: "Industry Partnerships",
+    icon: <Users className="w-5 h-5" />,
+    items: [
+      {
+        type: "image",
+        src: "/images/company-logos.jpg",
+        title: "Industry Partners",
+        description: "Collaborating with leading companies",
+        category: "Partnership"
+      }
+    ]
+  },
+}
+
+const VideoCard = ({ video, onClick }: any) => {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [isHovered, setIsHovered] = useState(false)
+
+  const handleMouseEnter = () => {
+    setIsHovered(true)
+    if (videoRef.current) {
+      videoRef.current.play()
+    }
+  }
+
+  const handleMouseLeave = () => {
+    setIsHovered(false)
+    if (videoRef.current) {
+      videoRef.current.pause()
+      videoRef.current.currentTime = 0
+    }
+  }
+
+  return (
+    <Card
+      className="group cursor-pointer overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-white"
+      onClick={onClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <CardContent className="p-0">
+        <div className="aspect-[4/3] relative overflow-hidden bg-black">
+          <video
+            ref={videoRef}
+            src={video.src}
+            className="w-full h-full object-cover"
+            muted
+            loop
+            playsInline
+          />
+          <div className={`absolute inset-0 bg-black/30 transition-opacity duration-300 ${
+            isHovered ? 'opacity-0' : 'opacity-100'
+          } flex items-center justify-center`}>
+            <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <Play className="w-6 h-6 text-[#0f2a4d] ml-1" fill="currentColor" />
+            </div>
+          </div>
+          <div className="absolute top-3 right-3">
+            <div className="bg-[#0f2a4d] text-white p-2 rounded-full shadow-lg">
+              <Film className="w-4 h-4" />
+            </div>
+          </div>
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4">
+            <Badge className="mb-2 bg-[#0f2a4d] hover:bg-[#1a4b8c]">{video.category}</Badge>
+            <h3 className="text-white font-semibold text-base">
+              {video.title}
+            </h3>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
+const GalleryPage = () => {
+  const [selectedImage, setSelectedImage] = useState<any>(null)
+  const [selectedVideo, setSelectedVideo] = useState<any>(null)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+  const allImages = Object.values(galleryData).flatMap(section => 
+    section.items.filter(item => item.type === 'image')
+  )
+
+  const openImageModal = (image: any) => {
+    const index = allImages.findIndex(img => img.src === image.src)
+    setCurrentImageIndex(index)
+    setSelectedImage(image)
+  }
+
+  const navigateImage = (direction: 'next' | 'prev') => {
+    const newIndex = direction === 'next' 
+      ? (currentImageIndex + 1) % allImages.length
+      : currentImageIndex === 0 ? allImages.length - 1 : currentImageIndex - 1
+    
+    setCurrentImageIndex(newIndex)
+    setSelectedImage(allImages[newIndex])
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 pt-28 pb-12">
+      {/* Hero Section */}
+      <div className="text-center mb-16 px-4">
+        <div className="flex justify-center mb-6">
+          <div className="w-24 h-24 rounded-3xl flex items-center justify-center overflow-hidden shadow-2xl border-4 border-white">
+            <img 
+              src="/images/stc-logo.jpg" 
+              alt="STC Logo" 
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+        <h1 className="text-5xl md:text-6xl font-bold text-[#0f2a4d] mb-4 tracking-tight">
+          Gallery
+        </h1>
+        <p className="text-lg md:text-xl text-[#1a4b8c] max-w-3xl mx-auto leading-relaxed">
+          Explore our journey through captivating moments - from groundbreaking events and achievements to valuable partnerships and innovations
+        </p>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="space-y-20">
+          {Object.entries(galleryData).map(([key, section]) => (
+            <div key={key}>
+              {/* Section Header */}
+              <div className="flex items-center gap-4 mb-10">
+                <div className="p-3 bg-gradient-to-br from-[#0f2a4d] to-[#1a4b8c] text-white rounded-xl shadow-lg">
+                  {section.icon}
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-3xl font-bold text-[#0f2a4d] mb-1">{section.title}</h2>
+                  <div className="h-1 w-24 bg-gradient-to-r from-[#0f2a4d] to-[#1a4b8c] rounded-full"></div>
+                </div>
+              </div>
+
+              {/* Media Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {section.items.map((item, index) => (
+                  <div key={index}>
+                    {item.type === 'image' ? (
+                      <Card
+                        className="group cursor-pointer overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-white"
+                        onClick={() => openImageModal(item)}
+                      >
+                        <CardContent className="p-0">
+                          <div className="aspect-[4/3] relative overflow-hidden">
+                            <Image
+                              src={item.src}
+                              alt={item.title}
+                              fill
+                              className="object-cover group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                              <Badge className="mb-2 bg-[#0f2a4d] hover:bg-[#1a4b8c] shadow-md">{item.category}</Badge>
+                              <h3 className="text-white font-semibold text-base opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                {item.title}
+                              </h3>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ) : (
+                      <VideoCard 
+                        video={item} 
+                        onClick={() => setSelectedVideo(item)} 
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Image Modal */}
+      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
+        <DialogContent className="max-w-7xl w-full h-[95vh] p-0 border-0 bg-transparent">
+          <div className="relative w-full h-full bg-black/95 rounded-xl overflow-hidden backdrop-blur-sm">
+            {selectedImage && (
+              <>
+                <Image
+                  src={selectedImage.src}
+                  alt={selectedImage.title}
+                  fill
+                  className="object-contain"
+                  priority
+                />
+                
+                {/* Navigation Buttons */}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white backdrop-blur-md h-12 w-12 rounded-full border border-white/20 transition-all duration-300"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    navigateImage('prev')
+                  }}
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white backdrop-blur-md h-12 w-12 rounded-full border border-white/20 transition-all duration-300"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    navigateImage('next')
+                  }}
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </Button>
+
+                {/* Close Button */}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 text-white backdrop-blur-md h-12 w-12 rounded-full border border-white/20 transition-all duration-300"
+                  onClick={() => setSelectedImage(null)}
+                >
+                  <X className="w-6 h-6" />
+                </Button>
+
+                {/* Image Counter */}
+                <div className="absolute top-6 left-6 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
+                  <span className="text-white font-medium">
+                    {currentImageIndex + 1} / {allImages.length}
+                  </span>
+                </div>
+
+                {/* Image Info */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent p-8">
+                  <div className="max-w-4xl">
+                    <Badge className="mb-3 bg-[#0f2a4d] hover:bg-[#1a4b8c] text-sm px-3 py-1">
+                      {selectedImage.category}
+                    </Badge>
+                    <h3 className="text-white text-2xl font-bold mb-2">
+                      {selectedImage.title}
+                    </h3>
+                    <p className="text-gray-200 text-base">
+                      {selectedImage.description}
+                    </p>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Video Modal */}
+      <Dialog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
+        <DialogContent className="max-w-7xl w-full p-0 border-0 bg-transparent">
+          <div className="relative w-full aspect-video bg-black/95 rounded-xl overflow-hidden backdrop-blur-sm">
+            {selectedVideo && (
+              <>
+                <video
+                  src={selectedVideo.src}
+                  controls
+                  autoPlay
+                  className="w-full h-full rounded-xl"
+                  controlsList="nodownload"
+                >
+                  Your browser does not support the video tag.
+                </video>
+                
+                {/* Close Button */}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 text-white backdrop-blur-md h-12 w-12 rounded-full border border-white/20 transition-all duration-300 z-50"
+                  onClick={() => setSelectedVideo(null)}
+                >
+                  <X className="w-6 h-6" />
+                </Button>
+
+                {/* Video Info */}
+                <div className="absolute bottom-12 md:bottom-16 left-0 right-0 p-4 md:p-8 pointer-events-none">
+                  <div className="max-w-4xl">
+                    <Badge className="mb-3 bg-[#0f2a4d] hover:bg-[#1a4b8c] text-sm px-3 py-1 pointer-events-auto">
+                      {selectedVideo.category}
+                    </Badge>
+                    <h3 className="text-white text-2xl font-bold mb-2">
+                      {selectedVideo.title}
+                    </h3>
+                    <p className="text-gray-200 text-base">
+                      {selectedVideo.description}
+                    </p>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
+    </div>
+  )
+}
+
+export default GalleryPage

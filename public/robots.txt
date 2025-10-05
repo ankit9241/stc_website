@@ -28,6 +28,7 @@ Allow: /about
 Allow: /events
 Allow: /team
 Allow: /wings
+Allow: /gallery
 Allow: /contact
 Allow: /wings/disha
 Allow: /wings/arthniti
