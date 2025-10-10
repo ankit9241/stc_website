@@ -1,12 +1,13 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Users, Lightbulb, Code, ArrowRight } from "lucide-react"
-import Link from "next/link"
-import type { Metadata } from "next"
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Users, Lightbulb, Code, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Our Wings",
-  description: "Explore the three specialized wings of STC IITP - Student Technical Council IIT Patna: DISHA for career growth, ARTHNITI for entrepreneurship, and TATVA for research & innovation.",
+  description:
+    "Explore the three specialized wings of STC IITP - Student Technical Council IIT Patna: DISHA for career growth, ARTHNITI for entrepreneurship, and TATVA for research & innovation.",
   keywords: [
     "STC IITP wings",
     "Student Technical Council wings",
@@ -20,24 +21,26 @@ export const metadata: Metadata = {
     "entrepreneurship wing",
     "research wing IITP",
     "innovation wing STC",
-    "STC hybrid wings"
+    "STC hybrid wings",
   ],
   openGraph: {
     title: "Our Wings",
-    description: "Discover our three specialized wings: DISHA for career growth, ARTHNITI for entrepreneurship, and TATVA for research & innovation.",
-    images: ['/images/stc.jpg'],
-    url: '/wings',
+    description:
+      "Discover our three specialized wings: DISHA for career growth, ARTHNITI for entrepreneurship, and TATVA for research & innovation.",
+    images: ["/images/stc.jpg"],
+    url: "/wings",
   },
   twitter: {
     title: "Our Wings | STC IITP",
-    description: "Discover our three specialized wings: DISHA for career growth, ARTHNITI for entrepreneurship, and TATVA for research & innovation.",
-    card: 'summary_large_image',
-    images: ['/images/stc.jpg'],
+    description:
+      "Discover our three specialized wings: DISHA for career growth, ARTHNITI for entrepreneurship, and TATVA for research & innovation.",
+    card: "summary_large_image",
+    images: ["/images/stc.jpg"],
   },
   alternates: {
-    canonical: '/wings',
+    canonical: "/wings",
   },
-}
+};
 
 const wings = [
   {
@@ -80,7 +83,7 @@ const wings = [
       "Funding & Grants Guidance",
       "Entrepreneurship Events",
       "Freelancing",
-      "CapitalX"
+      "CapitalX",
     ],
     link: "/wings/arthniti",
   },
@@ -107,18 +110,21 @@ const wings = [
     ],
     link: "/wings/tatva",
   },
-]
+];
 
 export default function WingsPage() {
   return (
-    <div className="min-h-screen bg-gray-50 pt-16">
+    <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-5xl font-bold mb-6">Student Technical Council Wings</h1>
+            <h1 className="text-5xl font-bold mb-6">
+              Student Technical Council Wings
+            </h1>
             <p className="text-xl max-w-3xl mx-auto opacity-90">
-              Three specialized verticals designed to cater to diverse academic and professional aspirations of students
+              Three specialized verticals designed to cater to diverse academic
+              and professional aspirations of students
             </p>
           </div>
         </div>
@@ -128,9 +134,12 @@ export default function WingsPage() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Three Wings</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Our Three Wings
+            </h2>
             <p className="text-xl text-gray-600">
-              Specialized focus areas for maximum impact and streamlined operations
+              Specialized focus areas for maximum impact and streamlined
+              operations
             </p>
           </div>
 
@@ -153,18 +162,31 @@ export default function WingsPage() {
                           className="w-16 h-16 object-contain"
                         />
                       </div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2">{wing.name}</h3>
-                      <p className={`${wing.subtitleText} font-semibold`}>{wing.subtitle}</p>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                        {wing.name}
+                      </h3>
+                      <p className={`${wing.subtitleText} font-semibold`}>
+                        {wing.subtitle}
+                      </p>
                     </div>
 
-                    <p className="text-gray-700 mb-6 leading-relaxed flex-grow">{wing.description}</p>
+                    <p className="text-gray-700 mb-6 leading-relaxed flex-grow">
+                      {wing.description}
+                    </p>
 
                     <div className="mb-6">
-                      <h4 className="font-semibold text-gray-900 mb-3">Key Focus Areas:</h4>
+                      <h4 className="font-semibold text-gray-900 mb-3">
+                        Key Focus Areas:
+                      </h4>
                       <ul className="space-y-2">
                         {wing.features.map((feature, featureIndex) => (
-                          <li key={featureIndex} className="flex items-center text-sm text-gray-600">
-                            <div className={`w-2 h-2 ${wing.dot} rounded-full mr-3`}></div>
+                          <li
+                            key={featureIndex}
+                            className="flex items-center text-sm text-gray-600"
+                          >
+                            <div
+                              className={`w-2 h-2 ${wing.dot} rounded-full mr-3`}
+                            ></div>
                             {feature}
                           </li>
                         ))}
@@ -181,19 +203,22 @@ export default function WingsPage() {
                     </Link>
                   </CardContent>
                 </Card>
-              )
+              );
             })}
           </div>
         </div>
       </section>
 
       {/* Why Three Wings */}
-      <section className="py-20 bg-white">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Three Specialized Wings?</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Why Three Specialized Wings?
+            </h2>
             <p className="text-xl text-gray-600">
-              Strategic division for focused excellence and maximum student impact
+              Strategic division for focused excellence and maximum student
+              impact
             </p>
           </div>
 
@@ -204,30 +229,37 @@ export default function WingsPage() {
               </div>
               <h3 className="text-xl font-semibold mb-3">Specialized Focus</h3>
               <p className="text-gray-600">
-                Each wing concentrates on specific domains, ensuring deeper expertise and better outcomes
+                Each wing concentrates on specific domains, ensuring deeper
+                expertise and better outcomes
               </p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Lightbulb className="w-8 h-8 text-green-600" />
               </div>
-              <h3 className="text-xl font-semibold mb-3">Streamlined Operations</h3>
+              <h3 className="text-xl font-semibold mb-3">
+                Streamlined Operations
+              </h3>
               <p className="text-gray-600">
-                Clear division of responsibilities leads to more efficient resource utilization and coordination
+                Clear division of responsibilities leads to more efficient
+                resource utilization and coordination
               </p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Code className="w-8 h-8 text-purple-600" />
               </div>
-              <h3 className="text-xl font-semibold mb-3">Cross-Domain Collaboration</h3>
+              <h3 className="text-xl font-semibold mb-3">
+                Cross-Domain Collaboration
+              </h3>
               <p className="text-gray-600">
-                Wings work together to create comprehensive solutions and holistic student development
+                Wings work together to create comprehensive solutions and
+                holistic student development
               </p>
             </div>
           </div>
         </div>
       </section>
     </div>
-  )
+  );
 }

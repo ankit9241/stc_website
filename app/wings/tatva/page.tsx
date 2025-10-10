@@ -2,7 +2,10 @@
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Code, Globe, Palette, Smartphone, BarChart, Brain, Shield, Trophy, ArrowRight, Mail, Newspaper } from "lucide-react"
+import { 
+  Code, Globe, Palette, Smartphone, BarChart, 
+  Brain, Shield, Trophy, ArrowRight, Mail, Newspaper 
+} from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useCallback } from "react";
@@ -12,6 +15,7 @@ const subClubs = [
     name: "WebWiser",
     subtitle: "Web Development Club",
     description: "Hands-on workshops and projects on modern web technologies, frameworks, and full-stack development.",
+    logo: "/DomainCards/WebWiser.png",
     icon: Globe,
     activities: ["React/Next.js workshops", "Backend development", "Full-stack projects", "Web design principles"],
   },
@@ -19,6 +23,7 @@ const subClubs = [
     name: "Mech-X",
     subtitle: "Robotics Club",
     description: "Building and programming robots through competitions and practical learning experiences.",
+    logo: "/DomainCards/Robot.png",
     icon: Code,
     activities: ["Robot building", "Arduino/Raspberry Pi", "Automation projects", "Robotics competitions"],
   },
@@ -26,6 +31,7 @@ const subClubs = [
     name: "Pixelerate",
     subtitle: "Design Club",
     description: "Training and projects in UI/UX design, graphic design, and visual communication skills.",
+    logo: "/DomainCards/Pixel.png",
     icon: Palette,
     activities: ["UI/UX design", "Graphic design", "Design thinking", "Prototyping tools"],
   },
@@ -33,6 +39,7 @@ const subClubs = [
     name: "Appistry",
     subtitle: "App Development Club",
     description: "Developing mobile applications with coding challenges and comprehensive development workshops.",
+    logo: "/DomainCards/App.png",
     icon: Smartphone,
     activities: [
       "Mobile app development",
@@ -45,6 +52,7 @@ const subClubs = [
     name: "Analytical Arena",
     subtitle: "Data Analytics & Science Club",
     description: "Teaching data analysis, visualization, and interpretation using modern tools and techniques.",
+    logo: "/DomainCards/Arena.png",
     icon: BarChart,
     activities: ["Data analysis", "Machine learning", "Data visualization", "Statistical modeling"],
   },
@@ -52,12 +60,14 @@ const subClubs = [
     name: "Synapse",
     subtitle: "AI, ML & Deep Learning Club",
     description: "Exploring artificial intelligence and machine learning through hands-on projects and research.",
+    logo: "/DomainCards/Synapse.png",
     icon: Brain,
     activities: ["AI/ML projects", "Deep learning", "Neural networks", "Research initiatives"],
   },
   {
     name: "HackShield",
     subtitle: "Cybersecurity Club",
+    logo: "/DomainCards/Hack.png",
     description: "Promoting ethical hacking, cybersecurity awareness, and information security skills.",
     icon: Shield,
     activities: ["Ethical hacking", "Security audits", "CTF competitions", "Cybersecurity awareness"],
@@ -66,6 +76,7 @@ const subClubs = [
     name: "CodeRED",
     subtitle: "Competitive Programming Club",
     description: "Enhancing algorithmic problem-solving skills through contests, practice sessions, and competitions.",
+    logo: "/DomainCards/CodeRed.png",
     icon: Trophy,
     activities: ["Coding contests", "Algorithm training", "Problem solving", "Programming competitions"],
   },
@@ -73,6 +84,7 @@ const subClubs = [
     name: "Tech Hub",
     subtitle: "Tech News & Updates Club",
     description: "Tech News Hub, your centralized platform for staying updated with the latest tech stories, trends, and breakthroughs. Be informed, be inspired, and be ahead!",
+    logo: "/DomainCards/News.png",
     icon: Newspaper,
     activities: ["Latest tech news", "Daily technology updates", "Trends, breakthroughs and stories", "Be informed, be inspired, be ahead!"],
   }
@@ -87,7 +99,7 @@ export default function TatvaPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-teal-50 pt-16">
+    <div className="min-h-screen bg-teal-50">
       {/* Hero Section */}
       <div className="relative overflow-hidden pt-20 pb-12 md:pt-24 md:pb-16 lg:pt-32 lg:pb-20">
         {/* Subtle background pattern */}
@@ -252,42 +264,45 @@ export default function TatvaPage() {
             {subClubs.map((club, index) => {
               const IconComponent = club.icon
               return (
-                <Card
-                  key={index}
-                  className="group rounded-3xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
-                >
-                  <CardContent className="p-6">
-                    <div className="flex items-center mb-4">
-                      <div className="w-12 h-12 bg-[#e6f7f5] rounded-lg flex items-center justify-center mr-4">
-                        <IconComponent className="w-6 h-6 text-[#0d9488]" />
+                <Link href={`/wings/tatva/subclubs/${club.name.toLowerCase().replace(/\s+/g, '-')}`} key={club.name}>
+                  <Card className="group h-full flex flex-col transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border border-teal-200 hover:border-teal-400 cursor-pointer">
+                    <CardContent className="p-6 flex-1 flex flex-col">
+                      <div className="flex items-center mb-4">
+                        <div className="w-12 h-12 rounded-full bg-teal-100 flex items-center justify-center mr-4 text-teal-600">
+                          <IconComponent className="w-6 h-6" />
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-bold text-gray-900">{club.name}</h3>
+                          <p className="text-sm text-gray-600">{club.subtitle}</p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="text-lg font-bold text-gray-900">{club.name}</h3>
-                        <p className="text-sm text-[#0d9488] font-medium">{club.subtitle}</p>
+                      <p className="text-gray-700 mb-4 flex-1">{club.description}</p>
+                      <div className="mt-4">
+                        <h4 className="text-sm font-semibold text-gray-900 mb-2">Key Activities:</h4>
+                        <ul className="space-y-1 text-sm text-gray-700">
+                          {club.activities.slice(0, 3).map((activity, i) => (
+                            <li key={i} className="flex items-start">
+                              <span className="text-teal-600 mr-2">•</span>
+                              <span>{activity}</span>
+                            </li>
+                          ))}
+                          {club.activities.length > 3 && (
+                            <li className="text-teal-600 font-medium">+{club.activities.length - 3} more</li>
+                          )}
+                        </ul>
                       </div>
-                    </div>
-
-                    <p className="text-gray-700 mb-4 leading-relaxed">{club.description}</p>
-
-                    <div className="mb-4">
-                      <h4 className="font-semibold text-gray-900 mb-2">Activities:</h4>
-                      <ul className="space-y-1">
-                        {club.activities.map((activity, actIndex) => (
-                          <li key={actIndex} className="flex items-center text-sm text-gray-600">
-                            <div className="w-1.5 h-1.5 bg-[#0d9488] rounded-full mr-2"></div>
-                            {activity}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </CardContent>
-                </Card>
+                      <div className="mt-4 pt-3 border-t border-gray-100 flex items-center text-teal-600 font-medium text-sm">
+                        <span>Learn more</span>
+                        <ArrowRight className="ml-1 w-4 h-4" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
               )
             })}
           </div>
         </div>
       </section>
-
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-[#0d9488] to-[#0f766e] text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
