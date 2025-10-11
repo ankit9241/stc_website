@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import Header from "@/components/DomainPage/Header";
 import About from "@/components/DomainPage/About";
 import MemberSection from "@/components/DomainPage/MemberSection";

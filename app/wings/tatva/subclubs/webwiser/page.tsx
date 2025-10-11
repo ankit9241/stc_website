@@ -1,7 +1,6 @@
 import React from 'react'
 import { Box } from '@mui/material'
 import Header from '@/components/DomainPage/Header'
-import Team from '@/components/DomainPage/Team'
 import About from '@/components/DomainPage/About'
 import MemberSection from '@/components/DomainPage/MemberSection'
 import domains from '@/DataStore/store'

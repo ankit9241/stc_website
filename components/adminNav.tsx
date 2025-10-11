@@ -6,7 +6,7 @@ import { signOut } from "next-auth/react";
 import { Menu, X } from "lucide-react"
 
 
-let theme = {
+const theme = {
     bg: 'bg-gray-100',
     accent: 'blue',
     border: 'border-gray-200',
