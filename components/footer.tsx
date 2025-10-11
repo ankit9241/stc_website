@@ -40,6 +40,11 @@ export default function Footer() {
 
   const accentColor = `text-${theme.accent}-400`
   const hoverColor = `hover:text-${theme.accent}-400`
+  const isAdmin = pathname?.startsWith('/admin');
+
+  if (isAdmin) {
+    return null;
+  }
 
   return (
     <footer className={`${theme.bg} text-white`}>

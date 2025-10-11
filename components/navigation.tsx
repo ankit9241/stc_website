@@ -132,6 +132,9 @@ export function Navigation() {
     return pathname === "/" && window.location.hash === "#notices"
   }
 
+  const isAdmin = pathname?.startsWith('/admin')
+  if (isAdmin) return null
+
   // No dropdowns; simplified navigation
 
   return (
