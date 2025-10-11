@@ -210,14 +210,14 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable}`}>
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/images/stc-logo.jpg" type="image/jpeg" />
         <link rel="apple-touch-icon" href="/images/stc-logo.jpg" />
         <meta name="msapplication-TileColor" content="#2563eb" />
         <meta name="msapplication-TileImage" content="/images/stc-logo.jpg" />
-        <meta name="theme-color" content="#2563eb" />
+        <meta name="theme-color" content="#000000" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
