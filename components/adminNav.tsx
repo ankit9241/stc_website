@@ -21,11 +21,11 @@ const theme = {
 
 
 const navItems = [
-    { label: "Admin", href: "/admin" },
-    { label: "Notices", href: "/admin/notices" },
-    { label: "Notifications", href: "/admin/notifications" },
+    { label: "Dashboard", href: "/admin" },
     { label: "Events", href: "/admin/events" },
-    { label: "Team", href: "/admin/team" },
+    { label: "Notifications", href: "/admin/notifications" },
+    { label: "Registration", href: "/admin/registration" },
+    { label: "Competitions", href: "/admin/competitions" },
 ];
 
 const AdminNav = () => {
