@@ -44,7 +44,7 @@ export default function LoginPage() {
             } else {
                 router.refresh()
             }
-        } catch (error) {
+        } catch {
             setError("An error occurred. Please try again.")
         } finally {
             setLoading(false)

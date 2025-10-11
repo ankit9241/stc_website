@@ -76,11 +76,12 @@ export default function ContactPage() {
         message: 'Your message has been sent successfully! We\'ll get back to you soon.' 
       });
       
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error submitting form:', error);
+      const errorMessage = error instanceof Error ? error.message : 'An error occurred while sending your message. Please try again later.';
       setStatus({ 
         type: 'error', 
-        message: error.message || 'An error occurred while sending your message. Please try again later.' 
+        message: errorMessage
       });
     } finally {
       setIsLoading(false);

@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     let jsonBody;
     try {
       jsonBody = JSON.parse(requestBody);
-    } catch (parseError) {
+    } catch {
       return NextResponse.json(
         { error: 'Invalid JSON format in request body' },
         { status: 400 }
@@ -121,23 +121,23 @@ export async function POST(request: Request) {
         data
       });
       
-    } catch (emailError: any) {
-      
+    } catch (emailError) {
+      const errorMessage = emailError instanceof Error ? emailError.message : 'Unknown error';
       return NextResponse.json(
         { 
           error: 'Failed to process email. Please try again later.',
-          details: process.env.NODE_ENV === 'development' ? emailError.message : undefined
+          details: process.env.NODE_ENV === 'development' ? errorMessage : undefined
         },
         { status: 500 }
       );
     }
 
-  } catch (error: any) {
-    
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
       { 
         error: 'An unexpected error occurred. Please try again later.',
-        details: process.env.NODE_ENV === 'development' ? error.message : undefined
+        details: process.env.NODE_ENV === 'development' ? errorMessage : undefined
       },
       { status: 500 }
     );

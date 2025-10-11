@@ -176,7 +176,17 @@ const galleryData = {
   },
 }
 
-const VideoCard = ({ video, onClick }: any) => {
+interface VideoCardProps {
+  video: {
+    src: string
+    title: string
+    description: string
+    category: string
+  }
+  onClick: () => void
+}
+
+const VideoCard = ({ video, onClick }: VideoCardProps) => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isHovered, setIsHovered] = useState(false)
 
@@ -236,16 +246,25 @@ const VideoCard = ({ video, onClick }: any) => {
   )
 }
 
+interface GalleryItem {
+  type: string
+  src: string
+  title: string
+  description: string
+  category: string
+  thumbnail?: string
+}
+
 const GalleryPage = () => {
-  const [selectedImage, setSelectedImage] = useState<any>(null)
-  const [selectedVideo, setSelectedVideo] = useState<any>(null)
+  const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null)
+  const [selectedVideo, setSelectedVideo] = useState<GalleryItem | null>(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const allImages = Object.values(galleryData).flatMap(section => 
     section.items.filter(item => item.type === 'image')
   )
 
-  const openImageModal = (image: any) => {
+  const openImageModal = (image: GalleryItem) => {
     const index = allImages.findIndex(img => img.src === image.src)
     setCurrentImageIndex(index)
     setSelectedImage(image)

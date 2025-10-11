@@ -261,7 +261,7 @@ export default function TatvaPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {subClubs.map((club, index) => {
+            {subClubs.map((club) => {
               const IconComponent = club.icon
               return (
                 <Link href={`/wings/tatva/subclubs/${club.name.toLowerCase().replace(/\s+/g, '-')}`} key={club.name}>
