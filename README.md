@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+**get and send data to backend from STC main site**
 
-## Getting Started
+registration ke liye us page pr sabhi registration form lo and us particular event ke registration form pr click krne pr form ayega uska fill krne ko. '/api/admin/registration':Get
 
-First, run the development server:
+/test dekh lena for proper information how system works
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+form meh details lelena 
+Full Name *
+    Enter your full name
+College Email *
+    your.email@iitp.ac.in
+Send OTP btn
+Phone Number *
+    10-digit mobile number
+Course *
+    e.g., B.Tech CSE
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+pehle otp send krna and otp lene ke baad hei form submit krna
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+otp bhejne ke liye
+const response = await fetch('/api/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: formData.collegeMail,
+          event: selectedForm?.title || 'Event Registration',
+        }),
+      })
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+and submit yaha krna
+const response = await fetch('/api/admin/registration/responses', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          forEvent: selectedForm?._id,
+          name: formData.name,
+          collegeMail: formData.collegeMail,
+          phone: formData.phone,
+          course: formData.course,
+          semester: parseInt(formData.semester),
+          otp: formData.otp,
+        }),
+      })
 
-## Learn More
+error and response proper show kr dena and wese toh backend meh iitp.ac.in ke liye validation hai but frontend meh bhi kr lena
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+baki main site meh data use krne ke liye sab api pr get request lelo

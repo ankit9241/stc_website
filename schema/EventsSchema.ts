@@ -4,6 +4,7 @@ const EventsSchema = new Schema({
     title: {type: String, required: true},
     content: {type: String, required: true},
     imageUrl: String,
+    imageFileId: String,
     club: {type: String, required: true},
     uploadedBy: {type: String, required: true},
     eventDate: {type: Date, required: true},
