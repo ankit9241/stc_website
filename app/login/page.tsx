@@ -42,7 +42,7 @@ function LoginForm() {
             if (result?.error) {
                 setError("Invalid username or password")
             } else {
-                router.refresh()
+                router.push(callbackUrl)
             }
         } catch {
             setError("An error occurred. Please try again.")

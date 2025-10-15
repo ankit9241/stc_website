@@ -3,6 +3,7 @@ import { NoticesSection } from "@/components/notices-section"
 import StatsSection from "@/components/stats-section"
 import WingsSection from "@/components/WingsSection"
 import CoreValues from "@/components/coreValues"
+import Notifications from "@/components/Notifications"
 import FaQ from "@/components/FaQ"
 import type { Metadata } from "next"
 
@@ -39,10 +40,11 @@ export default function HomePage() {
       </div>
       
       <HeroSection />
+      <Notifications />
       <StatsSection/>
       <WingsSection/>
       <CoreValues/>
-      <NoticesSection />
+      {/* <NoticesSection /> */}
       <FaQ/>
     </div>
   )
