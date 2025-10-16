@@ -1,19 +1,19 @@
-import React from 'react'
-import { Box } from '@mui/material'
-import Header from '@/components/DomainPage/Header'
-import About from '@/components/DomainPage/About'
-import MemberSection from '@/components/DomainPage/MemberSection'
-import domains from '@/DataStore/store'
+import React from "react";
+import { Box } from "@mui/material";
+import Header from "@/components/DomainPage/Header";
+import About from "@/components/DomainPage/About";
+import MemberSection from "@/components/DomainPage/MemberSection";
+import domains from "@/DataStore/store";
 
 const page = () => {
   return (
-    <Box 
-      sx= {{
-        position: 'relative',
-        overflow: 'hidden'
+    <Box
+      sx={{
+        position: "relative",
+        overflow: "hidden",
       }}
     >
-        {/* <Box
+      {/* <Box
           sx={{
             position: 'absolute',
             top: '25rem',
@@ -24,18 +24,18 @@ const page = () => {
           }}
         /> */}
 
-        <Header
-          title={domains.pixelerate.title}
-          subtitle={domains.pixelerate.branch}
-          imageUrl={domains.pixelerate.cardUrl}
-          fromColor="#c8c2f0"
-          toColor="#6f67ff"
-          to="left"
-          prvDomain="/wings/tatva/subclubs/webwiser"
-          nextDomain="/wings/tatva/subclubs/appistry"
-        />
+      <Header
+        title={domains.pixelerate.title}
+        subtitle={domains.pixelerate.branch}
+        imageUrl={domains.pixelerate.cardUrl}
+        fromColor="#c8c2f0"
+        toColor="#6f67ff"
+        to="left"
+        prvDomain="/wings/tatva/subclubs/webwiser"
+        nextDomain="/wings/tatva/subclubs/appistry"
+      />
 
-        {/* <Box
+      {/* <Box
           sx={{
             position: 'absolute',
             top: '80rem',
@@ -45,33 +45,32 @@ const page = () => {
             height: '60rem'
           }}
         /> */}
-        <About
-          title={domains.pixelerate.title}
-          about={domains.pixelerate.description}
-          message={domains.pixelerate.message}
-           fromColor= "#c8c2f0"
-          toColor="#6f67ff"
-          to="bottom"
-        />
+      <About
+        title={domains.pixelerate.title}
+        about={domains.pixelerate.description}
+        message={domains.pixelerate.message}
+        fromColor="#c8c2f0"
+        toColor="#6f67ff"
+        to="bottom"
+      />
 
-        <Box sx={{ my: 8 }}>
-          <MemberSection
-            members={domains.pixelerate.team.map((member, index) => ({
+      <Box sx={{ my: 8 }}>
+        <MemberSection
+          members={domains.pixelerate.team.map((member, index) => ({
             id: `member-${index + 1}`,
             name: member.name,
             role: member.position,
             avatar: member.imgUrl,
             achievements: [
-            `Active contributor to Pixelerate's success`,
-            'Participated in multiple web development projects',
-            'Helped organize workshops and events'
-            ]
+              `Active contributor to Pixelerate's success`,
+              "Participated in multiple web development projects",
+              "Helped organize workshops and events",
+            ],
           }))}
-          />
-        </Box>
+        />
+      </Box>
 
-
-        {/* <Box
+      {/* <Box
           sx={{
             position : 'absolute',
             zIndex: '5',
@@ -82,12 +81,11 @@ const page = () => {
             height : '60rem'
           }}
         /> */}
-        {/* <Team
+      {/* <Team
           teamData={domains.pixelerate.team}
         /> */}
-        
     </Box>
-  )
-}
+  );
+};
 
-export default page
+export default page;

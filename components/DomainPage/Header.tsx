@@ -51,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({
         width: '100%',
         position: 'relative',
         paddingTop: '80px',
-        marginTop: '-80px',
+        marginTop: 'calc(4rem - 80px)',
       }}
     >
       <div className="relative flex h-full w-full flex-col rounded-md bg-transparent md:items-center md:justify-center" style={{ zIndex: 10 }}>

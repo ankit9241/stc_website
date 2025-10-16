@@ -227,35 +227,36 @@ export default function ClubsPage() {
           <p className="text-xl mb-8 opacity-90">
             Take the first step towards enhancing your skills and building meaningful connections.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/participation">
+          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center w-full">
+            <Link href="/participation" className="w-full sm:w-auto">
               <Button
                 size="lg"
-                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 text-lg transform hover:scale-105 transition-all duration-200"
+                className="w-full sm:w-auto bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 text-lg transform hover:scale-105 transition-all duration-200"
               >
                 Get Involved
               </Button>
             </Link>
-            <a
-              href="/STC.pdf"
-              download
-              target="_blank"
-              className={`
-              ml-22 border border-amber-50 sm:ml-2 
-              inline-flex items-center 
-              px-4 py-2 
-              min-w-[10vw] 
-              text-lg rounded-md 
-              text-white ${accentBtnClass} 
-              transition-all duration-300 ease-in-out 
-              transform hover:scale-105 
-              hover:bg-white hover:text-blue-600 hover:border-white
-              w-[50vw] sm:w-auto justify-center
-              `}
-            >
-              <Download className="w-4 h-4 mr-2" />
-              <span className="truncate"> Brochure</span>
-            </a>
+            <div className="w-full sm:w-auto flex justify-center">
+              <a
+                href="/STC.pdf"
+                download
+                target="_blank"
+                className={`
+                flex items-center justify-center
+                w-[44px] h-[44px] overflow-hidden
+                sm:w-[171px] sm:rounded-md
+                text-sm sm:text-base rounded-md
+                text-white ${accentBtnClass}
+                border-2 border-white
+                transform hover:scale-105 
+                transition-all duration-200
+                hover:bg-white hover:text-blue-600
+                `}
+              >
+                <Download className="w-4 h-4 sm:mr-2" />
+                <span className="hidden sm:inline">Brochure</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
