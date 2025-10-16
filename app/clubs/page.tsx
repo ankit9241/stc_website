@@ -227,36 +227,35 @@ export default function ClubsPage() {
           <p className="text-xl mb-8 opacity-90">
             Take the first step towards enhancing your skills and building meaningful connections.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center w-full">
-            <Link href="/participation" className="w-full sm:w-auto">
+          <div className="flex flex-row flex-wrap gap-4 items-center justify-center w-full">
+            <Link href="/participation" className="flex-1 min-w-[150px] max-w-[200px]">
               <Button
                 size="lg"
-                className="w-full sm:w-auto bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 text-lg transform hover:scale-105 transition-all duration-200"
+                className="w-full h-[44px] bg-white text-blue-600 hover:bg-gray-100 text-lg transform hover:scale-105 transition-all duration-200"
               >
                 Get Involved
               </Button>
             </Link>
-            <div className="w-full sm:w-auto flex justify-center">
-              <a
-                href="/STC.pdf"
-                download
-                target="_blank"
-                className={`
-                flex items-center justify-center
-                w-[44px] h-[44px] overflow-hidden
-                sm:w-[171px] sm:rounded-md
-                text-sm sm:text-base rounded-md
-                text-white ${accentBtnClass}
-                border-2 border-white
-                transform hover:scale-105 
-                transition-all duration-200
-                hover:bg-white hover:text-blue-600
-                `}
-              >
-                <Download className="w-4 h-4 sm:mr-2" />
-                <span className="hidden sm:inline">Brochure</span>
-              </a>
-            </div>
+            <a
+              href="/STC.pdf"
+              download
+              target="_blank"
+              className={`
+              flex-1 min-w-[150px] max-w-[200px]
+              flex items-center justify-center
+              h-[44px] px-4 rounded-md
+              text-lg
+              text-white ${accentBtnClass}
+              border-2 border-white
+              transform hover:scale-105 
+              transition-all duration-200
+              hover:bg-white hover:text-blue-600
+              whitespace-nowrap
+              `}
+            >
+              <Download className="w-4 h-4 mr-2" />
+              <span>Brochure</span>
+            </a>
           </div>
         </div>
       </section>
