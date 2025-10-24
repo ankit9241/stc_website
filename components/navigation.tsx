@@ -12,6 +12,7 @@ export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
   const [showMoreDropdown, setShowMoreDropdown] = useState(false)
+  const [dropdownTimeout, setDropdownTimeout] = useState<NodeJS.Timeout | null>(null)
   const pathname = usePathname()
   
   // Determine the theme based on the current route
@@ -107,6 +108,7 @@ export function Navigation() {
   const moreItems = [
     { href: "/calendar", label: "Event Calendar" },
     { href: "/registration", label: "Registration" },
+    {href: "/results", label: "Results" },
     { href: "/contact", label: "Contact" },
   ]
 
@@ -181,11 +183,21 @@ export function Navigation() {
               </div>
             ))}
 
-            {/* More Dropdown */}
             <div 
               className="relative"
-              onMouseEnter={() => setShowMoreDropdown(true)}
-              onMouseLeave={() => setShowMoreDropdown(false)}
+              onMouseEnter={() => {
+                if (dropdownTimeout) {
+                  clearTimeout(dropdownTimeout)
+                  setDropdownTimeout(null)
+                }
+                setShowMoreDropdown(true)
+              }}
+              onMouseLeave={() => {
+                const timeout = setTimeout(() => {
+                  setShowMoreDropdown(false)
+                }, 200)
+                setDropdownTimeout(timeout)
+              }}
             >
               <button
                 className={`relative px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 whitespace-nowrap ${
