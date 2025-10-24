@@ -7,6 +7,7 @@ const RegistrationResponseSchema = new Schema({
     phone: { type: Number, required: true },
     course: { type: String, required: true },
     semester: { type: Number, required: true },
+    extraInput: String,
     createdAt: { type: Date, default: Date.now }
 });
 

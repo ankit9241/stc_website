@@ -10,6 +10,7 @@ const EventsSchema = new Schema({
     eventDate: {type: Date, required: true},
     isImportant: {type: Boolean, default: false},
     createdAt: {type: Date, default: Date.now},
+    status: {type: String},
     expireAt: Date
 });
 

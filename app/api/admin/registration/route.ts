@@ -3,9 +3,22 @@ import { getServerSession } from 'next-auth';
 import connectDB from '@/lib/connectdb';
 import Registration from '@/schema/RegistrationSchema';
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     await connectDB();
+    
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id');
+    
+    if (id) {
+      const registration = await Registration.findById(id);
+      if (!registration) {
+        return NextResponse.json({ error: 'Registration not found' }, { status: 404 });
+      }
+      return NextResponse.json(registration);
+    }
+    
+    // Return all registrations
     const registrations = await Registration.find().sort({ createdAt: -1 });
     return NextResponse.json(registrations);
   } catch (error) {

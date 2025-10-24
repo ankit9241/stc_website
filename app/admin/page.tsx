@@ -142,45 +142,6 @@ export default function AdminDashboard() {
               ))}
             </div>
           )}
-
-          {/* Quick Actions */}
-          <div className="mt-12">
-            <h2 className="text-2xl font-bold text-[#0f2a4d] mb-6">Quick Actions</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <a
-                href="/admin/events"
-                className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow border-l-4 border-blue-500"
-              >
-                <Calendar className="w-8 h-8 text-blue-500 mb-2" />
-                <h3 className="font-semibold text-[#0f2a4d]">Manage Events</h3>
-                <p className="text-sm text-[#1a4b8c]">Create and edit events</p>
-              </a>
-              <a
-                href="/admin/notifications"
-                className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow border-l-4 border-purple-500"
-              >
-                <Bell className="w-8 h-8 text-purple-500 mb-2" />
-                <h3 className="font-semibold text-[#0f2a4d]">Send Notifications</h3>
-                <p className="text-sm text-[#1a4b8c]">Notify students</p>
-              </a>
-              <a
-                href="/admin/registration"
-                className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow border-l-4 border-green-500"
-              >
-                <FileText className="w-8 h-8 text-green-500 mb-2" />
-                <h3 className="font-semibold text-[#0f2a4d]">Registrations</h3>
-                <p className="text-sm text-[#1a4b8c]">View & manage forms</p>
-              </a>
-              <a
-                href="/admin/competitions"
-                className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow border-l-4 border-yellow-500"
-              >
-                <Trophy className="w-8 h-8 text-yellow-500 mb-2" />
-                <h3 className="font-semibold text-[#0f2a4d]">Competition Results</h3>
-                <p className="text-sm text-[#1a4b8c]">Publish winners</p>
-              </a>
-            </div>
-          </div>
         </div>
       </div>
     </>

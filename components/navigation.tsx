@@ -11,6 +11,7 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
+  const [showMoreDropdown, setShowMoreDropdown] = useState(false)
   const pathname = usePathname()
   
   // Determine the theme based on the current route
@@ -101,7 +102,12 @@ export function Navigation() {
     { href: "/team", label: "Our Team" },
     { href: "/events", label: "Events" },
     { href: "/gallery", label: "Gallery" },
-    { href: "/contact", label: "Contact Us" },
+  ]
+
+  const moreItems = [
+    { href: "/calendar", label: "Event Calendar" },
+    { href: "/registration", label: "Registration" },
+    { href: "/contact", label: "Contact" },
   ]
 
   const _handleDownloadBrochure = () => {
@@ -162,31 +168,62 @@ export function Navigation() {
           <div className="hidden lg:flex items-center space-x-1">
             {navItems.map((item) => (
               <div key={item.href} className="relative flex items-center">
-                {item.label === "Notices" ? (
-                  <button
-                    onClick={handleNoticesClick}
-                    className={`relative px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 whitespace-nowrap ${
-                      isNoticesActive()
-                        ? `text-white bg-${theme.accent}-600`
-                        : `text-gray-300 ${theme.hover} hover:text-white`
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                ) : (
-                  <Link
-                    href={item.href}
-                    className={`relative px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 whitespace-nowrap ${
-                      (item.href === '/' ? pathname === '/' : pathname.startsWith(item.href))
-                        ? `${theme.navActive} font-semibold`
-                        : `${theme.navText} ${theme.navHover}`
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                )}
+                <Link
+                  href={item.href}
+                  className={`relative px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 whitespace-nowrap ${
+                    (item.href === '/' ? pathname === '/' : pathname.startsWith(item.href))
+                      ? `${theme.navActive} font-semibold`
+                      : `${theme.navText} ${theme.navHover}`
+                  }`}
+                >
+                  {item.label}
+                </Link>
               </div>
             ))}
+
+            {/* More Dropdown */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setShowMoreDropdown(true)}
+              onMouseLeave={() => setShowMoreDropdown(false)}
+            >
+              <button
+                className={`relative px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 whitespace-nowrap ${
+                  moreItems.some(item => pathname.startsWith(item.href))
+                    ? `${theme.navActive} font-semibold`
+                    : `${theme.navText} ${theme.navHover}`
+                }`}
+              >
+                More
+                <svg 
+                  className={`inline-block ml-1 w-4 h-4 transition-transform duration-200 ${showMoreDropdown ? 'rotate-180' : ''}`} 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {/* Dropdown Menu */}
+              {showMoreDropdown && (
+                <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+                  {moreItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`block px-4 py-2 text-sm transition-colors ${
+                        pathname.startsWith(item.href)
+                          ? `${theme.navActive}`
+                          : `text-gray-700 hover:bg-gray-50`
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
             
             {/* Download Brochure Button */}
             <a
@@ -225,36 +262,38 @@ export function Navigation() {
           isOpen ? 'translate-y-0' : '-translate-y-4'
         }`}>
           {navItems.map((item) => (
-            <div key={item.href}>
-              {item.label === 'Notices' ? ( 
-                <button
-                  onClick={(e) => {
-                    handleNoticesClick(e)
-                    setIsOpen(false)
-                  }}
-                  className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 transform hover:translate-x-1 ${
-                    isNoticesActive()
-                      ? `text-${theme.accent}-700 font-bold`
-                      : `text-gray-700 hover:text-${theme.accent}-600`
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ) : (
-                <Link
-                  href={item.href}
-                  className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 transform hover:translate-x-1 ${
-                    (item.href === '/' ? pathname === '/' : pathname.startsWith(item.href))
-                      ? `text-${theme.accent}-700 font-bold`
-                      : `text-gray-600 hover:text-${theme.accent}-600`
-                  }`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              )}
-            </div>
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 transform hover:translate-x-1 ${
+                (item.href === '/' ? pathname === '/' : pathname.startsWith(item.href))
+                  ? `text-${theme.accent}-700 font-bold`
+                  : `text-gray-600 hover:text-${theme.accent}-600`
+              }`}
+              onClick={() => setIsOpen(false)}
+            >
+              {item.label}
+            </Link>
           ))}
+
+          {/* Mobile More Items - Direct Links */}
+          <div className="pt-2 border-t border-gray-300">
+            <p className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">More</p>
+            {moreItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`block px-4 py-3 rounded-lg text-base font-medium transition-all duration-200 transform hover:translate-x-1 ${
+                  pathname.startsWith(item.href)
+                    ? `text-${theme.accent}-700 font-bold`
+                    : `text-gray-600 hover:text-${theme.accent}-600`
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
           
           <div className="pt-2">
             <a

@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/connectdb';
 import RegistrationResponse from '@/schema/RegistrationResponseSchema';
+import Registration from '@/schema/RegistrationSchema';
 import { getServerSession } from 'next-auth';
+import { sendConfirmationEmail } from '@/lib/nodemailer';
 
 export async function GET(request: NextRequest) {
   try {
@@ -33,13 +35,25 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     await connectDB();
-    const { otp, ...body } = await request.json();
+    const { otp, formId, email, name, phoneNumber, rollNumber, extraInput, ...body } = await request.json();
+    
     if (!otp) {
       return NextResponse.json({ error: 'OTP is required' }, { status: 400 });
     }
 
+    // Support both new field names (formId, email) and old ones (forEvent, collegeMail)
+    const eventId = formId || body.forEvent;
+    const userEmail = email || body.collegeMail;
+    
+    // Support both phone/phoneNumber
+    const phoneValue = body.phone || phoneNumber;
+    
+    // Support both course/rollNumber and semester
+    const courseValue = body.course;
+    const semesterValue = body.semester;
+
     const { getOTP, deleteOTP } = await import('@/lib/redis');
-    const storedOTP = await getOTP(body.collegeMail);
+    const storedOTP = await getOTP(userEmail);
 
     if (!storedOTP) {
       return NextResponse.json({ error: 'OTP expired or invalid' }, { status: 400 });
@@ -58,8 +72,8 @@ export async function POST(request: NextRequest) {
     }
 
     const existingResponse = await RegistrationResponse.findOne({
-      forEvent: body.forEvent,
-      collegeMail: body.collegeMail.toLowerCase(),
+      forEvent: eventId,
+      collegeMail: userEmail.toLowerCase(),
     });
 
     if (existingResponse) {
@@ -70,23 +84,49 @@ export async function POST(request: NextRequest) {
     }
 
     const response = await RegistrationResponse.create({
-      ...body,
-      collegeMail: body.collegeMail.toLowerCase(),
+      forEvent: eventId,
+      collegeMail: userEmail.toLowerCase(),
+      name: name || body.name,
+      phone: phoneValue,
+      course: courseValue,
+      semester: semesterValue,
+      extraInput: extraInput || body.extraInput,
     });
 
-    await deleteOTP(body.collegeMail);
+    await deleteOTP(userEmail);
+
+    // Send confirmation email
+    try {
+      const eventDetails = await Registration.findById(eventId);
+      if (eventDetails) {
+        await sendConfirmationEmail({
+          email: userEmail,
+          name: name || body.name,
+          eventTitle: eventDetails.title,
+          eventDate: new Date(eventDetails.eventAt).toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })
+        });
+      }
+    } catch (emailError) {
+      console.error('Error sending confirmation email:', emailError);
+      // Don't fail the registration if email fails
+    }
 
     return NextResponse.json(
       { 
         success: true, 
-        message: 'Registration successful!',
+        message: 'Registration successful! A confirmation email has been sent to your email address.',
         data: response 
       },
       { status: 201 }
     );
   } catch (error) {
     console.error('Error creating response:', error);
-    return NextResponse.json({ error: 'Failed to create response' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to complete registration. Please try again.' }, { status: 500 });
   }
 }
 

@@ -1,45 +1,22 @@
+"use client"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Calendar, MapPin, Users, Trophy, Clock, Target } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import CompanyCards from "@/components/CompanyCards"
-import type { Metadata } from "next"
+import { useState, useEffect } from "react"
 
-export const metadata: Metadata = {
-  title: "Events & Competitions",
-  description: "Discover exciting technical events, hackathons, workshops, and competitions by STC IITP - Student Technical Council IIT Patna. Join innovation and learning opportunities.",
-  keywords: [
-    "STC IITP events",
-    "IIT Patna hackathons",
-    "STC hybrid events", 
-    "technical competitions IITP",
-    "coding contests STC",
-    "workshops STC IITP",
-    "seminars IIT Patna",
-    "student events IITP",
-    "innovation competitions",
-    "tech talks STC",
-    "internship drives IITP",
-    "STC IITP competitions",
-    "Student Technical Council events",
-    "technical festivals IITP"
-  ],
-  openGraph: {
-    title: "Events & Competitions",
-    description: "Join exciting technical events, hackathons, and competitions by Student Technical Council IIT Patna. Showcase your skills and learn from industry experts.",
-    images: ['/images/hack-n-tech-poster.jpg'],
-    url: '/events',
-  },
-  twitter: {
-    title: "Events & Competitions | STC IITP",
-    description: "Join exciting technical events, hackathons, and competitions by Student Technical Council IIT Patna. Showcase your skills and learn from industry experts.",
-    card: 'summary_large_image',
-    images: ['/images/hack-n-tech-poster.jpg'],
-  },
-  alternates: {
-    canonical: '/events',
-  },
+interface Event {
+  _id: string
+  title: string
+  content: string
+  imageUrl?: string
+  eventDate: string
+  club: string
+  organizer: string
+  isImportant: boolean
+  expireAt?: string
 }
 
 const hackathonWinners = [
@@ -88,6 +65,45 @@ const internshipCompanies = [
 ]
 
 export default function EventsPage() {
+  const [upcomingEvents, setUpcomingEvents] = useState<Event[]>([])
+  const [loadingEvents, setLoadingEvents] = useState(true)
+
+  useEffect(() => {
+    fetchUpcomingEvents()
+  }, [])
+
+  const fetchUpcomingEvents = async () => {
+    try {
+      const response = await fetch('/api/admin/events')
+      if (response.ok) {
+        const data = await response.json()
+        // Filter only upcoming events (not expired)
+        const upcoming = data.filter((event: Event) => {
+          const eventDate = new Date(event.eventDate)
+          const expireDate = event.expireAt ? new Date(event.expireAt) : eventDate
+          return expireDate > new Date()
+        })
+        // Sort by event date (nearest first)
+        upcoming.sort((a: Event, b: Event) => 
+          new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
+        )
+        setUpcomingEvents(upcoming.slice(0, 6)) // Take only first 6 events
+      }
+    } catch (error) {
+      console.error('Error fetching events:', error)
+    } finally {
+      setLoadingEvents(false)
+    }
+  }
+
+  const formatEventDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric'
+    })
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 pt-16">
       {/* Hero Section */}
@@ -381,44 +397,79 @@ export default function EventsPage() {
             <p className="text-xl text-gray-600">Stay tuned for more exciting opportunities and events</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="hover:shadow-xl transition-all duration-300">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                  <Calendar className="w-6 h-6 text-blue-600" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Tech Symposium 2025</h3>
-                <p className="text-gray-600 mb-4">
-                  Annual technology conference featuring industry leaders and innovators
-                </p>
-                <p className="text-blue-600 font-semibold">Coming Soon</p>
-              </CardContent>
-            </Card>
+          {loadingEvents ? (
+            <div className="text-center py-12">
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+              <p className="mt-4 text-gray-600">Loading upcoming events...</p>
+            </div>
+          ) : upcomingEvents.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {upcomingEvents.map((event, index) => (
+                <Card key={event._id} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
+                  {event.imageUrl && (
+                    <div className="relative w-full h-48 bg-gray-200">
+                      <Image
+                        src={event.imageUrl}
+                        alt={event.title}
+                        fill
+                        className="object-cover"
+                      />
+                      {event.isImportant && (
+                        <div className="absolute top-3 right-3 bg-red-500 text-white text-xs px-3 py-1 rounded-full font-bold">
+                          IMPORTANT
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  <CardContent className="p-6">
+                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                      <Calendar className="w-6 h-6 text-blue-600" />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2 min-h-[3.5rem]">
+                      {event.title}
+                    </h3>
+                    <p className="text-gray-600 mb-4 line-clamp-3 min-h-[4.5rem]">
+                      {event.content}
+                    </p>
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center text-sm text-gray-500">
+                        <Calendar className="w-4 h-4 mr-2" />
+                        <span>{formatEventDate(event.eventDate)}</span>
+                      </div>
+                      <div className="flex items-center text-sm text-gray-500">
+                        <Users className="w-4 h-4 mr-2" />
+                        <span>{event.club}</span>
+                      </div>
+                      {event.organizer && (
+                        <div className="flex items-center text-sm text-gray-500">
+                          <MapPin className="w-4 h-4 mr-2" />
+                          <span>By {event.organizer}</span>
+                        </div>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Calendar className="w-8 h-8 text-gray-400" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-700 mb-2">No Upcoming Events</h3>
+              <p className="text-gray-500">Stay tuned! New events will be announced soon.</p>
+            </div>
+          )}
 
-            <Card className="hover:shadow-xl transition-all duration-300">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                  <Users className="w-6 h-6 text-green-600" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Startup Pitch Competition</h3>
-                <p className="text-gray-600 mb-4">
-                  Platform for budding entrepreneurs to showcase their innovative ideas
-                </p>
-                <p className="text-green-600 font-semibold">Registration Opens Soon</p>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-xl transition-all duration-300">
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                  <Trophy className="w-6 h-6 text-purple-600" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Coding Championship</h3>
-                <p className="text-gray-600 mb-4">Inter-college competitive programming contest with exciting prizes</p>
-                <p className="text-purple-600 font-semibold">Planning Phase</p>
-              </CardContent>
-            </Card>
-          </div>
+          {upcomingEvents.length > 0 && (
+            <div className="text-center mt-12">
+              <Link href="/calander">
+                <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3">
+                  View Full Calendar
+                </Button>
+              </Link>
+            </div>
+          )}
         </div>
       </section>
 

@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Plus, Users, Edit, Trash2, Loader2, Download, Calendar, FileText, ChevronRight } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
@@ -37,6 +37,7 @@ interface Response {
   phone: string
   course: string
   semester: number
+  extraInput?: string
   createdAt: string
 }
 
@@ -44,6 +45,8 @@ export default function AdminRegistrationPage() {
   const [registrations, setRegistrations] = useState<RegistrationForm[]>([])
   const [responses, setResponses] = useState<Response[]>([])
   const [selectedForm, setSelectedForm] = useState<string | null>(null)
+  const [selectedResponse, setSelectedResponse] = useState<Response | null>(null)
+  const [responseDialogOpen, setResponseDialogOpen] = useState(false)
   const [loading, setLoading] = useState(true)
   const [dialogOpen, setDialogOpen] = useState(false)
   const [editingForm, setEditingForm] = useState<RegistrationForm | null>(null)
@@ -303,13 +306,14 @@ export default function AdminRegistrationPage() {
       return
     }
 
-    const headers = ['Name', 'Email', 'Phone', 'Course', 'Semester', 'Form Title', 'Submitted At']
+    const headers = ['Name', 'Email', 'Phone', 'Course', 'Semester', 'Extra Input', 'Form Title', 'Submitted At']
     const rows = responses.map(r => [
       r.name,
       r.collegeMail,
       r.phone,
       r.course,
       r.semester,
+      r.extraInput || 'N/A',
       r.forEvent?.title || 'N/A',
       new Date(r.createdAt).toLocaleString()
     ])
@@ -335,6 +339,11 @@ export default function AdminRegistrationPage() {
 
   const getResponseCount = (formId: string) => {
     return responses.filter(r => r.forEvent?._id === formId).length
+  }
+
+  const handleViewResponse = (response: Response) => {
+    setSelectedResponse(response)
+    setResponseDialogOpen(true)
   }
 
   const FormCard = ({ form }: { form: RegistrationForm }) => (
@@ -511,6 +520,7 @@ export default function AdminRegistrationPage() {
                                 <TableHead className="text-white">Phone</TableHead>
                                 <TableHead className="text-white">Course</TableHead>
                                 <TableHead className="text-white">Semester</TableHead>
+                                <TableHead className="text-white">Extra Input</TableHead>
                                 {!selectedForm && <TableHead className="text-white">Form</TableHead>}
                                 <TableHead className="text-white">Submitted At</TableHead>
                                 <TableHead className="text-white text-right">Actions</TableHead>
@@ -524,6 +534,25 @@ export default function AdminRegistrationPage() {
                                   <TableCell>{response.phone}</TableCell>
                                   <TableCell>{response.course}</TableCell>
                                   <TableCell>{response.semester}</TableCell>
+                                  <TableCell className="text-sm max-w-xs">
+                                    {response.extraInput ? (
+                                      <div className="flex items-center gap-2">
+                                        <span className="truncate">{response.extraInput}</span>
+                                        {response.extraInput.length > 30 && (
+                                          <Button
+                                            onClick={() => handleViewResponse(response)}
+                                            variant="ghost"
+                                            size="sm"
+                                            className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 px-2 py-1 h-auto"
+                                          >
+                                            View Full
+                                          </Button>
+                                        )}
+                                      </div>
+                                    ) : (
+                                      '-'
+                                    )}
+                                  </TableCell>
                                   {!selectedForm && (
                                     <TableCell className="text-sm">
                                       {response.forEvent?.title || 'N/A'}
@@ -666,6 +695,94 @@ export default function AdminRegistrationPage() {
               </Button>
             </div>
           </form>
+        </DialogContent>
+      </Dialog>
+
+      {/* View Full Response Dialog */}
+      <Dialog open={responseDialogOpen} onOpenChange={setResponseDialogOpen}>
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl text-[#0f2a4d]">Full Response Details</DialogTitle>
+            <DialogDescription>
+              Complete information for this registration response
+            </DialogDescription>
+          </DialogHeader>
+          {selectedResponse && (
+            <div className="space-y-6">
+              {/* Student Information */}
+              <div className="bg-gray-50 rounded-lg p-6 space-y-4">
+                <h3 className="text-lg font-bold text-[#0f2a4d] mb-4">Student Information</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label className="text-gray-600">Name</Label>
+                    <p className="font-medium text-gray-900 mt-1">{selectedResponse.name}</p>
+                  </div>
+                  <div>
+                    <Label className="text-gray-600">Email</Label>
+                    <p className="font-medium text-gray-900 mt-1">{selectedResponse.collegeMail}</p>
+                  </div>
+                  <div>
+                    <Label className="text-gray-600">Phone</Label>
+                    <p className="font-medium text-gray-900 mt-1">{selectedResponse.phone}</p>
+                  </div>
+                  <div>
+                    <Label className="text-gray-600">Course</Label>
+                    <p className="font-medium text-gray-900 mt-1">{selectedResponse.course}</p>
+                  </div>
+                  <div>
+                    <Label className="text-gray-600">Semester</Label>
+                    <p className="font-medium text-gray-900 mt-1">{selectedResponse.semester}</p>
+                  </div>
+                  <div>
+                    <Label className="text-gray-600">Submitted At</Label>
+                    <p className="font-medium text-gray-900 mt-1">
+                      {new Date(selectedResponse.createdAt).toLocaleString()}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Form Information */}
+              <div className="bg-blue-50 rounded-lg p-6">
+                <h3 className="text-lg font-bold text-[#0f2a4d] mb-2">Registration Form</h3>
+                <p className="font-medium text-gray-900">{selectedResponse.forEvent?.title || 'N/A'}</p>
+              </div>
+
+              {/* Extra Input */}
+              {selectedResponse.extraInput && (
+                <div className="bg-green-50 rounded-lg p-6">
+                  <h3 className="text-lg font-bold text-[#0f2a4d] mb-3">Additional Input</h3>
+                  <div className="bg-white rounded-lg p-4 border border-green-200">
+                    <p className="text-gray-900 whitespace-pre-wrap break-words leading-relaxed">
+                      {selectedResponse.extraInput}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Actions */}
+              <div className="flex gap-3 pt-4 border-t">
+                <Button
+                  onClick={() => setResponseDialogOpen(false)}
+                  variant="outline"
+                  className="flex-1"
+                >
+                  Close
+                </Button>
+                <Button
+                  onClick={() => {
+                    handleDeleteResponse(selectedResponse._id)
+                    setResponseDialogOpen(false)
+                  }}
+                  variant="destructive"
+                  className="flex-1"
+                >
+                  <Trash2 className="w-4 h-4 mr-2" />
+                  Delete Response
+                </Button>
+              </div>
+            </div>
+          )}
         </DialogContent>
       </Dialog>
     </>
