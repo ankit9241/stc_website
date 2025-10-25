@@ -13,9 +13,10 @@ interface RegistrationForm {
 
 async function getFormData(id: string): Promise<RegistrationForm | null> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
-    const response = await fetch(`${baseUrl}/api/admin/registration?id=${id}`, {
-      cache: 'no-store'
+    const baseURL = process.env.NEXTAUTH_URL;
+    const response = await fetch(`${baseURL}/api/admin/registration?id=${id}`, {
+      cache: 'no-store',
+      next: { revalidate: 0 }
     })
     
     if (!response.ok) {
@@ -47,10 +48,7 @@ export async function generateMetadata({
   const title = `${formData.title} - Registration | IIT Patna STC`
   const description = formData.content.slice(0, 160) || `Register for ${formData.title} organized by the Student Technical Council, IIT Patna.`
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
-  const imageUrl = formData.image?.startsWith('http') 
-    ? formData.image 
-    : `${baseUrl}${formData.image || '/placeholder.jpg'}`
+  const imageUrl = formData.image || '/placeholder.jpg'
 
   return {
     title,
@@ -73,7 +71,6 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      url: `${baseUrl}/registration/${id}`,
       siteName: 'IIT Patna Student Technical Council',
       images: [
         {
@@ -106,10 +103,6 @@ export async function generateMetadata({
         'max-image-preview': 'large',
         'max-snippet': -1,
       },
-    },
-
-    alternates: {
-      canonical: `${baseUrl}/registration/${id}`,
     },
 
     other: {
