@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap');
 @import "tailwindcss";
+@tailwind utilities;
+
+.cursor-custom {
+  cursor: url("/xenith/cursor.svg") 16 16, auto !important;
+}
+
 
 @theme {
   --color-background: hsl(var(--background));
