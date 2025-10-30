@@ -7,6 +7,7 @@ import { FooterWrapper } from "@/components/footer-wrapper"
 import VideoTransition from "@/components/video-transition"
 import { SessionWrapper } from "@/lib/SessionWrapper"
 import AdminNav from "@/components/adminNav"
+import Script from "next/script"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -218,6 +219,8 @@ export default function RootLayout({
         <meta name="msapplication-TileColor" content="#2563eb" />
         <meta name="msapplication-TileImage" content="/images/stc-logo.jpg" />
         <meta name="theme-color" content="#000000" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -141,9 +141,8 @@ export function Navigation() {
   }
 
   const isAdmin = pathname?.startsWith('/admin')
-  if (isAdmin) return null
-
-  // No dropdowns; simplified navigation
+  const xenith = pathname?.startsWith('/xenith')
+  if (isAdmin || xenith) return null
 
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${theme.navBg} ${isScrolled ? 'py-2' : 'py-4'} border-b ${theme.border}`}>

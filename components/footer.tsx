@@ -41,8 +41,9 @@ export default function Footer() {
   const accentColor = `text-${theme.accent}-400`
   const hoverColor = `hover:text-${theme.accent}-400`
   const isAdmin = pathname?.startsWith('/admin');
+  const xenith = pathname?.startsWith('/xenith');
 
-  if (isAdmin) {
+  if (isAdmin || xenith) {
     return null;
   }
 

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 // import { Button } from "@/components/ui/button"
 // import { ArrowRight, Users, Award, TrendingUp } from "lucide-react"
-// import Link from "next/link"
+import Link from "next/link"
 
 const heroImage = "/07.jpg"
  
@@ -91,6 +91,16 @@ export function HeroSection() {
 							</div>
 						</div>
 					))}
+				</div>
+
+				{/* button for xenith */}
+				<div className="flex justify-center">
+					<Link
+						href="/xenith"
+						className="inline-block px-6 py-3 mt-4 text-lg font-semibold text-white bg-[#1a4b8c] rounded-lg shadow-md hover:bg-[#1a4b8c]/80 transition"
+					>
+						Explore Xenith
+					</Link>
 				</div>
 			</div>
 

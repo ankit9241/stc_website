@@ -102,8 +102,12 @@ export default function VideoTransition({ children }: VideoTransitionProps) {
   }, [pathname, router])
 
   const _handleVideoEnd = () => {
-    // Only end transition if minimum time has passed
     setTimeout(() => setIsTransitioning(false), 200)
+  }
+
+  const xenith = pathname.startsWith('/xenith')
+  if (xenith) {
+    return <>{children}</>
   }
 
   return (
