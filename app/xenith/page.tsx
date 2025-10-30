@@ -119,41 +119,76 @@ const Page = () => {
                         </div>
                     </div>
 
-                    {/* About Section */}
                     <div
-                        className="w-full h-screen bg-gradient-to-b from-[#0C0F29] to-[#000000] overflow-hidden relative"
+                        className="w-full min-h-screen bg-gradient-to-b from-[#0C0F29] via-[#060717] to-[#000000] relative py-16 md:py-20 lg:py-0 flex items-center"
                         id="about"
                     >
-                        <div className="absolute inset-0 flex flex-wrap justify-center items-center">
-                            {Array.from({ length: 200 }).map((_, index) => (
+                        <div className="absolute inset-0">
+                            {Array.from({ length: 150 }).map((_, index) => (
                                 <div
                                     key={index}
-                                    className="bg-white rounded-full"
+                                    className="bg-white rounded-full animate-pulse"
                                     style={{
                                         width: `${Math.random() * 2 + 0.5}px`,
                                         height: `${Math.random() * 2 + 0.5}px`,
                                         position: "absolute",
                                         top: `${Math.random() * 100}%`,
                                         left: `${Math.random() * 100}%`,
-                                        opacity: Math.random(),
+                                        opacity: Math.random() * 0.5,
+                                        animationDelay: `${Math.random() * 3}s`,
+                                        animationDuration: `${2 + Math.random() * 3}s`
                                     }}
                                 ></div>
                             ))}
                         </div>
 
-                        {/* about zenith, kya hai zenith */}
-                        <div className="absolute inset-0 flex flex-col justify-center items-center px-4 md:px-6 lg:px-10">
-                            <div className="border-1 flex flex-col lg:flex-row justify-between items-center border-dashed border-gray-500 max-w-6xl">
-                                <span className="border-b-1 lg:border-b-0 lg:border-r-1 border-dashed border-gray-500">
-                                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#ba9efe] p-3 md:p-4 text-center lg:text-left">About Xenith 2025</h2>
-                                    <p className="text-white text-xs md:text-sm max-w-2xl border-t-1 border-dashed border-gray-500 p-3 md:p-4 leading-relaxed text-justify">
-                                        Xenith is the definitive convergence of human potential and technological frontier. The name itself signifies the Extreme Peak of innovation—the moment where imagination becomes reality and engineering brilliance is unbound.
-                                        This year, the festival is a celebration of creators who defy convention and ideas that transcend human limits. Xenith envisions a revolutionary future shaped by Artificial Intelligence, Quantum Frontiers, and Human-Machine Symbiosis.
-                                        We are exploring a world where innovation isn't merely discovered; it is actively designed. From intelligent systems that learn and adapt, to immersive realities that blur the lines of perception, Xenith stands as the testament to humanity's power to push toward its next great evolution.
-                                        Join us as we ascend beyond the known limits—to the very Xenith of innovation.
-                                    </p>
-                                </span>
-                                <img src="/xenith/logo.png" alt="" className="w-32 h-32 md:w-48 md:h-48 lg:w-60 lg:h-60 m-4 md:m-6 lg:m-10"/>
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#ba9efe]/5 via-transparent to-[#293673]/5 pointer-events-none"></div>
+
+                        <div className="relative z-10 container mx-auto px-4 md:px-6 lg:px-10">
+                            <div className="max-w-7xl mx-auto">
+                                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 lg:gap-12 items-center">
+                                    <div className="lg:col-span-7 order-2 lg:order-1">
+                                        <div className="relative bg-gradient-to-br from-[#1a1a2e]/60 to-[#0f0f1e]/60 backdrop-blur-xl rounded-2xl border border-[#ba9efe]/20 p-6 md:p-8 lg:p-10 shadow-2xl shadow-[#ba9efe]/10 hover:border-[#ba9efe]/40 transition-all duration-500">
+                                            <div className="absolute -top-1 -left-1 w-20 h-20 border-t-2 border-l-2 border-[#ba9efe]/60 rounded-tl-2xl"></div>
+                                            <div className="absolute -bottom-1 -right-1 w-20 h-20 border-b-2 border-r-2 border-[#ba9efe]/60 rounded-br-2xl"></div>
+                                            
+                                            <div className="flex items-center gap-3 mb-6">
+                                                <div className="h-1 w-12 bg-gradient-to-r from-[#ba9efe] to-transparent"></div>
+                                                <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-[#ba9efe] via-[#d4b3ff] to-[#ba9efe] bg-clip-text text-transparent">
+                                                    About Xenith 2025
+                                                </h2>
+                                            </div>
+                                            
+                                            <div className="space-y-4 text-gray-300 text-sm md:text-base lg:text-lg leading-relaxed">
+                                                <p className="hover:text-white transition-colors duration-300">
+                                                    Xenith is the definitive <span className="text-[#ba9efe] font-semibold">convergence of human potential</span> and technological frontier. The name itself signifies the Extreme Peak of innovation—the moment where imagination becomes reality and engineering brilliance is unbound.
+                                                </p>
+                                                <p className="hover:text-white transition-colors duration-300">
+                                                    This year, the festival is a celebration of creators who defy convention and ideas that transcend human limits. Xenith envisions a revolutionary future shaped by <span className="text-[#ba9efe] font-semibold">Artificial Intelligence, Quantum Frontiers, and Human-Machine Symbiosis</span>.
+                                                </p>
+                                                <p className="hover:text-white transition-colors duration-300">
+                                                    We are exploring a world where innovation isn't merely discovered; it is actively designed. From intelligent systems that learn and adapt, to immersive realities that blur the lines of perception, Xenith stands as the testament to humanity's power to push toward its next great evolution.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center">
+                                        <div className="relative group">
+                                            <div className="absolute inset-0 bg-gradient-to-br from-[#ba9efe]/30 to-[#293673]/30 rounded-full blur-3xl group-hover:blur-2xl transition-all duration-500"></div>
+                                            <div className="relative bg-gradient-to-br from-[#1a1a2e]/80 to-[#0f0f1e]/80 backdrop-blur-xl rounded-full p-6 md:p-8 border-2 border-[#ba9efe]/30 group-hover:border-[#ba9efe]/60 transition-all duration-500 shadow-2xl shadow-[#ba9efe]/20">
+                                                <img 
+                                                    src="/xenith/logo.png" 
+                                                    alt="Xenith Logo" 
+                                                    className="w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-64 xl:h-64 object-contain group-hover:scale-110 transition-transform duration-500"
+                                                />
+                                                <div className="absolute inset-0 rounded-full border-2 border-dashed border-[#ba9efe]/20 animate-spin-slow"></div>
+                                            </div>
+                                            <div className="absolute -top-2 -right-2 w-4 h-4 bg-[#ba9efe] rounded-full animate-pulse"></div>
+                                            <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-[#ba9efe] rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -179,22 +214,16 @@ const Page = () => {
 
                         <div className="relative z-10 container mx-auto px-4 md:px-6 pt-4">
                             <div className="text-center mb-12 md:mb-16">
-                                <motion.h2
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6 }}
-                                    className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#ba9efe] mb-3 md:mb-4"
-                                >
-                                    Featured Events
-                                </motion.h2>
-                                <motion.p
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6, delay: 0.2 }}
-                                    className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto px-4"
-                                >
+                                <div className="flex items-center justify-center gap-3 mb-4">
+                                    <div className="h-1 w-8 md:w-12 bg-gradient-to-r from-transparent to-[#ba9efe]"></div>
+                                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-[#ba9efe] via-[#d4b3ff] to-[#ba9efe] bg-clip-text text-transparent">
+                                        Featured Events
+                                    </h2>
+                                    <div className="h-1 w-8 md:w-12 bg-gradient-to-l from-transparent to-[#ba9efe]"></div>
+                                </div>
+                                <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto px-4">
                                     Explore the cutting-edge competitions and workshops at Xenith 2025
-                                </motion.p>
+                                </p>
                             </div>
 
                             {/* Events Grid */}
@@ -209,16 +238,14 @@ const Page = () => {
                                     <p className="mt-2">Stay tuned for exciting announcements!</p>
                                 </div>
                             ) : (
-                                <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                                     {events.map((event, index) => (
-                                        <motion.div
+                                        <div
                                             key={index}
-                                            initial={{ opacity: 0, y: 30 }}
-                                            whileInView={{ opacity: 1, y: 0 }}
-                                            transition={{ duration: 0.5, delay: index * 0.1 }}
                                             className="group relative"
+                                            style={{ animationDelay: `${index * 0.1}s` }}
                                         >
-                                            <div className="relative h-[380px] md:h-[400px] bg-gradient-to-br from-[#1a1a2e] to-[#0f0f1e] rounded-lg overflow-hidden border border-[#ba9efe]/20 transition-all duration-300 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/20">
+                                            <div className="relative h-[380px] md:h-[400px] bg-gradient-to-br from-[#1a1a2e]/90 to-[#0f0f1e]/90 backdrop-blur-sm rounded-xl overflow-hidden border border-[#ba9efe]/20 transition-all duration-500 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/30 hover:scale-[1.02]">
                                                 <div className="relative h-48 overflow-hidden">
                                                     {event.imageUrl ? (
                                                         <img
@@ -279,7 +306,7 @@ const Page = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </motion.div>
+                                        </div>
                                     ))}
                                 </div>
                             )}
@@ -307,32 +334,20 @@ const Page = () => {
 
                         <div className="relative z-10 container mx-auto px-4 md:px-6">
                             <div className="text-center mb-12 md:mb-16 pt-4">
-                                <motion.h2
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6 }}
-                                    className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#ba9efe] mb-3 md:mb-4"
-                                >
-                                    Our Sponsors
-                                </motion.h2>
-                                <motion.p
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6, delay: 0.2 }}
-                                    className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto px-4"
-                                >
+                                <div className="flex items-center justify-center gap-3 mb-4">
+                                    <div className="h-1 w-8 md:w-12 bg-gradient-to-r from-transparent to-[#ba9efe]"></div>
+                                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-[#ba9efe] via-[#d4b3ff] to-[#ba9efe] bg-clip-text text-transparent">
+                                        Our Sponsors
+                                    </h2>
+                                    <div className="h-1 w-8 md:w-12 bg-gradient-to-l from-transparent to-[#ba9efe]"></div>
+                                </div>
+                                <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto px-4">
                                     Powered by industry leaders who believe in innovation
-                                </motion.p>
+                                </p>
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
-                                {/* TATA */}
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.5, delay: 0.1 }}
-                                    className="group relative"
-                                >
+                                <div className="group relative">
                                     <div className="relative h-[250px] md:h-[280px] bg-gradient-to-br from-[#1a1a2e]/80 to-[#0f0f1e]/80 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-[#ba9efe]/30 transition-all duration-300 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/30 hover:scale-105">
                                         <div className="absolute inset-0 bg-gradient-to-br from-[#ba9efe]/0 via-[#ba9efe]/0 to-[#ba9efe]/0 group-hover:from-[#ba9efe]/10 group-hover:via-[#ba9efe]/5 group-hover:to-transparent transition-all duration-500"></div>
                                         <div className="relative h-full flex flex-col items-center justify-center p-6 md:p-8">
@@ -346,15 +361,9 @@ const Page = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </motion.div>
+                                </div>
 
-                                {/* Infosys */}
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.5, delay: 0.2 }}
-                                    className="group relative"
-                                >
+                                <div className="group relative">
                                     <div className="relative h-[250px] md:h-[280px] bg-gradient-to-br from-[#1a1a2e]/80 to-[#0f0f1e]/80 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-[#ba9efe]/30 transition-all duration-300 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/30 hover:scale-105">
                                         <div className="absolute inset-0 bg-gradient-to-br from-[#ba9efe]/0 via-[#ba9efe]/0 to-[#ba9efe]/0 group-hover:from-[#ba9efe]/10 group-hover:via-[#ba9efe]/5 group-hover:to-transparent transition-all duration-500"></div>
                                         
@@ -369,15 +378,9 @@ const Page = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </motion.div>
+                                </div>
 
-                                {/* Amazon */}
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.5, delay: 0.3 }}
-                                    className="group relative"
-                                >
+                                <div className="group relative">
                                     <div className="relative h-[250px] md:h-[280px] bg-gradient-to-br from-[#1a1a2e]/80 to-[#0f0f1e]/80 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-[#ba9efe]/30 transition-all duration-300 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/30 hover:scale-105">
                                         <div className="absolute inset-0 bg-gradient-to-br from-[#ba9efe]/0 via-[#ba9efe]/0 to-[#ba9efe]/0 group-hover:from-[#ba9efe]/10 group-hover:via-[#ba9efe]/5 group-hover:to-transparent transition-all duration-500"></div>
                                         
@@ -392,15 +395,9 @@ const Page = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </motion.div>
+                                </div>
 
-                                {/* Microsoft */}
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.5, delay: 0.4 }}
-                                    className="group relative"
-                                >
+                                <div className="group relative">
                                     <div className="relative h-[250px] md:h-[280px] bg-gradient-to-br from-[#1a1a2e]/80 to-[#0f0f1e]/80 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-[#ba9efe]/30 transition-all duration-300 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/30 hover:scale-105">
                                         <div className="absolute inset-0 bg-gradient-to-br from-[#ba9efe]/0 via-[#ba9efe]/0 to-[#ba9efe]/0 group-hover:from-[#ba9efe]/10 group-hover:via-[#ba9efe]/5 group-hover:to-transparent transition-all duration-500"></div>
                                         
@@ -415,14 +412,10 @@ const Page = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </motion.div>
+                                </div>
 
-                                {/* Your Sponsor */}
-                                <motion.a
+                                <a
                                     href="#contact"
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.5, delay: 0.5 }}
                                     className="group relative md:col-span-2 lg:col-span-1 cursor-pointer"
                                 >
                                     <div className="relative h-[250px] md:h-[280px] bg-gradient-to-br from-[#ba9efe]/20 to-[#293673]/20 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-[#ba9efe] transition-all duration-300 hover:shadow-2xl hover:shadow-[#ba9efe]/50 hover:scale-105 animate-pulse-glow">
@@ -446,15 +439,10 @@ const Page = () => {
                                         <div className="absolute bottom-2 left-2 w-3 h-3 md:w-4 md:h-4 border-b-2 border-l-2 border-[#ba9efe]"></div>
                                         <div className="absolute bottom-2 right-2 w-3 h-3 md:w-4 md:h-4 border-b-2 border-r-2 border-[#ba9efe]"></div>
                                     </div>
-                                </motion.a>
+                                </a>
                             </div>
 
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
-                                transition={{ duration: 0.6, delay: 0.6 }}
-                                className="text-center mt-12 md:mt-16"
-                            >
+                            <div className="text-center mt-12 md:mt-16">
                                 <p className="text-gray-400 text-base md:text-lg mb-4 px-4">Join us in shaping the future of technology</p>
                                 <a 
                                     href="#contact"
@@ -462,7 +450,7 @@ const Page = () => {
                                 >
                                     Contact Us for Sponsorship
                                 </a>
-                            </motion.div>
+                            </div>
                         </div>
                     </div>
 
@@ -487,31 +475,20 @@ const Page = () => {
 
                         <div className="relative z-10 container mx-auto px-4 md:px-6">
                             <div className="text-center mb-12 md:mb-16 pt-4">
-                                <motion.h2
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6 }}
-                                    className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#ba9efe] mb-3 md:mb-4"
-                                >
-                                    Get In Touch
-                                </motion.h2>
-                                <motion.p
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6, delay: 0.2 }}
-                                    className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto px-4"
-                                >
+                                <div className="flex items-center justify-center gap-3 mb-4">
+                                    <div className="h-1 w-8 md:w-12 bg-gradient-to-r from-transparent to-[#ba9efe]"></div>
+                                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-[#ba9efe] via-[#d4b3ff] to-[#ba9efe] bg-clip-text text-transparent">
+                                        Get In Touch
+                                    </h2>
+                                    <div className="h-1 w-8 md:w-12 bg-gradient-to-l from-transparent to-[#ba9efe]"></div>
+                                </div>
+                                <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto px-4">
                                     Have questions about sponsorship or participation? We'd love to hear from you!
-                                </motion.p>
+                                </p>
                             </div>
 
                             <div className="max-w-4xl mx-auto">
-                                <motion.div
-                                    initial={{ opacity: 0, y: 30 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.6 }}
-                                    className="bg-gradient-to-br from-[#1a1a2e]/80 to-[#0f0f1e]/80 backdrop-blur-sm rounded-2xl border-2 border-[#ba9efe]/30 p-6 md:p-8 lg:p-12"
-                                >
+                                <div className="bg-gradient-to-br from-[#1a1a2e]/80 to-[#0f0f1e]/80 backdrop-blur-sm rounded-2xl border-2 border-[#ba9efe]/30 p-6 md:p-8 lg:p-12 hover:border-[#ba9efe]/50 transition-all duration-500">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                                         <div>
                                             <h3 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">Contact Information</h3>
@@ -569,7 +546,7 @@ const Page = () => {
                                             </a>
                                         </div>
                                     </div>
-                                </motion.div>
+                                </div>
                             </div>
                         </div>
                     </div>
