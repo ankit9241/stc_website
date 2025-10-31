@@ -1,17 +1,17 @@
 import type { Metadata } from 'next';
 import React from 'react';
 
-const DESCRIPTION = 'Xenith — Event at IIT Patna by STC Hybrid. Explore innovation, technology, and creativity with workshops, competitions, and guest lectures. Join us to experience the future of tech!  ';
+const DESCRIPTION = 'Xenith - Event at IIT Patna by STC Hybrid. Explore innovation, technology, and creativity with workshops, competitions, and guest lectures. Join us to experience the future of tech!  ';
 
 export const metadata: Metadata = {
     title: {
-        default: 'Xenith — STC IITP Hybrid',
+        default: 'Xenith - STC IITP Hybrid',
         template: '%s | STC',
     },
     description: DESCRIPTION,
     keywords: ['xenith', 'stc', 'iit', 'iit patna', 'iitp', 'tech event', 'technology', 'innovation', 'workshops', 'competitions', 'guest lectures'],
     openGraph: {
-        title: 'Xenith — STC IITP Hybrid',
+        title: 'Xenith - STC IITP Hybrid',
         description: DESCRIPTION,
         siteName: 'STC',
         images: [
