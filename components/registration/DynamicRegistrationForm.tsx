@@ -189,6 +189,18 @@ export default function DynamicRegistrationForm({ slug }: DynamicRegistrationFor
   };
 
   const shouldShowField = (field: Field): boolean => {
+    // Check if this is a team member field
+    const teamSizeMatch = field.key.match(/^member-(\d+)-/);
+    if (teamSizeMatch) {
+      const memberNumber = parseInt(teamSizeMatch[1]);
+      const teamSize = formData['hackathon-team-field'];
+      
+      // Only show member fields up to the selected team size
+      if (!teamSize || memberNumber > parseInt(teamSize)) {
+        return false;
+      }
+    }
+
     if (!field.conditional) return true;
 
     const { fieldKey, operator, value } = field.conditional;
@@ -572,9 +584,50 @@ export default function DynamicRegistrationForm({ slug }: DynamicRegistrationFor
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
-          {template.fields
-            .sort((a, b) => a.order - b.order)
-            .map((field) => renderField(field))}
+          {(() => {
+            const sortedFields = template.fields.sort((a, b) => a.order - b.order);
+            const teamSize = formData['hackathon-team-field'] ? parseInt(formData['hackathon-team-field']) : 0;
+            const renderedFields: React.ReactNode[] = [];
+            
+            // Group fields by member number
+            const memberFieldGroups: { [key: number]: Field[] } = {};
+            const regularFields: Field[] = [];
+            
+            sortedFields.forEach(field => {
+              const memberMatch = field.key.match(/^member-(\d+)-(.+)$/);
+              if (memberMatch) {
+                const memberNum = parseInt(memberMatch[1]);
+                if (!memberFieldGroups[memberNum]) {
+                  memberFieldGroups[memberNum] = [];
+                }
+                memberFieldGroups[memberNum].push(field);
+              } else {
+                regularFields.push(field);
+              }
+            });
+            
+            // Render regular fields first
+            regularFields.forEach(field => {
+              renderedFields.push(renderField(field));
+            });
+            
+            // Render team member sections if team size is selected
+            if (teamSize > 0) {
+              for (let i = 1; i <= teamSize; i++) {
+                const memberFields = memberFieldGroups[i];
+                if (memberFields && memberFields.length > 0) {
+                  renderedFields.push(
+                    <div key={`member-section-${i}`} className="border rounded-lg p-4 space-y-4 bg-gray-50">
+                      <h3 className="font-semibold text-lg text-gray-700">Team Member {i}</h3>
+                      {memberFields.map(field => renderField(field))}
+                    </div>
+                  );
+                }
+              }
+            }
+            
+            return renderedFields;
+          })()}
 
           <div className="flex justify-end pt-4">
             <Button type="submit" disabled={submitting || (emailField !== null && !otpVerified)}>
