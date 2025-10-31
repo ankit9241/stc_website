@@ -93,13 +93,22 @@ export function HeroSection() {
 					))}
 				</div>
 
-				{/* button for xenith */}
 				<div className="flex justify-center">
 					<Link
 						href="/xenith"
-						className="inline-block px-6 py-3 mt-4 text-lg font-semibold text-white bg-[#1a4b8c] rounded-lg shadow-md hover:bg-[#1a4b8c]/80 transition"
+						className="group relative inline-flex items-center gap-3 px-8 py-4 mt-4 bg-gradient-to-br from-[#1a1a2e]/80 to-[#0f0f1e]/80 backdrop-blur-xl rounded-xl border-2 border-[#ba9efe]/30 hover:border-[#ba9efe] shadow-2xl shadow-[#ba9efe]/20 hover:shadow-[#ba9efe]/40 transition-all duration-500 hover:scale-105"
 					>
-						Explore Xenith
+						<div className="absolute inset-0 bg-gradient-to-br from-[#ba9efe]/0 via-[#ba9efe]/0 to-[#ba9efe]/0 group-hover:from-[#ba9efe]/10 group-hover:via-[#ba9efe]/5 group-hover:to-transparent rounded-xl transition-all duration-500"></div>
+						
+						<div className="relative flex items-center gap-2">
+							<img src="/xenith/logo.png" alt="Xenith Logo" className="h-8 md:h-10 group-hover:rotate-12 transition-transform duration-500" />
+							<img src="/xenith/xenith.png" alt="Xenith" className="h-4 md:h-5 group-hover:brightness-125 transition-all duration-500" />
+						</div>
+
+						<div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-[#ba9efe]/60 rounded-tl-xl"></div>
+						<div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-[#ba9efe]/60 rounded-br-xl"></div>
+						
+						<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#ba9efe]/0 group-hover:bg-[#ba9efe]/5 rounded-xl transition-all duration-500 pointer-events-none"></div>
 					</Link>
 				</div>
 			</div>

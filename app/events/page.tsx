@@ -56,10 +56,10 @@ const internshipCompanies = [
   { name: "SkillNet", category: "Training", positions: "Technical Trainer", image: "/images/company/skillnet.png" },
   { name: "Makasa Industries", category: "Manufacturing", positions: "Process Engineer", image: "/images/company/makasa.png" },
   { name: "NEXTUTE", category: "EdTech", positions: "Software Developer", image: "/images/company/nextute.png" },
-  { name: "D2H", category: "Media", positions: "Content Creator", image: "/images/company/d2h.png" },
+  { name: "D2D", category: "Media", positions: "Content Creator", image: "/images/company/d2h.png" },
   { name: "FLATX", category: "Real Estate", positions: "Full Stack Developer", image: "/images/company/flatx.png" },
   { name: "deWall", category: "FinTech", positions: "Backend Developer", image: "/images/company/dewall.png" },
-  { name: "Apnada", category: "E-commerce", positions: "Product Manager", image: "/images/company/apnada.png" },
+  { name: "ApkaAds", category: "Product Base", positions: "Product Manager", image: "/images/company/apnada.png" },
   { name: "Syksha", category: "Fashion Tech", positions: "UI/UX Designer", image: "/images/company/syksha.png" },
   { name: "Gramin", category: "AgriTech", positions: "Mobile App Developer", image: "/images/company/gramin.png" },
 ]
@@ -463,7 +463,7 @@ export default function EventsPage() {
 
           {upcomingEvents.length > 0 && (
             <div className="text-center mt-12">
-              <Link href="/calander">
+              <Link href="/calendar">
                 <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3">
                   View Full Calendar
                 </Button>

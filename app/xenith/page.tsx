@@ -347,7 +347,7 @@ const Page = () => {
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
-                                <div className="group relative">
+                                {/* <div className="group relative">
                                     <div className="relative h-[250px] md:h-[280px] bg-gradient-to-br from-[#1a1a2e]/80 to-[#0f0f1e]/80 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-[#ba9efe]/30 transition-all duration-300 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/30 hover:scale-105">
                                         <div className="absolute inset-0 bg-gradient-to-br from-[#ba9efe]/0 via-[#ba9efe]/0 to-[#ba9efe]/0 group-hover:from-[#ba9efe]/10 group-hover:via-[#ba9efe]/5 group-hover:to-transparent transition-all duration-500"></div>
                                         <div className="relative h-full flex flex-col items-center justify-center p-6 md:p-8">
@@ -412,7 +412,7 @@ const Page = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
 
                                 <a
                                     href="#contact"
@@ -493,7 +493,7 @@ const Page = () => {
                                         <div>
                                             <h3 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">Contact Information</h3>
                                             <div className="space-y-3 md:space-y-4">
-                                                <div className="flex items-start gap-3 md:gap-4">
+                                                <div className="flex w-2xl items-start gap-3 md:gap-4">
                                                     <div className="w-10 h-10 md:w-12 md:h-12 bg-[#ba9efe]/20 rounded-lg flex items-center justify-center flex-shrink-0">
                                                         <svg className="w-5 h-5 md:w-6 md:h-6 text-[#ba9efe]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -501,7 +501,10 @@ const Page = () => {
                                                     </div>
                                                     <div>
                                                         <p className="text-gray-400 text-xs md:text-sm">Email</p>
-                                                        <p className="text-white font-semibold text-sm md:text-base break-all">stc_iitp@iitp.ac.in</p>
+                                                        <p className="text-white font-semibold text-xs md:text-base break-all">stciitphybrid@iitp.ac.in</p>
+                                                        <p className="text-white font-semibold text-xs md:text-base break-all">tatva@iitp.ac.in</p>
+                                                        <p className="text-white font-semibold text-xs md:text-base break-all">arthniti@iitp.ac.in</p>
+                                                        <p className="text-white font-semibold text-xs md:text-base break-all">disha@iitp.ac.in</p>
                                                     </div>
                                                 </div>
                                                 <div className="flex items-start gap-3 md:gap-4">
@@ -512,7 +515,8 @@ const Page = () => {
                                                     </div>
                                                     <div>
                                                         <p className="text-gray-400 text-xs md:text-sm">Phone</p>
-                                                        <p className="text-white font-semibold text-sm md:text-base">+91 1234567890</p>
+                                                        <p className="text-white font-semibold text-xs md:text-base">+91-93267-60945</p>
+                                                        <p className="text-white font-semibold text-xs md:text-base">+91-62022-36461</p>
                                                     </div>
                                                 </div>
                                                 <div className="flex items-start gap-3 md:gap-4">
@@ -535,7 +539,7 @@ const Page = () => {
                                             <p className="text-gray-400 text-sm md:text-base mb-4 md:mb-6">
                                                 For sponsorship, events or participation inquiries, please reach out via email or phone. We'll get back to you ASAP.
                                             </p>
-                                            <a
+                                            {/* <a
                                                 href="mailto:stc_iitp@iitp.ac.in"
                                                 className="inline-flex items-center gap-2 bg-gradient-to-r from-[#ba9efe] to-[#293673] text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg hover:shadow-lg hover:shadow-[#ba9efe]/50 transition-all duration-300 transform hover:scale-105 text-sm md:text-base"
                                             >
@@ -543,7 +547,7 @@ const Page = () => {
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                                 </svg>
                                                 Send Email
-                                            </a>
+                                            </a> */}
                                         </div>
                                     </div>
                                 </div>
