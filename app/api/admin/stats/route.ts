@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server'
 import connectDB from '@/lib/connectdb'
 import Events from '@/schema/EventsSchema'
 import Notifications from '@/schema/NotificationsSchema'
-import Registration from '@/schema/RegistrationSchema'
-import RegistrationResponse from '@/schema/RegistrationResponseSchema'
+import RegistrationTemplate from '@/schema/RegistrationTemplateSchema'
+import RegistrationSubmission from '@/schema/RegistrationSubmissionSchema'
 import CompetitionResult from '@/schema/CompetitionResultSchema'
 import { getServerSession } from 'next-auth'
 
@@ -19,15 +19,15 @@ export async function GET() {
         await connectDB()
         const EventsCount = await Events.countDocuments()
         const NotificationsCount = await Notifications.countDocuments()
-        const RegistrationsCount = await Registration.countDocuments()
-        const RegistrationResponsesCount = await RegistrationResponse.countDocuments()
+        const RegistrationFormsCount = await RegistrationTemplate.countDocuments()
+        const RegistrationSubmissionsCount = await RegistrationSubmission.countDocuments()
         const CompetitionResultsCount = await CompetitionResult.countDocuments()
 
         const stats = {
             events: EventsCount,
             notifications: NotificationsCount,
-            registrations: RegistrationsCount,
-            registrationResponses: RegistrationResponsesCount,
+            registrationForms: RegistrationFormsCount,
+            registrationSubmissions: RegistrationSubmissionsCount,
             competitionResults: CompetitionResultsCount
         }
 

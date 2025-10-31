@@ -10,13 +10,13 @@ import Link from 'next/link'
 
 interface RegistrationForm {
   _id: string
-  title: string
-  content: string
+  name: string
+  slug: string
+  description: string
   image?: string
-  eventAt: string
-  uploadedBy: string
+  fields: any[]
+  active: boolean
   createdAt: string
-  moreField?: string
 }
 
 export default function RegistrationsPage() {
@@ -30,14 +30,12 @@ export default function RegistrationsPage() {
 
   const fetchRegistrations = async () => {
     try {
-      const response = await fetch('/api/admin/registration')
+      const response = await fetch('/api/admin/registration-templates')
       if (response.ok) {
         const data = await response.json()
-        const upcoming = data.filter((form: RegistrationForm) => {
-          const eventDate = new Date(form.eventAt)
-          return eventDate >= new Date()
-        })
-        setRegistrations(upcoming)
+        // Only show active forms
+        const activeForms = data.filter((form: RegistrationForm) => form.active)
+        setRegistrations(activeForms)
       }
     } catch (error) {
       console.error('Error fetching registrations:', error)
@@ -83,41 +81,47 @@ export default function RegistrationsPage() {
                 className="overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-transparent hover:border-[#1a4b8c]"
               >
                 {form.image && (
-                  <div className="relative h-56 w-full overflow-hidden">
+                  <div className="relative w-full aspect-video bg-gray-50">
                     <Image
                       src={form.image}
-                      alt={form.title}
+                      alt={form.name}
                       fill
-                      className="object-cover transition-transform duration-300 hover:scale-110"
+                      className="object-contain"
+                      unoptimized
                     />
                   </div>
                 )}
-                <CardHeader className="pb-3">
+                <CardHeader className="pb-3 pt-6">
                   <h3 className="text-2xl font-bold text-[#0f2a4d] line-clamp-2 min-h-[3.5rem]">
-                    {form.title}
+                    {form.name}
                   </h3>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <p className="text-gray-600 line-clamp-3 min-h-[4.5rem] leading-relaxed">
-                    {form.content}
+                  <p className="text-gray-600 line-clamp-4 min-h-[6rem] leading-relaxed">
+                    {form.description}
                   </p>
                   
                   <div className="space-y-2 pt-3 border-t border-gray-100">
                     <div className="flex items-center text-sm text-[#1a4b8c] font-medium">
+                      <Users className="w-4 h-4 mr-2 flex-shrink-0" />
+                      <span className="line-clamp-1">
+                        {form.fields.length} fields
+                      </span>
+                    </div>
+                    <div className="flex items-center text-sm text-gray-500">
                       <Calendar className="w-4 h-4 mr-2 flex-shrink-0" />
                       <span className="line-clamp-1">
-                        {new Date(form.eventAt).toLocaleDateString('en-US', {
-                          weekday: 'short',
-                          year: 'numeric',
+                        Created {new Date(form.createdAt).toLocaleDateString('en-US', {
                           month: 'short',
-                          day: 'numeric'
+                          day: 'numeric',
+                          year: 'numeric'
                         })}
                       </span>
                     </div>
                   </div>
                 </CardContent>
                 <CardFooter className="bg-gradient-to-r from-[#0f2a4d] to-[#1a4b8c] p-0">
-                  <Link href={`/registration/${form._id}`} className="w-full">
+                  <Link href={`/registration/${form.slug}`} className="w-full">
                     <Button
                       className="w-full h-14 text-white bg-transparent hover:bg-white/10 text-base font-semibold rounded-none"
                     >

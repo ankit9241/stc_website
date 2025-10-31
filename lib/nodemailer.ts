@@ -121,11 +121,11 @@ export async function sendOTPEmail({ email, otp, event }: SendOTPEmailParams) {
       </html>
     `,
     text: `
-Student Technical Council, IIT Patna - Email Verification
+Student Technical Council Hybrid, IIT Patna - Email Verification
 
 Dear Student,
 
-You have initiated a registration with the Student Technical Council at IIT Patna.
+You have initiated a registration with the Student Technical Council Hybrid at IIT Patna.
 
 Your verification code is: ${otp}
 
@@ -136,7 +136,7 @@ SECURITY NOTICE: Never share this code with anyone. STC IITP will never ask for 
 If you did not initiate this registration, please disregard this email.
 
 Best regards,
-Student Technical Council
+STC Hybrid
 Indian Institute of Technology Patna
 Bihar 801106
 
@@ -302,7 +302,7 @@ Note: If you need to cancel your registration or have any queries, please contac
 We look forward to seeing you at the event!
 
 Best regards,
-Student Technical Council
+STC Hybrid
 Indian Institute of Technology Patna
 Bihar 801106
 

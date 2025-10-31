@@ -2,19 +2,18 @@ import { Metadata } from 'next'
 
 interface RegistrationForm {
   _id: string
-  title: string
-  content: string
+  name: string
+  slug: string
+  description?: string
   image?: string
-  eventAt: string
-  uploadedBy: string
+  active: boolean
   createdAt: string
-  moreField?: string
 }
 
 async function getFormData(id: string): Promise<RegistrationForm | null> {
   try {
     const baseURL = process.env.NEXTAUTH_URL;
-    const response = await fetch(`${baseURL}/api/admin/registration?id=${id}`, {
+    const response = await fetch(`${baseURL}/api/registration/${id}`, {
       cache: 'no-store',
       next: { revalidate: 0 }
     })
@@ -45,8 +44,8 @@ export async function generateMetadata({
     }
   }
 
-  const title = `${formData.title} - Registration | IIT Patna STC`
-  const description = formData.content.slice(0, 160) || `Register for ${formData.title} organized by the Student Technical Council, IIT Patna.`
+  const title = `${formData.name} - Registration | IIT Patna STC`
+  const description = formData.description?.slice(0, 160) || `Register for ${formData.name} organized by the Student Technical Council, IIT Patna.`
 
   const imageUrl = formData.image || '/placeholder.jpg'
 
@@ -59,7 +58,7 @@ export async function generateMetadata({
       'STC',
       'registration',
       'event registration',
-      formData.title,
+      formData.name,
       'technical events',
       'college events',
       'IIT Patna events',
@@ -77,7 +76,7 @@ export async function generateMetadata({
           url: imageUrl,
           width: 1200,
           height: 630,
-          alt: formData.title,
+          alt: formData.name,
         },
       ],
       locale: 'en_IN',
@@ -106,9 +105,8 @@ export async function generateMetadata({
     },
 
     other: {
-      'event:name': formData.title,
-      'event:date': formData.eventAt,
-      'event:organizer': formData.uploadedBy,
+      'registration:name': formData.name,
+      'registration:slug': formData.slug,
     },
   }
 }
