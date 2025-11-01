@@ -196,7 +196,7 @@ const Page = () => {
                               convergence of human potential
                             </span>{" "}
                             and technological frontier. The name itself
-                            signifies the Extreme Peak of innovation—the moment
+                            signifies the Extreme Peak of innovation-the moment
                             where imagination becomes reality and engineering
                             brilliance is unbound.
                           </p>

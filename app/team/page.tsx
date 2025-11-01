@@ -24,8 +24,8 @@ const coreTeam = [
     designation: "Vice President",
     department: "Student Technical Council - CEP",
     image: "/aryan.png",
-    email: "aryan_2321cs11@iitp.ac.in",
-    linkedin: "https://www.linkedin.com/in/aryan-singh-123456/",
+    email: "aryan_2312res179@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/aryan-singh-358556245/",
     description:
       "Overseeing technical initiatives and research projects. Expert in competitive programming and AI.",
   },
@@ -34,8 +34,8 @@ const coreTeam = [
     designation: "General Secretary",
     department: "Student Technical Council - CEP",
     image: "/Ritu.png",
-    email: "rituraj_2321ec12@iitp.ac.in",
-    linkedin: "https://www.linkedin.com/in/ritu-raj-123456/",
+    email: "ritu_2312res532@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/ritu-raj-9321b5294/",
     description:
       "Managing operations and career development programs. Focused on bridging academia and industry.",
   },
@@ -44,8 +44,8 @@ const coreTeam = [
     designation: "Treasurer",
     department: "Student Technical Council - CEP",
     image: "/hridyanand.png",
-    email: "hridya_2321me13@iitp.ac.in",
-    linkedin: "https://www.linkedin.com/in/hridyanand-gupta-123456/",
+    email: "hridayanand_2312res301@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/hridayanand-gupta-abb501304/",
     description:
       "Managing financial operations and budget planning. Expertise in financial modeling and analysis.",
   },

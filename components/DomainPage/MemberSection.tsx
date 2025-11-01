@@ -24,7 +24,7 @@ export const MemberSection: React.FC<MemberSectionProps> = ({ members }) => {
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-3">Our Team</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Meet the amazing members of our subclub — their expertise, skills,
+            Meet the amazing members of our subclub - their expertise, skills,
             and achievements.
           </p>
         </div>
