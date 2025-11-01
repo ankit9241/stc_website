@@ -116,11 +116,6 @@ export default function RegistrationFormPage() {
                   </p>
                 </div>
 
-                <div className="space-y-3 pt-4 border-t border-gray-200">
-                  <div className="flex items-center text-sm text-gray-600">
-                    <FileText className="w-4 h-4 mr-3 text-[#1a4b8c]" />
-                    <span>{template.fields.length} fields to fill</span>
-                  </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <Calendar className="w-4 h-4 mr-3 text-[#1a4b8c]" />
                     <span>
@@ -131,7 +126,6 @@ export default function RegistrationFormPage() {
                       })}
                     </span>
                   </div>
-                </div>
 
                 <div className="pt-4 border-t border-gray-200">
                   <div className="bg-blue-50 rounded-lg p-4">
@@ -140,7 +134,6 @@ export default function RegistrationFormPage() {
                       <li>• Fill all required fields</li>
                       <li>• Verify your email with OTP</li>
                       <li>• Review before submitting</li>
-                      <li>• You'll get confirmation after submission</li>
                     </ul>
                   </div>
                 </div>

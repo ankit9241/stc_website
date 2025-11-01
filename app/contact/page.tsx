@@ -184,7 +184,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-                    <p className="text-gray-600">stciitphybrid@iitp.ac.in</p>
+                    <p className="text-gray-600">stc_iitp@iitp.ac.in</p>
                     <p className="text-gray-600">tatva@iitp.ac.in</p>
                     <p className="text-gray-600">arthniti@iitp.ac.in</p>
                     <p className="text-gray-600">disha@iitp.ac.in</p>
@@ -216,8 +216,8 @@ export default function ContactPage() {
                   <CardContent className="p-4">
                     <h4 className="font-semibold text-gray-900 mb-2">For Students</h4>
                     <p className="text-sm text-gray-600 mb-2">Join wings and participation inquiries</p>
-                    <a href="mailto:stciitphybrid@iitp.ac.in" className="text-blue-600 text-sm hover:underline">
-                      stciitphybrid@iitp.ac.in
+                    <a href="mailto:stc_iitp@iitp.ac.in" className="text-blue-600 text-sm hover:underline">
+                      stc_iitp@iitp.ac.in
                     </a>
                   </CardContent>
                 </Card>
@@ -225,8 +225,8 @@ export default function ContactPage() {
                   <CardContent className="p-4">
                     <h4 className="font-semibold text-gray-900 mb-2">For Industry</h4>
                     <p className="text-sm text-gray-600 mb-2">Partnership and collaboration opportunities</p>
-                    <a href="mailto:stciitphybrid@iitp.ac.in" className="text-green-600 text-sm hover:underline">
-                      stciitphybrid@iitp.ac.in
+                    <a href="mailto:stc_iitp@iitp.ac.in" className="text-green-600 text-sm hover:underline">
+                      stc_iitp@iitp.ac.in
                     </a>
                   </CardContent>
                 </Card>

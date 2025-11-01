@@ -102,12 +102,6 @@ export default function RegistrationsPage() {
                   </p>
                   
                   <div className="space-y-2 pt-3 border-t border-gray-100">
-                    <div className="flex items-center text-sm text-[#1a4b8c] font-medium">
-                      <Users className="w-4 h-4 mr-2 flex-shrink-0" />
-                      <span className="line-clamp-1">
-                        {form.fields.length} fields
-                      </span>
-                    </div>
                     <div className="flex items-center text-sm text-gray-500">
                       <Calendar className="w-4 h-4 mr-2 flex-shrink-0" />
                       <span className="line-clamp-1">

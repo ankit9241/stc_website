@@ -1,41 +1,12 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Linkedin, Mail } from "lucide-react"
-import Link from "next/link"
-import type { Metadata } from "next"
+"use client";
 
-export const metadata: Metadata = {
-  title: "Our Team",
-  description: "Meet the dedicated team members of STC IITP - Student Technical Council IIT Patna. Our leadership team and wing coordinators driving innovation and technical excellence.",
-  keywords: [
-    "STC IITP team",
-    "Student Technical Council team",
-    "IIT Patna student leaders",
-    "STC hybrid team",
-    "leadership team IITP",
-    "DISHA team members",
-    "ARTHNITI team leaders", 
-    "TATVA team coordinators",
-    "student council members",
-    "core team STC IITP",
-    "technical leaders IITP",
-    "student executives"
-  ],
-  openGraph: {
-    title: "Our Team",
-    description: "Meet our dedicated team members of Student Technical Council IIT Patna driving innovation and technical excellence.",
-    images: ['/images/stc.jpg'],
-    url: '/team',
-  },
-  twitter: {
-    title: "Our Team | STC IITP",
-    description: "Meet our dedicated team members of Student Technical Council IIT Patna driving innovation and technical excellence.",
-    card: 'summary_large_image',
-    images: ['/images/stc.jpg'],
-  },
-  alternates: {
-    canonical: '/team',
-  },
-}
+import { Card, CardContent } from "@/components/ui/card";
+import { Linkedin, Mail, MessageCircle } from "lucide-react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+
+// Metadata must be in a server component
+// This will be handled by the layout or page component
 
 const coreTeam = [
   {
@@ -45,32 +16,40 @@ const coreTeam = [
     image: "/gautam.png",
     email: "gautam_2312res266@iitp.ac.in",
     linkedin: "https://www.linkedin.com/in/gautamkumar266/",
+    description:
+      "Leading STC's vision and driving innovation across all wings. Passionate about entrepreneurship and technology.",
   },
   {
     name: "Aryan Singh",
-    designation: "Vice-President",
+    designation: "Vice President",
     department: "Student Technical Council - CEP",
     image: "/aryan.png",
-    email: "aryan_2312res179@iitp.ac.in",
-    linkedin: "https://www.linkedin.com/in/aryan-singh-358556245/",
+    email: "aryan_2321cs11@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/aryan-singh-123456/",
+    description:
+      "Overseeing technical initiatives and research projects. Expert in competitive programming and AI.",
   },
   {
     name: "Ritu Raj",
     designation: "General Secretary",
     department: "Student Technical Council - CEP",
     image: "/Ritu.png",
-    email: "ritu_2312res532@iitp.ac.in",
-    linkedin: "https://www.linkedin.com/in/ritu-raj-9321b5294/",
+    email: "rituraj_2321ec12@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/ritu-raj-123456/",
+    description:
+      "Managing operations and career development programs. Focused on bridging academia and industry.",
   },
   {
     name: "Hridyanand Gupta",
     designation: "Treasurer",
     department: "Student Technical Council - CEP",
     image: "/hridyanand.png",
-    email: "hridayanand_2312res301@iitp.ac.in",
-    linkedin: "https://www.linkedin.com/in/hridayanand-gupta-abb501304/",
+    email: "hridya_2321me13@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/hridyanand-gupta-123456/",
+    description:
+      "Managing financial operations and budget planning. Expertise in financial modeling and analysis.",
   },
-]
+];
 
 const _teamMembers = [
   // Creatives Team Members
@@ -487,7 +466,7 @@ const _teamMembers = [
     linkedin: "#",
     team: "Tech News",
   },
-]
+];
 
 const _teamLeads = [
   // Creatives Team
@@ -569,7 +548,7 @@ const _teamLeads = [
     linkedin: "#",
     team: "Finance",
   },
-]
+];
 
 const _technicalLeads = [
   // WebWiser (Web Dev) Team
@@ -711,7 +690,7 @@ const _technicalLeads = [
     linkedin: "#",
     team: "App Dev",
   },
-]
+];
 
 const _specializedTeams = [
   // Session & Webinar Team
@@ -773,7 +752,7 @@ const _specializedTeams = [
     linkedin: "#",
     team: "Tech News",
   },
-]
+];
 
 interface TeamMember {
   name: string;
@@ -783,48 +762,124 @@ interface TeamMember {
   email: string;
   linkedin: string;
   team?: string;
+  description?: string;
 }
 
-function TeamMemberCard({ member }: { member: TeamMember }) {
+function TeamMemberCard({
+  member,
+  index,
+}: {
+  member: TeamMember;
+  index: number;
+}) {
+  // Generate colors based on index for variety
+  const colorThemes = [
+    { bg: "bg-blue-500", text: "text-blue-500", border: "border-blue-500" },
+    { bg: "bg-blue-500", text: "text-blue-500", border: "border-blue-500" },
+    { bg: "bg-blue-500", text: "text-blue-500", border: "border-blue-500" },
+    { bg: "bg-blue-500", text: "text-blue-500", border: "border-blue-500" },
+  ];
+  const colors = colorThemes[index % colorThemes.length];
+
   return (
-    <Card className="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-      <CardContent className="p-6 text-center">
-        <div className="relative mb-4">
-          <img
-            src={member.image || "/placeholder.svg"}
-            alt={member.name}
-            className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-blue-100 group-hover:border-blue-300 transition-colors"
-          />
+    <motion.div
+      key={index}
+      className="group relative overflow-hidden rounded-2xl shadow-2xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+    >
+      {/* Background Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50 opacity-90 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+
+      <div className="relative z-10 p-8">
+        <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
+          {/* Avatar */}
+          <div className="relative w-32 h-32 rounded-full overflow-hidden flex-shrink-0 shadow-lg group-hover:shadow-xl transform transition-all duration-500 group-hover:scale-105">
+            {member.image ? (
+              <img
+                src={member.image}
+                alt={member.name}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  // Fallback to initials if image fails to load
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = "none";
+                  const fallback = document.createElement("div");
+                  fallback.className = `w-full h-full flex items-center justify-center ${colors.bg}`;
+                  fallback.textContent = member.name
+                    .split(" ")
+                    .map((n: string) => n[0])
+                    .join("");
+                  fallback.style.color = "white";
+                  fallback.style.fontWeight = "bold";
+                  fallback.style.fontSize = "2rem";
+                  target.parentNode?.insertBefore(fallback, target.nextSibling);
+                }}
+              />
+            ) : (
+              <div
+                className={`w-full h-full flex items-center justify-center ${colors.bg} text-white font-bold text-4xl`}
+              >
+                {member.name
+                  .split(" ")
+                  .map((n: string) => n[0])
+                  .join("")}
+              </div>
+            )}
+          </div>
+
+          {/* Content */}
+          <div className="flex-1 text-center md:text-left">
+            <div className="mb-2">
+              <h3
+                className="text-2xl font-bold text-[#2e86c1] mb-1 group-hover:translate-x-1 transition-transform duration-300"
+              >
+                {member.name}
+              </h3>
+              <p className="text-lg font-medium text-muted-foreground mb-1">
+                {member.designation}
+              </p>
+              <p className="text-sm font-semibold text-[#2e86c1] mb-4 inline-block px-3 py-1 rounded-full bg-[#e8f1f8] bg-opacity-80">
+                {member.department}
+              </p>
+              <p className="text-muted-foreground mb-6 leading-relaxed border-l-2 border-gray-200 pl-4 italic">
+                "{member.description}"
+              </p>
+            </div>
+
+            {member.team && (
+              <p className="text-muted-foreground mb-6 leading-relaxed border-l-2 border-gray-200 pl-4 italic">
+                {member.team} Team
+              </p>
+            )}
+
+            {/* Contact Links */}
+            <div className="flex justify-center md:justify-start space-x-4">
+              <a
+                href={`mailto:${member.email}`}
+                className="p-3 bg-[#e8f1f8] hover:bg-[#d4e5f5] text-[#2e86c1] rounded-lg transition-colors duration-300"
+                aria-label={`Email ${member.name}`}
+              >
+                <Mail className="h-5 w-5" />
+              </a>
+              <a
+                href={member.linkedin}
+                className="p-3 bg-[#e8f1f8] hover:bg-[#d4e5f5] text-[#2e86c1] rounded-lg transition-colors duration-300"
+                aria-label={`${member.name}'s LinkedIn`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+            </div>
+          </div>
         </div>
-        <h3 className="text-xl font-bold text-gray-900 mb-2">{member.name}</h3>
-        <p className="text-blue-600 font-semibold mb-1">{member.designation}</p>
-        <p className="text-gray-600 text-sm mb-4">{member.department}</p>
-        {member.team && (
-          <p className="text-xs text-gray-500 mb-4 bg-gray-100 rounded-full px-3 py-1 inline-block">
-            {member.team} Team
-          </p>
-        )}
-        <div className="flex justify-center space-x-3">
-          <Link
-            href={`mailto:${member.email}`}
-            className="p-2 bg-blue-100 rounded-full hover:bg-blue-200 transition-colors"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Mail className="w-4 h-4 text-blue-600" />
-          </Link>
-          <Link 
-            href={member.linkedin} 
-            className="p-2 bg-blue-100 rounded-full hover:bg-blue-200 transition-colors"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Linkedin className="w-4 h-4 text-blue-600" />
-          </Link>
-        </div>
-      </CardContent>
-    </Card>
-  )
+      </div>
+    </motion.div>
+  );
 }
 
 export default function TeamPage() {
@@ -836,7 +891,8 @@ export default function TeamPage() {
           <div className="text-center">
             <h1 className="text-5xl font-bold mb-6">Our Team</h1>
             <p className="text-xl max-w-3xl mx-auto opacity-90">
-              Meet the dedicated individuals who lead the Student Technical Council and drive innovation across our three wings and
+              Meet the dedicated individuals who lead the Student Technical
+              Council and drive innovation across our three wings and
               specialized teams.
             </p>
           </div>
@@ -847,15 +903,18 @@ export default function TeamPage() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Core Leadership Team</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Core Leadership Team
+            </h2>
             <p className="text-xl text-gray-600">
-              The executive leadership providing strategic direction and governance
+              The executive leadership providing strategic direction and
+              governance
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
             {coreTeam.map((member, index) => (
-              <TeamMemberCard key={index} member={member} />
+              <TeamMemberCard key={member.name} member={member} index={index} />
             ))}
           </div>
         </div>
@@ -863,11 +922,11 @@ export default function TeamPage() {
       <div>
         <div className="flex flex-col items-center justify-center py-16 relative">
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 mb-2 flex items-center gap-2">
-        More Positions Coming Soon
-        <span className="relative flex h-4 w-4">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span>
-        </span>
+            More Positions Coming Soon
+            <span className="relative flex h-4 w-4">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span>
+            </span>
           </h2>
           <p className="text-gray-500 text-base">Stay tuned for updates!</p>
         </div>
@@ -875,9 +934,12 @@ export default function TeamPage() {
       {/* Contact CTA */}
       <section className="py-16 bg-blue-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Want to Connect with Our Team?</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            Want to Connect with Our Team?
+          </h2>
           <p className="text-xl text-gray-600 mb-8">
-            We're here to help with any questions about participation, collaboration, or Student Technical Council activities.
+            We're here to help with any questions about participation,
+            collaboration, or Student Technical Council activities.
           </p>
           <Link
             href="/contact"
@@ -888,5 +950,5 @@ export default function TeamPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }

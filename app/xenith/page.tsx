@@ -597,7 +597,7 @@ const Page = () => {
                                 Email
                               </p>
                               <p className="text-white font-semibold text-xs md:text-base break-all">
-                                stciitphybrid@iitp.ac.in
+                                stc_iitp@iitp.ac.in
                               </p>
                               <p className="text-white font-semibold text-xs md:text-base break-all">
                                 tatva@iitp.ac.in

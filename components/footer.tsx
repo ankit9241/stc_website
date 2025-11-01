@@ -188,7 +188,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className={`w-4 h-4 ${accentColor}`} />
-                <span className="text-gray-300 text-sm">stciitphybrid@iitp.ac.in</span>
+                <span className="text-gray-300 text-sm">stc_iitp@iitp.ac.in</span>
               </div>
             </div>
           </div>

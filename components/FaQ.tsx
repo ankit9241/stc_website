@@ -28,7 +28,7 @@ const FaQ: React.FC = () => {
     {
       question: "How can companies collaborate with Student Technical Council?",
       answer:
-        "Companies can collaborate with us through recruitment, workshops, mentorship, or sponsorships. For opportunities, contact our industry relations team at stciitphybrid@iitp.ac.in",
+        "Companies can collaborate with us through recruitment, workshops, mentorship, or sponsorships. For opportunities, contact our industry relations team at stc_iitp@iitp.ac.in",
     },
     {
       question: "What is the time commitment for participation?",

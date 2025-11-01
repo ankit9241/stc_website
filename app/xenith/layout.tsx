@@ -41,6 +41,8 @@ export const metadata: Metadata = {
 
 export default function XenithLayout({ children }: { children: React.ReactNode }) {
     return (
-        <>{children}</>
+        <>
+            {children}
+        </>
     );
 }

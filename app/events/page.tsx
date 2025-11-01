@@ -119,6 +119,90 @@ export default function EventsPage() {
         </div>
       </section>
 
+      {/* Upcoming Events */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Upcoming Events</h2>
+            <p className="text-xl text-gray-600">Stay tuned for more exciting opportunities and events</p>
+          </div>
+
+          {loadingEvents ? (
+            <div className="text-center py-12">
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+              <p className="mt-4 text-gray-600">Loading upcoming events...</p>
+            </div>
+          ) : upcomingEvents.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {upcomingEvents.map((event, index) => (
+                <Card key={event._id} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
+                  {event.imageUrl && (
+                    <div className="relative w-full h-48 bg-gray-200">
+                      <Image
+                        src={event.imageUrl}
+                        alt={event.title}
+                        fill
+                        className="object-cover"
+                      />
+                      {event.isImportant && (
+                        <div className="absolute top-3 right-3 bg-red-500 text-white text-xs px-3 py-1 rounded-full font-bold">
+                          IMPORTANT
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  <CardContent className="p-6">
+                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                      <Calendar className="w-6 h-6 text-blue-600" />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2 min-h-[3.5rem]">
+                      {event.title}
+                    </h3>
+                    <p className="text-gray-600 mb-4 line-clamp-3 min-h-[4.5rem]">
+                      {event.content}
+                    </p>
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center text-sm text-gray-500">
+                        <Calendar className="w-4 h-4 mr-2" />
+                        <span>{formatEventDate(event.eventDate)}</span>
+                      </div>
+                      <div className="flex items-center text-sm text-gray-500">
+                        <Users className="w-4 h-4 mr-2" />
+                        <span>{event.club}</span>
+                      </div>
+                      {event.organizer && (
+                        <div className="flex items-center text-sm text-gray-500">
+                          <MapPin className="w-4 h-4 mr-2" />
+                          <span>By {event.organizer}</span>
+                        </div>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Calendar className="w-8 h-8 text-gray-400" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-700 mb-2">No Upcoming Events</h3>
+              <p className="text-gray-500">Stay tuned! New events will be announced soon.</p>
+            </div>
+          )}
+
+          {upcomingEvents.length > 0 && (
+            <div className="text-center mt-12">
+              <Link href="/calendar">
+                <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3">
+                  View Full Calendar
+                </Button>
+              </Link>
+            </div>
+          )}
+        </div>
+      </section>
+
       {/* Hack N Tech Hackathon */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -386,90 +470,6 @@ export default function EventsPage() {
 
             <CompanyCards company={internshipCompanies} />
           </div>
-        </div>
-      </section>
-
-      {/* Upcoming Events */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Upcoming Events</h2>
-            <p className="text-xl text-gray-600">Stay tuned for more exciting opportunities and events</p>
-          </div>
-
-          {loadingEvents ? (
-            <div className="text-center py-12">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-              <p className="mt-4 text-gray-600">Loading upcoming events...</p>
-            </div>
-          ) : upcomingEvents.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {upcomingEvents.map((event, index) => (
-                <Card key={event._id} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
-                  {event.imageUrl && (
-                    <div className="relative w-full h-48 bg-gray-200">
-                      <Image
-                        src={event.imageUrl}
-                        alt={event.title}
-                        fill
-                        className="object-cover"
-                      />
-                      {event.isImportant && (
-                        <div className="absolute top-3 right-3 bg-red-500 text-white text-xs px-3 py-1 rounded-full font-bold">
-                          IMPORTANT
-                        </div>
-                      )}
-                    </div>
-                  )}
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                      <Calendar className="w-6 h-6 text-blue-600" />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2 min-h-[3.5rem]">
-                      {event.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 line-clamp-3 min-h-[4.5rem]">
-                      {event.content}
-                    </p>
-                    <div className="space-y-2 mb-4">
-                      <div className="flex items-center text-sm text-gray-500">
-                        <Calendar className="w-4 h-4 mr-2" />
-                        <span>{formatEventDate(event.eventDate)}</span>
-                      </div>
-                      <div className="flex items-center text-sm text-gray-500">
-                        <Users className="w-4 h-4 mr-2" />
-                        <span>{event.club}</span>
-                      </div>
-                      {event.organizer && (
-                        <div className="flex items-center text-sm text-gray-500">
-                          <MapPin className="w-4 h-4 mr-2" />
-                          <span>By {event.organizer}</span>
-                        </div>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Calendar className="w-8 h-8 text-gray-400" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-700 mb-2">No Upcoming Events</h3>
-              <p className="text-gray-500">Stay tuned! New events will be announced soon.</p>
-            </div>
-          )}
-
-          {upcomingEvents.length > 0 && (
-            <div className="text-center mt-12">
-              <Link href="/calendar">
-                <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3">
-                  View Full Calendar
-                </Button>
-              </Link>
-            </div>
-          )}
         </div>
       </section>
 

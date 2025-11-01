@@ -46,7 +46,7 @@ export default function NotFound() {
           <p className="text-gray-500 text-sm">
             Need help?{' '}
             <a 
-              href="mailto:stciitphybrid@iitp.ac.in" 
+              href="mailto:stc_iitp@iitp.ac.in" 
               className="text-blue-600 hover:underline"
             >
               Contact Support
