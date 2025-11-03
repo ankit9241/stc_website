@@ -1,5 +1,6 @@
-# Robots.txt for STC IITP - Student Technical Council IIT Patna Hybrid
-# Domain: stciitphybrid.in
+# Robots.txt for STC IIT Patna - Student Technical Council IIT Patna Hybrid Programs
+# Official Website: https://stciitphybrid.in
+# Organization: Student Technical Council, Indian Institute of Technology Patna
 
 # Allow all web crawlers to access all content
 User-agent: *
@@ -9,51 +10,92 @@ Allow: /
 Disallow: /api/
 Disallow: /_next/
 Disallow: /admin/
+Disallow: /admin/*
+Disallow: /login
+Disallow: /login/
 Disallow: /.well-known/
 Disallow: /temp/
 Disallow: /private/
 Disallow: /*?*utm_*
 Disallow: /*?*ref=*
+Disallow: /*?*sessionid=*
 
 # Allow access to important static assets
 Allow: /images/
+Allow: /videos/
 Allow: /icons/
 Allow: /favicon.ico
+Allow: /apple-icon.png
+Allow: /icon.png
 Allow: /manifest.json
 Allow: /*.css
 Allow: /*.js
 
 # Important pages for indexing
+Allow: /
 Allow: /about
 Allow: /events
 Allow: /team
 Allow: /wings
 Allow: /gallery
 Allow: /contact
+Allow: /clubs
+Allow: /participation
+Allow: /timeline
+Allow: /calendar
+Allow: /registration
+Allow: /results
+Allow: /xenith
+
+# Wings pages
 Allow: /wings/disha
 Allow: /wings/arthniti
 Allow: /wings/tatva
 
-# Sitemap location
+# Tatva Subclubs
+Allow: /wings/tatva/subclubs/analytical-arena
+Allow: /wings/tatva/subclubs/appistry
+Allow: /wings/tatva/subclubs/codered
+Allow: /wings/tatva/subclubs/hackshield
+Allow: /wings/tatva/subclubs/mech-x
+Allow: /wings/tatva/subclubs/pixelerate
+Allow: /wings/tatva/subclubs/synapse
+Allow: /wings/tatva/subclubs/tech-hub
+Allow: /wings/tatva/subclubs/webwiser
+
+# Sitemap location 
 Sitemap: https://stciitphybrid.in/sitemap.xml
 
-# Crawl-delay (optional - set to 1 second to be respectful)
-Crawl-delay: 1
+# Crawl-delay for better server performance
+Crawl-delay: 0.5
 
 # Specific rules for major search engines
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 1
+Crawl-delay: 0.5
+Disallow: /api/
+
+User-agent: Googlebot-Image
+Allow: /images/
+Allow: /videos/
 
 User-agent: Bingbot
 Allow: /
-Crawl-delay: 1
+Crawl-delay: 0.5
 
 User-agent: Slurp
 Allow: /
+Crawl-delay: 0.5
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 0.5
+
+User-agent: Baiduspider
+Allow: /
 Crawl-delay: 1
 
-# Block bad bots (optional)
+# Block bad bots
 User-agent: AhrefsBot
 Disallow: /
 

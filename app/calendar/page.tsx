@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { Card, CardContent } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, MapPin, User, Clock, Loader2 } from "lucide-react"
+import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, MapPin, Clock, Loader2 } from "lucide-react"
 import Image from 'next/image'
 
 const MONTHS = [
@@ -14,12 +14,24 @@ const MONTHS = [
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
+interface Event {
+    _id: string
+    title: string
+    content: string
+    club: string
+    eventDate: string
+    expireAt?: string
+    imageUrl?: string
+    isImportant?: boolean
+    createdAt: string
+}
+
 export default function CalendarPage() {
     const [currentDate, setCurrentDate] = useState(new Date())
-    const [events, setEvents] = useState([])
+    const [events, setEvents] = useState<Event[]>([])
     const [loading, setLoading] = useState(true)
-    const [selectedDate, setSelectedDate] = useState(null)
-    const [selectedEvents, setSelectedEvents] = useState([])
+    const [selectedDate, setSelectedDate] = useState<Date | null>(null)
+    const [selectedEvents, setSelectedEvents] = useState<Event[]>([])
     const [dialogOpen, setDialogOpen] = useState(false)
 
     useEffect(() => {
@@ -40,7 +52,7 @@ export default function CalendarPage() {
         }
     }
 
-    const getEventsForDate = (date) => {
+    const getEventsForDate = (date: Date): Event[] => {
         return events.filter(event => {
             const eventDate = new Date(event.eventDate)
             return eventDate.getDate() === date.getDate() &&
@@ -49,7 +61,7 @@ export default function CalendarPage() {
         })
     }
 
-    const getDaysInMonth = (date) => {
+    const getDaysInMonth = (date: Date): (Date | null)[] => {
         const year = date.getFullYear()
         const month = date.getMonth()
         const firstDay = new Date(year, month, 1)
@@ -77,7 +89,7 @@ export default function CalendarPage() {
         setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1))
     }
 
-    const handleDateClick = (date) => {
+    const handleDateClick = (date: Date | null) => {
         if (!date) return
         const dayEvents = getEventsForDate(date)
         if (dayEvents.length > 0) {
@@ -87,7 +99,7 @@ export default function CalendarPage() {
         }
     }
 
-    const isToday = (date) => {
+    const isToday = (date: Date | null): boolean => {
         if (!date) return false
         const today = new Date()
         return date.getDate() === today.getDate() &&
@@ -95,7 +107,7 @@ export default function CalendarPage() {
             date.getFullYear() === today.getFullYear()
     }
 
-    const isExpired = (event) => {
+    const isExpired = (event: Event): boolean => {
         const expireDate = event.expireAt ? new Date(event.expireAt) : new Date(event.eventDate)
         return expireDate < new Date()
     }

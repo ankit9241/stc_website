@@ -3,7 +3,7 @@ import { Target, Eye, Award, Users } from "lucide-react"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "About Us | STC IITP",
+  title: "About Us",
   description: "Learn about STC IITP - Student Technical Council IIT Patna Hybrid. Discover our vision, mission, and three specialized wings: DISHA, ARTHNITI, and TATVA for diverse academic and professional growth.",
   keywords: [
     "about STC IITP",
