@@ -17,21 +17,134 @@ interface MemberSectionProps {
   members: Member[];
 }
 
+
 export const MemberSection: React.FC<MemberSectionProps> = ({ members }) => {
+  const getGridConfig = (count: number) => {
+    // Base styles for all screen sizes
+    const baseStyles = 'w-full mx-auto px-4 sm:px-6';
+    
+    // For 1 member: Single centered card
+    if (count === 1) return { 
+      container: `${baseStyles} max-w-md`, 
+      grid: 'grid-cols-1', 
+      gap: 'gap-8', 
+      specialLayout: false 
+    };
+    
+    // For 2 members: 1 column on mobile, 2 on larger screens
+    if (count === 2) return { 
+      container: `${baseStyles} max-w-4xl`, 
+      grid: 'grid-cols-1 sm:grid-cols-2', 
+      gap: 'gap-6 sm:gap-8', 
+      specialLayout: false 
+    };
+    
+    // For 3 members: 1 column on mobile, 3 on larger screens
+    if (count === 3) return { 
+      container: `${baseStyles} max-w-5xl`, 
+      grid: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3', 
+      gap: 'gap-6 sm:gap-8', 
+      specialLayout: false 
+    };
+    
+    // For 4 members: 2 columns on mobile, 4 on larger screens
+    if (count === 4) return { 
+      container: `${baseStyles} max-w-6xl`, 
+      grid: 'grid-cols-2 sm:grid-cols-2 md:grid-cols-4', 
+      gap: 'gap-4 sm:gap-6', 
+      specialLayout: false 
+    };
+    
+    // For 5 members: Special layout (2-3)
+    if (count === 5) return { 
+      container: `${baseStyles} max-w-6xl`, 
+      grid: 'grid-cols-2 md:grid-cols-3', 
+      gap: 'gap-4 sm:gap-6', 
+      specialLayout: true 
+    };
+    
+    // For 6+ members: 2 columns on mobile, 3 on medium, 4 on large screens
+    return { 
+      container: `${baseStyles} max-w-7xl`, 
+      grid: 'grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4', 
+      gap: 'gap-4 sm:gap-5', 
+      specialLayout: false 
+    };
+  };
+
+  const gridConfig = getGridConfig(members.length);
+  
+  // For 5 cards, we'll split them into two separate rows with responsive layout
+  if (members.length === 5 && gridConfig.specialLayout) {
+    const firstRow = members.slice(0, 2);
+    const secondRow = members.slice(2);
+    
+    return (
+      <section className="pb-8 sm:pb-12 md:pb-16">
+        <div className={gridConfig.container}>
+          <div className="text-center mb-8 sm:mb-12">
+            <div className="relative inline-block group">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-black bg-clip-text bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 mb-4 sm:mb-5 relative z-10 font-sans">
+                <span className="relative">
+                  Our Team
+                  <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-gray-400 to-transparent"></span>
+                </span>
+              </h2>
+            </div>
+            <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
+              Meet the amazing members of our subclub - their expertise, skills, and achievements.
+            </p>
+          </div>
+
+          {/* First row with 2 cards */}
+          <div className="flex justify-center mb-6 sm:mb-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 w-full max-w-4xl">
+              {firstRow.map((member) => (
+                <div key={member.id} className="flex justify-center px-2 w-full">
+                  <ProfileCard member={member} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Second row with 3 cards */}
+          <div className="flex justify-center">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 w-full max-w-5xl">
+              {secondRow.map((member) => (
+                <div key={member.id} className="flex justify-center px-2 w-full">
+                  <ProfileCard member={member} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+  
+  // Default grid layout for other cases
   return (
-    <section className="py-16">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-3">Our Team</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Meet the amazing members of our subclub - their expertise, skills,
-            and achievements.
+    <section className="py-8 sm:py-12 md:py-16">
+      <div className={gridConfig.container}>
+        <div className="text-center mb-8 sm:mb-12">
+          <div className="relative inline-block group">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-black bg-clip-text bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 mb-4 sm:mb-5 relative z-10 font-sans">
+              <span className="relative">
+                Our Team
+                <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-gray-400 to-transparent"></span>
+              </span>
+            </h2>
+          </div>
+          <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
+            Meet the amazing members of our subclub - their expertise, skills, and achievements.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
+        <div className={`grid ${gridConfig.grid} ${gridConfig.gap} w-full mx-auto`}>
           {members.map((member) => (
-            <ProfileCard key={member.id} member={member} />
+            <div key={member.id} className="flex justify-center px-2 w-full">
+              <ProfileCard member={member} />
+            </div>
           ))}
         </div>
       </div>
@@ -41,79 +154,32 @@ export const MemberSection: React.FC<MemberSectionProps> = ({ members }) => {
 
 const ProfileCard: React.FC<{ member: Member }> = ({ member }) => {
   return (
-    <div className="w-[300px] h-[380px] rounded-3xl bg-white shadow-lg overflow-hidden relative flex flex-col items-center justify-center group transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-gray-100 hover:border-gray-200">
-      {/* Shine effect on hover */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-      {/* Profile image */}
+    <div className="w-full h-[300px] sm:h-[340px] md:h-[380px] rounded-2xl sm:rounded-3xl bg-gradient-to-b from-sky-300/60 to-sky-500/60 shadow-md sm:shadow-lg overflow-hidden relative group transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+      {/* Profile Image - Responsive container with fixed aspect ratio */}
       <div className="relative w-full h-full">
         <Image
           src={member.avatar}
           alt={member.name}
           fill
           className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
 
-        <div className="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-t from-white via-white/95 to-transparent transition-all duration-300"></div>
+        {/* Bottom Overlay Gradient */}
+        <div className="absolute bottom-0 left-0 right-0 h-1/4 bg-gradient-to-t from-black/80 to-transparent"></div>
 
-        <div className="absolute bottom-4 left-0 w-full flex justify-between items-center px-5">
-          <div className="flex items-center gap-2">
-            <Image
-              src={member.avatar}
-              alt={member.name}
-              width={32}
-              height={32}
-              className="rounded-full object-cover border border-gray-300"
-            />
-            <div className="flex flex-col leading-tight">
-              <span className="text-sm text-gray-800">
-                <b>{member.name}</b>
-              </span>
-              <span className="text-xs text-gray-500">
-                <b>{member.role}</b>
-              </span>
+        {/* Bottom Section */}
+        <div className="absolute bottom-2 sm:bottom-4 left-0 w-full flex justify-center px-2">
+          <div className="w-[95%] flex flex-col items-center bg-white/20 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2 sm:py-3 shadow-sm">
+            {/* Name + Role */}
+            <div className="w-full text-center">
+              <p className="text-sm sm:text-base font-semibold text-white">{member.name}</p>
+              <p className="text-xs sm:text-sm text-white/80 leading-tight font-light">
+                {member.role}
+              </p>
             </div>
-          </div>
 
-          {/* Social links */}
-          <div className="flex gap-2">
-            {member.linkedin && (
-              <a
-                href={member.linkedin}
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-2 bg-white/80 backdrop-blur-sm rounded-full shadow hover:bg-white hover:shadow-md hover:scale-110 transition-all duration-300 transform group-hover:bg-white"
-                aria-label="LinkedIn"
-              >
-                <svg
-                  className="w-5 h-5 text-gray-700"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-              </svg>
-            </a>
-            )}
-            {member.github && (
-              <a
-              href={member.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 bg-white rounded-full shadow hover:bg-gray-100 transition"
-              aria-label="GitHub"
-            >
-              <svg
-                className="w-5 h-5 text-gray-700"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.699 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </a>
-            )}
+            
           </div>
         </div>
       </div>

@@ -26,9 +26,9 @@ const page = () => {
 
         <Header 
         
-          title={domains.analytica_arena.title}
-          subtitle= {domains.analytica_arena.branch}
-          imageUrl= {domains.analytica_arena.cardUrl}
+          title={domains.analytical_arena.title}
+          subtitle= {domains.analytical_arena.branch}
+          imageUrl= {domains.analytical_arena.cardUrl}
           fromColor= "#e5d011"
           toColor="#f64242"
           to='left'
@@ -49,9 +49,9 @@ const page = () => {
           }}
         /> */}
         <About
-          title={domains.analytica_arena.title}
-          about={domains.analytica_arena.description}
-          message={domains.analytica_arena.message}
+          title={domains.analytical_arena.title}
+          about={domains.analytical_arena.description}
+          message={domains.analytical_arena.message}
           fromColor= "#e5d011"
           toColor="#f64242"
           to=''
@@ -69,7 +69,7 @@ const page = () => {
         /> */}
         <Box sx={{ my: 8 }}>
           <MemberSection
-            members={domains.analytica_arena.team.map((member, index) => ({
+            members={domains.analytical_arena.team.map((member, index) => ({
             id: `member-${index + 1}`,
             name: member.name,
             role: member.position,

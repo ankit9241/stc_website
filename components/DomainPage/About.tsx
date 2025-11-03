@@ -90,41 +90,30 @@ const About: React.FC<AboutProps> = ({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="mb-12"
           >
             <Typography
               variant="h1"
               sx={{
-                fontSize: { xs: '2.5rem', md: '3.25rem', lg: '3.75rem' },
-                fontWeight: 700,
-                lineHeight: 1.15,
-                margin: '1rem 0',
-                color: 'text.primary',
-                fontFamily: 'var(--font-sans, Inter), sans-serif',
+                fontSize: { xs: '2.25rem', md: '2.75rem', lg: '3.25rem' },
+                fontWeight: 800,
+                
                 position: 'relative',
-                letterSpacing: '-0.02em',
-                '&::before, &::after': {
-                  content: '""',
-                  position: 'absolute',
-                  fontSize: '4rem',
-                  color: 'rgba(0,0,0,0.04)',
-                  fontFamily: 'var(--font-sans, Inter), sans-serif',
-                  lineHeight: 1,
-                  fontWeight: 900,
-                },
-                '&::before': {
-                  content: '""',
-                  top: '-1.5rem',
-                  left: '-2rem',
-                },
+                display: 'inline-block',
+                fontFamily: 'var(--font-sans, Inter), sans-serif',
                 '&::after': {
                   content: '""',
-                  bottom: '-2.5rem',
-                  right: '-2rem',
+                  position: 'absolute',
+                  bottom: '-0.5rem',
+                  left: 0,
+                  width: '100%',
+                  height: '2px',
+                  background: 'linear-gradient(to right, transparent, #9ca3af, transparent)'
                 }
               }}
             >
-              {title}
+              <span className="relative">
+                {title}
+              </span>
             </Typography>
           </motion.div>
         </div>

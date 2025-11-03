@@ -26,9 +26,9 @@ const page = () => {
       /> */}
 
       <Header
-        title={domains.hackershield.title}
-        subtitle={domains.hackershield.branch}
-        imageUrl={domains.hackershield.cardUrl}
+        title={domains.hackshield.title}
+        subtitle={domains.hackshield.branch}
+        imageUrl={domains.hackshield.cardUrl}
         fromColor="#B53fff"
         toColor="#e590e3"
         to="left"
@@ -47,9 +47,9 @@ const page = () => {
         }}
       /> */}
       <About
-        title={domains.hackershield.title}
-        about={domains.hackershield.description}
-        message={domains.hackershield.message}
+        title={domains.hackshield.title}
+        about={domains.hackshield.description}
+        message={domains.hackshield.message}
         fromColor="#B53fff"
         toColor="#e590e3"
         to="right"
@@ -68,7 +68,7 @@ const page = () => {
       /> */}
       <Box sx={{ my: 8 }}>
         <MemberSection
-          members={domains.hackershield.team.map((member, index) => ({
+          members={domains.hackshield.team.map((member, index) => ({
           id: `member-${index + 1}`,
           name: member.name,
           role: member.position,

@@ -44,6 +44,7 @@ const AppConfig = {
       SessionBox2: "/DomainCards/Session.png",
       HackathonBox2: "/DomainCards/Hackathon.png",
       NewsBox2: "/DomainCards/News.png",
+      MechXBox2: "/DomainCards/mech-x.png",
   
       MilkyWay: "/images/MilkyWay.svg",
       StarPatt: "/images/StarPatt.svg",
@@ -76,69 +77,61 @@ const AppConfig = {
       Satyam:"/images/ManagementLeads/Satyam.svg",
       Tushar:"/images/ManagementLeads/Tushar.svg",
   
-  
-      //AnalyticsArena
-      Aditya: "/Sub-Clubs/analytical-arena/Aditya (2).png",
-      AlokChoudhary: "/Sub-Clubs/analytical-arena/AlokChoudhary (2).png",
-      AlokRanjan: "/Sub-Clubs/analytical-arena/AlokRanjan (2).png",
-      AnuragVerma: "/Sub-Clubs/analytical-arena/AnuragVerma (2).png",
-      Gaurav: "/Sub-Clubs/analytical-arena/Gaurav (2).png",
-      Rajeev: "/Sub-Clubs/analytical-arena/Rajeev (2).png",
-      Shruti: "/Sub-Clubs/analytical-arena/Shruti (2).png",
+      //Analytical Arena
+      Harshit: "/SubClub/Analytical Arena/Harshit.png",
+      ShrutiKumari: "/SubClub/Analytical Arena/Shruti Kumari.png",
+      SuyashMukherjee: "/SubClub/Analytical Arena/SuyashMukherjee.png",
+      AasthaAnand: "/SubClub/Analytical Arena/aasthaanand.png",
   
       //Appistry
-      AdityaKumar: "/Sub-Clubs/appistry/AdityaKumar (2).png",
-      AdityaPrakash: "/Sub-Clubs/appistry/AdityaPrakash (2).png",
-      AdityaSah: "/Sub-Clubs/appistry/AdityaSah (2).png",
-      RishabhRaj: "/Sub-Clubs/appistry/RishabhRaj (2).png",
+      Ayush: "/SubClub/Appistry/Ayush.jpg",
+      Dipesh: "/SubClub/Appistry/Dipesh.png",
+      Shashi: "/SubClub/Appistry/Shashi.jpg",
+      ShubhamAppistry: "/SubClub/Appistry/Shubham.jpg",
   
       //CodeRed
-      Abhijeet: "/Sub-Clubs/codered/Abhijeet (2).png",
-      Ansh: "/Sub-Clubs/codered/Ansh (2).png",
-      Rahul: "/Sub-Clubs/codered/Rahul (2).png",
-      Ramandeep: "/Sub-Clubs/codered/Ramandeep (2).png",
+      RonakDokania: "/SubClub/Codered/RonakDokania.jpg",
+      SakshiKumari: "/SubClub/Codered/SakshiKumari.jpg",
+      AbhijeetKumar: "/SubClub/Codered/abhijeetkumar.jpg",
+      RamandeepSingh: "/SubClub/Codered/ramandeepsingh.jpg",
+      Ratna: "/SubClub/Codered/ratna.jpg",
   
-      //Hackathon
-      Arya: "/Sub-Clubs/hackathon/Arya (2).png",
-      Prakriti: "/Sub-Clubs/hackathon/Prakriti (2).png",
-      Ritik: "/Sub-Clubs/hackathon/Ritik (2).png",
-      Ritu1: "/Sub-Clubs/hackathon/Ritu (2).png",
+      //HackShield
+      AayushBabu: "/SubClub/HackShield/Aayush Babu.jpg",
+      AnkitHackShield: "/SubClub/HackShield/Ankit.jpg",
+      GautamSah: "/SubClub/HackShield/Gautam Sah.jpg",
+      Shiwangini: "/SubClub/HackShield/Shiwangini.jpg",
   
-      //Hackshield
-      Goutam: "/Sub-Clubs/hackshield/Goutam (2).png",
-      Hariom: "/Sub-Clubs/hackshield/Hariom (2).png",
-      Piyush: "/Sub-Clubs/hackshield/Piyush (2).png",
-      Vishnu: "/Sub-Clubs/hackshield/Vishnu (2).png",
-  
-      //News
-      Rishik: "/Sub-Clubs/news/Rishik (2).png",
-      Shakshi: "/Sub-Clubs/news/Shakshi (2).png",
-      Shreya: "/Sub-Clubs/news/Shreya (2).png",
-      Udit: "/Sub-Clubs/news/Udit (2).png",
+      //Tech Hub
+      Krishna: "/SubClub/Tech hub/krishna.jpg",
+      Shreya: "/SubClub/Tech hub/shreya.jpg",
+      Sonal: "/SubClub/Tech hub/sonal.jpg",
+      Sumit: "/SubClub/Tech hub/sumit.jpg",
+      Tannu: "/SubClub/Tech hub/tannu.jpg",
   
       //Pixelerate
-      Akshay: "/Sub-Clubs/pixelerate/Akshay (2).png",
-      Aryan1: "/Sub-Clubs/pixelerate/Aryan (2).png",
-      Pratap1: "/Sub-Clubs/pixelerate/Pratap (2).png",
-      Tannu: "/Sub-Clubs/pixelerate/Tannu (2).png",
+      Amarjeet: "/SubClub/Pixelerate/Amarjeet Kumar.jpg",
+      Ankit: "/SubClub/Pixelerate/Ankit.jpg",
+      Badal: "/SubClub/Pixelerate/Badal Raj.jpg",
   
-      //Session
-      Aayush: "/Sub-Clubs/session/Aayush (2).png",
-      Sumit: "/Sub-Clubs/session/Sumit (2).png",
-      Swastika: "/Sub-Clubs/session/Swastika (2).png",
-      Vikash: "/Sub-Clubs/session/Vikash (2).png",
-  
+    
       //Synapse
-      Ashank: "/Sub-Clubs/synapse/Ashank (2).png",
-      Purnasha: "/Sub-Clubs/synapse/Purnasha (2).png",
-      Rishabh: "/Sub-Clubs/synapse/Rishabh (2).png",
-      Shubh: "/Sub-Clubs/synapse/Shubh (2).png",
+      Prakash: "/SubClub/Synapse/Prakash.jpg",
+      Harsh: "/SubClub/Synapse/harsh.jpg",
+      Priya: "/SubClub/Synapse/priya.jpg",
+      RishabhSynapse: "/SubClub/Synapse/rishabh.jpg",
+      ShubhamSynapse: "/SubClub/Synapse/shubham.jpg",
   
       //WebWiser
-      Hridyanand1: "/Sub-Clubs/webwiser/Hridyanand (2).png",
-      Mohit: "/Sub-Clubs/webwiser/Mohit (2).png",
-      Sannu: "/Sub-Clubs/webwiser/Sannu (2).png",
-      Vatsal: "/Sub-Clubs/webwiser/Vatsal (2).png",
+      Abhishek: "/SubClub/WebWiser/abhishek.png",
+      Mandeep: "/SubClub/WebWiser/mandeep.png",
+      MohitWebWiser: "/SubClub/WebWiser/mohit.png",
+      PrakashWebWiser: "/SubClub/WebWiser/prakash.jpg",
+      VatsalWebWiser: "/SubClub/WebWiser/vatsal.png",
+
+      //Mech-X
+      ShivamThakur: "/SubClub/Mech-X/ShivamThakur.png",
+      Vishnu: "/SubClub/Mech-X/Vishnu.jpg",
   
       //Footer
       Instagram: "/images/Footer/insta.svg",

@@ -28,9 +28,9 @@ const TechHubPage = () => {
 
         
         <Header
-          title={domains.tech_news.title}
-          subtitle= {domains.tech_news.branch}
-          imageUrl= {domains.tech_news.cardUrl}
+          title={domains.tech_hub.title}
+          subtitle= {domains.tech_hub.branch}
+          imageUrl= {domains.tech_hub.cardUrl}
           fromColor= "#fcb224"
           toColor="#f3465d"
           to='left'
@@ -52,9 +52,9 @@ const TechHubPage = () => {
         /> */}
         <About
           
-          title={domains.tech_news.title}
-          about={domains.tech_news.description}
-          message={domains.tech_news.message}
+          title={domains.tech_hub.title}
+          about={domains.tech_hub.description}
+          message={domains.tech_hub.message}
           fromColor= "fcb224"
           toColor="#f3465d"
           to=''
@@ -62,7 +62,7 @@ const TechHubPage = () => {
 
         <Box sx={{ my: 8 }}>
           <MemberSection
-            members={domains.tech_news.team.map((member, index) => ({
+            members={domains.tech_hub.team.map((member, index) => ({
             id: `member-${index + 1}`,
             name: member.name,
             role: member.position,
@@ -90,7 +90,7 @@ const TechHubPage = () => {
         
         
         {/* <Team
-          teamData={domains.tech_news.team}
+          teamData={domains.tech_hub.team}
         /> */}
         
     </Box>
