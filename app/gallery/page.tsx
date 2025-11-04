@@ -1,12 +1,21 @@
-"use client"
+"use client";
 
-import React, { useState, useRef } from 'react'
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button"
-import { Play, X, ChevronLeft, ChevronRight, Award, Users, Film, SquareChevronRight } from "lucide-react"
-import Image from 'next/image'
+import React, { useState, useRef } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import {
+  Play,
+  X,
+  ChevronLeft,
+  ChevronRight,
+  Award,
+  Users,
+  Film,
+  SquareChevronRight,
+} from "lucide-react";
+import Image from "next/image";
 
 const galleryData = {
   // events: {
@@ -22,7 +31,7 @@ const galleryData = {
   //     },
   //     {
   //       type: "image",
-  //       src: "/images/internship-drive-poster.jpg", 
+  //       src: "/images/internship-drive-poster.jpg",
   //       title: "Internship Drive",
   //       description: "Career opportunities with top companies",
   //       category: "Career Development"
@@ -46,93 +55,94 @@ const galleryData = {
   // },
   hackNtech: {
     title: "Hack-N-Tech 2025",
-    icon: <SquareChevronRight className='w-5 h-5'/>,
+    icon: <SquareChevronRight className="w-5 h-5" />,
     items: [
       {
         type: "video",
         src: "/videos/hackntech.mp4",
         title: "Hack-n-Tech Winnners",
         description: "Winners of Hack-N-Tech Hackathon 2025",
-        category: "Hackathon"
+        category: "Hackathon",
       },
       {
         type: "image",
         src: "/hackNtech/img1.jpg",
         title: "Hackathon moments",
-        description: "Experience the energy and innovation of our hackathon event",
-        category: "Hackathon"
+        description:
+          "Experience the energy and innovation of our hackathon event",
+        category: "Hackathon",
       },
       {
         type: "image",
         src: "/hackNtech/img2.jpg",
         title: "Hackathon moments",
         description: "Having questions?",
-        category: "Hackathon"
+        category: "Hackathon",
       },
       {
         type: "image",
         src: "/hackNtech/img3.jpg",
         title: "Hackathon moments",
         description: "Meet some members",
-        category: "Hackathon"
+        category: "Hackathon",
       },
       {
         type: "image",
         src: "/hackNtech/img4.jpg",
         title: "Hackathon moments",
         description: "Some sponsor moments from Hack-N-Tech Hackathon 2025",
-        category: "Hackathon"
+        category: "Hackathon",
       },
       {
         type: "image",
         src: "/hackNtech/img5.jpg",
         title: "Hackathon moments",
         description: "Just code or having fun?",
-        category: "Hackathon"
+        category: "Hackathon",
       },
       {
         type: "image",
         src: "/hackNtech/img6.jpg",
         title: "Hackathon moments",
         description: "Having fun is important!!!",
-        category: "Hackathon"
+        category: "Hackathon",
       },
       {
         type: "image",
         src: "/hackNtech/img7.jpg",
         title: "Hackathon moments",
         description: "Again having fun",
-        category: "Hackathon"
+        category: "Hackathon",
       },
       {
         type: "image",
         src: "/hackNtech/img8.jpg",
         title: "Hackathon moments",
         description: "Want to see all participants?",
-        category: "Hackathon"
+        category: "Hackathon",
       },
       {
         type: "video",
         src: "/hackNtech/vdo1.mp4",
         title: "Hackathon moments",
         description: "Selfie time!",
-        category: "Hackathon"
+        category: "Hackathon",
       },
       {
         type: "video",
         src: "/hackNtech/vdo2.mp4",
         title: "Hackathon moments",
         description: "Merchandise?",
-        category: "Hackathon"
+        category: "Hackathon",
       },
       {
         type: "video",
         src: "/hackNtech/vdo3.mp4",
         title: "Hackathon moments",
         description: "Post hackathon celebration",
-        category: "Hackathon"
-      }
-    ]
+        category: "Hackathon",
+      },
+    ],
   },
   achievements: {
     title: "Achievements & Recognition",
@@ -143,23 +153,23 @@ const galleryData = {
         src: "/images/hackathon-winner.jpg",
         title: "Hackathon Winners",
         description: "Celebrating our champions of innovation",
-        category: "Achievement"
+        category: "Achievement",
       },
       {
         type: "image",
         src: "/images/hackathon-first-runner.jpg",
         title: "First Runner Up",
         description: "Excellence in technical innovation",
-        category: "Achievement"
+        category: "Achievement",
       },
       {
         type: "image",
         src: "/images/hackathon-second-runner.jpg",
         title: "Second Runner Up",
         description: "Outstanding performance in competition",
-        category: "Achievement"
-      }
-    ]
+        category: "Achievement",
+      },
+    ],
   },
   partnerships: {
     title: "Industry Partnerships",
@@ -170,40 +180,40 @@ const galleryData = {
         src: "/images/company-logos.jpg",
         title: "Industry Partners",
         description: "Collaborating with leading companies",
-        category: "Partnership"
-      }
-    ]
+        category: "Partnership",
+      },
+    ],
   },
-}
+};
 
 interface VideoCardProps {
   video: {
-    src: string
-    title: string
-    description: string
-    category: string
-  }
-  onClick: () => void
+    src: string;
+    title: string;
+    description: string;
+    category: string;
+  };
+  onClick: () => void;
 }
 
 const VideoCard = ({ video, onClick }: VideoCardProps) => {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const [isHovered, setIsHovered] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
-    setIsHovered(true)
+    setIsHovered(true);
     if (videoRef.current) {
-      videoRef.current.play()
+      videoRef.current.play();
     }
-  }
+  };
 
   const handleMouseLeave = () => {
-    setIsHovered(false)
+    setIsHovered(false);
     if (videoRef.current) {
-      videoRef.current.pause()
-      videoRef.current.currentTime = 0
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
     }
-  }
+  };
 
   return (
     <Card
@@ -222,11 +232,16 @@ const VideoCard = ({ video, onClick }: VideoCardProps) => {
             loop
             playsInline
           />
-          <div className={`absolute inset-0 bg-black/30 transition-opacity duration-300 ${
-            isHovered ? 'opacity-0' : 'opacity-100'
-          } flex items-center justify-center`}>
+          <div
+            className={`absolute inset-0 bg-black/30 transition-opacity duration-300 ${
+              isHovered ? "opacity-0" : "opacity-100"
+            } flex items-center justify-center`}
+          >
             <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-              <Play className="w-6 h-6 text-[#0f2a4d] ml-1" fill="currentColor" />
+              <Play
+                className="w-6 h-6 text-[#0f2a4d] ml-1"
+                fill="currentColor"
+              />
             </div>
           </div>
           <div className="absolute top-3 right-3">
@@ -235,7 +250,9 @@ const VideoCard = ({ video, onClick }: VideoCardProps) => {
             </div>
           </div>
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4">
-            <Badge className="mb-2 bg-[#0f2a4d] hover:bg-[#1a4b8c]">{video.category}</Badge>
+            <Badge className="mb-2 bg-[#0f2a4d] hover:bg-[#1a4b8c]">
+              {video.category}
+            </Badge>
             <h3 className="text-white font-semibold text-base">
               {video.title}
             </h3>
@@ -243,60 +260,55 @@ const VideoCard = ({ video, onClick }: VideoCardProps) => {
         </div>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
 interface GalleryItem {
-  type: string
-  src: string
-  title: string
-  description: string
-  category: string
-  thumbnail?: string
+  type: string;
+  src: string;
+  title: string;
+  description: string;
+  category: string;
+  thumbnail?: string;
 }
 
 const GalleryPage = () => {
-  const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null)
-  const [selectedVideo, setSelectedVideo] = useState<GalleryItem | null>(null)
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
+  const [selectedVideo, setSelectedVideo] = useState<GalleryItem | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const allImages = Object.values(galleryData).flatMap(section => 
-    section.items.filter(item => item.type === 'image')
-  )
+  const allImages = Object.values(galleryData).flatMap((section) =>
+    section.items.filter((item) => item.type === "image")
+  );
 
   const openImageModal = (image: GalleryItem) => {
-    const index = allImages.findIndex(img => img.src === image.src)
-    setCurrentImageIndex(index)
-    setSelectedImage(image)
-  }
+    const index = allImages.findIndex((img) => img.src === image.src);
+    setCurrentImageIndex(index);
+    setSelectedImage(image);
+  };
 
-  const navigateImage = (direction: 'next' | 'prev') => {
-    const newIndex = direction === 'next' 
-      ? (currentImageIndex + 1) % allImages.length
-      : currentImageIndex === 0 ? allImages.length - 1 : currentImageIndex - 1
-    
-    setCurrentImageIndex(newIndex)
-    setSelectedImage(allImages[newIndex])
-  }
+  const navigateImage = (direction: "next" | "prev") => {
+    const newIndex =
+      direction === "next"
+        ? (currentImageIndex + 1) % allImages.length
+        : currentImageIndex === 0
+          ? allImages.length - 1
+          : currentImageIndex - 1;
+
+    setCurrentImageIndex(newIndex);
+    setSelectedImage(allImages[newIndex]);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 pt-28 pb-12">
       {/* Hero Section */}
       <div className="text-center mb-16 px-4">
-        <div className="flex justify-center mb-6">
-          <div className="w-24 h-24 rounded-3xl flex items-center justify-center overflow-hidden shadow-2xl border-4 border-white">
-            <img 
-              src="/images/stc-logo.jpg" 
-              alt="STC Logo" 
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
         <h1 className="text-5xl md:text-6xl font-bold text-[#0f2a4d] mb-4 tracking-tight">
           Gallery
         </h1>
         <p className="text-lg md:text-xl text-[#1a4b8c] max-w-3xl mx-auto leading-relaxed">
-          Explore our journey through captivating moments - from groundbreaking events and achievements to valuable partnerships and innovations
+          Explore our journey through captivating moments - from groundbreaking
+          events and achievements to valuable partnerships and innovations
         </p>
       </div>
 
@@ -310,7 +322,9 @@ const GalleryPage = () => {
                   {section.icon}
                 </div>
                 <div className="flex-1">
-                  <h2 className="text-3xl font-bold text-[#0f2a4d] mb-1">{section.title}</h2>
+                  <h2 className="text-3xl font-bold text-[#0f2a4d] mb-1">
+                    {section.title}
+                  </h2>
                   <div className="h-1 w-24 bg-gradient-to-r from-[#0f2a4d] to-[#1a4b8c] rounded-full"></div>
                 </div>
               </div>
@@ -319,7 +333,7 @@ const GalleryPage = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {section.items.map((item, index) => (
                   <div key={index}>
-                    {item.type === 'image' ? (
+                    {item.type === "image" ? (
                       <Card
                         className="group cursor-pointer overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-white"
                         onClick={() => openImageModal(item)}
@@ -334,7 +348,9 @@ const GalleryPage = () => {
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                              <Badge className="mb-2 bg-[#0f2a4d] hover:bg-[#1a4b8c] shadow-md">{item.category}</Badge>
+                              <Badge className="mb-2 bg-[#0f2a4d] hover:bg-[#1a4b8c] shadow-md">
+                                {item.category}
+                              </Badge>
                               <h3 className="text-white font-semibold text-base opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 {item.title}
                               </h3>
@@ -343,9 +359,9 @@ const GalleryPage = () => {
                         </CardContent>
                       </Card>
                     ) : (
-                      <VideoCard 
-                        video={item} 
-                        onClick={() => setSelectedVideo(item)} 
+                      <VideoCard
+                        video={item}
+                        onClick={() => setSelectedVideo(item)}
                       />
                     )}
                   </div>
@@ -357,10 +373,13 @@ const GalleryPage = () => {
       </div>
 
       {/* Image Modal */}
-      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
+      <Dialog
+        open={!!selectedImage}
+        onOpenChange={() => setSelectedImage(null)}
+      >
         <DialogContent className="max-w-7xl w-full h-[95vh] p-0 border-0 bg-transparent">
           <DialogTitle className="sr-only">
-            {selectedImage?.title || 'Image Viewer'}
+            {selectedImage?.title || "Image Viewer"}
           </DialogTitle>
           <div className="relative w-full h-full bg-black/95 rounded-xl overflow-hidden backdrop-blur-sm">
             {selectedImage && (
@@ -372,15 +391,15 @@ const GalleryPage = () => {
                   className="object-contain"
                   priority
                 />
-                
+
                 {/* Navigation Buttons */}
                 <Button
                   variant="ghost"
                   size="icon"
                   className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white backdrop-blur-md h-12 w-12 rounded-full border border-white/20 transition-all duration-300"
                   onClick={(e) => {
-                    e.stopPropagation()
-                    navigateImage('prev')
+                    e.stopPropagation();
+                    navigateImage("prev");
                   }}
                 >
                   <ChevronLeft className="w-6 h-6" />
@@ -390,8 +409,8 @@ const GalleryPage = () => {
                   size="icon"
                   className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white backdrop-blur-md h-12 w-12 rounded-full border border-white/20 transition-all duration-300"
                   onClick={(e) => {
-                    e.stopPropagation()
-                    navigateImage('next')
+                    e.stopPropagation();
+                    navigateImage("next");
                   }}
                 >
                   <ChevronRight className="w-6 h-6" />
@@ -435,10 +454,13 @@ const GalleryPage = () => {
       </Dialog>
 
       {/* Video Modal */}
-      <Dialog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
+      <Dialog
+        open={!!selectedVideo}
+        onOpenChange={() => setSelectedVideo(null)}
+      >
         <DialogContent className="max-w-7xl w-full p-0 h-[95vh] border-0 bg-transparent">
           <DialogTitle className="sr-only">
-            {selectedVideo?.title || 'Video Player'}
+            {selectedVideo?.title || "Video Player"}
           </DialogTitle>
           <div className="relative w-full h-full aspect-video bg-black/95 rounded-xl overflow-hidden backdrop-blur-sm">
             {selectedVideo && (
@@ -452,7 +474,7 @@ const GalleryPage = () => {
                 >
                   Your browser does not support the video tag.
                 </video>
-                
+
                 {/* Close Button */}
                 <Button
                   variant="ghost"
@@ -483,7 +505,7 @@ const GalleryPage = () => {
         </DialogContent>
       </Dialog>
     </div>
-  )
-}
+  );
+};
 
-export default GalleryPage
+export default GalleryPage;

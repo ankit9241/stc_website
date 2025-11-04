@@ -7,7 +7,8 @@ const domains = {
     cardUrl: AppConfig.imageUrls.PixelBox2,
     description:
       "Welcome to Pixelerate, the UI/UX and Graphic Design Club at IIT Patna! 🎨✨ Whether you're a design enthusiast or an experienced designer, join us to explore the world of digital design, user experience, and visual communication. Participate in workshops, design challenges, and real-world projects to enhance your skills and build an impressive portfolio.",
-    message: "Let's create stunning designs and amazing user experiences together!",
+    message:
+      "Let's create stunning designs and amazing user experiences together!",
     team: [
       {
         name: "Badal Raj",
@@ -67,6 +68,11 @@ const domains = {
     message: "Crafting digital experiences, one line of code at a time!",
     team: [
       {
+        name: "Prakash Kumar",
+        position: "Advisor",
+        imgUrl: AppConfig.imageUrls.PrakashWebWiser,
+      },
+      {
         name: "Mohit Kumar",
         position: "Coordinator",
         imgUrl: AppConfig.imageUrls.MohitWebWiser,
@@ -100,24 +106,24 @@ const domains = {
       {
         name: "Shubham Kumar Gupta",
         position: "Coordinator",
-        imgUrl: AppConfig.imageUrls.ShubhamSynapse
+        imgUrl: AppConfig.imageUrls.ShubhamSynapse,
       },
       {
         name: "Harsh Kumar",
         position: "Sub-coordinator",
-        imgUrl: AppConfig.imageUrls.Harsh
+        imgUrl: AppConfig.imageUrls.Harsh,
       },
       {
         name: "Rishabh Prajapati",
         position: "Member",
-        imgUrl: AppConfig.imageUrls.RishabhSynapse
+        imgUrl: AppConfig.imageUrls.RishabhSynapse,
       },
       {
         name: "Purnasha Priya",
         position: "Member",
-        imgUrl: AppConfig.imageUrls.Priya
-      }
-    ]
+        imgUrl: AppConfig.imageUrls.Priya,
+      },
+    ],
   },
 
   code_red: {
@@ -131,29 +137,29 @@ const domains = {
       {
         name: "Ratna Singh",
         position: "Advisor",
-        imgUrl: AppConfig.imageUrls.Ratna
+        imgUrl: AppConfig.imageUrls.Ratna,
       },
       {
         name: "Ramandeep Singh",
         position: "Coordinator",
-        imgUrl: AppConfig.imageUrls.RamandeepSingh
+        imgUrl: AppConfig.imageUrls.RamandeepSingh,
       },
       {
         name: "Abhijeet Kumar",
         position: "Sub-Coordinator",
-        imgUrl: AppConfig.imageUrls.AbhijeetKumar
+        imgUrl: AppConfig.imageUrls.AbhijeetKumar,
       },
       {
         name: "Sakshi Kumari",
         position: "Member",
-        imgUrl: AppConfig.imageUrls.SakshiKumari
+        imgUrl: AppConfig.imageUrls.SakshiKumari,
       },
       {
         name: "Ronak Dokania",
         position: "Member",
-        imgUrl: AppConfig.imageUrls.RonakDokania
+        imgUrl: AppConfig.imageUrls.RonakDokania,
       },
-    ]
+    ],
   },
 
   analytical_arena: {
@@ -167,19 +173,19 @@ const domains = {
       {
         name: "Shruti Kumari",
         position: "Coordinator",
-        imgUrl: AppConfig.imageUrls.ShrutiKumari
+        imgUrl: AppConfig.imageUrls.ShrutiKumari,
       },
       {
         name: "Suyash Mukherjee",
         position: "Sub coordinator",
-        imgUrl: AppConfig.imageUrls.SuyashMukherjee
+        imgUrl: AppConfig.imageUrls.SuyashMukherjee,
       },
       {
         name: "Aastha Anand",
         position: "Member",
-        imgUrl: AppConfig.imageUrls.AasthaAnand
-      }
-    ]
+        imgUrl: AppConfig.imageUrls.AasthaAnand,
+      },
+    ],
   },
 
   hackshield: {
@@ -193,24 +199,24 @@ const domains = {
       {
         name: "Shiwangi Shreya",
         position: "Advisor",
-        imgUrl: AppConfig.imageUrls.Shiwangini
+        imgUrl: AppConfig.imageUrls.Shiwangini,
       },
       {
         name: "Aayush Babu",
         position: "Coordinator",
-        imgUrl: AppConfig.imageUrls.AayushBabu
+        imgUrl: AppConfig.imageUrls.AayushBabu,
       },
       {
         name: "Goutam Kumar Sah",
         position: "Sub-Coordinator",
-        imgUrl: AppConfig.imageUrls.GautamSah
+        imgUrl: AppConfig.imageUrls.GautamSah,
       },
       {
         name: "Ankit Kumar",
         position: "Member",
-        imgUrl: AppConfig.imageUrls.AnkitHackShield
-      }
-    ]
+        imgUrl: AppConfig.imageUrls.AnkitHackShield,
+      },
+    ],
   },
 
   tech_hub: {
@@ -224,24 +230,24 @@ const domains = {
       {
         name: "Krishna Mittal",
         position: "Coordinator",
-        imgUrl: AppConfig.imageUrls.Krishna
+        imgUrl: AppConfig.imageUrls.Krishna,
       },
       {
         name: "Tannu",
         position: "Sub coordinator",
-        imgUrl: AppConfig.imageUrls.Tannu
+        imgUrl: AppConfig.imageUrls.Tannu,
       },
       {
         name: "Sherya Anand",
         position: "Member",
-        imgUrl: AppConfig.imageUrls.Shreya
+        imgUrl: AppConfig.imageUrls.Shreya,
       },
       {
         name: "Kumari Sonal",
         position: "Member",
-        imgUrl: AppConfig.imageUrls.Sonal
-      }
-    ]
+        imgUrl: AppConfig.imageUrls.Sonal,
+      },
+    ],
   },
 
   mech_x: {
@@ -255,15 +261,15 @@ const domains = {
       {
         name: "Vishnu Kumar",
         position: "Coordinator",
-        imgUrl: AppConfig.imageUrls.Vishnu
+        imgUrl: AppConfig.imageUrls.Vishnu,
       },
       {
         name: "Shivam Thakur",
         position: "Member",
-        imgUrl: AppConfig.imageUrls.ShivamThakur
-      }
-    ]
-  }
+        imgUrl: AppConfig.imageUrls.ShivamThakur,
+      },
+    ],
+  },
 };
 
 export default domains;
