@@ -81,8 +81,8 @@ const page = () => {
         title="MECH-X"
         subtitle="ROBOTICS CLUB"
         imageUrl={AppConfig.imageUrls.MechXBox2}
-        fromColor="#14a44d"
-        toColor="#0d6efd"
+        fromColor="#1E1637 "
+        toColor="#e51111"
         to="left"
         prvDomain="/wings/tatva/subclubs/tech-hub"
         nextDomain="/wings/tatva/subclubs/webwiser"
@@ -92,8 +92,8 @@ const page = () => {
         title="MECH-X"
         about="Mech-X is the robotics club that focuses on building and programming robots through competitions and practical learning experiences. Join us to explore the exciting world of robotics and automation."
         message="Join us and be part of the robotics revolution! 🤖⚡"
-        fromColor="#14a44d"
-        toColor="#0d6efd"
+        fromColor="#1E1637 "
+        toColor="#e51111"
         to="bottom"
       />
 

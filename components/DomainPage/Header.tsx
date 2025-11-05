@@ -86,13 +86,14 @@ const Header: React.FC<HeaderProps> = ({
               mb: 4
             }}>
               <Typography
-                className="playfair-display"
+                className="playfair-display bitcount-grid-single"
                 sx={{
+                  fontFamily: "'Michroma', 'system-ui', serif",
                   fontSize: { xs: '2.8rem', sm: '3.5rem', md: '4.5rem' },
                   fontWeight: 800,
                   lineHeight: 1.1,
                   letterSpacing: '-0.02em',
-                  textTransform: 'uppercase',
+                  textTransform: 'capitalize',
                   marginTop: '3rem',
                   background: `linear-gradient(90deg, ${fromColor} 0%, ${toColor} 90%)`,
                   WebkitBackgroundClip: 'text',
@@ -155,7 +156,7 @@ const Header: React.FC<HeaderProps> = ({
                   }
                 }}
               >
-                The {subtitle} Club
+                The {subtitle} 
               </Typography>
             </Box>
 
@@ -232,34 +233,33 @@ const Header: React.FC<HeaderProps> = ({
                   }
                 }}
               >
-                <span 
+                <span
                   className="button-text"
                   style={{
-                    display: 'inline-block',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.6rem',
                     transition: 'all 0.3s ease',
                     position: 'relative',
                     zIndex: 1
                   }}
                 >
                   Join Our Community
+                  <Box
+                    component="span"
+                    className="button-arrow"
+                    sx={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      transition: 'all 0.3s ease',
+                      opacity: 0.9,
+                      lineHeight: 1
+                    }}
+                  >
+                    <ArrowRight size={18} />
+                  </Box>
                 </span>
-                <Box 
-                  className="button-arrow"
-                  component="span"
-                  sx={{
-                    display: 'inline-flex',
-                    ml: 1.5,
-                    transition: 'all 0.3s ease',
-                    opacity: 0.8,
-                    transform: 'translateX(-4px)',
-                    '& > svg': {
-                      width: '16px',
-                      height: '16px'
-                    }
-                  }}
-                >
-                  <ArrowRight/>
-                </Box>
               </Box>
               <Typography variant="caption" sx={{
                 display: 'block',

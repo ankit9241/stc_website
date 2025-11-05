@@ -93,7 +93,7 @@ const page = () => {
         subtitle={domains.code_red.branch}
         imageUrl={domains.code_red.cardUrl}
         fromColor="#e51111"
-        toColor="#e842f6"
+        toColor="#1E1637"
         to="left"
         prvDomain="/wings/tatva/subclubs/hackshield"
         nextDomain="/wings/tatva/subclubs/tech-hub"
@@ -114,7 +114,7 @@ const page = () => {
         about={domains.code_red.description}
         message={domains.code_red.message}
         fromColor="#e51111"
-        toColor="#e842f6"
+        toColor="#1E1637"
         to=""
       />
       {/* <Box

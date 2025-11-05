@@ -221,7 +221,7 @@ const domains = {
 
   tech_hub: {
     title: "TECH HUB",
-    branch: "INNOVATION & LEARNING",
+    branch: "INNOVATION & LEARNING CLUB",
     cardUrl: AppConfig.imageUrls.NewsBox2,
     description:
       "Welcome to Tech Hub, the central hub for all things tech at IIT Patna! 🚀 Whether you're interested in learning new technologies, working on innovative projects, or attending insightful sessions, Tech Hub is the place to be. Join us to expand your knowledge, collaborate with peers, and stay ahead in the fast-paced world of technology.",
