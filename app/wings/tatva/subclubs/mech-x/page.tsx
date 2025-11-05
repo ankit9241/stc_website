@@ -81,9 +81,12 @@ const page = () => {
         title="MECH-X"
         subtitle="ROBOTICS CLUB"
         imageUrl={AppConfig.imageUrls.MechXBox2}
-        fromColor="#1E1637 "
+        fromColor="#1E1637"
         toColor="#e51111"
-        to="left"
+        to={{
+          whatsappLink: domains.mech_x.whatsappLink,
+          direction: 'left'
+        }}
         prvDomain="/wings/tatva/subclubs/tech-hub"
         nextDomain="/wings/tatva/subclubs/webwiser"
       />

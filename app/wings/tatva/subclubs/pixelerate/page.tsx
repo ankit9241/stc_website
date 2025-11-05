@@ -91,9 +91,12 @@ const page = () => {
         title={domains.pixelerate.title}
         subtitle={domains.pixelerate.branch}
         imageUrl={domains.pixelerate.cardUrl}
-        fromColor="#c8c2f0"
-        toColor="#6f67ff"
-        to="left"
+        fromColor="#7b68ee"
+        toColor="#4b0082"
+        to={{
+          whatsappLink: domains.pixelerate.whatsappLink,
+          direction: 'left'
+        }}
         prvDomain="/wings/tatva/subclubs/webwiser"
         nextDomain="/wings/tatva/subclubs/appistry"
       />
@@ -112,8 +115,8 @@ const page = () => {
         title={domains.pixelerate.title}
         about={domains.pixelerate.description}
         message={domains.pixelerate.message}
-        fromColor="#c8c2f0"
-        toColor="#6f67ff"
+        fromColor="#7b68ee"
+        toColor="#4b0082"
         to="bottom"
       />
 

@@ -88,16 +88,17 @@ const page = () => {
         /> */}
 
         <Header 
-        
           title={domains.analytical_arena.title}
-          subtitle= {domains.analytical_arena.branch}
-          imageUrl= {domains.analytical_arena.cardUrl}
-          fromColor= "#e5d011"
+          subtitle={domains.analytical_arena.branch}
+          imageUrl={domains.analytical_arena.cardUrl}
+          fromColor="#e5d011"
           toColor="#f64242"
-          to='left'
+          to={{
+            whatsappLink: domains.analytical_arena.whatsappLink,
+            direction: 'left'
+          }}
           prvDomain='/wings/tatva/subclubs/appistry'
           nextDomain='/wings/tatva/subclubs/synapse'
-
         />
         
         

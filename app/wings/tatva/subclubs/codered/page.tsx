@@ -94,7 +94,10 @@ const page = () => {
         imageUrl={domains.code_red.cardUrl}
         fromColor="#e51111"
         toColor="#1E1637"
-        to="left"
+        to={{
+          whatsappLink: domains.code_red.whatsappLink,
+          direction: 'left'
+        }}
         prvDomain="/wings/tatva/subclubs/hackshield"
         nextDomain="/wings/tatva/subclubs/tech-hub"
       />

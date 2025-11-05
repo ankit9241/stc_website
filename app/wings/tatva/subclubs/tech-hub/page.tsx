@@ -31,9 +31,12 @@ const TechHubPage = () => {
           title={domains.tech_hub.title}
           subtitle= {domains.tech_hub.branch}
           imageUrl= {domains.tech_hub.cardUrl}
-          fromColor= "#fcb224"
+          fromColor="#fcb224"
           toColor="#f3465d"
-          to='left'
+          to={{
+            whatsappLink: domains.tech_hub.whatsappLink,
+            direction: 'left'
+          }}
           prvDomain='/wings/tatva/subclubs/codered'
           nextDomain='/wings/tatva/subclubs/mech-x'
 

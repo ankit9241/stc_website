@@ -31,7 +31,10 @@ const page = () => {
           imageUrl= {domains.appistry.cardUrl}
            fromColor= "#12E7B5"
           toColor="#09A9BB"
-          to='left'
+          to={{
+            whatsappLink: domains.appistry.whatsappLink,
+            direction: 'left'
+          }}
           prvDomain='/wings/tatva/subclubs/pixelerate'
           nextDomain='/wings/tatva/subclubs/analytical-arena'
 

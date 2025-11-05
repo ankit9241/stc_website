@@ -103,7 +103,10 @@ const page = () => {
           }}
           fromColor="#4541f7"
           toColor="#c742f6"
-          to='left'
+          to={{
+            whatsappLink: domains.webwiser.whatsappLink,
+            direction: 'left'
+          }}
           prvDomain='/wings/tatva/subclubs/tech-hub'
           nextDomain='/wings/tatva/subclubs/pixelerate'
 

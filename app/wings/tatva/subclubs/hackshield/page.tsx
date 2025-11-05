@@ -94,7 +94,10 @@ const page = () => {
         imageUrl={domains.hackshield.cardUrl}
         fromColor="#B53fff"
         toColor="#e590e3"
-        to="left"
+        to={{
+          whatsappLink: domains.hackshield.whatsappLink,
+          direction: 'left'
+        }}
         prvDomain="/wings/tatva/subclubs/synapse"
         nextDomain="/wings/tatva/subclubs/codered"
       />

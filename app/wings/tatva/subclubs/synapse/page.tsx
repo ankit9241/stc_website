@@ -93,9 +93,12 @@ const page = () => {
           title={domains.synapse.title}
           subtitle= {domains.synapse.branch}
           imageUrl= {domains.synapse.cardUrl}
-          fromColor= "#118ce5"
+          fromColor="#118ce5"
           toColor="#9142f6"
-          to='left'
+          to={{
+            whatsappLink: domains.synapse.whatsappLink,
+            direction: 'left'
+          }}
           prvDomain='/wings/tatva/subclubs/analytical-arena'
           nextDomain='/wings/tatva/subclubs/hackshield'
 

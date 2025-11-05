@@ -27,7 +27,10 @@ type HeaderProps = {
   stats?: ClubStats;  // Made optional with '?'
   fromColor: string;
   toColor: string;
-  to: string;
+  to: {
+    whatsappLink: string;
+    [key: string]: any; // Allow other properties as well
+  };
   prvDomain: string;
   nextDomain: string;
 };
@@ -89,12 +92,16 @@ const Header: React.FC<HeaderProps> = ({
                 className="playfair-display bitcount-grid-single"
                 sx={{
                   fontFamily: "'Michroma', 'system-ui', serif",
-                  fontSize: { xs: '2.8rem', sm: '3.5rem', md: '4.5rem' },
+                  fontSize: { 
+                  xs: ['ANALYTICAL ARENA', 'WEBWISER', 'PIXELERATE'].includes(title) ? '2.2rem' : '2.8rem', 
+                  sm: '3.5rem', 
+                  md: '4.5rem' 
+                },
                   fontWeight: 800,
                   lineHeight: 1.1,
                   letterSpacing: '-0.02em',
                   textTransform: 'capitalize',
-                  marginTop: '3rem',
+                  marginTop: { xs: '1.5rem', md: '3rem' },
                   background: `linear-gradient(90deg, ${fromColor} 0%, ${toColor} 90%)`,
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
@@ -128,10 +135,10 @@ const Header: React.FC<HeaderProps> = ({
                     transition: 'width 0.3s ease, opacity 0.3s ease'
                   },
                   '&::before': {
-                    left: '-70px',
+                    left: '-40px',
                   },
                   '&::after': {
-                    right: '-70px',
+                    right: '-40px',
                   },
                   '&:hover': {
                     '&::before, &::after': {
@@ -141,11 +148,15 @@ const Header: React.FC<HeaderProps> = ({
                   },
                   '@media (max-width: 900px)': {
                     '&::before, &::after': {
-                      width: '40px'
+                      width: '25px',
+                      left: '-30px',
+                      right: '-30px'
                     },
                     '&:hover': {
                       '&::before, &::after': {
-                        width: '50px'
+                        width: '35px',
+                        left: '-35px',
+                        right: '-35px'
                       }
                     }
                   },
@@ -162,7 +173,10 @@ const Header: React.FC<HeaderProps> = ({
 
             <Box sx={{ mt: 3, textAlign: 'center' }}>
               <Box
-                component="button"
+                component="a"
+                href={to.whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
                 sx={{
                   position: 'relative',
                   display: 'inline-flex',
@@ -182,6 +196,7 @@ const Header: React.FC<HeaderProps> = ({
                   overflow: 'hidden',
                   transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
                   willChange: 'transform, box-shadow',
+                  textDecoration: 'none',
                   '&:hover': {
                     color: 'white',
                     transform: 'translateY(-2px)',
@@ -230,6 +245,9 @@ const Header: React.FC<HeaderProps> = ({
                     transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
                     zIndex: 2,
                     pointerEvents: 'none'
+                  },
+                  '&:active': {
+                    transform: 'translateY(0)'
                   }
                 }}
               >

@@ -41,21 +41,21 @@ export const MemberSection: React.FC<MemberSectionProps> = ({ members }) => {
         specialLayout: false,
       };
 
-    // For 3 members: 1 column on mobile, 3 on larger screens
+    // For 3 members: 1 column on mobile, 3 on larger screens with wider cards
     if (count === 3)
       return {
-        container: `${baseStyles} max-w-5xl`,
-        grid: "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
-        gap: "gap-6 sm:gap-8",
+        container: `${baseStyles} max-w-6xl`, // Increased from max-w-5xl to max-w-6xl
+        grid: "grid-cols-1 md:grid-cols-3", // Changed from sm:grid-cols-2 to md:grid-cols-3
+        gap: "gap-6 md:gap-8 lg:gap-10", // Adjusted gaps for better spacing
         specialLayout: false,
       };
 
-    // For 4 members: 2 columns on mobile, 4 on larger screens
+    // For 4 members: 2 columns on mobile, 4 on larger screens with wider cards
     if (count === 4)
       return {
-        container: `${baseStyles} max-w-6xl`,
-        grid: "grid-cols-2 sm:grid-cols-2 md:grid-cols-4",
-        gap: "gap-4 sm:gap-6",
+        container: `${baseStyles} max-w-7xl`, // Increased from max-w-6xl to max-w-7xl
+        grid: "grid-cols-2 md:grid-cols-4", // Changed from sm:grid-cols-2 to md:grid-cols-4
+        gap: "gap-4 md:gap-6 lg:gap-8", // Adjusted gaps for better spacing
         specialLayout: false,
       };
 
@@ -184,31 +184,10 @@ const ProfileCard: React.FC<{ member: Member }> = ({ member }) => {
         <div className="absolute bottom-0 left-0 right-0 h-1/4 bg-gradient-to-t from-black/80 to-transparent"></div>
 
         {/* Bottom Section */}
-        <div className="  absolute bottom-2 sm:bottom-4 left-0 w-full flex justify-center px-2">
-          <div className=" w-[95%] flex items-center bg-white/20 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2 sm:py-3 shadow-sm">
-            {/* user logo */}
-            <div
-              className="flex items-center justify-center border border-white/30 bg-white/20 backdrop-blur-sm rounded-full shadow-md overflow-hidden mr-2"
-              style={{
-                width: "2.75rem",
-                height: "2.75rem",
-                minWidth: "2.75rem",
-                minHeight: "2.75rem",
-              }}
-            >
-              <Image
-                src={member.avatar}
-                alt={member.name}
-                height={44}
-                width={44}
-                className="object-cover rounded-full"
-                sizes="44px"
-              />
-            </div>
-
+        <div className="absolute bottom-2 sm:bottom-4 left-0 w-full flex justify-center px-2">
+          <div className="w-[95%] flex items-center justify-center bg-white/20 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2 sm:py-3 shadow-sm">
             {/* Name and Position */}
-
-            <div className=" w-full text-start">
+            <div className="text-center">
               <p className="text-sm sm:text-base font-semibold text-white">
                 {member.name}
               </p>
