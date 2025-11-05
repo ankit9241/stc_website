@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { UserRound } from "lucide-react";
 
 interface Member {
   id: string;
@@ -17,68 +18,72 @@ interface MemberSectionProps {
   members: Member[];
 }
 
-
 export const MemberSection: React.FC<MemberSectionProps> = ({ members }) => {
   const getGridConfig = (count: number) => {
     // Base styles for all screen sizes
-    const baseStyles = 'w-full mx-auto px-4 sm:px-6';
-    
+    const baseStyles = "w-full mx-auto px-4 sm:px-6";
+
     // For 1 member: Single centered card
-    if (count === 1) return { 
-      container: `${baseStyles} max-w-md`, 
-      grid: 'grid-cols-1', 
-      gap: 'gap-8', 
-      specialLayout: false 
-    };
-    
+    if (count === 1)
+      return {
+        container: `${baseStyles} max-w-md`,
+        grid: "grid-cols-1",
+        gap: "gap-8",
+        specialLayout: false,
+      };
+
     // For 2 members: 1 column on mobile, 2 on larger screens
-    if (count === 2) return { 
-      container: `${baseStyles} max-w-4xl`, 
-      grid: 'grid-cols-1 sm:grid-cols-2', 
-      gap: 'gap-6 sm:gap-8', 
-      specialLayout: false 
-    };
-    
+    if (count === 2)
+      return {
+        container: `${baseStyles} max-w-4xl`,
+        grid: "grid-cols-1 sm:grid-cols-2",
+        gap: "gap-6 sm:gap-8",
+        specialLayout: false,
+      };
+
     // For 3 members: 1 column on mobile, 3 on larger screens
-    if (count === 3) return { 
-      container: `${baseStyles} max-w-5xl`, 
-      grid: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3', 
-      gap: 'gap-6 sm:gap-8', 
-      specialLayout: false 
-    };
-    
+    if (count === 3)
+      return {
+        container: `${baseStyles} max-w-5xl`,
+        grid: "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3",
+        gap: "gap-6 sm:gap-8",
+        specialLayout: false,
+      };
+
     // For 4 members: 2 columns on mobile, 4 on larger screens
-    if (count === 4) return { 
-      container: `${baseStyles} max-w-6xl`, 
-      grid: 'grid-cols-2 sm:grid-cols-2 md:grid-cols-4', 
-      gap: 'gap-4 sm:gap-6', 
-      specialLayout: false 
-    };
-    
+    if (count === 4)
+      return {
+        container: `${baseStyles} max-w-6xl`,
+        grid: "grid-cols-2 sm:grid-cols-2 md:grid-cols-4",
+        gap: "gap-4 sm:gap-6",
+        specialLayout: false,
+      };
+
     // For 5 members: Special layout (2-3)
-    if (count === 5) return { 
-      container: `${baseStyles} max-w-6xl`, 
-      grid: 'grid-cols-2 md:grid-cols-3', 
-      gap: 'gap-4 sm:gap-6', 
-      specialLayout: true 
-    };
-    
+    if (count === 5)
+      return {
+        container: `${baseStyles} max-w-6xl`,
+        grid: "grid-cols-2 md:grid-cols-3",
+        gap: "gap-4 sm:gap-6",
+        specialLayout: true,
+      };
+
     // For 6+ members: 2 columns on mobile, 3 on medium, 4 on large screens
-    return { 
-      container: `${baseStyles} max-w-7xl`, 
-      grid: 'grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4', 
-      gap: 'gap-4 sm:gap-5', 
-      specialLayout: false 
+    return {
+      container: `${baseStyles} max-w-7xl`,
+      grid: "grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
+      gap: "gap-4 sm:gap-5",
+      specialLayout: false,
     };
   };
 
   const gridConfig = getGridConfig(members.length);
-  
+
   // For 5 cards, we'll split them into two separate rows with responsive layout
   if (members.length === 5 && gridConfig.specialLayout) {
     const firstRow = members.slice(0, 2);
     const secondRow = members.slice(2);
-    
+
     return (
       <section className="pb-8 sm:pb-12 md:pb-16">
         <div className={gridConfig.container}>
@@ -92,7 +97,8 @@ export const MemberSection: React.FC<MemberSectionProps> = ({ members }) => {
               </h2>
             </div>
             <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
-              Meet the amazing members of our subclub - their expertise, skills, and achievements.
+              Meet the amazing members of our subclub - their expertise, skills,
+              and achievements.
             </p>
           </div>
 
@@ -100,7 +106,10 @@ export const MemberSection: React.FC<MemberSectionProps> = ({ members }) => {
           <div className="flex justify-center mb-6 sm:mb-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 w-full max-w-4xl">
               {firstRow.map((member) => (
-                <div key={member.id} className="flex justify-center px-2 w-full">
+                <div
+                  key={member.id}
+                  className="flex justify-center px-2 w-full"
+                >
                   <ProfileCard member={member} />
                 </div>
               ))}
@@ -111,7 +120,10 @@ export const MemberSection: React.FC<MemberSectionProps> = ({ members }) => {
           <div className="flex justify-center">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 w-full max-w-5xl">
               {secondRow.map((member) => (
-                <div key={member.id} className="flex justify-center px-2 w-full">
+                <div
+                  key={member.id}
+                  className="flex justify-center px-2 w-full"
+                >
                   <ProfileCard member={member} />
                 </div>
               ))}
@@ -121,7 +133,7 @@ export const MemberSection: React.FC<MemberSectionProps> = ({ members }) => {
       </section>
     );
   }
-  
+
   // Default grid layout for other cases
   return (
     <section className="py-8 sm:py-12 md:py-16">
@@ -136,11 +148,14 @@ export const MemberSection: React.FC<MemberSectionProps> = ({ members }) => {
             </h2>
           </div>
           <p className="text-gray-600 max-w-2xl mx-auto text-sm sm:text-base px-4">
-            Meet the amazing members of our subclub - their expertise, skills, and achievements.
+            Meet the amazing members of our subclub - their expertise, skills,
+            and achievements.
           </p>
         </div>
 
-        <div className={`grid ${gridConfig.grid} ${gridConfig.gap} w-full mx-auto`}>
+        <div
+          className={`grid ${gridConfig.grid} ${gridConfig.gap} w-full mx-auto`}
+        >
           {members.map((member) => (
             <div key={member.id} className="flex justify-center px-2 w-full">
               <ProfileCard member={member} />
@@ -169,17 +184,38 @@ const ProfileCard: React.FC<{ member: Member }> = ({ member }) => {
         <div className="absolute bottom-0 left-0 right-0 h-1/4 bg-gradient-to-t from-black/80 to-transparent"></div>
 
         {/* Bottom Section */}
-        <div className="absolute bottom-2 sm:bottom-4 left-0 w-full flex justify-center px-2">
-          <div className="w-[95%] flex flex-col items-center bg-white/20 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2 sm:py-3 shadow-sm">
-            {/* Name + Role */}
-            <div className="w-full text-center">
-              <p className="text-sm sm:text-base font-semibold text-white">{member.name}</p>
+        <div className="  absolute bottom-2 sm:bottom-4 left-0 w-full flex justify-center px-2">
+          <div className=" w-[95%] flex items-center bg-white/20 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2 sm:py-3 shadow-sm">
+            {/* user logo */}
+            <div
+              className="flex items-center justify-center border border-white/30 bg-white/20 backdrop-blur-sm rounded-full shadow-md overflow-hidden mr-2"
+              style={{
+                width: "2.75rem",
+                height: "2.75rem",
+                minWidth: "2.75rem",
+                minHeight: "2.75rem",
+              }}
+            >
+              <Image
+                src={member.avatar}
+                alt={member.name}
+                height={44}
+                width={44}
+                className="object-cover rounded-full"
+                sizes="44px"
+              />
+            </div>
+
+            {/* Name and Position */}
+
+            <div className=" w-full text-start">
+              <p className="text-sm sm:text-base font-semibold text-white">
+                {member.name}
+              </p>
               <p className="text-xs sm:text-sm text-white/80 leading-tight font-light">
                 {member.role}
               </p>
             </div>
-
-            
           </div>
         </div>
       </div>

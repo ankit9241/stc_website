@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { Cover } from "@//components/ui/cover";
 import { cn } from "@/lib/utils";
 import { Spotlight } from "@//components/ui/Spotlight";
+import { ArrowRight, MoveUpRight } from "lucide-react";
 
 interface ClubStats {
   activeMembers: number;
@@ -90,10 +91,15 @@ const Header: React.FC<HeaderProps> = ({
                   fontSize: { xs: '2.8rem', sm: '3.5rem', md: '4.5rem' },
                   fontWeight: 800,
                   lineHeight: 1.1,
-                  color: '#1a1a1a',
-                  marginTop: '3rem',
                   letterSpacing: '-0.02em',
-                  textTransform: 'uppercase'
+                  textTransform: 'uppercase',
+                  marginTop: '3rem',
+                  background: `linear-gradient(90deg, ${fromColor} 0%, ${toColor} 90%)`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  color: 'transparent',
+                  display: 'inline-block',
                 }}
               >
                 {title}
@@ -129,7 +135,7 @@ const Header: React.FC<HeaderProps> = ({
                   '&:hover': {
                     '&::before, &::after': {
                       width: '80px',
-                      opacity: 0.8
+                      opacity: 0.8,
                     }
                   },
                   '@media (max-width: 900px)': {
@@ -252,9 +258,7 @@ const Header: React.FC<HeaderProps> = ({
                     }
                   }}
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
+                  <ArrowRight/>
                 </Box>
               </Box>
               <Typography variant="caption" sx={{
