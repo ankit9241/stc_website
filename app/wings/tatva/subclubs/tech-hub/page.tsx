@@ -70,11 +70,9 @@ const TechHubPage = () => {
             name: member.name,
             role: member.position,
             avatar: member.imgUrl,
-            achievements: [
-            `Active contributor to TechHub's success`,
-            'Participated in multiple web development projects',
-            'Helped organize workshops and events'
-            ]
+            linkedin: member.linkedin,
+            github: member.github,
+            email: member.email,
           }))}
           />
         </Box>

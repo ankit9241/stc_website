@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { UserRound } from "lucide-react";
+import { Github, Linkedin, Mail, UserRound } from "lucide-react";
 
 interface Member {
   id: string;
@@ -185,15 +185,33 @@ const ProfileCard: React.FC<{ member: Member }> = ({ member }) => {
 
         {/* Bottom Section */}
         <div className="absolute bottom-2 sm:bottom-4 left-0 w-full flex justify-center px-2">
-          <div className="w-[95%] flex items-center justify-center bg-white/20 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2 sm:py-3 shadow-sm">
+          <div className="w-[95%] flex items-center justify-between bg-white/20 backdrop-blur-md border border-white/20 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2 sm:py-3 shadow-sm">
             {/* Name and Position */}
-            <div className="text-center">
+            <div className="text-left">
               <p className="text-sm sm:text-base font-semibold text-white">
                 {member.name}
               </p>
               <p className="text-xs sm:text-sm text-white/80 leading-tight font-light">
                 {member.role}
               </p>
+            </div>
+            {/* Social Icons */}
+            <div className="flex items-center space-x-2">
+              {member.linkedin && (
+                <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                  <Linkedin className="w-4 h-4 text-white" />
+                </a>
+              )}
+              {member.github && (
+                <a href={member.github} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                  <Github className="w-4 h-4 text-white" />
+                </a>
+              )}
+              {member.email && (
+                <a href={`mailto:${member.email}`} className="hover:opacity-80 transition-opacity">
+                  <Mail className="w-4 h-4 text-white" />
+                </a>
+              )}
             </div>
           </div>
         </div>

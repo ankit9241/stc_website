@@ -113,7 +113,7 @@ const AppConfig = {
       Amarjeet: "/SubClub/Pixelerate/Amarjeet Kumar.jpg",
       Ankit: "/SubClub/Pixelerate/Ankit.jpg",
       Badal: "/SubClub/Pixelerate/Badal Raj.jpg",
-  
+      Saisworup: "/SubClub/Pixelerate/Saisworup.jpg",
     
       //Synapse
       Prakash: "/SubClub/Synapse/Prakash.jpg",
