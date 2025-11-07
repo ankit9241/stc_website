@@ -31,7 +31,8 @@ const domains = {
         name: "Amarjeet Kumar",
         position: "Member",
         imgUrl: AppConfig.imageUrls.Amarjeet,
-        email:"amarjeet_24a12res78@iitp.ac.in"
+        email:"amarjeet_24a12res78@iitp.ac.in",
+        linkedin:"https://www.linkedin.com/in/amarjeet-kumar-628451323"
 
       },
       {
@@ -203,26 +204,41 @@ const domains = {
         name: "Ratna Singh",
         position: "Advisor",
         imgUrl: AppConfig.imageUrls.Ratna,
+        linkedin: "https://www.linkedin.com/in/ratna-singh-b56baa15b/",
+        github: "",
+        email: "ratna_24a02res12@iitp.ac.in"
       },
       {
         name: "Ramandeep Singh",
         position: "Coordinator",
         imgUrl: AppConfig.imageUrls.RamandeepSingh,
+        linkedin: "https://www.linkedin.com/in/ramandeep-singh-503077200/",
+        github: "https://github.com/Raman-Khiva",
+        email: "ramandeep_2312res502@iitp.ac.in"
       },
       {
         name: "Abhijeet Kumar",
         position: "Sub-Coordinator",
         imgUrl: AppConfig.imageUrls.AbhijeetKumar,
+        linkedin: "https://www.linkedin.com/in/abhijeetiitp/",
+        github: "https://github.com/Abhi-Jeeet",
+        email: "abhijeet_2312res11@iitp.ac.in"
       },
       {
         name: "Sakshi Kumari",
         position: "Member",
         imgUrl: AppConfig.imageUrls.SakshiKumari,
+        linkedin: "https://www.linkedin.com/in/sakshi-kumari-b064a5296/",
+        github: "https://github.com/272006Sakshi",
+        email: "sakshi_2312res563@iitp.ac.in"
       },
       {
         name: "Ronak Dokania",
         position: "Member",
         imgUrl: AppConfig.imageUrls.RonakDokania,
+        linkedin: "https://www.linkedin.com/in/ronak-dokania-40a34328b",
+        github: "https://github.com/RonakDokania",
+        email: "ronak_25s12res140@iitp.ac.in"
       },
     ],
   },

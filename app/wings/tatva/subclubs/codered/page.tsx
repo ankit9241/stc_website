@@ -139,9 +139,9 @@ const page = () => {
           name: member.name,
           role: member.position,
           avatar: member.imgUrl,
-          // linkedin: member.linkedin,
-          // github: member.github,
-          // email: member.email,
+          linkedin: member.linkedin,
+          github: member.github,
+          email: member.email,
         }))}
         />
       </Box>
