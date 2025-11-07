@@ -198,17 +198,30 @@ const ProfileCard: React.FC<{ member: Member }> = ({ member }) => {
             {/* Social Icons */}
             <div className="flex items-center space-x-2">
               {member.linkedin && (
-                <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                <a 
+                  href={member.linkedin} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="inline-block hover:opacity-80 transition-all duration-200 hover:scale-125"
+                >
                   <Linkedin className="w-4 h-4 text-white" />
                 </a>
               )}
               {member.github && (
-                <a href={member.github} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+                <a 
+                  href={member.github} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="inline-block hover:opacity-80 transition-all duration-200 hover:scale-125"
+                >
                   <Github className="w-4 h-4 text-white" />
                 </a>
               )}
               {member.email && (
-                <a href={`mailto:${member.email}`} className="hover:opacity-80 transition-opacity">
+                <a 
+                  href={`mailto:${member.email}`} 
+                  className="inline-block hover:opacity-80 transition-all duration-200 hover:scale-125"
+                >
                   <Mail className="w-4 h-4 text-white" />
                 </a>
               )}
