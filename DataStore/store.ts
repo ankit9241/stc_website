@@ -41,6 +41,13 @@ const domains = {
         imgUrl: AppConfig.imageUrls.Saisworup,
         email:"saisworup_ua2504cdh142@iitp.ac.in",
         linkedin:"https://www.linkedin.com/in/saisworup-rout-iit-patna/"
+      },
+      {
+        name: "Arunesh Kumar",
+        position: "Member",
+        imgUrl: AppConfig.imageUrls.Arunesh,
+        email:"arunesh_24a12res142@iitp.ac.in",
+        linkedin:"http://www.linkedin.com/in/arunesh-kumar-19n11m06y"
       }
     ],
   },
