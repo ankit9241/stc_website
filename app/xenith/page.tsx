@@ -445,57 +445,42 @@ const Page = () => {
                     </div>
                   </div>
 
-                  {/* <div className="group relative">
-                    <div className="relative h-[250px] md:h-[280px] bg-gradient-to-br from-[#1a1a2e]/80 to-[#0f0f1e]/80 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-[#ba9efe]/30 transition-all duration-300 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/30 hover:scale-105">
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#ba9efe]/0 via-[#ba9efe]/0 to-[#ba9efe]/0 group-hover:from-[#ba9efe]/10 group-hover:via-[#ba9efe]/5 group-hover:to-transparent transition-all duration-500"></div>
-
+                  {/* apka ads */}
+                  <div className="group relative">
+                    <div className="relative h-[300px] md:h-[350px] bg-gradient-to-br from-[#1a1a2e]/90 to-[#0f0f1e]/90 backdrop-blur-sm rounded-2xl overflow-hidden border-2 border-[#ba9efe]/40 transition-all duration-500 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/40 hover:scale-[1.02]">
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#ba9efe]/0 via-[#ba9efe]/0 to-[#ba9efe]/0 group-hover:from-[#ba9efe]/20 group-hover:via-[#ba9efe]/10 group-hover:to-transparent transition-all duration-500"></div>
+                      <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-[#ba9efe] opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                      <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-[#ba9efe] opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                      <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-[#ba9efe] opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                      <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-[#ba9efe] opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                      
                       <div className="relative h-full flex flex-col items-center justify-center p-6 md:p-8">
-                        <div className="w-24 h-24 md:w-32 md:h-32 bg-white/10 rounded-lg flex items-center justify-center mb-3 md:mb-4 backdrop-blur-sm border border-white/20">
-                          <span className="text-3xl md:text-4xl font-bold text-blue-400">Infosys</span>
+                        <div className="relative mb-4 md:mb-6">
+                          <div className="absolute inset-0 bg-[#ba9efe]/30 rounded-2xl blur-2xl group-hover:blur-3xl transition-all duration-500"></div>
+                          <div className="relative w-32 h-32 md:w-40 md:h-40 bg-white/5 rounded-2xl flex items-center justify-center backdrop-blur-sm border-2 border-white/10 group-hover:border-[#ba9efe]/50 transition-all duration-500 overflow-hidden">
+                            <img 
+                              src="/xenith/sponsor/apkaads.png" 
+                              alt="Apka Ads Logo" 
+                              className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#ba9efe]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                          </div>
                         </div>
-                        <h3 className="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Infosys</h3>
-                        <p className="text-gray-400 text-xs md:text-sm text-center">Innovation Partner</p>
-                        <div className="mt-3 md:mt-4 px-3 md:px-4 py-1 bg-blue-500/20 rounded-full border border-blue-400/40">
-                          <span className="text-blue-400 text-xs font-semibold">Gold Partner</span>
-                        </div>
+                        
+                        {/* Company name */}
+                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 group-hover:text-[#ba9efe] transition-colors duration-300">
+                          Apka Ads
+                        </h3>
+                        
+                        <p className="text-gray-400 text-sm md:text-base text-center mb-4 group-hover:text-gray-300 transition-colors">
+                          Official Sponsor
+                        </p>
                       </div>
+                      <div className="absolute inset-0 rounded-2xl border-2 border-[#ba9efe]/0 group-hover:border-[#ba9efe]/30 group-hover:scale-105 transition-all duration-700"></div>
                     </div>
-                  </div> */}
+                  </div>
 
-                  {/* <div className="group relative">
-                    <div className="relative h-[250px] md:h-[280px] bg-gradient-to-br from-[#1a1a2e]/80 to-[#0f0f1e]/80 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-[#ba9efe]/30 transition-all duration-300 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/30 hover:scale-105">
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#ba9efe]/0 via-[#ba9efe]/0 to-[#ba9efe]/0 group-hover:from-[#ba9efe]/10 group-hover:via-[#ba9efe]/5 group-hover:to-transparent transition-all duration-500"></div>
-
-                      <div className="relative h-full flex flex-col items-center justify-center p-6 md:p-8">
-                        <div className="w-24 h-24 md:w-32 md:h-32 bg-white/10 rounded-lg flex items-center justify-center mb-3 md:mb-4 backdrop-blur-sm border border-white/20">
-                          <span className="text-4xl md:text-5xl font-bold text-orange-400">amazon</span>
-                        </div>
-                        <h3 className="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Amazon</h3>
-                        <p className="text-gray-400 text-xs md:text-sm text-center">Cloud Partner</p>
-                        <div className="mt-3 md:mt-4 px-3 md:px-4 py-1 bg-orange-500/20 rounded-full border border-orange-400/40">
-                          <span className="text-orange-400 text-xs font-semibold">Silver Partner</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
-
-                  {/* <div className="group relative">
-                    <div className="relative h-[250px] md:h-[280px] bg-gradient-to-br from-[#1a1a2e]/80 to-[#0f0f1e]/80 backdrop-blur-sm rounded-xl overflow-hidden border-2 border-[#ba9efe]/30 transition-all duration-300 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/30 hover:scale-105">
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#ba9efe]/0 via-[#ba9efe]/0 to-[#ba9efe]/0 group-hover:from-[#ba9efe]/10 group-hover:via-[#ba9efe]/5 group-hover:to-transparent transition-all duration-500"></div>
-
-                      <div className="relative h-full flex flex-col items-center justify-center p-6 md:p-8">
-                        <div className="w-24 h-24 md:w-32 md:h-32 bg-white/10 rounded-lg flex items-center justify-center mb-3 md:mb-4 backdrop-blur-sm border border-white/20">
-                          <span className="text-3xl md:text-4xl font-bold text-red-400">Microsoft</span>
-                        </div>
-                        <h3 className="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">Microsoft</h3>
-                        <p className="text-gray-400 text-xs md:text-sm text-center">Technology Partner</p>
-                        <div className="mt-3 md:mt-4 px-3 md:px-4 py-1 bg-cyan-500/20 rounded-full border border-cyan-400/40">
-                          <span className="text-cyan-400 text-xs font-semibold">Gold Partner</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
-
+                  {/* Become a Sponsor Card */}
                   <a
                     href="#contact"
                     className="group relative md:col-span-2 lg:col-span-1 cursor-pointer"
