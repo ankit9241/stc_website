@@ -3,14 +3,9 @@ import { getServerSession } from 'next-auth';
 import connectDB from '@/lib/connectdb';
 import RegistrationTemplate from '@/schema/RegistrationTemplateSchema';
 
-// GET all templates or single template by ID
 export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession();
-    if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
     await connectDB();
     
     const { searchParams } = new URL(request.url);
