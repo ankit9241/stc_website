@@ -618,7 +618,6 @@ export default function DynamicRegistrationForm({ slug }: DynamicRegistrationFor
                 if (memberFields && memberFields.length > 0) {
                   renderedFields.push(
                     <div key={`member-section-${i}`} className="border rounded-lg p-4 space-y-4 bg-gray-50">
-                      <h3 className="font-semibold text-lg text-gray-700">Team Member {i}</h3>
                       {memberFields.map(field => renderField(field))}
                     </div>
                   );
