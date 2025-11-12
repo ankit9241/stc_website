@@ -424,7 +424,7 @@ const Page = () => {
                           <div className="absolute inset-0 bg-[#ba9efe]/30 rounded-2xl blur-2xl group-hover:blur-3xl transition-all duration-500"></div>
                           <div className="relative w-32 h-32 md:w-40 md:h-40 bg-white/5 rounded-2xl flex items-center justify-center backdrop-blur-sm border-2 border-white/10 group-hover:border-[#ba9efe]/50 transition-all duration-500 overflow-hidden">
                             <img 
-                              src="/xenith/sponsor/adshree.jpg" 
+                              src="/xenith/sponsor/adshree.png" 
                               alt="Adshree Logo" 
                               className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500"
                             />

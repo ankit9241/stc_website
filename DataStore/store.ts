@@ -123,7 +123,7 @@ const domains = {
       },
       {
         name: "Abhishek Kr. Mohanty",
-        position: "Member",
+        position: "Sub-Coordinator",
         imgUrl: AppConfig.imageUrls.Abhishek,
         linkedin: "https://www.linkedin.com/in/abhishekiitp891",
         github: "https://github.com/Abhishek-IITP",
