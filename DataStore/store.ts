@@ -17,7 +17,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.Badal,
         linkedin: "https://www.linkedin.com/in/badal-raj-400b6b281",
         github: "",
-        email: "badal_2312res218@iitp.ac.in"
+        email: "badal_2312res218@iitp.ac.in",
       },
       {
         name: "Ankit Kumar",
@@ -25,30 +25,22 @@ const domains = {
         imgUrl: AppConfig.imageUrls.Ankit,
         linkedin: "https://www.linkedin.com/in/ankit-kumar-0435b8257",
         github: "https://github.com/ankit9241",
-        email: "ankit_24a12res103@iitp.ac.in"
+        email: "ankit_24a12res103@iitp.ac.in",
       },
       {
         name: "Amarjeet Kumar",
         position: "Member",
         imgUrl: AppConfig.imageUrls.Amarjeet,
-        email:"amarjeet_24a12res78@iitp.ac.in",
-        linkedin:"https://www.linkedin.com/in/amarjeet-kumar-628451323"
-
+        email: "amarjeet_24a12res78@iitp.ac.in",
+        linkedin: "https://www.linkedin.com/in/amarjeet-kumar-628451323",
       },
       {
         name: "Saisworup Rout",
         position: "Member",
         imgUrl: AppConfig.imageUrls.Saisworup,
-        email:"saisworup_ua2504cdh142@iitp.ac.in",
-        linkedin:"https://www.linkedin.com/in/saisworup-rout-iit-patna/"
+        email: "saisworup_ua2504cdh142@iitp.ac.in",
+        linkedin: "https://www.linkedin.com/in/saisworup-rout-iit-patna/",
       },
-      {
-        name: "Arunesh Kumar",
-        position: "Member",
-        imgUrl: AppConfig.imageUrls.Arunesh,
-        email:"arunesh_24a12res142@iitp.ac.in",
-        linkedin:"http://www.linkedin.com/in/arunesh-kumar-19n11m06y"
-      }
     ],
   },
 
@@ -67,7 +59,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.Dipesh,
         linkedin: "https://www.linkedin.com/in/dipesh-gupta-2960452b2",
         github: "https://github.com/dipeshgupta07",
-        email: "dipesh_2412res58@iitp.ac.in"
+        email: "dipesh_2412res58@iitp.ac.in",
       },
       {
         name: "Ayush Kumar Gupta",
@@ -75,7 +67,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.Ayush,
         linkedin: "https://www.linkedin.com/in/ayushkumargupta7870664924",
         github: "https://github.com/AyushKumarGupta018",
-        email: "ayush_24a12res173@iitp.ac.in"
+        email: "ayush_24a12res173@iitp.ac.in",
       },
       {
         name: "Shubham Kumar",
@@ -83,7 +75,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.ShubhamAppistry,
         linkedin: "https://www.linkedin.com/in/shubhamiitpatna",
         github: "https://github.com/SHubhamanjk",
-        email: "shubham_2312res631@iitp.ac.in"
+        email: "shubham_2312res631@iitp.ac.in",
       },
       {
         name: "Shashi Kumar",
@@ -91,7 +83,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.Shashi,
         linkedin: "https://www.linkedin.com/in/shashi-kumar-iitp",
         github: "https://github.com/shashikumar-iitp",
-        email: "Shashi_2312res597@iitp.ac.in"
+        email: "Shashi_2312res597@iitp.ac.in",
       },
     ],
   },
@@ -111,7 +103,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.PrakashWebWiser,
         linkedin: "https://www.linkedin.com/in/theverma",
         github: "https://github.com/prakashverma-dev",
-        email: "prakash_2408res18@iitp.ac.in"
+        email: "prakash_2408res18@iitp.ac.in",
       },
       {
         name: "Mohit Kumar",
@@ -119,7 +111,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.MohitWebWiser,
         linkedin: "https://www.linkedin.com/in/mohiitp",
         github: "https://github.com/MOHIT-IITP",
-        email: "mohit_2312res394@iitp.ac.in"
+        email: "mohit_2312res394@iitp.ac.in",
       },
       {
         name: "Abhishek Kr. Mohanty",
@@ -127,7 +119,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.Abhishek,
         linkedin: "https://www.linkedin.com/in/abhishekiitp891",
         github: "https://github.com/Abhishek-IITP",
-        email: "abhishek_2312res891@iitp.ac.in"
+        email: "abhishek_2312res891@iitp.ac.in",
       },
       {
         name: "Mandeep Nagar",
@@ -135,7 +127,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.Mandeep,
         linkedin: "https://www.linkedin.com/in/mandeepnagar",
         github: "https://github.com/mandeep140",
-        email: "mandeep_25s12res200@iitp.ac.in"
+        email: "mandeep_25s12res200@iitp.ac.in",
       },
       {
         name: "Vatsal Srivastav",
@@ -143,7 +135,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.VatsalWebWiser,
         linkedin: "https://www.linkedin.com/in/vatsalsrivastava-iitp",
         github: "https://github.com/Vatsal9915",
-        email: "vatsal_2313res728@iitp.ac.in"
+        email: "vatsal_2313res728@iitp.ac.in",
       },
     ],
   },
@@ -162,7 +154,7 @@ const domains = {
         position: "Advisor",
         imgUrl: AppConfig.imageUrls.Prakash,
         linkedin: "https://www.linkedin.com/in/prakashrp",
-        email: "r_24a03res68@iitp.ac.in"
+        email: "r_24a03res68@iitp.ac.in",
       },
       {
         name: "Shubham Kumar Gupta",
@@ -170,7 +162,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.ShubhamSynapse,
         email: "shubham_2312res631@iitp.ac.in",
         linkedin: "https://www.linkedin.com/in/shubhamiitpatna",
-        github: "https://github.com/SHubhamanjk"
+        github: "https://github.com/SHubhamanjk",
       },
       {
         name: "Harsh Kumar",
@@ -178,22 +170,22 @@ const domains = {
         imgUrl: AppConfig.imageUrls.Harsh,
         linkedin: "https://www.linkedin.com/in/harsh-kumar-885181297",
         email: "harsh_2312res930@iitp.ac.in",
-        github: "https://github.com/Harsh18999"
+        github: "https://github.com/Harsh18999",
       },
-      { 
+      {
         name: "Rishabh Prajapati",
         position: "Member",
         imgUrl: AppConfig.imageUrls.RishabhSynapse,
         linkedin: "https://www.linkedin.com/in/rishabh-prajapati-0910982b9",
         email: "rishab_2312res516@iitp.ac.in",
-        github: "https://github.com/rishabh6900"
+        github: "https://github.com/rishabh6900",
       },
       {
         name: "Purnasha Priya",
         position: "Member",
         imgUrl: AppConfig.imageUrls.Priya,
         linkedin: "https://www.linkedin.com/in/purnasha-priya-2ba5202a8/",
-        email: "purnasha_2312res828@iitp.ac.in"
+        email: "purnasha_2312res828@iitp.ac.in",
       },
     ],
   },
@@ -213,7 +205,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.Ratna,
         linkedin: "https://www.linkedin.com/in/ratna-singh-b56baa15b/",
         github: "",
-        email: "ratna_24a02res12@iitp.ac.in"
+        email: "ratna_24a02res12@iitp.ac.in",
       },
       {
         name: "Ramandeep Singh",
@@ -221,7 +213,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.RamandeepSingh,
         linkedin: "https://www.linkedin.com/in/ramandeep-singh-503077200/",
         github: "https://github.com/Raman-Khiva",
-        email: "ramandeep_2312res502@iitp.ac.in"
+        email: "ramandeep_2312res502@iitp.ac.in",
       },
       {
         name: "Abhijeet Kumar",
@@ -229,7 +221,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.AbhijeetKumar,
         linkedin: "https://www.linkedin.com/in/abhijeetiitp/",
         github: "https://github.com/Abhi-Jeeet",
-        email: "abhijeet_2312res11@iitp.ac.in"
+        email: "abhijeet_2312res11@iitp.ac.in",
       },
       {
         name: "Sakshi Kumari",
@@ -237,7 +229,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.SakshiKumari,
         linkedin: "https://www.linkedin.com/in/sakshi-kumari-b064a5296/",
         github: "https://github.com/272006Sakshi",
-        email: "sakshi_2312res563@iitp.ac.in"
+        email: "sakshi_2312res563@iitp.ac.in",
       },
       {
         name: "Ronak Dokania",
@@ -245,7 +237,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.RonakDokania,
         linkedin: "https://www.linkedin.com/in/ronak-dokania-40a34328b",
         github: "https://github.com/RonakDokania",
-        email: "ronak_25s12res140@iitp.ac.in"
+        email: "ronak_25s12res140@iitp.ac.in",
       },
     ],
   },
@@ -265,7 +257,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.Harshit,
         email: "harshit_pa2503mth143@iitp.ac.in",
         linkedin: "https://www.linkedin.com/in/harshit-raj-pandey-412019162",
-        github: "https://github.com/HarshitTest26"
+        github: "https://github.com/HarshitTest26",
       },
       {
         name: "Shruti Kumari",
@@ -273,7 +265,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.ShrutiKumari,
         email: "shruti_2312res629@iitp.ac.in",
         linkedin: "https://www.linkedin.com/in/shruti-kumari-a83724286/",
-        github: "https://github.com/shruti629"
+        github: "https://github.com/shruti629",
       },
       {
         name: "Suyash Mukherjee",
@@ -281,7 +273,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.SuyashMukherjee,
         email: "suyash_2312res690@iitp.ac.in",
         linkedin: "https://www.linkedin.com/in/suyashmukherjee/",
-        github: "https://github.com/suyash1912"
+        github: "https://github.com/suyash1912",
       },
       {
         name: "Aastha Anand",
@@ -289,7 +281,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.AasthaAnand,
         email: "aastha_2312res753@iitp.ac.in",
         linkedin: "https://www.linkedin.com/in/aastha-anand-7138b4368/",
-        github: "https://github.com/anandaastha01"
+        github: "https://github.com/anandaastha01",
       },
     ],
   },
@@ -309,7 +301,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.Shiwangini,
         linkedin: "https://www.linkedin.com/in/shiwangini-loves-iaf19",
         github: "https://www.github.com/shreya-annihilatrix",
-        email: "shiwangini_pa2508mch214@iitp.ac.in"
+        email: "shiwangini_pa2508mch214@iitp.ac.in",
       },
       {
         name: "Aayush Babu",
@@ -317,7 +309,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.AayushBabu,
         linkedin: "https://www.linkedin.com/in/aayushrambo8",
         github: "https://www.github.com/aayushrambo8",
-        email: "aayush_25s12res03@iitp.ac.in"
+        email: "aayush_25s12res03@iitp.ac.in",
       },
       {
         name: "Goutam Kumar Sah",
@@ -325,7 +317,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.GautamSah,
         linkedin: "https://www.linkedin.com/in/goutam-kumar-sah-562873278",
         github: "https://github.com/GoutamIITP",
-        email: "Goutam_2312res271@iitp.ac.in"
+        email: "Goutam_2312res271@iitp.ac.in",
       },
       {
         name: "Ankit Kushwaha",
@@ -333,7 +325,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.AnkitHackShield,
         linkedin: "https://www.linkedin.com/in/ankitkushwaha-ank",
         github: "https://www.github.com/ankitkushwaha-ank",
-        email: "ankit_24a12res854@iitp.ac.in"
+        email: "ankit_24a12res854@iitp.ac.in",
       },
     ],
   },
@@ -353,7 +345,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.Sumit,
         linkedin: "https://www.linkedin.com/in/sumiitt2612",
         github: "https://github.com/Sumiitt2612",
-        email: "sumit_pa2508mch234@iitp.ac.in"
+        email: "sumit_pa2508mch234@iitp.ac.in",
       },
       {
         name: "Krishna Mittal",
@@ -361,7 +353,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.Krishna,
         linkedin: "https://www.linkedin.com/in/krishnamittal1",
         github: "https://github.com/krishnamittal01",
-        email: "krishna_2412res66@iitp.ac.in"
+        email: "krishna_2412res66@iitp.ac.in",
       },
       {
         name: "Tannu Sharma",
@@ -369,7 +361,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.Tannu,
         linkedin: "https://www.linkedin.com/in/tannu-sharma-343b77331",
         github: "https://github.com/TannuSharma861",
-        email: "tannu_24a12res728@iitp.ac.in"
+        email: "tannu_24a12res728@iitp.ac.in",
       },
       {
         name: "Kumari Sonal",
@@ -377,7 +369,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.Sonal,
         linkedin: "https://www.linkedin.com/in/kumari-sonal-a13b49329",
         github: "https://github.com/KS2179",
-        email: "kumari_24a12res968@iitp.ac.in"
+        email: "kumari_24a12res968@iitp.ac.in",
       },
       {
         name: "Shreya Anand",
@@ -385,12 +377,10 @@ const domains = {
         imgUrl: AppConfig.imageUrls.Shreya,
         linkedin: "https://www.linkedin.com/in/shreya-anand1803",
         github: "https://github.com/ShreyaAnand1810",
-        email: "shreya_2312res860@iitp.ac.in"
+        email: "shreya_2312res860@iitp.ac.in",
       },
     ],
   },
-
-  
 
   mech_x: {
     title: "MECH-X",
@@ -407,7 +397,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.Vishnu,
         github: "https://github.com/vishnu-iitp",
         linkedin: "https://www.linkedin.com/in/vishnu-kumar-5b94502a0",
-        email: "vishnu_24a12res771@iitp.ac.in"
+        email: "vishnu_24a12res771@iitp.ac.in",
       },
       {
         name: "Shivam Thakur",
@@ -415,7 +405,7 @@ const domains = {
         imgUrl: AppConfig.imageUrls.ShivamThakur,
         github: "https://github.com/shivam-iitp",
         linkedin: "https://www.linkedin.com/in/shìvamthakur",
-        email: "shivam_24a12res646@iitp.ac.in"
+        email: "shivam_24a12res646@iitp.ac.in",
       },
     ],
   },
