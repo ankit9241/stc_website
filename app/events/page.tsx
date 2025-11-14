@@ -26,7 +26,7 @@ const hackathonWinners = [
     members: ["Shubham Raj (Team Leader)", "Ayush Kr. Gupta", "Nishant Sharma", "Arvind Kumar", "Harsh Kumar"],
     image: "/images/hackathon-winner.jpg",
     prize: "₹5,000",
-    project: "AI-powered Smart Campus Management System",
+    project: "AI-powered helmet system",
   },
   {
     position: "1st Runner Up",
