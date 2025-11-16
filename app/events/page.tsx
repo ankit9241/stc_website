@@ -67,6 +67,7 @@ const internshipCompanies = [
 export default function EventsPage() {
   const [upcomingEvents, setUpcomingEvents] = useState<Event[]>([])
   const [loadingEvents, setLoadingEvents] = useState(true)
+  const [showAllEvents, setShowAllEvents] = useState(false)
 
   useEffect(() => {
     fetchUpcomingEvents()
@@ -87,7 +88,7 @@ export default function EventsPage() {
         upcoming.sort((a: Event, b: Event) => 
           new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
         )
-        setUpcomingEvents(upcoming.slice(0, 6)) // Take only first 6 events
+        setUpcomingEvents(upcoming) // Store all events
       }
     } catch (error) {
       console.error('Error fetching events:', error)
@@ -134,7 +135,7 @@ export default function EventsPage() {
             </div>
           ) : upcomingEvents.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {upcomingEvents.map((event, index) => (
+              {upcomingEvents.slice(0, showAllEvents ? upcomingEvents.length : 6).map((event) => (
                 <Card key={event._id} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
                   {event.imageUrl && (
                     <div className="relative w-full h-48 bg-gray-200">
@@ -192,9 +193,22 @@ export default function EventsPage() {
           )}
 
           {upcomingEvents.length > 0 && (
-            <div className="text-center mt-12">
+            <div className="flex justify-center items-center mt-12 space-x-4">
+              {upcomingEvents.length > 6 && (
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="border-blue-600 text-blue-600 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-700 px-6 py-3 transition-all duration-200 transform hover:-translate-y-0.5 hover:shadow-md"
+                  onClick={() => setShowAllEvents(!showAllEvents)}
+                >
+                  {showAllEvents ? 'Show Less' : 'Show More'}
+                </Button>
+              )}
               <Link href="/calendar">
-                <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3">
+                <Button 
+                  size="lg" 
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 transition-all duration-200 transform hover:-translate-y-0.5 hover:shadow-lg"
+                >
                   View Full Calendar
                 </Button>
               </Link>
