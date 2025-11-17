@@ -54,7 +54,7 @@ export default function AdminDashboard() {
       title: "Notifications",
       value: stats.notifications,
       icon: <Bell className="w-6 h-6" />,
-      description: "Active notifications",
+      description: "Notifications",
       color: "from-purple-500 to-purple-600",
       href: "/admin/notifications"
     },

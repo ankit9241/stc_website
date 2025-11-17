@@ -19,15 +19,15 @@ export async function GET() {
         await connectDB()
         const EventsCount = await Events.countDocuments()
         const NotificationsCount = await Notifications.countDocuments()
-        const RegistrationFormsCount = await RegistrationTemplate.countDocuments()
+        const RegistrationFormsCount = await RegistrationTemplate.countDocuments({active: true})
         const RegistrationSubmissionsCount = await RegistrationSubmission.countDocuments()
         const CompetitionResultsCount = await CompetitionResult.countDocuments()
 
         const stats = {
             events: EventsCount,
             notifications: NotificationsCount,
-            registrationForms: RegistrationFormsCount,
-            registrationSubmissions: RegistrationSubmissionsCount,
+            registrations: RegistrationFormsCount,
+            registrationResponses: RegistrationSubmissionsCount,
             competitionResults: CompetitionResultsCount
         }
 

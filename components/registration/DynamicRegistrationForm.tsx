@@ -94,7 +94,7 @@ export default function DynamicRegistrationForm({ slug }: DynamicRegistrationFor
       if (response.ok) {
         const data = await response.json();
         setTemplate(data);
-        
+
         const initialData: { [key: string]: any } = {};
         data.fields.forEach((field: Field) => {
           if (field.type === 'checkbox') {
@@ -135,14 +135,14 @@ export default function DynamicRegistrationForm({ slug }: DynamicRegistrationFor
     setSendingOtp(true);
     const trimmedEmail = email.trim().toLowerCase();
     setOtpEmail(trimmedEmail);
-    
+
     try {
       const response = await fetch('/api/registration/send-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          email: trimmedEmail, 
-          registrationSlug: slug 
+        body: JSON.stringify({
+          email: trimmedEmail,
+          registrationSlug: slug
         })
       });
 
@@ -173,9 +173,9 @@ export default function DynamicRegistrationForm({ slug }: DynamicRegistrationFor
       const response = await fetch('/api/registration/verify-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          email: formData[emailField.key]?.trim().toLowerCase(), 
-          otp: otp.trim() 
+        body: JSON.stringify({
+          email: formData[emailField.key]?.trim().toLowerCase(),
+          otp: otp.trim()
         })
       });
 
@@ -201,7 +201,7 @@ export default function DynamicRegistrationForm({ slug }: DynamicRegistrationFor
     if (teamSizeMatch) {
       const memberNumber = parseInt(teamSizeMatch[1]);
       const teamSize = formData['hackathon-team-field'];
-      
+
       // Only show member fields up to the selected team size
       if (!teamSize || memberNumber > parseInt(teamSize)) {
         return false;
@@ -408,18 +408,21 @@ export default function DynamicRegistrationForm({ slug }: DynamicRegistrationFor
               <p className="text-xs text-blue-500">Only @iitp.ac.in email addresses are allowed</p>
             )}
             {otpSent && !otpVerified && (
-              <div className="flex gap-2 mt-2">
-                <Input
-                  type="text"
-                  placeholder="Enter 6-digit OTP"
-                  value={otp}
-                  onChange={(e) => setOtp(e.target.value)}
-                  maxLength={6}
-                />
-                <Button type="button" onClick={verifyOTP} disabled={verifyingOtp || otp.length !== 6}>
-                  {verifyingOtp && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
-                  Verify
-                </Button>
+              <div className="gap-2 mt-2">
+                <div className='flex gap-2'>
+                  <Input
+                    type="text"
+                    placeholder="Enter 6-digit OTP"
+                    value={otp}
+                    onChange={(e) => setOtp(e.target.value)}
+                    maxLength={6}
+                  />
+                  <Button type="button" onClick={verifyOTP} disabled={verifyingOtp || otp.length !== 6}>
+                    {verifyingOtp && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+                    Verify
+                  </Button>
+                </div>
+                <span className=" text-blue-500 break-all text-xs">can't find OTP? check your spam/junk folder</span>
               </div>
             )}
           </div>
@@ -609,18 +612,18 @@ export default function DynamicRegistrationForm({ slug }: DynamicRegistrationFor
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-50 mb-5">
                 <CheckCircle2 className="h-8 w-8 text-green-500" />
               </div>
-              
+
               <DialogTitle className="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-2">
                 OTP Sent Successfully
               </DialogTitle>
-              
+
               <DialogDescription asChild>
                 <div className="space-y-6 mt-2 w-full">
                   <p className="text-base text-gray-600 text-center">
                     We've sent a 6-digit OTP to <br className="hidden sm:inline" />
                     <span className="font-semibold text-gray-900 break-all">{otpEmail}</span>
                   </p>
-                  
+
                   <div className="bg-blue-50/80 p-4 rounded-xl">
                     <div className="flex items-start space-x-3">
                       <AlertCircle className="h-5 w-5 text-blue-500 flex-shrink-0 mt-0.5" />
@@ -629,8 +632,8 @@ export default function DynamicRegistrationForm({ slug }: DynamicRegistrationFor
                       </p>
                     </div>
                   </div>
-                  
-                  <Button 
+
+                  <Button
                     type="button"
                     size="lg"
                     className="w-full py-6 text-base font-medium rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5"
@@ -658,11 +661,11 @@ export default function DynamicRegistrationForm({ slug }: DynamicRegistrationFor
               const sortedFields = [...template.fields].sort((a, b) => a.order - b.order);
               const teamSize = formData['hackathon-team-field'] ? parseInt(formData['hackathon-team-field']) : 0;
               const renderedFields: React.ReactNode[] = [];
-              
+
               // Group fields by member number
               const memberFieldGroups: { [key: number]: Field[] } = {};
               const regularFields: Field[] = [];
-              
+
               sortedFields.forEach(field => {
                 const memberMatch = field.key.match(/^member-(\d+)-(.+)$/);
                 if (memberMatch) {
@@ -675,12 +678,12 @@ export default function DynamicRegistrationForm({ slug }: DynamicRegistrationFor
                   regularFields.push(field);
                 }
               });
-              
+
               // Render regular fields first
               regularFields.forEach(field => {
                 renderedFields.push(renderField(field));
               });
-              
+
               // Render team member sections if team size is selected
               if (teamSize > 0) {
                 for (let i = 1; i <= teamSize; i++) {
@@ -692,11 +695,11 @@ export default function DynamicRegistrationForm({ slug }: DynamicRegistrationFor
                       </div>
                     );
                   }
+                }
               }
-            }
-            
-            return renderedFields;
-          })()}
+
+              return renderedFields;
+            })()}
 
             <div className="flex justify-end">
               <Button type="submit" disabled={submitting || (emailField ? !otpVerified : false)}>
