@@ -51,6 +51,69 @@ const coreTeam = [
   },
 ];
 
+const councilMembers = [
+  {
+    name: "Tushar Parihar",
+    designation: "Council Head",
+    department: "Student Technical Council - CEP",
+    image: "/tushar.png",
+    email: "tushar_2312res704@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/tushar-parihar-87168a34a/",
+    description:
+      "Leading the Student Technical Council to foster innovation, technical excellence, and student growth across IIT Patna.",
+  },
+  {
+    name: "Satyam Kumar",
+    designation: "Editor in Chief",
+    department: "Student Technical Council - CEP",
+    image: "/satyam.png",
+    email: "satyam_24a12res597@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/satyamkumariitp/",
+    description:
+      "Overseeing editorial content and communications. Skilled in technical writing and media relations.",   
+  },
+  {
+    name: "Ayush Jha",
+    designation: "Overall Management Lead",
+    department: "Student Technical Council - CEP",
+    image: "/ayush-jha.png",
+    email: "ayush_2312res211@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/ayush1979/",
+    description:
+      "Coordinating overall management and strategic planning. Experienced in project management and leadership.",
+  },
+  {
+    name: "Kumar Aayush",
+    designation: "Tatva Cell Head",
+    department: "Student Technical Council - CEP",
+    image: "/aayush.png",
+    email: "aayush_2312res805@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/kumar-aayush-772973332/",
+    description:
+      "Leading the Tatva Cell and coordinating its activities. Skilled in event management and team leadership.",
+  },
+  {
+    name: "Kanishk Arya",
+    designation: "Disha Cell Head",
+    department: "Student Technical Council - CEP",
+    image: "/kanishk.png",
+    email: "kanishk_2312res322@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/kanishk-arya-a47a70283/",
+    description:
+      "Heading the Training & Placement Cell with a mission to empower students with opportunities and professional readiness.",
+  },
+  {
+    name: "Raunak Verma",
+    designation: "Arthniti Cell Head",
+    department: "Student Technical Council - CEP",
+    image: "/raunak.png",
+    email: "raunak_24a11res65@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/raunak-verma-7b365a2a3/",
+    description:
+      "Leading the Arthniti Cell and coordinating its activities. Skilled in financial analysis and team leadership.",
+  }
+]
+
 const _teamMembers = [
   // Creatives Team Members
   {
@@ -914,6 +977,26 @@ export default function TeamPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
             {coreTeam.map((member, index) => (
+              <TeamMemberCard key={member.name} member={member} index={index} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* council Team */}
+       <section className="py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Council Team
+            </h2>
+            <p className="text-xl text-gray-600">
+              Meet the council team of Student Technical Council IIT Patna Hybrid Programs
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+            {councilMembers.map((member, index) => (
               <TeamMemberCard key={member.name} member={member} index={index} />
             ))}
           </div>
