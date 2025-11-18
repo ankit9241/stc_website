@@ -21,6 +21,8 @@ interface Notification {
   imageUrl?: string
   imageFileId?: string
   uploadedBy: string
+  redirectLink?: string
+  redirectLabel?: string
   isImportant: boolean
   createdAt: string
   expireAt?: string
@@ -33,6 +35,8 @@ export default function AdminNotificationsPage() {
   const [editingNotification, setEditingNotification] = useState<Notification | null>(null)
   const [uploading, setUploading] = useState(false)
   const [imageFile, setImageFile] = useState<File | null>(null)
+  const [redirectLink, setRedirectLink] = useState<string>('')
+  const [redirectLabel, setRedirectLabel] = useState<string>('')
   const [imagePreview, setImagePreview] = useState<string>('')
   const { toast } = useToast()
 
@@ -42,6 +46,8 @@ export default function AdminNotificationsPage() {
     imageUrl: '',
     imageFileId: '',
     uploadedBy: '',
+    redirectLink: '',
+    redirectLabel: '',
     isImportant: false,
     expireAt: '',
   })
@@ -194,6 +200,8 @@ export default function AdminNotificationsPage() {
       uploadedBy: notification.uploadedBy,
       isImportant: notification.isImportant,
       expireAt: notification.expireAt ? notification.expireAt.split('T')[0] : '',
+      redirectLink: notification.redirectLink || '',
+      redirectLabel: notification.redirectLabel || '',
     })
     setImagePreview(notification.imageUrl || '')
     setDialogOpen(true)
@@ -208,6 +216,8 @@ export default function AdminNotificationsPage() {
       uploadedBy: '',
       isImportant: false,
       expireAt: '',
+      redirectLink: '',
+      redirectLabel: '',
     })
     setEditingNotification(null)
     setImageFile(null)
@@ -392,6 +402,28 @@ export default function AdminNotificationsPage() {
                 placeholder="Enter your name"
                 required
               />
+            </div>
+            
+            <div>
+              <Label htmlFor="redirectLink">Redirect Link (Optional)</Label>
+              <Input
+                id="redirectLink"
+                type="text"
+                value={formData.redirectLink}
+                onChange={(e) => setFormData({ ...formData, redirectLink: e.target.value })}
+              />
+              <p className="text-xs text-gray-500 mt-1">Leave empty for permanent notification</p>
+            </div>
+
+            <div>
+              <Label htmlFor="redirectLabel">Redirect Label (Optional)</Label>
+              <Input
+                id="redirectLabel"
+                type="text"
+                value={formData.redirectLabel}
+                onChange={(e) => setFormData({ ...formData, redirectLabel: e.target.value })}
+              />
+              <p className="text-xs text-gray-500 mt-1">Leave empty for permanent notification</p>
             </div>
 
             <div>

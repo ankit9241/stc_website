@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Bell, Clock, AlertCircle, Loader2 } from "lucide-react"
+import { Bell, Clock, AlertCircle, Loader2, ExternalLink } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 interface Notification {
   _id: string
@@ -14,6 +15,8 @@ interface Notification {
   uploadedBy: string
   isImportant: boolean
   expireAt?: string
+  redirectLink?: string
+  redirectLabel?: string
 }
 
 const Notifications = () => {
@@ -140,6 +143,19 @@ const Notifications = () => {
                         {notification.content}
                       </p>
                     </div>
+                    {notification.redirectLink && (
+                    <div className="pb-4">
+                      <Link 
+                        href={notification.redirectLink}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        className="inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 hover:underline font-medium transition-colors"
+                      >
+                        {notification.redirectLabel || 'Learn More'}
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </Link>
+                    </div>
+                  )}
                     <div className="pt-3 border-t border-gray-200 flex items-center text-xs text-gray-500 mt-auto">
                       <Clock className="w-3.5 h-3.5 mr-1" />
                       <span>{formatDate(notification.createdAt)}</span>

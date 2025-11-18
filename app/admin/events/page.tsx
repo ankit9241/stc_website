@@ -9,10 +9,11 @@ import { Textarea } from "@/components/ui/textarea"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Plus, Trash2, Edit, Calendar, Upload, Loader2 } from "lucide-react"
+import { Plus, Trash2, Edit, Calendar, Upload, Loader2, ExternalLink } from "lucide-react"
 import { uploadToImageKit, deleteFromImageKit } from '@/lib/imagekit'
 import Image from 'next/image'
 import { useToast } from "@/hooks/use-toast"
+import Link from 'next/link'
 
 interface Event {
   _id: string
@@ -26,6 +27,10 @@ interface Event {
   isImportant: boolean
   createdAt: string
   expireAt?: string
+  redirectLink?: string
+  redirectLabel?: string
+  resourcesLink?: string
+  resourcesLabel?: string
 }
 
 export default function AdminEventsPage() {
@@ -48,6 +53,10 @@ export default function AdminEventsPage() {
     isImportant: false,
     expireAt: '',
     uploadedBy: '',
+    redirectLink: '',
+    redirectLabel: '',
+    resourcesLink: '',
+    resourcesLabel: ''
   })
 
   useEffect(() => {
@@ -200,7 +209,11 @@ export default function AdminEventsPage() {
       eventDate: event.eventDate.split('T')[0],
       isImportant: event.isImportant,
       expireAt: event.expireAt ? event.expireAt.split('T')[0] : '',
-      uploadedBy: event.uploadedBy || ''
+      uploadedBy: event.uploadedBy || '',
+      redirectLink: event.redirectLink || '',
+      redirectLabel: event.redirectLabel || '',
+      resourcesLink: event.resourcesLink || '',
+      resourcesLabel: event.resourcesLabel || ''
     })
     setImagePreview(event.imageUrl || '')
     setDialogOpen(true)
@@ -216,7 +229,11 @@ export default function AdminEventsPage() {
       eventDate: '',
       isImportant: false,
       expireAt: '',
-      uploadedBy: ''
+      uploadedBy: '',
+      redirectLink: '',
+      redirectLabel: '',
+      resourcesLink: '',
+      resourcesLabel: ''
     })
     setEditingEvent(null)
     setImageFile(null)
@@ -415,6 +432,46 @@ export default function AdminEventsPage() {
                   type="date"
                   value={formData.expireAt}
                   onChange={(e) => setFormData({ ...formData, expireAt: e.target.value })}
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="redirectLink">Redirect Link (Optional)</Label>
+                <Input
+                  id="redirectLink"
+                  type="text"
+                  value={formData.redirectLink}
+                  onChange={(e) => setFormData({ ...formData, redirectLink: e.target.value })}
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="redirectLabel">Redirect Label(Optional)</Label>
+                <Input
+                  id="redirectLabel"
+                  type="text"
+                  value={formData.redirectLabel}
+                  onChange={(e) => setFormData({ ...formData, redirectLabel: e.target.value })}
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="resourcesLink">Resources Link (Optional)</Label>
+                <Input
+                  id="resourcesLink"
+                  type="text"
+                  value={formData.resourcesLink}
+                  onChange={(e) => setFormData({ ...formData, resourcesLink: e.target.value })}
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="resourcesLabel">Resources Label (Optional)</Label>
+                <Input
+                  id="resourcesLabel"
+                  type="text"
+                  value={formData.resourcesLabel}
+                  onChange={(e) => setFormData({ ...formData, resourcesLabel: e.target.value })}
                 />
               </div>
 

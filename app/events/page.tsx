@@ -1,7 +1,7 @@
 "use client"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Calendar, MapPin, Users, Trophy, Clock, Target } from "lucide-react"
+import { Calendar, MapPin, Users, Trophy, Clock, Target, ExternalLink } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import CompanyCards from "@/components/CompanyCards"
@@ -17,6 +17,10 @@ interface Event {
   organizer: string
   isImportant: boolean
   expireAt?: string
+  redirectLink?: string,
+  redirectLabel?: string,
+  resourcesLink?: string,
+  resourcesLabel?: string,
 }
 
 const hackathonWinners = [
@@ -162,6 +166,7 @@ export default function EventsPage() {
                     <p className="text-gray-600 mb-4 line-clamp-3 min-h-[4.5rem]">
                       {event.content}
                     </p>
+                    
                     <div className="space-y-2 mb-4">
                       <div className="flex items-center text-sm text-gray-500">
                         <Calendar className="w-4 h-4 mr-2" />
@@ -171,13 +176,36 @@ export default function EventsPage() {
                         <Users className="w-4 h-4 mr-2" />
                         <span>{event.club}</span>
                       </div>
-                      {event.organizer && (
-                        <div className="flex items-center text-sm text-gray-500">
-                          <MapPin className="w-4 h-4 mr-2" />
-                          <span>By {event.organizer}</span>
-                        </div>
-                      )}
                     </div>
+
+                    {(event.redirectLink || event.resourcesLink) && (
+                      <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-gray-200">
+                        {event.redirectLink && (
+                          <Link 
+                            href={event.redirectLink} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="group relative inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg overflow-hidden"
+                          >
+                            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-400 to-blue-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+                            <span className="relative z-10">{event.redirectLabel || "Learn More"}</span>
+                            <ExternalLink className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                          </Link>
+                        )}
+                        {event.resourcesLink && (
+                          <Link 
+                            href={event.resourcesLink} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="group relative inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg overflow-hidden"
+                          >
+                            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-emerald-400 to-green-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+                            <span className="relative z-10">{event.resourcesLabel || "View Resources"}</span>
+                            <ExternalLink className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                          </Link>
+                        )}
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               ))}
