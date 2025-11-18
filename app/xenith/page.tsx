@@ -21,6 +21,10 @@ interface Event {
   eventDate: string;
   club: string;
   isImportant: boolean;
+  resourcesLink?: string;
+  resourcesLabel?: string;
+  redirectLink?: string;
+  redirectLabel?: string;
 }
 
 const Page = () => {
@@ -66,7 +70,7 @@ const Page = () => {
   };
 
   return (
-    <div className={`${inter.variable} ${poppins.variable} font-sans`}>
+    <div className={`${inter.variable} ${poppins.variable} font-sans overflow-x-hidden`}>
       <AnimatePresence mode="wait">
         <React.Fragment key="xenith-layout">
           <XenithNav key="xenith-nav" />
@@ -343,6 +347,38 @@ const Page = () => {
                             <p className="text-gray-400 text-xs md:text-sm line-clamp-2 group-hover:opacity-0 transition-opacity duration-300">
                               {event.content.substring(0, 80)}...
                             </p>
+
+                            {/* Mobile-only Action Buttons - Always visible on mobile */}
+                            {(event.redirectLink || event.resourcesLink) && (
+                              <div className="md:hidden flex  gap-2 mt-3">
+                                {event.redirectLink && (
+                                  <a
+                                    href={event.redirectLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#ba9efe] to-[#293673] text-white px-3 py-2 rounded-lg font-semibold text-xs hover:shadow-lg transition-all duration-200"
+                                  >
+                                    {event.redirectLabel || 'Learn More'}
+                                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                    </svg>
+                                  </a>
+                                )}
+                                {event.resourcesLink && (
+                                  <a
+                                    href={event.resourcesLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-[#ba9efe]/30 px-3 py-2 rounded-lg font-semibold text-xs hover:bg-white/20 transition-all duration-200"
+                                  >
+                                    {event.resourcesLabel || 'View Resources'}
+                                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                    </svg>
+                                  </a>
+                                )}
+                              </div>
+                            )}
                           </div>
 
                           <div className="absolute inset-0 bg-gradient-to-br from-[#ba9efe]/70 to-[#293673]/70 backdrop-blur-sm p-4 md:p-6 flex flex-col justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
@@ -355,11 +391,46 @@ const Page = () => {
                               {formatEventDate(event.eventDate)}
                             </div>
 
-                            <div className="overflow-y-auto max-h-[200px] md:max-h-[250px] scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-transparent">
+                            <div className="overflow-y-auto max-h-[150px] md:max-h-[200px] scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-transparent mb-3">
                               <p className="text-white/90 text-xs md:text-sm leading-relaxed">
                                 {event.content}
                               </p>
                             </div>
+
+                            {/* Action Buttons */}
+                            {(event.redirectLink || event.resourcesLink) && (
+                              <div className="flex flex-col gap-2 mt-2">
+                                {event.redirectLink && (
+                                  <a
+                                    href={event.redirectLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center justify-center gap-2 bg-white text-[#293673] px-4 py-2 rounded-lg font-semibold text-sm hover:bg-white/90 transition-all duration-200 hover:scale-105"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    {event.redirectLabel || 'Learn More'}
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                    </svg>
+                                  </a>
+                                )}
+                                {event.resourcesLink && (
+                                  <a
+                                    href={event.resourcesLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center justify-center gap-2 bg-white/20 text-white border border-white/50 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-white/30 transition-all duration-200 hover:scale-105"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    {event.resourcesLabel || 'View Resources'}
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                    </svg>
+                                  </a>
+                                )}
+                              </div>
+                            )}
+
                             <div className="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-white/20 text-white/90 text-xs md:text-sm flex items-center">
                               At IITP Campus
                             </div>
