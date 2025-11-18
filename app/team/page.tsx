@@ -60,7 +60,7 @@ const councilMembers = [
     email: "tushar_2312res704@iitp.ac.in",
     linkedin: "https://www.linkedin.com/in/tushar-parihar-87168a34a/",
     description:
-      "Leading the Student Technical Council to foster innovation, technical excellence, and student growth across IIT Patna.",
+      "Leading the Student Technical Council to foster innovation, impactful event management and holistic student growth across IIT Patna.",
   },
   {
     name: "Satyam Kumar",

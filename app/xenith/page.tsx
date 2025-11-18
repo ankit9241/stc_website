@@ -620,6 +620,41 @@ const Page = () => {
                     </div>
                   </div>
 
+                  {/* nextute */}
+                  <div className="group relative">
+                    <div className="relative h-[300px] md:h-[350px] bg-gradient-to-br from-[#1a1a2e]/90 to-[#0f0f1e]/90 backdrop-blur-sm rounded-2xl overflow-hidden border-2 border-[#ba9efe]/40 transition-all duration-500 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/40 hover:scale-[1.02]">
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#ba9efe]/0 via-[#ba9efe]/0 to-[#ba9efe]/0 group-hover:from-[#ba9efe]/20 group-hover:via-[#ba9efe]/10 group-hover:to-transparent transition-all duration-500"></div>
+                      <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-[#ba9efe] opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                      <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-[#ba9efe] opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                      <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-[#ba9efe] opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                      <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-[#ba9efe] opacity-60 group-hover:opacity-100 transition-opacity"></div>
+
+                      <div className="relative h-full flex flex-col items-center justify-center p-6 md:p-8">
+                        <div className="relative mb-4 md:mb-6">
+                          <div className="absolute inset-0 bg-[#ba9efe]/30 rounded-2xl blur-2xl group-hover:blur-3xl transition-all duration-500"></div>
+                          <div className="relative w-32 h-32 md:w-40 md:h-40 bg-white/5 rounded-2xl flex items-center justify-center backdrop-blur-sm border-2 border-white/10 group-hover:border-[#ba9efe]/50 transition-all duration-500 overflow-hidden">
+                            <img
+                              src="/xenith/sponsor/nextute.jpg"
+                              alt="Nextute Logo"
+                              className="w-full h-full object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#ba9efe]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                          </div>
+                        </div>
+
+                        {/* Company name */}
+                        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 group-hover:text-[#ba9efe] transition-colors duration-300">
+                          Nextute
+                        </h3>
+
+                        <p className="text-gray-400 text-sm md:text-base text-center mb-4 group-hover:text-gray-300 transition-colors">
+                          Official Sponsor
+                        </p>
+                      </div>
+                      <div className="absolute inset-0 rounded-2xl border-2 border-[#ba9efe]/0 group-hover:border-[#ba9efe]/30 group-hover:scale-105 transition-all duration-700"></div>
+                    </div>
+                  </div>
+
                   {/* Become a Sponsor Card */}
                   <a
                     href="#contact"
