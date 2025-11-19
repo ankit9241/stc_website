@@ -18,16 +18,38 @@ interface Submission {
   };
 }
 
+interface RegistrationTemplate {
+  slug: string;
+  fields: Array<{
+    key: string;
+    label: string;
+  }>;
+}
+
 export default function RegistrationSubmissionsViewer() {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [loading, setLoading] = useState(true);
   const [filterForm, setFilterForm] = useState<string>('all');
   const [viewingSubmission, setViewingSubmission] = useState<Submission | null>(null);
   const [formSlugs, setFormSlugs] = useState<string[]>([]);
+  const [templates, setTemplates] = useState<RegistrationTemplate[]>([]);
 
   useEffect(() => {
     fetchSubmissions();
+    fetchTemplates();
   }, []);
+
+  const fetchTemplates = async () => {
+    try {
+      const response = await fetch('/api/admin/registration-templates');
+      if (response.ok) {
+        const data = await response.json();
+        setTemplates(data);
+      }
+    } catch (error) {
+      console.error('Error fetching templates:', error);
+    }
+  };
 
   const fetchSubmissions = async () => {
     setLoading(true);
@@ -72,13 +94,29 @@ export default function RegistrationSubmissionsViewer() {
     const filtered = getFilteredSubmissions();
     if (filtered.length === 0) return;
 
+    // Get field labels from template
+    const getFieldLabel = (key: string, slug: string): string => {
+      const template = templates.find(t => t.slug === slug);
+      if (template) {
+        const field = template.fields.find(f => f.key === key);
+        if (field) return field.label;
+      }
+      return key; // fallback to key if label not found
+    };
+
     // Get all unique keys from submissions
     const allKeys = new Set<string>();
     filtered.forEach(sub => {
       Object.keys(sub.data).forEach(key => allKeys.add(key));
     });
 
-    const headers = ['Submission ID', 'Form', 'Submitted At', ...Array.from(allKeys)];
+    // Use labels for headers
+    const headers = ['Submission ID', 'Form', 'Submitted At', ...Array.from(allKeys).map(key => {
+      // Get label from the first submission's template
+      const firstSlug = filtered[0]?.registrationSlug;
+      return getFieldLabel(key, firstSlug);
+    })];
+    
     const rows = filtered.map(sub => [
       sub._id,
       sub.registrationSlug,
@@ -98,7 +136,7 @@ export default function RegistrationSubmissionsViewer() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `registration-submissions-${filterForm}-${new Date().toISOString()}.csv`;
+    a.download = `registration-submissions-${filterForm}-${new Date().toLocaleString('en-IN')}.csv`;
     a.click();
     URL.revokeObjectURL(url);
   };
