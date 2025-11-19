@@ -21,10 +21,18 @@ interface Event {
   eventDate: string;
   club: string;
   isImportant: boolean;
+  expireAt?: string;
   resourcesLink?: string;
   resourcesLabel?: string;
   redirectLink?: string;
   redirectLabel?: string;
+  // Internal properties added during processing
+  _eventDate?: Date;
+  _expireDate?: Date;
+  _hasRegistration?: boolean;
+  _isRegistrationOpen?: boolean;
+  _isRegistrationUpcoming?: boolean;
+  _isEventEnded?: boolean;
 }
 
 const Page = () => {
@@ -34,25 +42,74 @@ const Page = () => {
 
   const [events, setEvents] = useState<Event[]>([]);
   const [loadingEvents, setLoadingEvents] = useState(true);
+  const [mounted, setMounted] = useState(false);
+  const [dots, setDots] = useState<Array<{width: number, height: number, top: number, left: number, opacity: number}>>([]);
 
   useEffect(() => {
     fetchEvents();
+    setMounted(true);
+    setDots(Array.from({ length: 200 }).map(() => ({
+      width: Math.random() * 2 + 0.5,
+      height: Math.random() * 2 + 0.5,
+      top: Math.random() * 100,
+      left: Math.random() * 100,
+      opacity: Math.random()
+    })));
   }, []);
 
   const fetchEvents = async () => {
     try {
+      setLoadingEvents(true);
       const response = await fetch("/api/admin/events");
       if (response.ok) {
         const data = await response.json();
-        const upcoming = data.filter((event: Event) => {
+        const now = new Date();
+        
+        const processedEvents = data.map((event: Event) => {
           const eventDate = new Date(event.eventDate);
-          return eventDate > new Date();
+          const hasRegistration = !!event.redirectLink;
+          const expireDate = event.expireAt ? new Date(event.expireAt) : eventDate;
+          const isRegistrationOpen = hasRegistration && expireDate > now;
+          const isRegistrationUpcoming = hasRegistration && new Date() < new Date(event.eventDate) && !isRegistrationOpen;
+          const isEventEnded = eventDate < now;
+          
+          return {
+            ...event,
+            _eventDate: eventDate,
+            _expireDate: expireDate,
+            _hasRegistration: hasRegistration,
+            _isRegistrationOpen: isRegistrationOpen,
+            _isRegistrationUpcoming: isRegistrationUpcoming,
+            _isEventEnded: isEventEnded
+          };
         });
-        upcoming.sort(
-          (a: Event, b: Event) =>
-            new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
-        );
-        setEvents(upcoming);
+        
+        const getEventPriority = (event: any) => {
+          if (event._isEventEnded) return 4; // Past events last
+          if (!event._hasRegistration) return 3; // Events without registration
+          if (event._isRegistrationOpen) return 1; // Registration live
+          if (event._isRegistrationUpcoming) return 0; // Registration upcoming
+          return 2; // Registration ended but event not completed
+        };
+        
+        const sortedEvents = processedEvents.sort((a: any, b: any) => {
+          const aPriority = getEventPriority(a);
+          const bPriority = getEventPriority(b);
+          
+          // Different priority levels
+          if (aPriority !== bPriority) {
+            return aPriority - bPriority;
+          }
+          
+          // Same priority level, sort by date
+          if (aPriority === 4) { // For past events, newest first
+            return b._eventDate.getTime() - a._eventDate.getTime();
+          }
+          // For all other cases, soonest first
+          return a._eventDate.getTime() - b._eventDate.getTime();
+        });
+        
+        setEvents(sortedEvents);
       }
     } catch (error) {
       console.error("Error fetching events:", error);
@@ -88,17 +145,17 @@ const Page = () => {
               id="main"
             >
               <div className="absolute inset-0 flex flex-wrap justify-center items-center">
-                {Array.from({ length: 200 }).map((_, index) => (
+                {mounted && dots.map((dot, index) => (
                   <div
                     key={index}
                     className="bg-white rounded-full"
                     style={{
-                      width: `${Math.random() * 2 + 0.5}px`,
-                      height: `${Math.random() * 2 + 0.5}px`,
+                      width: `${dot.width}px`,
+                      height: `${dot.height}px`,
                       position: "absolute",
-                      top: `${Math.random() * 100}%`,
-                      left: `${Math.random() * 100}%`,
-                      opacity: Math.random(),
+                      top: `${dot.top}%`,
+                      left: `${dot.left}%`,
+                      opacity: dot.opacity,
                     }}
                   ></div>
                 ))}
@@ -255,21 +312,36 @@ const Page = () => {
               className="min-h-screen w-full bg-black relative overflow-hidden py-20"
               id="events"
             >
-              <div className="absolute inset-0">
-                {Array.from({ length: 200 }).map((_, index) => (
-                  <div
-                    key={index}
-                    className="bg-white rounded-full"
-                    style={{
-                      width: `${Math.random() * 2 + 0.5}px`,
-                      height: `${Math.random() * 2 + 0.5}px`,
-                      position: "absolute",
-                      top: `${Math.random() * 100}%`,
-                      left: `${Math.random() * 100}%`,
-                      opacity: Math.random(),
-                    }}
-                  ></div>
-                ))}
+              <div className="absolute inset-0 pointer-events-none">
+                {Array.from({ length: 200 }).map((_, index) => {
+                  // Use a simple hash function to generate deterministic values based on index
+                  const hash = (index * 9301 + 49297) % 233280;
+                  const random = (seed: number) => {
+                    const x = Math.sin(seed) * 10000;
+                    return x - Math.floor(x);
+                  };
+                  
+                  const posX = random(hash * 100) * 100;
+                  const posY = random(hash * 200) * 100;
+                  const size = 0.5 + random(hash * 300) * 2;
+                  const opacity = 0.1 + random(hash * 400) * 0.9;
+                  
+                  return (
+                    <div
+                      key={index}
+                      className="bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2"
+                      style={{
+                        width: `${size}px`,
+                        height: `${size}px`,
+                        position: 'absolute',
+                        top: `${posY}%`,
+                        left: `${posX}%`,
+                        opacity: opacity,
+                        willChange: 'transform',
+                      }}
+                    />
+                  );
+                })}
               </div>
 
               <div className="relative z-10 container mx-auto px-4 md:px-12 lg:px-20 pt-4">
@@ -308,13 +380,13 @@ const Page = () => {
                         className="group relative"
                         style={{ animationDelay: `${index * 0.1}s` }}
                       >
-                        <div className="relative h-[380px] md:h-[400px] bg-gradient-to-br from-[#1a1a2e]/90 to-[#0f0f1e]/90 backdrop-blur-sm rounded-xl overflow-hidden border border-[#ba9efe]/20 transition-all duration-500 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/30 hover:scale-[1.02]">
-                          <div className="relative h-48 overflow-hidden">
+                        <div className="relative h-full flex flex-col bg-gradient-to-br from-[#1a1a2e]/90 to-[#0f0f1e]/90 backdrop-blur-sm rounded-xl overflow-hidden border border-[#ba9efe]/20 transition-all duration-500 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/30 hover:scale-[1.02] group/card">
+                          <div className="relative h-48 flex-shrink-0 overflow-hidden">
                             {event.imageUrl ? (
                               <img
                                 src={event.imageUrl}
                                 alt={event.title}
-                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-110"
                               />
                             ) : (
                               <div className="w-full h-full bg-gradient-to-br from-[#ba9efe]/30 to-[#293673]/30 flex items-center justify-center">
@@ -323,95 +395,75 @@ const Page = () => {
                             )}
                             <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f1e] via-transparent to-transparent"></div>
 
-                            {/* Important Badge as featured*/}
-                            {event.isImportant && (
-                              <div className="absolute top-3 right-3 bg-red-500 text-white px-3 py-1 rounded-full text-xs font-semibold animate-pulse">
-                                Featured
+                            {/* Registration Status Badge */}
+                            {event.redirectLink && (
+                              <div 
+                                className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm ${
+                                  event._isEventEnded
+                                    ? 'bg-gray-600/90 text-white' 
+                                    : event._isRegistrationOpen 
+                                      ? 'bg-green-600/90 text-white' 
+                                      : 'bg-amber-600/90 text-white'
+                                }`}
+                              >
+                                {event._isEventEnded 
+                                  ? 'Event Ended' 
+                                  : event._isRegistrationOpen 
+                                    ? 'Registration Open' 
+                                    : 'Registration Closed'}
                               </div>
                             )}
                           </div>
 
-                          <div className="p-4 md:p-6 relative">
-                            <div className="inline-block bg-[#ba9efe]/10 text-[#ba9efe] px-2 md:px-3 py-1 rounded-full text-xs font-semibold mb-2 md:mb-3 border border-[#ba9efe]/30">
-                              {event.club}
-                            </div>
-                            <h3 className="text-lg md:text-xl font-bold text-white mb-2 line-clamp-2 group-hover:text-[#ba9efe] transition-colors duration-300">
-                              {event.title}
-                            </h3>
-                            <div className="flex items-center text-gray-400 text-xs md:text-sm mb-2 md:mb-3">
-                              <Calendar className="w-3 md:w-4 h-3 md:h-4 mr-2" />
-                              {formatEventDate(event.eventDate)}
-                            </div>
-
-                            {/* Preview */}
-                            <p className="text-gray-400 text-xs md:text-sm line-clamp-2 group-hover:opacity-0 transition-opacity duration-300">
-                              {event.content.substring(0, 80)}...
-                            </p>
-
-                            {/* Mobile-only Action Buttons - Always visible on mobile */}
-                            {(event.redirectLink || event.resourcesLink) && (
-                              <div className="md:hidden flex  gap-2 mt-3">
-                                {event.redirectLink && (
-                                  <a
-                                    href={event.redirectLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#ba9efe] to-[#293673] text-white px-3 py-2 rounded-lg font-semibold text-xs hover:shadow-lg transition-all duration-200"
-                                  >
-                                    {event.redirectLabel || 'Learn More'}
-                                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                    </svg>
-                                  </a>
-                                )}
-                                {event.resourcesLink && (
-                                  <a
-                                    href={event.resourcesLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-[#ba9efe]/30 px-3 py-2 rounded-lg font-semibold text-xs hover:bg-white/20 transition-all duration-200"
-                                  >
-                                    {event.resourcesLabel || 'View Resources'}
-                                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                    </svg>
-                                  </a>
-                                )}
+                          <div className="flex-1 flex flex-col p-4 md:p-6">
+                            <div className="flex-1">
+                              <div className="flex justify-between items-center mb-2 md:mb-3">
+                                <div className="inline-block bg-[#ba9efe]/10 text-[#ba9efe] px-2 md:px-3 py-1 rounded-full text-xs font-semibold border border-[#ba9efe]/30">
+                                  {event.club}
+                                </div>
+                                <span className="text-[#ba9efe] text-xs inline-flex items-center bg-[#ba9efe]/10 px-2 py-1 rounded-full border border-[#ba9efe]/30">
+                                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                  </svg>
+                                  IITP
+                                </span>
                               </div>
-                            )}
-                          </div>
+                              <h3 className="text-lg md:text-xl font-bold text-white mb-2 line-clamp-2 group-hover/card:text-[#ba9efe] transition-colors duration-300">
+                                {event.title}
+                              </h3>
+                              <div className="flex items-center text-gray-400 text-xs md:text-sm mb-3">
+                                <Calendar className="w-3 md:w-4 h-3 md:h-4 mr-2" />
+                                {formatEventDate(event.eventDate)}
+                              </div>
 
-                          <div className="absolute inset-0 bg-gradient-to-br from-[#ba9efe]/70 to-[#293673]/70 backdrop-blur-sm p-4 md:p-6 flex flex-col justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0">
-                            <h3 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">
-                              {event.title}
-                            </h3>
-
-                            <div className="flex items-center text-white/90 text-xs md:text-sm mb-3 md:mb-4">
-                              <Calendar className="w-3 md:w-4 h-3 md:h-4 mr-2" />
-                              {formatEventDate(event.eventDate)}
-                            </div>
-
-                            <div className="overflow-y-auto max-h-[150px] md:max-h-[200px] scrollbar-thin scrollbar-thumb-white/30 scrollbar-track-transparent mb-3">
-                              <p className="text-white/90 text-xs md:text-sm leading-relaxed">
+                              {/* Preview */}
+                              <p className="text-gray-400 text-xs md:text-sm line-clamp-2 group-hover/card:line-clamp-4 transition-all duration-300">
                                 {event.content}
                               </p>
                             </div>
 
-                            {/* Action Buttons */}
+                            {/* Action Buttons - Always visible on desktop */}
                             {(event.redirectLink || event.resourcesLink) && (
-                              <div className="flex flex-col gap-2 mt-2">
+                              <div className={`hidden md:flex ${event.redirectLink && event.resourcesLink ? 'flex-row' : 'flex-col'} gap-2 mt-4 pt-3 border-t border-white/10`}>
                                 {event.redirectLink && (
                                   <a
-                                    href={event.redirectLink}
+                                    href={event._isRegistrationOpen ? event.redirectLink : '#'}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center justify-center gap-2 bg-white text-[#293673] px-4 py-2 rounded-lg font-semibold text-sm hover:bg-white/90 transition-all duration-200 hover:scale-105"
-                                    onClick={(e) => e.stopPropagation()}
+                                    className={`inline-flex flex-1 items-center justify-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 ${
+                                      event._isRegistrationOpen
+                                        ? 'bg-gradient-to-r from-[#ba9efe] to-[#7a5cff] text-white hover:shadow-lg hover:shadow-[#7a5cff]/30'
+                                        : 'bg-gray-700/80 text-gray-400 cursor-not-allowed'
+                                    }`}
+                                    onClick={(e) => !event._isRegistrationOpen && e.preventDefault()}
                                   >
-                                    {event.redirectLabel || 'Learn More'}
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                    </svg>
+                                    {event._isRegistrationOpen ? (event.redirectLabel || 'Register Now') : 'Registration Closed'}
+                                    {event._isRegistrationOpen && (
+                                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                      </svg>
+                                    )}
                                   </a>
                                 )}
                                 {event.resourcesLink && (
@@ -419,8 +471,7 @@ const Page = () => {
                                     href={event.resourcesLink}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center justify-center gap-2 bg-white/20 text-white border border-white/50 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-white/30 transition-all duration-200 hover:scale-105"
-                                    onClick={(e) => e.stopPropagation()}
+                                    className="inline-flex flex-1 items-center justify-center gap-2 bg-white/5 text-white border border-[#ba9efe]/30 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-white/10 transition-all duration-200 hover:border-[#ba9efe]/60"
                                   >
                                     {event.resourcesLabel || 'View Resources'}
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -431,9 +482,44 @@ const Page = () => {
                               </div>
                             )}
 
-                            <div className="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-white/20 text-white/90 text-xs md:text-sm flex items-center">
-                              At IITP Campus
-                            </div>
+                            {/* Mobile-only Action Buttons */}
+                            {(event.redirectLink || event.resourcesLink) && (
+                              <div className="md:hidden flex gap-2 mt-3">
+                                {event.redirectLink && (
+                                  <a
+                                    href={event._isRegistrationOpen ? event.redirectLink : '#'}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={`flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg font-semibold text-xs transition-all duration-200 ${
+                                      event._isRegistrationOpen
+                                        ? 'bg-gradient-to-r from-[#ba9efe] to-[#7a5cff] text-white hover:shadow-lg'
+                                        : 'bg-gray-600/50 text-gray-400 cursor-not-allowed'
+                                    }`}
+                                    onClick={(e) => !event._isRegistrationOpen && e.preventDefault()}
+                                  >
+                                    {event._isRegistrationOpen ? (event.redirectLabel || 'Register Now') : 'Registration Closed'}
+                                    {event._isRegistrationOpen && (
+                                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                      </svg>
+                                    )}
+                                  </a>
+                                )}
+                                {event.resourcesLink && (
+                                  <a
+                                    href={event.resourcesLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex-1 inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-[#ba9efe]/30 px-3 py-2 rounded-lg font-semibold text-xs hover:bg-white/20 transition-all duration-200"
+                                  >
+                                    {event.resourcesLabel || 'Resources'}
+                                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                    </svg>
+                                  </a>
+                                )}
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -448,21 +534,36 @@ const Page = () => {
               className="min-h-screen w-full bg-gradient-to-b from-[#000000] to-[#0C0F29] relative overflow-hidden py-20"
               id="sponsors"
             >
-              <div className="absolute inset-0">
-                {Array.from({ length: 200 }).map((_, index) => (
-                  <div
-                    key={index}
-                    className="bg-white rounded-full"
-                    style={{
-                      width: `${Math.random() * 2 + 0.5}px`,
-                      height: `${Math.random() * 2 + 0.5}px`,
-                      position: "absolute",
-                      top: `${Math.random() * 100}%`,
-                      left: `${Math.random() * 100}%`,
-                      opacity: Math.random(),
-                    }}
-                  ></div>
-                ))}
+              <div className="absolute inset-0 pointer-events-none">
+                {Array.from({ length: 200 }).map((_, index) => {
+                  // Use a simple hash function to generate deterministic values based on index
+                  const hash = (index * 9301 + 49297) % 233280;
+                  const random = (seed: number) => {
+                    const x = Math.sin(seed) * 10000;
+                    return x - Math.floor(x);
+                  };
+                  
+                  const posX = random(hash * 100) * 100;
+                  const posY = random(hash * 200) * 100;
+                  const size = 0.5 + random(hash * 300) * 2;
+                  const opacity = 0.1 + random(hash * 400) * 0.9;
+                  
+                  return (
+                    <div
+                      key={index}
+                      className="bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2"
+                      style={{
+                        width: `${size}px`,
+                        height: `${size}px`,
+                        position: 'absolute',
+                        top: `${posY}%`,
+                        left: `${posX}%`,
+                        opacity: opacity,
+                        willChange: 'transform',
+                      }}
+                    />
+                  );
+                })}
               </div>
 
               <div className="relative z-10 container mx-auto px-4 md:px-12 lg:px-20">
@@ -787,21 +888,36 @@ const Page = () => {
               className="min-h-screen w-full bg-gradient-to-b from-[#0C0F29] to-[#000000] relative overflow-hidden py-20"
               id="contact"
             >
-              <div className="absolute inset-0">
-                {Array.from({ length: 200 }).map((_, index) => (
-                  <div
-                    key={index}
-                    className="bg-white rounded-full"
-                    style={{
-                      width: `${Math.random() * 2 + 0.5}px`,
-                      height: `${Math.random() * 2 + 0.5}px`,
-                      position: "absolute",
-                      top: `${Math.random() * 100}%`,
-                      left: `${Math.random() * 100}%`,
-                      opacity: Math.random(),
-                    }}
-                  ></div>
-                ))}
+              <div className="absolute inset-0 pointer-events-none">
+                {Array.from({ length: 200 }).map((_, index) => {
+                  // Use a simple hash function to generate deterministic values based on index
+                  const hash = (index * 9301 + 49297) % 233280;
+                  const random = (seed: number) => {
+                    const x = Math.sin(seed) * 10000;
+                    return x - Math.floor(x);
+                  };
+                  
+                  const posX = random(hash * 100) * 100;
+                  const posY = random(hash * 200) * 100;
+                  const size = 0.5 + random(hash * 300) * 2;
+                  const opacity = 0.1 + random(hash * 400) * 0.9;
+                  
+                  return (
+                    <div
+                      key={index}
+                      className="bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2"
+                      style={{
+                        width: `${size}px`,
+                        height: `${size}px`,
+                        position: 'absolute',
+                        top: `${posY}%`,
+                        left: `${posX}%`,
+                        opacity: opacity,
+                        willChange: 'transform',
+                      }}
+                    />
+                  );
+                })}
               </div>
 
               <div className="relative z-10 container mx-auto px-4 md:px-12 lg:px-20">
@@ -932,15 +1048,15 @@ const Page = () => {
                           please reach out via email or phone. We'll get back to
                           you ASAP.
                         </p>
-                        {/* <a
-                                                href="mailto:stc_iitp@iitp.ac.in"
-                                                className="inline-flex items-center gap-2 bg-gradient-to-r from-[#ba9efe] to-[#293673] text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg hover:shadow-lg hover:shadow-[#ba9efe]/50 transition-all duration-300 transform hover:scale-105 text-sm md:text-base"
-                                            >
-                                                <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                                </svg>
-                                                Send Email
-                                            </a> */}
+                        <a
+                          href="mailto:stc_iitp@iitp.ac.in"
+                          className="inline-flex items-center gap-2 bg-gradient-to-r from-[#ba9efe] to-[#293673] text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg hover:shadow-lg hover:shadow-[#ba9efe]/50 transition-all duration-300 transform hover:scale-105 text-sm md:text-base"
+                        >
+                          <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                          </svg>
+                          Send Email
+                        </a>
                       </div>
                     </div>
                   </div>

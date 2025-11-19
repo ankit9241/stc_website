@@ -1,33 +1,54 @@
-"use client"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Calendar, MapPin, Users, Trophy, Clock, Target, ExternalLink } from "lucide-react"
-import Link from "next/link"
-import Image from "next/image"
-import CompanyCards from "@/components/CompanyCards"
-import { useState, useEffect } from "react"
+"use client";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Calendar,
+  MapPin,
+  Users,
+  Trophy,
+  Clock,
+  Target,
+  ArrowUpRight,
+  CalendarCheck,
+  Download,
+} from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import CompanyCards from "@/components/CompanyCards";
+import { useState, useEffect } from "react";
 
 interface Event {
-  _id: string
-  title: string
-  content: string
-  imageUrl?: string
-  eventDate: string
-  club: string
-  organizer: string
-  isImportant: boolean
-  expireAt?: string
-  redirectLink?: string,
-  redirectLabel?: string,
-  resourcesLink?: string,
-  resourcesLabel?: string,
+  _id: string;
+  title: string;
+  content: string;
+  imageUrl?: string;
+  eventDate: string;
+  club: string;
+  organizer: string;
+  isImportant: boolean;
+  expireAt?: string;
+  redirectLink?: string;
+  redirectLabel?: string;
+  resourcesLink?: string;
+  resourcesLabel?: string;
+  // Internal properties added during processing
+  _eventDate?: Date;
+  _expireDate?: Date;
+  _isRegistrationOpen?: boolean;
+  _isEventEnded?: boolean;
 }
 
 const hackathonWinners = [
   {
     position: "Winner",
     teamName: "Caffeine Coderz",
-    members: ["Shubham Raj (Team Leader)", "Ayush Kr. Gupta", "Nishant Sharma", "Arvind Kumar", "Harsh Kumar"],
+    members: [
+      "Shubham Raj (Team Leader)",
+      "Ayush Kr. Gupta",
+      "Nishant Sharma",
+      "Arvind Kumar",
+      "Harsh Kumar",
+    ],
     image: "/images/hackathon-winner.jpg",
     prize: "₹5,000",
     project: "AI-powered helmet system",
@@ -35,7 +56,13 @@ const hackathonWinners = [
   {
     position: "1st Runner Up",
     teamName: "Prachand",
-    members: ["Ankit Shankar (Team Leader)", "Akash Dhibar", "Debangsu Das", "Smita Raj", "Alekhya Chatterjee"],
+    members: [
+      "Ankit Shankar (Team Leader)",
+      "Akash Dhibar",
+      "Debangsu Das",
+      "Smita Raj",
+      "Alekhya Chatterjee",
+    ],
     image: "/images/hackathon-first-runner.jpg",
     prize: "₹3,000",
     project: "Blockchain-based Student Verification Platform",
@@ -43,71 +70,188 @@ const hackathonWinners = [
   {
     position: "2nd Runner Up",
     teamName: "Tech_X",
-    members: ["Ali Raza (Team Leader)", "Brejbhushan Kumar", "Saurav Sharma", "Ashmit Kumar", "Ankit Kumar"],
+    members: [
+      "Ali Raza (Team Leader)",
+      "Brejbhushan Kumar",
+      "Saurav Sharma",
+      "Ashmit Kumar",
+      "Ankit Kumar",
+    ],
     image: "/images/hackathon-second-runner.jpg",
     prize: "₹2,000",
     project: "IoT-enabled Environmental Monitoring System",
   },
-]
+];
 
 const internshipCompanies = [
-  { name: "GUVI", category: "EdTech", positions: "Frontend/Backend Developer", image: "/images/company/guvi.png" },
-  { name: "HCL", category: "IT Services", positions: "Software Engineer", image: "/images/company/hcl.png" },
-  { name: "Superset", category: "Analytics", positions: "Data Analyst", image: "/images/company/superset.png" },
-  { name: "Physics Wallah", category: "EdTech", positions: "Content Developer", image: "/images/company/pw.png" },
-  { name: "Humantics", category: "HR Tech", positions: "Product Developer", image: "/images/company/humantics.png" },
-  { name: "Samriddh", category: "Consulting", positions: "Business Analyst", image: "/images/company/samriddh.png" },
-  { name: "SkillNet", category: "Training", positions: "Technical Trainer", image: "/images/company/skillnet.png" },
-  { name: "Makasa Industries", category: "Manufacturing", positions: "Process Engineer", image: "/images/company/makasa.png" },
-  { name: "NEXTUTE", category: "EdTech", positions: "Software Developer", image: "/images/company/nextute.png" },
-  { name: "D2D", category: "Media", positions: "Content Creator", image: "/images/company/d2h.png" },
-  { name: "FLATX", category: "Real Estate", positions: "Full Stack Developer", image: "/images/company/flatx.png" },
-  { name: "deWall", category: "FinTech", positions: "Backend Developer", image: "/images/company/dewall.png" },
-  { name: "ApkaAds", category: "Product Base", positions: "Product Manager", image: "/images/company/apnada.png" },
-  { name: "Syksha", category: "Fashion Tech", positions: "UI/UX Designer", image: "/images/company/syksha.png" },
-  { name: "Gramin", category: "AgriTech", positions: "Mobile App Developer", image: "/images/company/gramin.png" },
-]
+  {
+    name: "GUVI",
+    category: "EdTech",
+    positions: "Frontend/Backend Developer",
+    image: "/images/company/guvi.png",
+  },
+  {
+    name: "HCL",
+    category: "IT Services",
+    positions: "Software Engineer",
+    image: "/images/company/hcl.png",
+  },
+  {
+    name: "Superset",
+    category: "Analytics",
+    positions: "Data Analyst",
+    image: "/images/company/superset.png",
+  },
+  {
+    name: "Physics Wallah",
+    category: "EdTech",
+    positions: "Content Developer",
+    image: "/images/company/pw.png",
+  },
+  {
+    name: "Humantics",
+    category: "HR Tech",
+    positions: "Product Developer",
+    image: "/images/company/humantics.png",
+  },
+  {
+    name: "Samriddh",
+    category: "Consulting",
+    positions: "Business Analyst",
+    image: "/images/company/samriddh.png",
+  },
+  {
+    name: "SkillNet",
+    category: "Training",
+    positions: "Technical Trainer",
+    image: "/images/company/skillnet.png",
+  },
+  {
+    name: "Makasa Industries",
+    category: "Manufacturing",
+    positions: "Process Engineer",
+    image: "/images/company/makasa.png",
+  },
+  {
+    name: "NEXTUTE",
+    category: "EdTech",
+    positions: "Software Developer",
+    image: "/images/company/nextute.png",
+  },
+  {
+    name: "D2D",
+    category: "Media",
+    positions: "Content Creator",
+    image: "/images/company/d2h.png",
+  },
+  {
+    name: "FLATX",
+    category: "Real Estate",
+    positions: "Full Stack Developer",
+    image: "/images/company/flatx.png",
+  },
+  {
+    name: "deWall",
+    category: "FinTech",
+    positions: "Backend Developer",
+    image: "/images/company/dewall.png",
+  },
+  {
+    name: "ApkaAds",
+    category: "Product Base",
+    positions: "Product Manager",
+    image: "/images/company/apnada.png",
+  },
+  {
+    name: "Syksha",
+    category: "Fashion Tech",
+    positions: "UI/UX Designer",
+    image: "/images/company/syksha.png",
+  },
+  {
+    name: "Gramin",
+    category: "AgriTech",
+    positions: "Mobile App Developer",
+    image: "/images/company/gramin.png",
+  },
+];
 
 export default function EventsPage() {
-  const [upcomingEvents, setUpcomingEvents] = useState<Event[]>([])
-  const [loadingEvents, setLoadingEvents] = useState(true)
-  const [showAllEvents, setShowAllEvents] = useState(false)
+  const [upcomingEvents, setUpcomingEvents] = useState<Event[]>([]);
+  const [loadingEvents, setLoadingEvents] = useState(true);
+  const [showAllEvents, setShowAllEvents] = useState(false);
 
   useEffect(() => {
-    fetchUpcomingEvents()
-  }, [])
+    fetchUpcomingEvents();
+  }, []);
 
   const fetchUpcomingEvents = async () => {
     try {
-      const response = await fetch('/api/admin/events')
+      const response = await fetch("/api/admin/events");
       if (response.ok) {
-        const data = await response.json()
-        // Filter only upcoming events (not expired)
-        const upcoming = data.filter((event: Event) => {
-          const eventDate = new Date(event.eventDate)
-          const expireDate = event.expireAt ? new Date(event.expireAt) : eventDate
-          return expireDate > new Date()
-        })
-        // Sort by event date (nearest first)
-        upcoming.sort((a: Event, b: Event) => 
-          new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime()
-        )
-        setUpcomingEvents(upcoming) // Store all events
+        const data = await response.json();
+        const now = new Date();
+        
+        const processedEvents = data.map((event: Event) => {
+          const eventDate = new Date(event.eventDate);
+          const hasRegistration = !!event.redirectLink;
+          const expireDate = event.expireAt ? new Date(event.expireAt) : eventDate;
+          const isRegistrationOpen = hasRegistration && expireDate > now;
+          const isRegistrationUpcoming = hasRegistration && new Date() < new Date(event.eventDate) && !isRegistrationOpen;
+          const isEventEnded = eventDate < now;
+          
+          return {
+            ...event,
+            _eventDate: eventDate,
+            _expireDate: expireDate,
+            _hasRegistration: hasRegistration,
+            _isRegistrationOpen: isRegistrationOpen,
+            _isRegistrationUpcoming: isRegistrationUpcoming,
+            _isEventEnded: isEventEnded
+          };
+        });
+        
+        const getEventPriority = (event: any) => {
+          if (event._isEventEnded) return 4; // Past events last
+          if (!event._hasRegistration) return 3; // Events without registration
+          if (event._isRegistrationOpen) return 1; // Registration live
+          if (event._isRegistrationUpcoming) return 0; // Registration upcoming
+          return 2; // Registration ended but event not completed
+        };
+        
+        const sortedEvents = processedEvents.sort((a: any, b: any) => {
+          const aPriority = getEventPriority(a);
+          const bPriority = getEventPriority(b);
+          
+          // Different priority levels
+          if (aPriority !== bPriority) {
+            return aPriority - bPriority;
+          }
+          
+          // Same priority level, sort by date
+          if (aPriority === 4) { // For past events, newest first
+            return b._eventDate.getTime() - a._eventDate.getTime();
+          }
+          // For all other cases, soonest first
+          return a._eventDate.getTime() - b._eventDate.getTime();
+        });
+
+        setUpcomingEvents(sortedEvents);
       }
     } catch (error) {
-      console.error('Error fetching events:', error)
+      console.error("Error fetching events:", error);
     } finally {
-      setLoadingEvents(false)
+      setLoadingEvents(false);
     }
-  }
+  };
 
   const formatEventDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric'
-    })
-  }
+    return new Date(dateString).toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 pt-16">
@@ -115,10 +259,12 @@ export default function EventsPage() {
       <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-5xl font-bold mb-6">Our Events & Achievements</h1>
+            <h1 className="text-5xl font-bold mb-6">
+              Our Events & Achievements
+            </h1>
             <p className="text-xl max-w-3xl mx-auto opacity-90">
-              Celebrating innovation, fostering talent, and creating opportunities through impactful events and
-              initiatives
+              Celebrating innovation, fostering talent, and creating
+              opportunities through impactful events and initiatives
             </p>
           </div>
         </div>
@@ -128,8 +274,12 @@ export default function EventsPage() {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Upcoming Events</h2>
-            <p className="text-xl text-gray-600">Stay tuned for more exciting opportunities and events</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Upcoming Events
+            </h2>
+            <p className="text-xl text-gray-600">
+              Stay tuned for more exciting opportunities and events
+            </p>
           </div>
 
           {loadingEvents ? (
@@ -139,102 +289,160 @@ export default function EventsPage() {
             </div>
           ) : upcomingEvents.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {upcomingEvents.slice(0, showAllEvents ? upcomingEvents.length : 6).map((event) => (
-                <Card key={event._id} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
-                  {event.imageUrl && (
-                    <div className="relative w-full h-48 bg-gray-200">
-                      <Image
-                        src={event.imageUrl}
-                        alt={event.title}
-                        fill
-                        className="object-cover"
-                      />
-                      {event.isImportant && (
-                        <div className="absolute top-3 right-3 bg-red-500 text-white text-xs px-3 py-1 rounded-full font-bold">
-                          IMPORTANT
-                        </div>
-                      )}
-                    </div>
-                  )}
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                      <Calendar className="w-6 h-6 text-blue-600" />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2 min-h-[3.5rem]">
-                      {event.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4 line-clamp-3 min-h-[4.5rem]">
-                      {event.content}
-                    </p>
-                    
-                    <div className="space-y-2 mb-4">
-                      <div className="flex items-center text-sm text-gray-500">
-                        <Calendar className="w-4 h-4 mr-2" />
-                        <span>{formatEventDate(event.eventDate)}</span>
-                      </div>
-                      <div className="flex items-center text-sm text-gray-500">
-                        <Users className="w-4 h-4 mr-2" />
-                        <span>{event.club}</span>
-                      </div>
-                    </div>
+              {upcomingEvents
+                .slice(0, showAllEvents ? upcomingEvents.length : 6)
+                .map((event) => (
+                  <Card
+                    key={event._id}
+                    className="group h-full flex flex-col rounded-2xl overflow-hidden border border-gray-200 bg-white/60 backdrop-blur-md shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+                  >
+                    {event.imageUrl && (
+                      <div className="relative w-full h-52 bg-gray-200 overflow-hidden">
+                        <Image
+                          src={event.imageUrl}
+                          alt={event.title}
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
 
-                    {(event.redirectLink || event.resourcesLink) && (
-                      <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-gray-200">
                         {event.redirectLink && (
-                          <Link 
-                            href={event.redirectLink} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="group relative inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg overflow-hidden"
+                          <div
+                            className={`absolute top-4 right-4 text-xs px-3 py-1.5 rounded-full font-semibold shadow-md backdrop-blur-lg
+                            ${
+                              event._isEventEnded 
+                                ? 'bg-gray-600/90 text-white' 
+                                : event._isRegistrationOpen 
+                                  ? 'bg-green-600/90 text-white' 
+                                  : 'bg-amber-600/90 text-white'
+                            }`}
                           >
-                            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-400 to-blue-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
-                            <span className="relative z-10">{event.redirectLabel || "Learn More"}</span>
-                            <ExternalLink className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-                          </Link>
-                        )}
-                        {event.resourcesLink && (
-                          <Link 
-                            href={event.resourcesLink} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="group relative inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white rounded-lg font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg overflow-hidden"
-                          >
-                            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-emerald-400 to-green-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
-                            <span className="relative z-10">{event.resourcesLabel || "View Resources"}</span>
-                            <ExternalLink className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-                          </Link>
+                            {event._isEventEnded 
+                              ? 'Event Ended' 
+                              : event._isRegistrationOpen 
+                                ? 'Registration Open' 
+                                : 'Registration Closed'}
+                          </div>
                         )}
                       </div>
                     )}
-                  </CardContent>
-                </Card>
-              ))}
+
+                    <CardContent className="p-7">
+                      <div className="flex items-center gap-3 mb-4">
+                        <h3 className="text-2xl font-extrabold text-gray-900 leading-snug tracking-tight">
+                          {event.title}
+                        </h3>
+                      </div>
+
+                      <p className="text-gray-600 mb-6 leading-relaxed line-clamp-3">
+                        {event.content}
+                      </p>
+                      <div className="space-y-2 mb-6">
+                        <div className="flex items-center text-sm text-gray-500 gap-2">
+                          <Calendar className="w-4 h-4" />
+                          <span>{formatEventDate(event.eventDate)}</span>
+                        </div>
+                        <div className="flex items-center text-sm text-gray-500 gap-2">
+                          <Users className="w-4 h-4" />
+                          <span>{event.club}</span>
+                        </div>
+                      </div>
+
+                      {(event.redirectLink || event.resourcesLink) && (
+                        <div className="pt-5 border-t border-gray-200">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            {event.redirectLink && (
+                              <Link
+                                href={event._isRegistrationOpen ? event.redirectLink : '#'}
+                                target="_blank"
+                                className={`relative flex items-center justify-center gap-2 px-4 py-2.5 
+                                rounded-lg font-semibold text-sm
+                                ${
+                                  event._isRegistrationOpen
+                                    ? 'text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg hover:shadow-xl hover:-translate-y-1'
+                                    : 'text-gray-400 bg-gray-100 cursor-not-allowed'
+                                } 
+                                transition-all duration-300`}
+                                onClick={(e) => {
+                                  if (!event._isRegistrationOpen) {
+                                    e.preventDefault();
+                                  }
+                                }}
+                              >
+                                <CalendarCheck className="w-4 h-4" />
+                                {event._isRegistrationOpen 
+                                  ? (event.redirectLabel || 'Register Now')
+                                  : 'Registration Closed'}
+                              </Link>
+                            )}
+
+                            {event.resourcesLink && (
+                              <Link
+                                href={event.resourcesLink}
+                                target="_blank"
+                                className="flex items-center justify-center gap-2 px-4 py-2.5 
+              bg-gray-100 border border-gray-300 rounded-lg text-gray-700 
+              hover:bg-gray-200 hover:text-gray-900
+              shadow-sm hover:shadow transition-all duration-300 hover:-translate-y-1"
+                              >
+                                <Download className="w-4 h-4" />
+                                {event.resourcesLabel || "Rulebook"}
+                              </Link>
+                            )}
+                          </div>
+
+                          <div className="mt-4 text-xs text-center text-gray-500">
+                            <Clock className="w-3.5 h-3.5 inline-block mr-1.5" />
+                            {event._isEventEnded ? (
+                              <span className="text-red-500 font-medium">Event Ended</span>
+                            ) : !event._isRegistrationOpen ? (
+                              <span>Registration closed on{' '}
+                                <span className="font-bold text-red-500">
+                                  {event.expireAt ? formatEventDate(event.expireAt) : formatEventDate(event.eventDate)}
+                                </span>
+                              </span>
+                            ) : (
+                              <span>Registration open until{' '}
+                                <span className="font-bold text-blue-600">
+                                  {event.expireAt ? formatEventDate(event.expireAt) : formatEventDate(event.eventDate)}
+                                </span>
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                ))}
             </div>
           ) : (
             <div className="text-center py-12">
               <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Calendar className="w-8 h-8 text-gray-400" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-700 mb-2">No Upcoming Events</h3>
-              <p className="text-gray-500">Stay tuned! New events will be announced soon.</p>
+              <h3 className="text-xl font-semibold text-gray-700 mb-2">
+                No Upcoming Events
+              </h3>
+              <p className="text-gray-500">
+                Stay tuned! New events will be announced soon.
+              </p>
             </div>
           )}
 
           {upcomingEvents.length > 0 && (
             <div className="flex justify-center items-center mt-12 space-x-4">
               {upcomingEvents.length > 6 && (
-                <Button 
-                  variant="outline" 
-                  size="lg" 
+                <Button
+                  variant="outline"
+                  size="lg"
                   className="border-blue-600 text-blue-600 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-700 px-6 py-3 transition-all duration-200 transform hover:-translate-y-0.5 hover:shadow-md"
                   onClick={() => setShowAllEvents(!showAllEvents)}
                 >
-                  {showAllEvents ? 'Show Less' : 'Show More'}
+                  {showAllEvents ? "Show Less" : "Show More"}
                 </Button>
               )}
               <Link href="/calendar">
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 transition-all duration-200 transform hover:-translate-y-0.5 hover:shadow-lg"
                 >
                   View Full Calendar
@@ -249,9 +457,12 @@ export default function EventsPage() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">HACK N TECH Hackathon 2025</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              HACK N TECH Hackathon 2025
+            </h2>
             <p className="text-xl text-gray-600">
-              "Unleash your innovation. Code the future" - A 24-hour coding marathon
+              "Unleash your innovation. Code the future" - A 24-hour coding
+              marathon
             </p>
           </div>
 
@@ -265,7 +476,9 @@ export default function EventsPage() {
               />
             </div>
             <div className="flex flex-col justify-center">
-              <h3 className="text-3xl font-bold text-gray-900 mb-6">Event Highlights</h3>
+              <h3 className="text-3xl font-bold text-gray-900 mb-6">
+                Event Highlights
+              </h3>
               <div className="space-y-4 mb-8">
                 <div className="flex items-center">
                   <Calendar className="w-6 h-6 text-blue-600 mr-3" />
@@ -277,7 +490,9 @@ export default function EventsPage() {
                 </div>
                 <div className="flex items-center">
                   <MapPin className="w-6 h-6 text-blue-600 mr-3" />
-                  <span className="text-lg">Central Lecture Hall, IIT Patna</span>
+                  <span className="text-lg">
+                    Central Lecture Hall, IIT Patna
+                  </span>
                 </div>
                 <div className="flex items-center">
                   <Users className="w-6 h-6 text-blue-600 mr-3" />
@@ -285,11 +500,15 @@ export default function EventsPage() {
                 </div>
                 <div className="flex items-center">
                   <Target className="w-6 h-6 text-blue-600 mr-3" />
-                  <span className="text-lg">Innovation & Future Technology</span>
+                  <span className="text-lg">
+                    Innovation & Future Technology
+                  </span>
                 </div>
               </div>
               <div className="bg-blue-50 rounded-lg p-6">
-                <h4 className="font-semibold text-gray-900 mb-3">Event Features:</h4>
+                <h4 className="font-semibold text-gray-900 mb-3">
+                  Event Features:
+                </h4>
                 <ul className="space-y-2 text-gray-700">
                   <li>• Workshops & Tech Talks</li>
                   <li>• Coding Sprints & Challenges</li>
@@ -303,8 +522,10 @@ export default function EventsPage() {
 
           {/* Event Collage */}
           <div className="mb-16 relative">
-            <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">Event Moments</h3>
-            
+            <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+              Event Moments
+            </h3>
+
             {/* Background Pattern */}
             <div className="relative bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 rounded-3xl p-8 overflow-hidden">
               {/* Decorative background elements */}
@@ -314,17 +535,20 @@ export default function EventsPage() {
                 <div className="absolute bottom-20 left-20 w-28 h-28 bg-pink-300 rounded-full blur-xl"></div>
                 <div className="absolute bottom-10 right-10 w-20 h-20 bg-indigo-300 rounded-full blur-lg"></div>
               </div>
-              
+
               {/* Geometric pattern overlay */}
-              <div className="absolute inset-0 opacity-5" style={{
-                backgroundImage: `
+              <div
+                className="absolute inset-0 opacity-5"
+                style={{
+                  backgroundImage: `
                   radial-gradient(circle at 25% 25%, #3b82f6 2px, transparent 2px),
                   radial-gradient(circle at 75% 75%, #8b5cf6 2px, transparent 2px),
                   radial-gradient(circle at 75% 25%, #ec4899 2px, transparent 2px),
                   radial-gradient(circle at 25% 75%, #6366f1 2px, transparent 2px)
                 `,
-                backgroundSize: '60px 60px'
-              }}></div>
+                  backgroundSize: "60px 60px",
+                }}
+              ></div>
 
               {/* Watermark Text */}
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -350,7 +574,7 @@ export default function EventsPage() {
                   HACK N TECH
                 </div>
               </div>
-              
+
               {/* Main image container */}
               <div className="relative z-10 flex justify-center">
                 <div className="max-w-3xl w-full">
@@ -361,7 +585,7 @@ export default function EventsPage() {
                   />
                 </div>
               </div>
-              
+
               {/* Floating elements */}
               <div className="absolute top-6 left-6 w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
               <div className="absolute top-12 right-8 w-2 h-2 bg-purple-400 rounded-full animate-pulse delay-100"></div>
@@ -372,7 +596,9 @@ export default function EventsPage() {
 
           {/* Winners Section */}
           <div className="mb-16">
-            <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">Hackathon Winners</h3>
+            <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+              Hackathon Winners
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {hackathonWinners.map((winner, index) => (
                 <Card
@@ -400,20 +626,33 @@ export default function EventsPage() {
                         alt={`${winner.teamName} team`}
                         className="w-full h-48 object-cover rounded-lg mb-4"
                       />
-                      <h4 className="text-xl font-bold text-gray-900 mb-2">{winner.teamName}</h4>
-                      <p className="text-lg font-semibold text-blue-600 mb-4">{winner.prize}</p>
+                      <h4 className="text-xl font-bold text-gray-900 mb-2">
+                        {winner.teamName}
+                      </h4>
+                      <p className="text-lg font-semibold text-blue-600 mb-4">
+                        {winner.prize}
+                      </p>
                     </div>
 
                     <div className="mb-4">
-                      <h5 className="font-semibold text-gray-900 mb-2">Project:</h5>
-                      <p className="text-gray-700 text-sm mb-4">{winner.project}</p>
+                      <h5 className="font-semibold text-gray-900 mb-2">
+                        Project:
+                      </h5>
+                      <p className="text-gray-700 text-sm mb-4">
+                        {winner.project}
+                      </p>
                     </div>
 
                     <div>
-                      <h5 className="font-semibold text-gray-900 mb-2">Team Members:</h5>
+                      <h5 className="font-semibold text-gray-900 mb-2">
+                        Team Members:
+                      </h5>
                       <ul className="space-y-1">
                         {winner.members.map((member, memberIndex) => (
-                          <li key={memberIndex} className="text-sm text-gray-600">
+                          <li
+                            key={memberIndex}
+                            className="text-sm text-gray-600"
+                          >
                             {member}
                           </li>
                         ))}
@@ -431,8 +670,12 @@ export default function EventsPage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Internship Drive 2025</h2>
-            <p className="text-xl text-gray-600">Connecting talented students with leading industry partners</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Internship Drive 2025
+            </h2>
+            <p className="text-xl text-gray-600">
+              Connecting talented students with leading industry partners
+            </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
@@ -444,7 +687,9 @@ export default function EventsPage() {
               />
             </div>
             <div className="flex flex-col justify-center">
-              <h3 className="text-3xl font-bold text-gray-900 mb-6">Drive Details</h3>
+              <h3 className="text-3xl font-bold text-gray-900 mb-6">
+                Drive Details
+              </h3>
               <div className="space-y-4 mb-8">
                 <div className="flex items-center">
                   <Calendar className="w-6 h-6 text-blue-600 mr-3" />
@@ -452,7 +697,9 @@ export default function EventsPage() {
                 </div>
                 <div className="flex items-center">
                   <MapPin className="w-6 h-6 text-blue-600 mr-3" />
-                  <span className="text-lg">Central Lecture Hall, IIT Patna</span>
+                  <span className="text-lg">
+                    Central Lecture Hall, IIT Patna
+                  </span>
                 </div>
                 <div className="flex items-center">
                   <Users className="w-6 h-6 text-blue-600 mr-3" />
@@ -464,7 +711,9 @@ export default function EventsPage() {
                 </div>
               </div>
               <div className="bg-green-50 rounded-lg p-6">
-                <h4 className="font-semibold text-gray-900 mb-3">Opportunities Available:</h4>
+                <h4 className="font-semibold text-gray-900 mb-3">
+                  Opportunities Available:
+                </h4>
                 <ul className="space-y-2 text-gray-700">
                   <li>• Software Development Internships</li>
                   <li>• Data Science & Analytics Roles</li>
@@ -478,31 +727,39 @@ export default function EventsPage() {
 
           {/* Companies List */}
           <div>
-            <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">Company details</h3>
-            
+            <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+              Company details
+            </h3>
+
             {/* Infinite Horizontal Scroll for Company Logos */}
             <div className="mb-12 overflow-hidden">
               <div className="flex animate-scroll space-x-8">
                 {/* First set of logos */}
                 {internshipCompanies.map((company, index) => (
-                  <div key={`first-${index}`} className="flex-shrink-0 w-32 h-20 bg-white rounded-lg shadow-sm p-4 flex items-center justify-center">
-                    <Image 
-                      src={company.image} 
-                      alt={company.name} 
-                      width={140} 
-                      height={120} 
+                  <div
+                    key={`first-${index}`}
+                    className="flex-shrink-0 w-32 h-20 bg-white rounded-lg shadow-sm p-4 flex items-center justify-center"
+                  >
+                    <Image
+                      src={company.image}
+                      alt={company.name}
+                      width={140}
+                      height={120}
                       className="object-contain w-full h-full filter grayscale hover:grayscale-0 transition-all duration-300"
                     />
                   </div>
                 ))}
                 {/* Duplicate set for infinite scroll */}
                 {internshipCompanies.map((company, index) => (
-                  <div key={`second-${index}`} className="flex-shrink-0 w-32 h-20 bg-white rounded-lg shadow-sm p-4 flex items-center justify-center">
-                    <Image 
-                      src={company.image} 
-                      alt={company.name} 
-                      width={140} 
-                      height={120} 
+                  <div
+                    key={`second-${index}`}
+                    className="flex-shrink-0 w-32 h-20 bg-white rounded-lg shadow-sm p-4 flex items-center justify-center"
+                  >
+                    <Image
+                      src={company.image}
+                      alt={company.name}
+                      width={140}
+                      height={120}
                       className="object-contain w-full h-full filter grayscale hover:grayscale-0 transition-all duration-300"
                     />
                   </div>
@@ -518,13 +775,19 @@ export default function EventsPage() {
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Want to Participate in Our Events?</h2>
+          <h2 className="text-3xl font-bold mb-4">
+            Want to Participate in Our Events?
+          </h2>
           <p className="text-xl mb-8 opacity-90">
-            Join our community and be the first to know about upcoming events and opportunities
+            Join our community and be the first to know about upcoming events
+            and opportunities
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/participation">
-              <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 text-lg">
+              <Button
+                size="lg"
+                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 text-lg"
+              >
                 Join Student Technical Council
               </Button>
             </Link>
@@ -540,5 +803,5 @@ export default function EventsPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }
