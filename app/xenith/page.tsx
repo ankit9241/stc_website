@@ -43,18 +43,28 @@ const Page = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const [loadingEvents, setLoadingEvents] = useState(true);
   const [mounted, setMounted] = useState(false);
-  const [dots, setDots] = useState<Array<{width: number, height: number, top: number, left: number, opacity: number}>>([]);
+  const [dots, setDots] = useState<
+    Array<{
+      width: number;
+      height: number;
+      top: number;
+      left: number;
+      opacity: number;
+    }>
+  >([]);
 
   useEffect(() => {
     fetchEvents();
     setMounted(true);
-    setDots(Array.from({ length: 200 }).map(() => ({
-      width: Math.random() * 2 + 0.5,
-      height: Math.random() * 2 + 0.5,
-      top: Math.random() * 100,
-      left: Math.random() * 100,
-      opacity: Math.random()
-    })));
+    setDots(
+      Array.from({ length: 200 }).map(() => ({
+        width: Math.random() * 2 + 0.5,
+        height: Math.random() * 2 + 0.5,
+        top: Math.random() * 100,
+        left: Math.random() * 100,
+        opacity: Math.random(),
+      }))
+    );
   }, []);
 
   const fetchEvents = async () => {
@@ -64,15 +74,20 @@ const Page = () => {
       if (response.ok) {
         const data = await response.json();
         const now = new Date();
-        
+
         const processedEvents = data.map((event: Event) => {
           const eventDate = new Date(event.eventDate);
           const hasRegistration = !!event.redirectLink;
-          const expireDate = event.expireAt ? new Date(event.expireAt) : eventDate;
+          const expireDate = event.expireAt
+            ? new Date(event.expireAt)
+            : eventDate;
           const isRegistrationOpen = hasRegistration && expireDate > now;
-          const isRegistrationUpcoming = hasRegistration && new Date() < new Date(event.eventDate) && !isRegistrationOpen;
+          const isRegistrationUpcoming =
+            hasRegistration &&
+            new Date() < new Date(event.eventDate) &&
+            !isRegistrationOpen;
           const isEventEnded = eventDate < now;
-          
+
           return {
             ...event,
             _eventDate: eventDate,
@@ -80,10 +95,10 @@ const Page = () => {
             _hasRegistration: hasRegistration,
             _isRegistrationOpen: isRegistrationOpen,
             _isRegistrationUpcoming: isRegistrationUpcoming,
-            _isEventEnded: isEventEnded
+            _isEventEnded: isEventEnded,
           };
         });
-        
+
         const getEventPriority = (event: any) => {
           if (event._isEventEnded) return 4; // Past events last
           if (!event._hasRegistration) return 3; // Events without registration
@@ -91,24 +106,25 @@ const Page = () => {
           if (event._isRegistrationUpcoming) return 0; // Registration upcoming
           return 2; // Registration ended but event not completed
         };
-        
+
         const sortedEvents = processedEvents.sort((a: any, b: any) => {
           const aPriority = getEventPriority(a);
           const bPriority = getEventPriority(b);
-          
+
           // Different priority levels
           if (aPriority !== bPriority) {
             return aPriority - bPriority;
           }
-          
+
           // Same priority level, sort by date
-          if (aPriority === 4) { // For past events, newest first
+          if (aPriority === 4) {
+            // For past events, newest first
             return b._eventDate.getTime() - a._eventDate.getTime();
           }
           // For all other cases, soonest first
           return a._eventDate.getTime() - b._eventDate.getTime();
         });
-        
+
         setEvents(sortedEvents);
       }
     } catch (error) {
@@ -127,7 +143,9 @@ const Page = () => {
   };
 
   return (
-    <div className={`${inter.variable} ${poppins.variable} font-sans overflow-x-hidden`}>
+    <div
+      className={`${inter.variable} ${poppins.variable} font-sans overflow-x-hidden`}
+    >
       <AnimatePresence mode="wait">
         <React.Fragment key="xenith-layout">
           <XenithNav key="xenith-nav" />
@@ -145,20 +163,21 @@ const Page = () => {
               id="main"
             >
               <div className="absolute inset-0 flex flex-wrap justify-center items-center">
-                {mounted && dots.map((dot, index) => (
-                  <div
-                    key={index}
-                    className="bg-white rounded-full"
-                    style={{
-                      width: `${dot.width}px`,
-                      height: `${dot.height}px`,
-                      position: "absolute",
-                      top: `${dot.top}%`,
-                      left: `${dot.left}%`,
-                      opacity: dot.opacity,
-                    }}
-                  ></div>
-                ))}
+                {mounted &&
+                  dots.map((dot, index) => (
+                    <div
+                      key={index}
+                      className="bg-white rounded-full"
+                      style={{
+                        width: `${dot.width}px`,
+                        height: `${dot.height}px`,
+                        position: "absolute",
+                        top: `${dot.top}%`,
+                        left: `${dot.left}%`,
+                        opacity: dot.opacity,
+                      }}
+                    ></div>
+                  ))}
 
                 {/* hero section content */}
                 <div className="flex flex-col justify-center items-center gap-4 mb-10 md:mb-20 px-4">
@@ -237,7 +256,11 @@ const Page = () => {
                     <div className="flex items-center gap-3">
                       <div className="h-1 w-8 md:w-12 bg-gradient-to-r from-transparent to-[#ba9efe]"></div>
                       <h2 className="flex items-center gap-2 text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-[#ba9efe] via-[#d4b3ff] to-[#ba9efe] bg-clip-text text-transparent whitespace-nowrap">
-                        <img src="/xenith/xenith.png" alt="Xenith" className="h-6 md:h-8 lg:h-10 xl:h-12 w-auto object-contain" />
+                        <img
+                          src="/xenith/xenith.png"
+                          alt="Xenith"
+                          className="h-6 md:h-8 lg:h-10 xl:h-12 w-auto object-contain"
+                        />
                       </h2>
                       <div className="h-1 w-8 md:w-12 bg-gradient-to-l from-transparent to-[#ba9efe]"></div>
                     </div>
@@ -320,12 +343,12 @@ const Page = () => {
                     const x = Math.sin(seed) * 10000;
                     return x - Math.floor(x);
                   };
-                  
+
                   const posX = random(hash * 100) * 100;
                   const posY = random(hash * 200) * 100;
                   const size = 0.5 + random(hash * 300) * 2;
                   const opacity = 0.1 + random(hash * 400) * 0.9;
-                  
+
                   return (
                     <div
                       key={index}
@@ -333,11 +356,11 @@ const Page = () => {
                       style={{
                         width: `${size}px`,
                         height: `${size}px`,
-                        position: 'absolute',
+                        position: "absolute",
                         top: `${posY}%`,
                         left: `${posX}%`,
                         opacity: opacity,
-                        willChange: 'transform',
+                        willChange: "transform",
                       }}
                     />
                   );
@@ -373,7 +396,7 @@ const Page = () => {
                     </p>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-stretch">
                     {events.map((event, index) => (
                       <div
                         key={index}
@@ -397,20 +420,20 @@ const Page = () => {
 
                             {/* Registration Status Badge */}
                             {event.redirectLink && (
-                              <div 
+                              <div
                                 className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm ${
                                   event._isEventEnded
-                                    ? 'bg-gray-600/90 text-white' 
-                                    : event._isRegistrationOpen 
-                                      ? 'bg-green-600/90 text-white' 
-                                      : 'bg-amber-600/90 text-white'
+                                    ? "bg-gray-600/90 text-white"
+                                    : event._isRegistrationOpen
+                                      ? "bg-green-600/90 text-white"
+                                      : "bg-amber-600/90 text-white"
                                 }`}
                               >
-                                {event._isEventEnded 
-                                  ? 'Event Ended' 
-                                  : event._isRegistrationOpen 
-                                    ? 'Registration Open' 
-                                    : 'Registration Closed'}
+                                {event._isEventEnded
+                                  ? "Event Ended"
+                                  : event._isRegistrationOpen
+                                    ? "Registration Open"
+                                    : "Registration Closed"}
                               </div>
                             )}
                           </div>
@@ -422,14 +445,30 @@ const Page = () => {
                                   {event.club}
                                 </div>
                                 <span className="text-[#ba9efe] text-xs inline-flex items-center bg-[#ba9efe]/10 px-2 py-1 rounded-full border border-[#ba9efe]/30">
-                                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-3 w-3 mr-1"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                    />
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                    />
                                   </svg>
                                   IITP
                                 </span>
                               </div>
-                              <h3 className="text-lg md:text-xl font-bold text-white mb-2 line-clamp-2 group-hover/card:text-[#ba9efe] transition-colors duration-300">
+                              <h3 className="text-lg md:text-xl font-bold text-white mb-2 group-hover/card:text-[#ba9efe] transition-colors duration-300">
                                 {event.title}
                               </h3>
                               <div className="flex items-center text-gray-400 text-xs md:text-sm mb-3">
@@ -438,30 +477,51 @@ const Page = () => {
                               </div>
 
                               {/* Preview */}
-                              <p className="text-gray-400 text-xs md:text-sm line-clamp-2 group-hover/card:line-clamp-4 transition-all duration-300">
+                              <p className="text-gray-400 text-xs md:text-sm transition-all duration-300 whitespace-pre-wrap">
                                 {event.content}
                               </p>
                             </div>
 
                             {/* Action Buttons - Always visible on desktop */}
                             {(event.redirectLink || event.resourcesLink) && (
-                              <div className={`hidden md:flex ${event.redirectLink && event.resourcesLink ? 'flex-row' : 'flex-col'} gap-2 mt-4 pt-3 border-t border-white/10`}>
+                              <div
+                                className={`hidden md:flex ${event.redirectLink && event.resourcesLink ? "flex-row" : "flex-col"} gap-2 mt-4 pt-3 border-t border-white/10`}
+                              >
                                 {event.redirectLink && (
                                   <a
-                                    href={event._isRegistrationOpen ? event.redirectLink : '#'}
+                                    href={
+                                      event._isRegistrationOpen
+                                        ? event.redirectLink
+                                        : "#"
+                                    }
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className={`inline-flex flex-1 items-center justify-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 ${
                                       event._isRegistrationOpen
-                                        ? 'bg-gradient-to-r from-[#ba9efe] to-[#7a5cff] text-white hover:shadow-lg hover:shadow-[#7a5cff]/30'
-                                        : 'bg-gray-700/80 text-gray-400 cursor-not-allowed'
+                                        ? "bg-gradient-to-r from-[#ba9efe] to-[#7a5cff] text-white hover:shadow-lg hover:shadow-[#7a5cff]/30"
+                                        : "bg-gray-700/80 text-gray-400 cursor-not-allowed"
                                     }`}
-                                    onClick={(e) => !event._isRegistrationOpen && e.preventDefault()}
+                                    onClick={(e) =>
+                                      !event._isRegistrationOpen &&
+                                      e.preventDefault()
+                                    }
                                   >
-                                    {event._isRegistrationOpen ? (event.redirectLabel || 'Register Now') : 'Registration Closed'}
+                                    {event._isRegistrationOpen
+                                      ? event.redirectLabel || "Register Now"
+                                      : "Registration Closed"}
                                     {event._isRegistrationOpen && (
-                                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                      <svg
+                                        className="w-4 h-4"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                      >
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          strokeWidth={2}
+                                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                        />
                                       </svg>
                                     )}
                                   </a>
@@ -473,9 +533,19 @@ const Page = () => {
                                     rel="noopener noreferrer"
                                     className="inline-flex flex-1 items-center justify-center gap-2 bg-white/5 text-white border border-[#ba9efe]/30 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-white/10 transition-all duration-200 hover:border-[#ba9efe]/60"
                                   >
-                                    {event.resourcesLabel || 'View Resources'}
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                    {event.resourcesLabel || "View Resources"}
+                                    <svg
+                                      className="w-4 h-4"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      viewBox="0 0 24 24"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                      />
                                     </svg>
                                   </a>
                                 )}
@@ -487,20 +557,39 @@ const Page = () => {
                               <div className="md:hidden flex gap-2 mt-3">
                                 {event.redirectLink && (
                                   <a
-                                    href={event._isRegistrationOpen ? event.redirectLink : '#'}
+                                    href={
+                                      event._isRegistrationOpen
+                                        ? event.redirectLink
+                                        : "#"
+                                    }
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className={`flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg font-semibold text-xs transition-all duration-200 ${
                                       event._isRegistrationOpen
-                                        ? 'bg-gradient-to-r from-[#ba9efe] to-[#7a5cff] text-white hover:shadow-lg'
-                                        : 'bg-gray-600/50 text-gray-400 cursor-not-allowed'
+                                        ? "bg-gradient-to-r from-[#ba9efe] to-[#7a5cff] text-white hover:shadow-lg"
+                                        : "bg-gray-600/50 text-gray-400 cursor-not-allowed"
                                     }`}
-                                    onClick={(e) => !event._isRegistrationOpen && e.preventDefault()}
+                                    onClick={(e) =>
+                                      !event._isRegistrationOpen &&
+                                      e.preventDefault()
+                                    }
                                   >
-                                    {event._isRegistrationOpen ? (event.redirectLabel || 'Register Now') : 'Registration Closed'}
+                                    {event._isRegistrationOpen
+                                      ? event.redirectLabel || "Register Now"
+                                      : "Registration Closed"}
                                     {event._isRegistrationOpen && (
-                                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                      <svg
+                                        className="w-3 h-3"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                      >
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          strokeWidth={2}
+                                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                        />
                                       </svg>
                                     )}
                                   </a>
@@ -512,9 +601,19 @@ const Page = () => {
                                     rel="noopener noreferrer"
                                     className="flex-1 inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-[#ba9efe]/30 px-3 py-2 rounded-lg font-semibold text-xs hover:bg-white/20 transition-all duration-200"
                                   >
-                                    {event.resourcesLabel || 'Resources'}
-                                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                    {event.resourcesLabel || "Resources"}
+                                    <svg
+                                      className="w-3 h-3"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      viewBox="0 0 24 24"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                      />
                                     </svg>
                                   </a>
                                 )}
@@ -542,12 +641,12 @@ const Page = () => {
                     const x = Math.sin(seed) * 10000;
                     return x - Math.floor(x);
                   };
-                  
+
                   const posX = random(hash * 100) * 100;
                   const posY = random(hash * 200) * 100;
                   const size = 0.5 + random(hash * 300) * 2;
                   const opacity = 0.1 + random(hash * 400) * 0.9;
-                  
+
                   return (
                     <div
                       key={index}
@@ -555,11 +654,11 @@ const Page = () => {
                       style={{
                         width: `${size}px`,
                         height: `${size}px`,
-                        position: 'absolute',
+                        position: "absolute",
                         top: `${posY}%`,
                         left: `${posX}%`,
                         opacity: opacity,
-                        willChange: 'transform',
+                        willChange: "transform",
                       }}
                     />
                   );
@@ -581,7 +680,6 @@ const Page = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
-
                   {/* Red Bull Sponsor Card */}
                   <div className="group relative">
                     <div className="relative h-[300px] md:h-[350px] bg-gradient-to-br from-[#1a1a2e]/90 to-[#0f0f1e]/90 backdrop-blur-sm rounded-2xl overflow-hidden border-2 border-[#ba9efe]/40 transition-all duration-500 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/40 hover:scale-[1.02]">
@@ -758,7 +856,7 @@ const Page = () => {
                   </div>
 
                   {/* futterflow */}
-                   <div className="group relative">
+                  <div className="group relative">
                     <div className="relative h-[300px] md:h-[350px] bg-gradient-to-br from-[#1a1a2e]/90 to-[#0f0f1e]/90 backdrop-blur-sm rounded-2xl overflow-hidden border-2 border-[#ba9efe]/40 transition-all duration-500 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/40 hover:scale-[1.02]">
                       <div className="absolute inset-0 bg-gradient-to-br from-[#ba9efe]/0 via-[#ba9efe]/0 to-[#ba9efe]/0 group-hover:from-[#ba9efe]/20 group-hover:via-[#ba9efe]/10 group-hover:to-transparent transition-all duration-500"></div>
                       <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-[#ba9efe] opacity-60 group-hover:opacity-100 transition-opacity"></div>
@@ -896,12 +994,12 @@ const Page = () => {
                     const x = Math.sin(seed) * 10000;
                     return x - Math.floor(x);
                   };
-                  
+
                   const posX = random(hash * 100) * 100;
                   const posY = random(hash * 200) * 100;
                   const size = 0.5 + random(hash * 300) * 2;
                   const opacity = 0.1 + random(hash * 400) * 0.9;
-                  
+
                   return (
                     <div
                       key={index}
@@ -909,11 +1007,11 @@ const Page = () => {
                       style={{
                         width: `${size}px`,
                         height: `${size}px`,
-                        position: 'absolute',
+                        position: "absolute",
                         top: `${posY}%`,
                         left: `${posX}%`,
                         opacity: opacity,
-                        willChange: 'transform',
+                        willChange: "transform",
                       }}
                     />
                   );
@@ -1052,8 +1150,18 @@ const Page = () => {
                           href="mailto:stc_iitp@iitp.ac.in"
                           className="inline-flex items-center gap-2 bg-gradient-to-r from-[#ba9efe] to-[#293673] text-white font-semibold py-2 md:py-3 px-4 md:px-6 rounded-lg hover:shadow-lg hover:shadow-[#ba9efe]/50 transition-all duration-300 transform hover:scale-105 text-sm md:text-base"
                         >
-                          <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                          <svg
+                            className="w-4 h-4 md:w-5 md:h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                            />
                           </svg>
                           Send Email
                         </a>
