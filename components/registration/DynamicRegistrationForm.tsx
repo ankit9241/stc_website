@@ -51,6 +51,8 @@ interface Template {
   slug: string;
   description?: string;
   fields: Field[];
+  passwordProtected?: boolean;
+  password?: string;
 }
 
 interface DynamicRegistrationFormProps {
@@ -76,6 +78,10 @@ export default function DynamicRegistrationForm({ slug }: DynamicRegistrationFor
   const [otpTimer, setOtpTimer] = useState(0);
   const [showOtpSentModal, setShowOtpSentModal] = useState(false);
   const [otpEmail, setOtpEmail] = useState('');
+
+  // Password protection states
+  const [formPassword, setFormPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   useEffect(() => {
     fetchTemplate();
@@ -208,20 +214,34 @@ export default function DynamicRegistrationForm({ slug }: DynamicRegistrationFor
       }
     }
 
+    // Check conditional logic
     if (!field.conditional) return true;
 
     const { fieldKey, operator, value } = field.conditional;
     const fieldValue = formData[fieldKey];
 
+    // If the parent field hasn't been filled yet, don't show this field
+    if (fieldValue === '' || fieldValue === null || fieldValue === undefined) {
+      return false;
+    }
+
     switch (operator) {
       case '==':
-        return fieldValue === value;
+        return String(fieldValue) === String(value);
       case '!=':
-        return fieldValue !== value;
+        return String(fieldValue) !== String(value);
       case 'in':
-        return Array.isArray(value) && value.includes(fieldValue);
+        // For checkbox fields (arrays)
+        if (Array.isArray(fieldValue)) {
+          return fieldValue.includes(value);
+        }
+        // For other fields, check if value contains the string
+        return String(fieldValue).includes(String(value));
       case 'notin':
-        return Array.isArray(value) && !value.includes(fieldValue);
+        if (Array.isArray(fieldValue)) {
+          return !fieldValue.includes(value);
+        }
+        return !String(fieldValue).includes(String(value));
       case '>':
         return Number(fieldValue) > Number(value);
       case '<':
@@ -329,6 +349,18 @@ export default function DynamicRegistrationForm({ slug }: DynamicRegistrationFor
       return;
     }
 
+    // Password protection check
+    if (template?.passwordProtected) {
+      if (!formPassword) {
+        setPasswordError('Password is required to submit this form');
+        return;
+      }
+      if (formPassword !== template.password) {
+        setPasswordError('Incorrect password. Please try again.');
+        return;
+      }
+    }
+
     setSubmitting(true);
     try {
       const response = await fetch('/api/registration/submit', {
@@ -337,13 +369,15 @@ export default function DynamicRegistrationForm({ slug }: DynamicRegistrationFor
         body: JSON.stringify({
           registrationSlug: slug,
           data: formData,
-          emailVerified: otpVerified
+          emailVerified: otpVerified,
+          password: template?.passwordProtected ? formPassword : undefined
         })
       });
 
       if (response.ok) {
         setSubmitted(true);
         setFormData({});
+        setFormPassword('');
       } else {
         const error = await response.json();
         if (error.errors) {
@@ -700,6 +734,46 @@ export default function DynamicRegistrationForm({ slug }: DynamicRegistrationFor
 
               return renderedFields;
             })()}
+
+            {/* Password Protection Field */}
+            {template.passwordProtected && (
+              <div className="border-t pt-6 space-y-3">
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                  <div className="flex items-start gap-3">
+                    <AlertCircle className="w-5 h-5 text-yellow-600 mt-0.5" />
+                    <div>
+                      <h4 className="font-semibold text-yellow-800 mb-1">Password Protected Form</h4>
+                      <p className="text-sm text-yellow-700">
+                        Please read rulebook or any provided resources to get password.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="formPassword">
+                    Form Password <span className="text-red-500">*</span>
+                  </Label>
+                  <Input
+                    id="formPassword"
+                    type="password"
+                    value={formPassword}
+                    onChange={(e) => {
+                      setFormPassword(e.target.value);
+                      setPasswordError('');
+                    }}
+                    placeholder="Enter form password"
+                    className={passwordError ? 'border-red-500' : ''}
+                    disabled={submitting}
+                  />
+                  {passwordError && (
+                    <p className="text-sm text-red-500 flex items-center gap-1">
+                      <AlertCircle className="w-4 h-4" />
+                      {passwordError}
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
 
             <div className="flex justify-end">
               <Button type="submit" disabled={submitting || (emailField ? !otpVerified : false)}>

@@ -6,7 +6,7 @@ import RegistrationSubmission from '@/schema/RegistrationSubmissionSchema';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { registrationSlug, data, emailVerified } = body;
+    const { registrationSlug, data, emailVerified, password } = body;
 
     if (!registrationSlug || !data) {
       return NextResponse.json({ error: 'Registration slug and data are required' }, { status: 400 });
@@ -18,6 +18,16 @@ export async function POST(request: NextRequest) {
     
     if (!template) {
       return NextResponse.json({ error: 'Registration form not found or inactive' }, { status: 404 });
+    }
+
+    // Check password protection
+    if (template.passwordProtected) {
+      if (!password) {
+        return NextResponse.json({ error: 'Password is required for this form' }, { status: 400 });
+      }
+      if (password !== template.password) {
+        return NextResponse.json({ error: 'Incorrect password' }, { status: 401 });
+      }
     }
 
     const hasEmailField = template.fields.some((f: any) => f.type === 'email');
