@@ -297,12 +297,12 @@ export default function EventsPage() {
                     className="group h-full flex flex-col rounded-2xl overflow-hidden border border-gray-200 bg-white/60 backdrop-blur-md shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
                   >
                     {event.imageUrl && (
-                      <div className="relative w-full h-52 bg-gray-200 overflow-hidden">
+                      <div className="relative aspect-[4/5] bg-gray-200 overflow-hidden">
                         <Image
                           src={event.imageUrl}
                           alt={event.title}
                           fill
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          className=" object-contain transition-transform duration-500 group-hover:scale-105"
                         />
 
                         {event.redirectLink && (
