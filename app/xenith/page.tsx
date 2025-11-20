@@ -403,13 +403,13 @@ const Page = () => {
                         className="group relative"
                         style={{ animationDelay: `${index * 0.1}s` }}
                       >
-                        <div className="relative h-full flex flex-col bg-gradient-to-br from-[#1a1a2e]/90 to-[#0f0f1e]/90 backdrop-blur-sm rounded-xl overflow-hidden border border-[#ba9efe]/20 transition-all duration-500 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/30 hover:scale-[1.02] group/card">
-                          <div className="relative h-48 flex-shrink-0 overflow-hidden">
+                        <div className="relative  h-full flex flex-col bg-gradient-to-br from-[#1a1a2e]/90 to-[#0f0f1e]/90 backdrop-blur-sm rounded-xl overflow-hidden border border-[#ba9efe]/20 transition-all duration-500 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/30 hover:scale-[1.02] group/card">
+                          <div className="relative h-[50vh]  flex-shrink-0 overflow-hidden">
                             {event.imageUrl ? (
                               <img
                                 src={event.imageUrl}
                                 alt={event.title}
-                                className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-110"
+                                className="aspect-[4/5] object-cover transition-transform duration-500 group-hover/card:scale-110"
                               />
                             ) : (
                               <div className="w-full h-full bg-gradient-to-br from-[#ba9efe]/30 to-[#293673]/30 flex items-center justify-center">
@@ -436,9 +436,7 @@ const Page = () => {
                                     : "Registration Closed"}
                               </div>
                             )}
-                          </div>
-
-                          <div className="flex-1 flex flex-col p-4 md:p-6">
+                          <div className="flex-1 absolute bottom-0 w-full backdrop-blur-2xl  flex flex-col p-4 md:p-6">
                             <div className="flex-1">
                               <div className="flex justify-between items-center mb-2 md:mb-3">
                                 <div className="inline-block bg-[#ba9efe]/10 text-[#ba9efe] px-2 md:px-3 py-1 rounded-full text-xs font-semibold border border-[#ba9efe]/30">
@@ -477,9 +475,9 @@ const Page = () => {
                               </div>
 
                               {/* Preview */}
-                              <p className="text-gray-400 text-xs md:text-sm transition-all duration-300 whitespace-pre-wrap">
+                              {/* <p className="text-gray-400 text-xs md:text-sm transition-all duration-300 whitespace-pre-wrap">
                                 {event.content}
-                              </p>
+                              </p> */}
                             </div>
 
                             {/* Action Buttons - Always visible on desktop */}
@@ -620,6 +618,8 @@ const Page = () => {
                               </div>
                             )}
                           </div>
+                          </div>
+
                         </div>
                       </div>
                     ))}
