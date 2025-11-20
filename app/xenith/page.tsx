@@ -404,7 +404,7 @@ const Page = () => {
                         style={{ animationDelay: `${index * 0.1}s` }}
                       >
                         <div className="relative h-full flex flex-col bg-gradient-to-br from-[#1a1a2e]/90 to-[#0f0f1e]/90 rounded-xl overflow-hidden border border-[#ba9efe]/20 transition-all duration-500 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/30 hover:scale-[1.02] group/card">
-                          <div className="relative h-[50vh] md:h-[60vh] flex-shrink-0 overflow-hidden">
+                          <div className="relative h-[50vh] md:h-[70vh] flex-shrink-0 overflow-hidden">
                             {event.imageUrl ? (
                               <img
                                 src={event.imageUrl}

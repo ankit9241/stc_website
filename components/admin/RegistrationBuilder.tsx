@@ -667,19 +667,8 @@ export default function RegistrationBuilder() {
                     placeholder="field_name"
                     disabled={MANDATORY_FIELDS.includes(editingField.key)}
                   />
+                  <p className="text-xs text-gray-500 mt-1">Unique identifier (lowercase, underscores only)</p>
                 </div>
-                <div>
-                  <Label htmlFor="fieldLabel">Label</Label>
-                  <Input
-                    id="fieldLabel"
-                    value={editingField.label}
-                    onChange={(e) => setEditingField({ ...editingField, label: e.target.value })}
-                    placeholder="Field Label"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="fieldType">Field Type</Label>
                   <Select
@@ -696,15 +685,29 @@ export default function RegistrationBuilder() {
                     </SelectContent>
                   </Select>
                 </div>
-                <div>
-                  <Label htmlFor="placeholder">Placeholder</Label>
-                  <Input
-                    id="placeholder"
-                    value={editingField.placeholder || ''}
-                    onChange={(e) => setEditingField({ ...editingField, placeholder: e.target.value })}
-                    placeholder="Enter placeholder text"
-                  />
-                </div>
+              </div>
+
+              <div>
+                <Label htmlFor="fieldLabel">Label / Question Text</Label>
+                <Textarea
+                  id="fieldLabel"
+                  value={editingField.label}
+                  onChange={(e) => setEditingField({ ...editingField, label: e.target.value })}
+                  placeholder="Enter your question or field label (can be multiple lines)"
+                  className="min-h-[60px] resize-y"
+                  rows={2}
+                />
+                <p className="text-xs text-gray-500 mt-1">This will be displayed as the question/label for users</p>
+              </div>
+
+              <div>
+                <Label htmlFor="placeholder">Placeholder Text</Label>
+                <Input
+                  id="placeholder"
+                  value={editingField.placeholder || ''}
+                  onChange={(e) => setEditingField({ ...editingField, placeholder: e.target.value })}
+                  placeholder="Enter placeholder text (optional)"
+                />
               </div>
 
               <div className="grid grid-cols-2 gap-4">

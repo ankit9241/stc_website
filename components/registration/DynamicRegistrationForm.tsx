@@ -404,7 +404,7 @@ export default function DynamicRegistrationForm({ slug }: DynamicRegistrationFor
 
     return (
       <div key={field.key} className="space-y-2">
-        <Label htmlFor={field.key}>
+        <Label htmlFor={field.key} className="text-base font-medium leading-relaxed whitespace-pre-wrap block">
           {field.label}
           {field.required && <span className="text-red-500 ml-1">*</span>}
           {field.important && <span className="text-yellow-500 ml-1 font-bold">⚠</span>}
