@@ -108,17 +108,17 @@ const Notifications = () => {
                 <Card
                   className={`w-[250px] md:w-[360px] h-full flex flex-col rounded-2xl transition-all duration-300 ${
                     notification.isImportant
-                      ? "border border-red-400/50 bg-white/80"
+                      ? "border border-red-500/20 shadow-red-100 shadow-md bg-white/80"
                       : "border border-gray-200/70 bg-white/80"
                   } hover:scale-[1.02]`}
                 >
                   {notification.imageUrl && (
-                    <div className="relative w-full h-44 bg-gray-100">
+                    <div className="relative aspect-[4/5]  bg-gray-100">
                       <Image
                         src={notification.imageUrl}
                         alt={notification.title}
                         fill
-                        className="object-cover"
+                        className="object-cover rounded-2xl"
                       />
                       {notification.isImportant && (
                         <div className="absolute top-3 right-3">
@@ -136,7 +136,7 @@ const Notifications = () => {
 
                   <CardContent className="p-5 flex-1 flex flex-col">
                     <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-[#0f2a4d] mb-2 line-clamp-2 min-h-[3rem]">
+                      <h3 className="text-lg font-bold text-[#0f2a4d] mb-2 line-clamp-2 min-h-[3rem]">
                         {notification.title}
                       </h3>
                       <p className="text-sm text-gray-700 mb-4 leading-relaxed line-clamp-3">
@@ -149,10 +149,9 @@ const Notifications = () => {
                         href={notification.redirectLink}
                         rel="noopener noreferrer"
                         target="_blank"
-                        className="inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 hover:underline font-medium transition-colors"
+                        className="inline-flex border border-gray-300/20 px-4 py-2 rounded-xl bg-blue-100 hover:bg-blue-500 hover:text-white items-center gap-1 text-sm text-blue-600  font-medium transition-colors"
                       >
                         {notification.redirectLabel || 'Learn More'}
-                        <ExternalLink className="w-3.5 h-3.5" />
                       </Link>
                     </div>
                   )}

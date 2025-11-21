@@ -53,6 +53,8 @@ interface Template {
   imageFileId?: string;
   fields: Field[];
   active: boolean;
+  passwordProtected?: boolean;
+  password?: string;
 }
 
 const FIELD_TYPES = [
@@ -489,16 +491,49 @@ export default function RegistrationBuilder() {
                 />
                 <Label htmlFor="active">Active</Label>
               </div>
-              <div className="flex gap-2">
-                <Button variant="outline" onClick={() => setPreviewMode(!previewMode)}>
-                  <Eye className="w-4 h-4 mr-2" />
-                  {previewMode ? 'Edit' : 'Preview'}
-                </Button>
-                <Button onClick={addField}>
-                  <Plus className="w-4 h-4 mr-2" />
-                  Add Field
-                </Button>
+            </div>
+
+            {/* Password Protection */}
+            <div className="border-t pt-4">
+              <div className="flex items-center space-x-2 mb-3">
+                <Switch
+                  id="passwordProtected"
+                  checked={currentTemplate.passwordProtected || false}
+                  onCheckedChange={(checked) => setCurrentTemplate({ 
+                    ...currentTemplate, 
+                    passwordProtected: checked,
+                    password: checked ? currentTemplate.password : undefined
+                  })}
+                />
+                <Label htmlFor="passwordProtected">Password Protected Form</Label>
               </div>
+              {currentTemplate.passwordProtected && (
+                <div className="pl-8">
+                  <Label htmlFor="formPassword">Form Password</Label>
+                  <Input
+                    id="formPassword"
+                    type="text"
+                    value={currentTemplate.password || ''}
+                    onChange={(e) => setCurrentTemplate({ ...currentTemplate, password: e.target.value })}
+                    placeholder="Enter password for form submission"
+                    className="max-w-md"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    Users will need to enter this password to submit the form
+                  </p>
+                </div>
+              )}
+            </div>
+
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={() => setPreviewMode(!previewMode)}>
+                <Eye className="w-4 h-4 mr-2" />
+                {previewMode ? 'Edit' : 'Preview'}
+              </Button>
+              <Button onClick={addField}>
+                <Plus className="w-4 h-4 mr-2" />
+                Add Field
+              </Button>
             </div>
 
             {!previewMode ? (
@@ -632,19 +667,8 @@ export default function RegistrationBuilder() {
                     placeholder="field_name"
                     disabled={MANDATORY_FIELDS.includes(editingField.key)}
                   />
+                  <p className="text-xs text-gray-500 mt-1">Unique identifier (lowercase, underscores only)</p>
                 </div>
-                <div>
-                  <Label htmlFor="fieldLabel">Label</Label>
-                  <Input
-                    id="fieldLabel"
-                    value={editingField.label}
-                    onChange={(e) => setEditingField({ ...editingField, label: e.target.value })}
-                    placeholder="Field Label"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="fieldType">Field Type</Label>
                   <Select
@@ -661,15 +685,29 @@ export default function RegistrationBuilder() {
                     </SelectContent>
                   </Select>
                 </div>
-                <div>
-                  <Label htmlFor="placeholder">Placeholder</Label>
-                  <Input
-                    id="placeholder"
-                    value={editingField.placeholder || ''}
-                    onChange={(e) => setEditingField({ ...editingField, placeholder: e.target.value })}
-                    placeholder="Enter placeholder text"
-                  />
-                </div>
+              </div>
+
+              <div>
+                <Label htmlFor="fieldLabel">Label / Question Text</Label>
+                <Textarea
+                  id="fieldLabel"
+                  value={editingField.label}
+                  onChange={(e) => setEditingField({ ...editingField, label: e.target.value })}
+                  placeholder="Enter your question or field label (can be multiple lines)"
+                  className="min-h-[60px] resize-y"
+                  rows={2}
+                />
+                <p className="text-xs text-gray-500 mt-1">This will be displayed as the question/label for users</p>
+              </div>
+
+              <div>
+                <Label htmlFor="placeholder">Placeholder Text</Label>
+                <Input
+                  id="placeholder"
+                  value={editingField.placeholder || ''}
+                  onChange={(e) => setEditingField({ ...editingField, placeholder: e.target.value })}
+                  placeholder="Enter placeholder text (optional)"
+                />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -787,6 +825,100 @@ export default function RegistrationBuilder() {
                   </div>
                 </div>
               )}
+
+              {/* Conditional Logic */}
+              <div className="border-t pt-4">
+                <h4 className="font-medium mb-3">Conditional Logic (Show/Hide)</h4>
+                <p className="text-sm text-gray-500 mb-3">Show this field only when another field meets a condition</p>
+                <div className="flex items-center space-x-2 mb-3">
+                  <Switch
+                    id="enableConditional"
+                    checked={!!editingField.conditional}
+                    onCheckedChange={(checked) => {
+                      if (checked) {
+                        setEditingField({
+                          ...editingField,
+                          conditional: { fieldKey: '', operator: '==', value: '' }
+                        });
+                      } else {
+                        const { conditional, ...rest } = editingField;
+                        setEditingField(rest);
+                      }
+                    }}
+                  />
+                  <Label htmlFor="enableConditional">Enable Conditional Display</Label>
+                </div>
+                
+                {editingField.conditional && currentTemplate && (
+                  <div className="space-y-3 p-3 bg-gray-50 rounded-md">
+                    <div>
+                      <Label>Show this field when</Label>
+                      <Select
+                        value={editingField.conditional.fieldKey}
+                        onValueChange={(value) => setEditingField({
+                          ...editingField,
+                          conditional: { ...editingField.conditional!, fieldKey: value }
+                        })}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a field" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {currentTemplate.fields
+                            .filter(f => f.key !== editingField.key)
+                            .sort((a, b) => a.order - b.order)
+                            .map(field => (
+                              <SelectItem key={field.key} value={field.key}>
+                                {field.label} ({field.key})
+                              </SelectItem>
+                            ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <Label>Operator</Label>
+                        <Select
+                          value={editingField.conditional.operator}
+                          onValueChange={(value) => setEditingField({
+                            ...editingField,
+                            conditional: { ...editingField.conditional!, operator: value }
+                          })}
+                        >
+                          <SelectTrigger>
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="==">Equals (==)</SelectItem>
+                            <SelectItem value="!=">Not Equals (!=)</SelectItem>
+                            <SelectItem value="in">Contains</SelectItem>
+                            <SelectItem value="notin">Not Contains</SelectItem>
+                            <SelectItem value=">">Greater Than (&gt;)</SelectItem>
+                            <SelectItem value="<">Less Than (&lt;)</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      
+                      <div>
+                        <Label>Value</Label>
+                        <Input
+                          value={editingField.conditional.value}
+                          onChange={(e) => setEditingField({
+                            ...editingField,
+                            conditional: { ...editingField.conditional!, value: e.target.value }
+                          })}
+                          placeholder="Enter value to match"
+                        />
+                      </div>
+                    </div>
+                    
+                    <p className="text-xs text-gray-500 mt-2">
+                      <strong>Example:</strong> Show "Company Name" when "Employment Status" equals "Employed"
+                    </p>
+                  </div>
+                )}
+              </div>
 
               {/* Validation rules */}
               <div className="border-t pt-4">

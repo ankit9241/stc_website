@@ -37,6 +37,8 @@ export interface IRegistrationTemplate extends Document {
   imageFileId?: string;
   fields: IField[];
   active: boolean;
+  passwordProtected: boolean;
+  password?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -87,6 +89,8 @@ const RegistrationTemplateSchema = new Schema({
   imageFileId: String,
   fields: [FieldSchema],
   active: { type: Boolean, default: true },
+  passwordProtected: { type: Boolean, default: false },
+  password: { type: String },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 });

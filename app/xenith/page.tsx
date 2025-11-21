@@ -403,20 +403,20 @@ const Page = () => {
                         className="group relative"
                         style={{ animationDelay: `${index * 0.1}s` }}
                       >
-                        <div className="relative h-full flex flex-col bg-gradient-to-br from-[#1a1a2e]/90 to-[#0f0f1e]/90 backdrop-blur-sm rounded-xl overflow-hidden border border-[#ba9efe]/20 transition-all duration-500 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/30 hover:scale-[1.02] group/card">
-                          <div className="relative h-48 flex-shrink-0 overflow-hidden">
+                        <div className="relative h-full flex flex-col bg-gradient-to-br from-[#1a1a2e]/90 to-[#0f0f1e]/90 rounded-xl overflow-hidden border border-[#ba9efe]/20 transition-all duration-500 hover:border-[#ba9efe] hover:shadow-2xl hover:shadow-[#ba9efe]/30 hover:scale-[1.02] group/card">
+                          <div className="relative h-[50vh] md:h-[70vh] flex-shrink-0 overflow-hidden">
                             {event.imageUrl ? (
                               <img
                                 src={event.imageUrl}
                                 alt={event.title}
-                                className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-110"
+                                className="aspect-[4/5] object-cover transition-transform duration-500 group-hover/card:scale-110"
                               />
                             ) : (
                               <div className="w-full h-full bg-gradient-to-br from-[#ba9efe]/30 to-[#293673]/30 flex items-center justify-center">
                                 <Calendar className="w-16 h-16 text-[#ba9efe]/50" />
                               </div>
                             )}
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f1e] via-transparent to-transparent"></div>
+                            <div className="absolute bottom-0 h-2/3 w-full bg-gradient-to-t from-[#000000]/100 via-[#3b2a6a]/90 to-transparent pointer-events-none"></div>
 
                             {/* Registration Status Badge */}
                             {event.redirectLink && (
@@ -436,80 +436,102 @@ const Page = () => {
                                     : "Registration Closed"}
                               </div>
                             )}
-                          </div>
-
-                          <div className="flex-1 flex flex-col p-4 md:p-6">
-                            <div className="flex-1">
-                              <div className="flex justify-between items-center mb-2 md:mb-3">
-                                <div className="inline-block bg-[#ba9efe]/10 text-[#ba9efe] px-2 md:px-3 py-1 rounded-full text-xs font-semibold border border-[#ba9efe]/30">
-                                  {event.club}
+                            <div className="absolute bottom-0 h-1/2 w-full bg-transparent flex flex-col p-4 md:p-6 pb-10 md:pb-12 border-t border-white/6">
+                              <div className="flex-1">
+                                <div className="flex justify-between items-center mb-2 md:mb-3">
+                                  <div className="inline-block bg-[#ba9efe]/10 text-[#ba9efe] px-2 md:px-3 py-1 rounded-full text-xs font-semibold border border-[#ba9efe]/30">
+                                    {event.club}
+                                  </div>
+                                  <span className="text-[#ba9efe] text-xs inline-flex items-center bg-[#ba9efe]/10 px-2 py-1 rounded-full border border-[#ba9efe]/30">
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      className="h-3 w-3 mr-1"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke="currentColor"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                      />
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                      />
+                                    </svg>
+                                    IITP
+                                  </span>
                                 </div>
-                                <span className="text-[#ba9efe] text-xs inline-flex items-center bg-[#ba9efe]/10 px-2 py-1 rounded-full border border-[#ba9efe]/30">
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-3 w-3 mr-1"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                                    />
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                                    />
-                                  </svg>
-                                  IITP
-                                </span>
-                              </div>
-                              <h3 className="text-lg md:text-xl font-bold text-white mb-2 group-hover/card:text-[#ba9efe] transition-colors duration-300">
-                                {event.title}
-                              </h3>
-                              <div className="flex items-center text-gray-400 text-xs md:text-sm mb-3">
-                                <Calendar className="w-3 md:w-4 h-3 md:h-4 mr-2" />
-                                {formatEventDate(event.eventDate)}
-                              </div>
+                                <h3 className="text-lg md:text-xl font-bold text-white mb-2 group-hover/card:text-[#ba9efe] transition-colors duration-300">
+                                  {event.title}
+                                </h3>
+                                <div className="flex items-center text-gray-400 text-xs md:text-sm mb-3">
+                                  <Calendar className="w-3 md:w-4 h-3 md:h-4 mr-2" />
+                                  {formatEventDate(event.eventDate)}
+                                </div>
 
-                              {/* Preview */}
-                              <p className="text-gray-400 text-xs md:text-sm transition-all duration-300 whitespace-pre-wrap">
+                                {/* Preview */}
+                                {/* <p className="text-gray-400 text-xs md:text-sm transition-all duration-300 whitespace-pre-wrap">
                                 {event.content}
-                              </p>
-                            </div>
+                              </p> */}
+                              </div>
 
-                            {/* Action Buttons - Always visible on desktop */}
-                            {(event.redirectLink || event.resourcesLink) && (
-                              <div
-                                className={`hidden md:flex ${event.redirectLink && event.resourcesLink ? "flex-row" : "flex-col"} gap-2 mt-4 pt-3 border-t border-white/10`}
-                              >
-                                {event.redirectLink && (
-                                  <a
-                                    href={
-                                      event._isRegistrationOpen
-                                        ? event.redirectLink
-                                        : "#"
-                                    }
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={`inline-flex flex-1 items-center justify-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 ${
-                                      event._isRegistrationOpen
-                                        ? "bg-gradient-to-r from-[#ba9efe] to-[#7a5cff] text-white hover:shadow-lg hover:shadow-[#7a5cff]/30"
-                                        : "bg-gray-700/80 text-gray-400 cursor-not-allowed"
-                                    }`}
-                                    onClick={(e) =>
-                                      !event._isRegistrationOpen &&
-                                      e.preventDefault()
-                                    }
-                                  >
-                                    {event._isRegistrationOpen
-                                      ? event.redirectLabel || "Register Now"
-                                      : "Registration Closed"}
-                                    {event._isRegistrationOpen && (
+                              {/* Action Buttons - Always visible on desktop */}
+                              {(event.redirectLink || event.resourcesLink) && (
+                                <div
+                                  className={`hidden md:flex ${event.redirectLink && event.resourcesLink ? "flex-row" : "flex-col"} gap-2 mt-4 pt-3 border-t border-white/10`}
+                                >
+                                  {event.redirectLink && (
+                                    <a
+                                      href={
+                                        event._isRegistrationOpen
+                                          ? event.redirectLink
+                                          : "#"
+                                      }
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className={`inline-flex flex-1 items-center justify-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 ${
+                                        event._isRegistrationOpen
+                                          ? "bg-gradient-to-r from-[#ba9efe] to-[#7a5cff] text-white hover:shadow-lg hover:shadow-[#7a5cff]/30"
+                                          : "bg-gray-700/80 text-gray-400 cursor-not-allowed"
+                                      }`}
+                                      onClick={(e) =>
+                                        !event._isRegistrationOpen &&
+                                        e.preventDefault()
+                                      }
+                                    >
+                                      {event._isRegistrationOpen
+                                        ? event.redirectLabel || "Register Now"
+                                        : "Registration Closed"}
+                                      {event._isRegistrationOpen && (
+                                        <svg
+                                          className="w-4 h-4"
+                                          fill="none"
+                                          stroke="currentColor"
+                                          viewBox="0 0 24 24"
+                                        >
+                                          <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                          />
+                                        </svg>
+                                      )}
+                                    </a>
+                                  )}
+                                  {event.resourcesLink && (
+                                    <a
+                                      href={event.resourcesLink}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="inline-flex flex-1 items-center justify-center gap-2 bg-white/5 text-white border border-[#ba9efe]/30 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-white/10 transition-all duration-200 hover:border-[#ba9efe]/60"
+                                    >
+                                      {event.resourcesLabel || "View Resources"}
                                       <svg
                                         className="w-4 h-4"
                                         fill="none"
@@ -523,61 +545,61 @@ const Page = () => {
                                           d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                                         />
                                       </svg>
-                                    )}
-                                  </a>
-                                )}
-                                {event.resourcesLink && (
-                                  <a
-                                    href={event.resourcesLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex flex-1 items-center justify-center gap-2 bg-white/5 text-white border border-[#ba9efe]/30 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-white/10 transition-all duration-200 hover:border-[#ba9efe]/60"
-                                  >
-                                    {event.resourcesLabel || "View Resources"}
-                                    <svg
-                                      className="w-4 h-4"
-                                      fill="none"
-                                      stroke="currentColor"
-                                      viewBox="0 0 24 24"
-                                    >
-                                      <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                                      />
-                                    </svg>
-                                  </a>
-                                )}
-                              </div>
-                            )}
+                                    </a>
+                                  )}
+                                </div>
+                              )}
 
-                            {/* Mobile-only Action Buttons */}
-                            {(event.redirectLink || event.resourcesLink) && (
-                              <div className="md:hidden flex gap-2 mt-3">
-                                {event.redirectLink && (
-                                  <a
-                                    href={
-                                      event._isRegistrationOpen
-                                        ? event.redirectLink
-                                        : "#"
-                                    }
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={`flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg font-semibold text-xs transition-all duration-200 ${
-                                      event._isRegistrationOpen
-                                        ? "bg-gradient-to-r from-[#ba9efe] to-[#7a5cff] text-white hover:shadow-lg"
-                                        : "bg-gray-600/50 text-gray-400 cursor-not-allowed"
-                                    }`}
-                                    onClick={(e) =>
-                                      !event._isRegistrationOpen &&
-                                      e.preventDefault()
-                                    }
-                                  >
-                                    {event._isRegistrationOpen
-                                      ? event.redirectLabel || "Register Now"
-                                      : "Registration Closed"}
-                                    {event._isRegistrationOpen && (
+                              {/* Mobile-only Action Buttons */}
+                              {(event.redirectLink || event.resourcesLink) && (
+                                <div className="md:hidden flex gap-2 mt-3">
+                                  {event.redirectLink && (
+                                    <a
+                                      href={
+                                        event._isRegistrationOpen
+                                          ? event.redirectLink
+                                          : "#"
+                                      }
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className={`flex-1 inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg font-semibold text-xs transition-all duration-200 ${
+                                        event._isRegistrationOpen
+                                          ? "bg-gradient-to-r from-[#ba9efe] to-[#7a5cff] text-white hover:shadow-lg"
+                                          : "bg-gray-600/50 text-gray-400 cursor-not-allowed"
+                                      }`}
+                                      onClick={(e) =>
+                                        !event._isRegistrationOpen &&
+                                        e.preventDefault()
+                                      }
+                                    >
+                                      {event._isRegistrationOpen
+                                        ? event.redirectLabel || "Register Now"
+                                        : "Registration Closed"}
+                                      {event._isRegistrationOpen && (
+                                        <svg
+                                          className="w-3 h-3"
+                                          fill="none"
+                                          stroke="currentColor"
+                                          viewBox="0 0 24 24"
+                                        >
+                                          <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                          />
+                                        </svg>
+                                      )}
+                                    </a>
+                                  )}
+                                  {event.resourcesLink && (
+                                    <a
+                                      href={event.resourcesLink}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="flex-1 inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-[#ba9efe]/30 px-3 py-2 rounded-lg font-semibold text-xs hover:bg-white/20 transition-all duration-200"
+                                    >
+                                      {event.resourcesLabel || "Resources"}
                                       <svg
                                         className="w-3 h-3"
                                         fill="none"
@@ -591,34 +613,11 @@ const Page = () => {
                                           d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                                         />
                                       </svg>
-                                    )}
-                                  </a>
-                                )}
-                                {event.resourcesLink && (
-                                  <a
-                                    href={event.resourcesLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex-1 inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-[#ba9efe]/30 px-3 py-2 rounded-lg font-semibold text-xs hover:bg-white/20 transition-all duration-200"
-                                  >
-                                    {event.resourcesLabel || "Resources"}
-                                    <svg
-                                      className="w-3 h-3"
-                                      fill="none"
-                                      stroke="currentColor"
-                                      viewBox="0 0 24 24"
-                                    >
-                                      <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                                      />
-                                    </svg>
-                                  </a>
-                                )}
-                              </div>
-                            )}
+                                    </a>
+                                  )}
+                                </div>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </div>
