@@ -8,6 +8,7 @@ interface Company {
   name: string;
   category: string;
   positions: string;
+  image: string;
 }
 
 interface CompanyCardsProps {
@@ -54,22 +55,33 @@ const CompanyCards = ({ company: internshipCompanies }: CompanyCardsProps) => {
           >
             <CardContent className="p-6 relative overflow-hidden">
               {/* Background decoration */}
-              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-100 to-transparent rounded-bl-full opacity-50 group-hover:opacity-70 transition-opacity duration-300"></div>
-              
-
-              {/* Company name */}
-              <h4 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-blue-900 transition-colors duration-300 leading-tight">
-                {company.name}
-              </h4>
-
-              {/* Category badge */}
-              <div className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold mb-3 border transition-all duration-300 ${getCategoryColor(company.category)}`}>
-                <MapPin className="w-3 h-3 mr-1" />
-                {company.category}
+              <div className="flex items-start gap-4">
+                {/* Company Logo */}
+                <div className="w-14 h-14 rounded-full bg-white p-1 border-2 border-gray-100 shadow-sm flex-shrink-0">
+                  <div className="w-full h-full rounded-full overflow-hidden bg-gray-50 flex items-center justify-center">
+                    <img 
+                      src={company.image} 
+                      alt={company.name}
+                      className="w-10 h-10 object-contain"
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <h4 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-blue-900 transition-colors duration-300 leading-tight">
+                    {company.name}
+                  </h4>
+                  
+                  {/* Category badge */}
+                  <div className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${getCategoryColor(company.category)}`}>
+                    <MapPin className="w-3 h-3 mr-1" />
+                    {company.category}
+                  </div>
+                </div>
               </div>
 
               {/* Positions */}
-              <p className="text-gray-600 text-sm leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
+              <p className="mt-3 text-gray-600 text-sm leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
                 {company.positions}
               </p>
 

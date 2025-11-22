@@ -15,7 +15,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import CompanyCards from "@/components/CompanyCards";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 
 interface Event {
   _id: string;
@@ -160,7 +160,7 @@ const internshipCompanies = [
     name: "ApkaAds",
     category: "Product Base",
     positions: "Product Manager",
-    image: "/images/company/apnada.png",
+    image: "/images/company/apkaads.png",
   },
   {
     name: "Syksha",
@@ -191,15 +191,20 @@ export default function EventsPage() {
       if (response.ok) {
         const data = await response.json();
         const now = new Date();
-        
+
         const processedEvents = data.map((event: Event) => {
           const eventDate = new Date(event.eventDate);
           const hasRegistration = !!event.redirectLink;
-          const expireDate = event.expireAt ? new Date(event.expireAt) : eventDate;
+          const expireDate = event.expireAt
+            ? new Date(event.expireAt)
+            : eventDate;
           const isRegistrationOpen = hasRegistration && expireDate > now;
-          const isRegistrationUpcoming = hasRegistration && new Date() < new Date(event.eventDate) && !isRegistrationOpen;
+          const isRegistrationUpcoming =
+            hasRegistration &&
+            new Date() < new Date(event.eventDate) &&
+            !isRegistrationOpen;
           const isEventEnded = eventDate < now;
-          
+
           return {
             ...event,
             _eventDate: eventDate,
@@ -207,10 +212,10 @@ export default function EventsPage() {
             _hasRegistration: hasRegistration,
             _isRegistrationOpen: isRegistrationOpen,
             _isRegistrationUpcoming: isRegistrationUpcoming,
-            _isEventEnded: isEventEnded
+            _isEventEnded: isEventEnded,
           };
         });
-        
+
         const getEventPriority = (event: any) => {
           if (event._isEventEnded) return 4; // Past events last
           if (!event._hasRegistration) return 3; // Events without registration
@@ -218,21 +223,18 @@ export default function EventsPage() {
           if (event._isRegistrationUpcoming) return 0; // Registration upcoming
           return 2; // Registration ended but event not completed
         };
-        
+
         const sortedEvents = processedEvents.sort((a: any, b: any) => {
           const aPriority = getEventPriority(a);
           const bPriority = getEventPriority(b);
-          
-          // Different priority levels
+
           if (aPriority !== bPriority) {
             return aPriority - bPriority;
           }
-          
-          // Same priority level, sort by date
-          if (aPriority === 4) { // For past events, newest first
+
+          if (aPriority === 4) {
             return b._eventDate.getTime() - a._eventDate.getTime();
           }
-          // For all other cases, soonest first
           return a._eventDate.getTime() - b._eventDate.getTime();
         });
 
@@ -309,18 +311,18 @@ export default function EventsPage() {
                           <div
                             className={`absolute top-4 right-4 text-xs px-3 py-1.5 rounded-full font-semibold shadow-md backdrop-blur-lg
                             ${
-                              event._isEventEnded 
-                                ? 'bg-gray-600/90 text-white' 
-                                : event._isRegistrationOpen 
-                                  ? 'bg-green-600/90 text-white' 
-                                  : 'bg-amber-600/90 text-white'
+                              event._isEventEnded
+                                ? "bg-gray-600/90 text-white"
+                                : event._isRegistrationOpen
+                                  ? "bg-green-600/90 text-white"
+                                  : "bg-amber-600/90 text-white"
                             }`}
                           >
-                            {event._isEventEnded 
-                              ? 'Event Ended' 
-                              : event._isRegistrationOpen 
-                                ? 'Registration Open' 
-                                : 'Registration Closed'}
+                            {event._isEventEnded
+                              ? "Event Ended"
+                              : event._isRegistrationOpen
+                                ? "Registration Open"
+                                : "Registration Closed"}
                           </div>
                         )}
                       </div>
@@ -352,14 +354,18 @@ export default function EventsPage() {
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {event.redirectLink && (
                               <Link
-                                href={event._isRegistrationOpen ? event.redirectLink : '#'}
+                                href={
+                                  event._isRegistrationOpen
+                                    ? event.redirectLink
+                                    : "#"
+                                }
                                 target="_blank"
                                 className={`relative flex items-center justify-center gap-2 px-4 py-2.5 
                                 rounded-lg font-semibold text-sm
                                 ${
                                   event._isRegistrationOpen
-                                    ? 'text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg hover:shadow-xl hover:-translate-y-1'
-                                    : 'text-gray-400 bg-gray-100 cursor-not-allowed'
+                                    ? "text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg hover:shadow-xl hover:-translate-y-1"
+                                    : "text-gray-400 bg-gray-100 cursor-not-allowed"
                                 } 
                                 transition-all duration-300`}
                                 onClick={(e) => {
@@ -369,9 +375,9 @@ export default function EventsPage() {
                                 }}
                               >
                                 <CalendarCheck className="w-4 h-4" />
-                                {event._isRegistrationOpen 
-                                  ? (event.redirectLabel || 'Register Now')
-                                  : 'Registration Closed'}
+                                {event._isRegistrationOpen
+                                  ? event.redirectLabel || "Register Now"
+                                  : "Registration Closed"}
                               </Link>
                             )}
 
@@ -393,17 +399,25 @@ export default function EventsPage() {
                           <div className="mt-4 text-xs text-center text-gray-500">
                             <Clock className="w-3.5 h-3.5 inline-block mr-1.5" />
                             {event._isEventEnded ? (
-                              <span className="text-red-500 font-medium">Event Ended</span>
+                              <span className="text-red-500 font-medium">
+                                Event Ended
+                              </span>
                             ) : !event._isRegistrationOpen ? (
-                              <span>Registration closed on{' '}
+                              <span>
+                                Registration closed on{" "}
                                 <span className="font-bold text-red-500">
-                                  {event.expireAt ? formatEventDate(event.expireAt) : formatEventDate(event.eventDate)}
+                                  {event.expireAt
+                                    ? formatEventDate(event.expireAt)
+                                    : formatEventDate(event.eventDate)}
                                 </span>
                               </span>
                             ) : (
-                              <span>Registration open until{' '}
+                              <span>
+                                Registration open until{" "}
                                 <span className="font-bold text-blue-600">
-                                  {event.expireAt ? formatEventDate(event.expireAt) : formatEventDate(event.eventDate)}
+                                  {event.expireAt
+                                    ? formatEventDate(event.expireAt)
+                                    : formatEventDate(event.eventDate)}
                                 </span>
                               </span>
                             )}
@@ -732,38 +746,57 @@ export default function EventsPage() {
             </h3>
 
             {/* Infinite Horizontal Scroll for Company Logos */}
-            <div className="mb-12 overflow-hidden">
-              <div className="flex animate-scroll space-x-8">
-                {/* First set of logos */}
-                {internshipCompanies.map((company, index) => (
-                  <div
-                    key={`first-${index}`}
-                    className="flex-shrink-0 w-32 h-20 bg-white rounded-lg shadow-sm p-4 flex items-center justify-center"
-                  >
-                    <Image
-                      src={company.image}
-                      alt={company.name}
-                      width={140}
-                      height={120}
-                      className="object-contain w-full h-full filter grayscale hover:grayscale-0 transition-all duration-300"
-                    />
-                  </div>
-                ))}
-                {/* Duplicate set for infinite scroll */}
-                {internshipCompanies.map((company, index) => (
-                  <div
-                    key={`second-${index}`}
-                    className="flex-shrink-0 w-32 h-20 bg-white rounded-lg shadow-sm p-4 flex items-center justify-center"
-                  >
-                    <Image
-                      src={company.image}
-                      alt={company.name}
-                      width={140}
-                      height={120}
-                      className="object-contain w-full h-full filter grayscale hover:grayscale-0 transition-all duration-300"
-                    />
-                  </div>
-                ))}
+            <div className="mb-12 overflow-hidden py-4">
+              <div className="flex items-center">
+                <style jsx global>{`
+                  @keyframes scroll {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-50%); }
+                  }
+                  .animate-scroll {
+                    animation: scroll 60s linear infinite;
+                    width: max-content;
+                    display: flex;
+                    align-items: center;
+                  }
+                  .animate-scroll:hover {
+                    animation-play-state: running !important;
+                  }
+                  .logo-container {
+                    transform-origin: center;
+                    transition: transform 0.3s ease;
+                    min-width: 100px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  }
+                  .logo-container img {
+                    max-height: 50px;
+                    width: auto;
+                    max-width: 120px;
+                  }
+                  .logo-container:hover {
+                    transform: scale(1.25);
+                  }
+                `}</style>
+                <div className="flex animate-scroll">
+                  {/* First set of logos */}
+                  {[...Array(4)].map((_, i) => (
+                    <Fragment key={`set-${i}`}>
+                      {internshipCompanies.map((company, index) => (
+                        <div key={`${i}-${index}`} className="logo-container flex-shrink-0 mx-6">
+                          <Image
+                            src={company.image}
+                            alt={company.name}
+                            width={100}
+                            height={50}
+                            className="object-contain max-h-[50px] w-auto"
+                          />
+                        </div>
+                      ))}
+                    </Fragment>
+                  ))}
+                </div>
               </div>
             </div>
 
