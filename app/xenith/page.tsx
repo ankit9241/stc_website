@@ -12,6 +12,7 @@ const poppins = Poppins({
 });
 import { AnimatePresence } from "framer-motion";
 import { Calendar } from "lucide-react";
+import { toIndianDateString } from "@/lib/formatDate";
 
 interface Event {
   _id: string;
@@ -135,11 +136,7 @@ const Page = () => {
   };
 
   const formatEventDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
+    return toIndianDateString(dateString);
   };
 
   return (

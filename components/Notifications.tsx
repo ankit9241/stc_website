@@ -1,83 +1,81 @@
-"use client"
-import React, { useState, useEffect } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Bell, Clock, AlertCircle, Loader2, ExternalLink } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
+"use client";
+import React, { useState, useEffect } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Bell, Clock, AlertCircle, Loader2, ExternalLink } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { toIndianDateString, toIndianDateTimeString } from "@/lib/formatDate";
 
 interface Notification {
-  _id: string
-  title: string
-  content: string
-  imageUrl?: string
-  createdAt: string
-  uploadedBy: string
-  isImportant: boolean
-  expireAt?: string
-  redirectLink?: string
-  redirectLabel?: string
+  _id: string;
+  title: string;
+  content: string;
+  imageUrl?: string;
+  createdAt: string;
+  uploadedBy: string;
+  isImportant: boolean;
+  expireAt?: string;
+  redirectLink?: string;
+  redirectLabel?: string;
 }
 
 const Notifications = () => {
-  const [notifications, setNotifications] = useState<Notification[]>([])
-  const [loading, setLoading] = useState(true)
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchNotifications()
-  }, [])
+    fetchNotifications();
+  }, []);
 
   const fetchNotifications = async () => {
     try {
-      const response = await fetch("/api/admin/notifications")
+      const response = await fetch("/api/admin/notifications");
       if (response.ok) {
-        const data = await response.json()
+        const data = await response.json();
         const activeNotifications = data.filter((notif: Notification) => {
-          if (!notif.expireAt) return true
-          return new Date(notif.expireAt) > new Date()
-        })
-        setNotifications(activeNotifications)
+          if (!notif.expireAt) return true;
+          return new Date(notif.expireAt) > new Date();
+        });
+        setNotifications(activeNotifications);
       }
     } catch (error) {
-      console.error("Error fetching notifications:", error)
+      console.error("Error fetching notifications:", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    const now = new Date()
+    const date = new Date(dateString);
+    const now = new Date();
     const diffInHours = Math.floor(
       (now.getTime() - date.getTime()) / (1000 * 60 * 60)
-    )
+    );
 
     if (diffInHours < 1) {
       const diffInMinutes = Math.floor(
         (now.getTime() - date.getTime()) / (1000 * 60)
-      )
-      return `${diffInMinutes} minute${diffInMinutes !== 1 ? "s" : ""} ago`
+      );
+      return `${diffInMinutes} minute${diffInMinutes !== 1 ? "s" : ""} ago`;
     } else if (diffInHours < 24) {
-      return `${diffInHours} hour${diffInHours !== 1 ? "s" : ""} ago`
+      return `${diffInHours} hour${diffInHours !== 1 ? "s" : ""} ago`;
     } else {
-      return date.toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: date.getFullYear() !== now.getFullYear() ? "numeric" : undefined,
-      })
+      // Use Indian DD/MM/YYYY for date display
+      return toIndianDateString(dateString);
     }
-  }
+  };
 
   if (loading) {
     return (
       <div className="flex justify-center items-center py-20">
         <Loader2 className="w-12 h-12 animate-spin text-[#1a4b8c]" />
       </div>
-    )
+    );
   }
 
   if (notifications.length === 0) {
-    return null
+    return null;
   }
 
   return (
@@ -144,17 +142,17 @@ const Notifications = () => {
                       </p>
                     </div>
                     {notification.redirectLink && (
-                    <div className="pb-4">
-                      <Link 
-                        href={notification.redirectLink}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                        className="inline-flex border border-gray-300/20 px-4 py-2 rounded-xl bg-blue-100 hover:bg-blue-500 hover:text-white items-center gap-1 text-sm text-blue-600  font-medium transition-colors"
-                      >
-                        {notification.redirectLabel || 'Learn More'}
-                      </Link>
-                    </div>
-                  )}
+                      <div className="pb-4">
+                        <Link
+                          href={notification.redirectLink}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                          className="inline-flex border border-gray-300/20 px-4 py-2 rounded-xl bg-blue-100 hover:bg-blue-500 hover:text-white items-center gap-1 text-sm text-blue-600  font-medium transition-colors"
+                        >
+                          {notification.redirectLabel || "Learn More"}
+                        </Link>
+                      </div>
+                    )}
                     <div className="pt-3 border-t border-gray-200 flex items-center text-xs text-gray-500 mt-auto">
                       <Clock className="w-3.5 h-3.5 mr-1" />
                       <span>{formatDate(notification.createdAt)}</span>
@@ -178,7 +176,7 @@ const Notifications = () => {
         )}
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Notifications
+export default Notifications;

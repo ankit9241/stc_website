@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import { toIndianDateString } from "@/lib/formatDate";
 
 interface Event {
   title: string;
@@ -44,9 +45,7 @@ const Timeline: React.FC<TimelineProps> = ({ events }) => {
           const active = activeIndex[date] ?? 0;
           const event = dayEvents[active];
           const formattedDate = new Date(date);
-          const day = formattedDate.getDate();
-          const month = formattedDate.toLocaleString("default", { month: "short" });
-          const dayOfWeek = formattedDate.toLocaleString("default", { weekday: "short" });
+          const indianDate = toIndianDateString(formattedDate);
 
           return (
             <div key={date} className="relative pl-10 pb-6">
@@ -58,19 +57,17 @@ const Timeline: React.FC<TimelineProps> = ({ events }) => {
                     <div className="bg-white px-2 py-1 rounded-r-full shadow-sm border border-l-0 border-gray-200 flex items-center">
                       <CalendarMonthIcon className="w-3 h-3 text-blue-500 mr-1.5" />
                       <span className="text-xs font-medium text-gray-700">
-                        {`${day} ${month}`}
+                        {indianDate}
                       </span>
                     </div>
                   </div>
                 </div>
 
-                <div 
-                  className="relative group transition-all duration-300"
-                >
+                <div className="relative group transition-all duration-300">
                   {/* Only show the active event */}
                   <div>
                     <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-400 to-blue-600 rounded-2xl opacity-5 group-hover:opacity-10 blur-sm transition duration-200"></div>
-                    
+
                     <div className="relative bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 active:shadow-md active:-translate-y-0.5">
                       {/* Header */}
                       <div className="relative overflow-hidden">
@@ -83,7 +80,11 @@ const Timeline: React.FC<TimelineProps> = ({ events }) => {
                               <img
                                 className="w-14 h-14 rounded-full object-cover border-2 border-white/30 shadow-lg"
                                 src={event.image || "/images/stc-logo.jpg"}
-                                alt={event.image ? `${event.club} logo` : "Default logo"}
+                                alt={
+                                  event.image
+                                    ? `${event.club} logo`
+                                    : "Default logo"
+                                }
                                 onError={(e) => {
                                   const target = e.target as HTMLImageElement;
                                   target.src = "/images/stc-logo.jpg";
@@ -114,11 +115,7 @@ const Timeline: React.FC<TimelineProps> = ({ events }) => {
                           <div className="flex items-center space-x-1.5">
                             <CalendarMonthIcon className="w-4 h-4 text-blue-500" />
                             <span className="text-xs font-medium text-gray-600">
-                              {formattedDate.toLocaleDateString("en-US", {
-                                year: "numeric",
-                                month: "short",
-                                day: "numeric",
-                              })}
+                              {toIndianDateString(formattedDate)}
                             </span>
                           </div>
                           <div className="flex items-center space-x-2">
@@ -171,8 +168,7 @@ const Timeline: React.FC<TimelineProps> = ({ events }) => {
           const event = dayEvents[active];
           const isLeft = i % 2 === 0;
           const formattedDate = new Date(date);
-          const day = formattedDate.getDate();
-          const month = formattedDate.toLocaleString("default", { month: "short" });
+          const indianDate = toIndianDateString(formattedDate);
 
           return (
             <div key={date} className="relative w-full flex items-stretch my-8">
@@ -181,7 +177,7 @@ const Timeline: React.FC<TimelineProps> = ({ events }) => {
                 <div className="h-full flex items-center">
                   <div className="relative group w-full">
                     <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-2xl opacity-5 group-hover:opacity-10 blur-sm transition duration-200"></div>
-                    
+
                     <div className="relative bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5">
                       {/* Header */}
                       <div className="relative overflow-hidden">
@@ -194,7 +190,11 @@ const Timeline: React.FC<TimelineProps> = ({ events }) => {
                               <img
                                 className="w-14 h-14 rounded-full object-cover border-2 border-white/30 shadow-lg"
                                 src={event.image || "/images/stc-logo.jpg"}
-                                alt={event.image ? `${event.club} logo` : "Default logo"}
+                                alt={
+                                  event.image
+                                    ? `${event.club} logo`
+                                    : "Default logo"
+                                }
                                 onError={(e) => {
                                   const target = e.target as HTMLImageElement;
                                   target.src = "/images/stc-logo.jpg";
@@ -225,11 +225,7 @@ const Timeline: React.FC<TimelineProps> = ({ events }) => {
                           <div className="flex items-center space-x-1.5">
                             <CalendarMonthIcon className="w-4 h-4 text-blue-500" />
                             <span className="text-xs font-medium text-gray-600">
-                              {formattedDate.toLocaleDateString("en-US", {
-                                year: "numeric",
-                                month: "short",
-                                day: "numeric",
-                              })}
+                              {toIndianDateString(formattedDate)}
                             </span>
                           </div>
                           <div className="flex items-center space-x-2">
@@ -278,16 +274,16 @@ const Timeline: React.FC<TimelineProps> = ({ events }) => {
                 </div>
                 <div className="relative z-10 w-16 h-16 rounded-full bg-white border-2 border-blue-500 flex items-center justify-center shadow-lg mx-auto hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 mt-6">
                   <div className="text-center">
-                    <div className="text-xl font-bold text-gray-800">{day}</div>
-                    <div className="text-xs text-blue-500 font-medium uppercase">
-                      {month}
+                    <div className="text-xs font-medium text-gray-700">
+                      {indianDate}
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className={`w-1/2 px-8 ${isLeft ? "order-3" : "order-1"}`}>
-              </div>
+              <div
+                className={`w-1/2 px-8 ${isLeft ? "order-3" : "order-1"}`}
+              ></div>
             </div>
           );
         })}

@@ -1,12 +1,31 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import React, { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-import { Loader2, Download, Eye, Trash2 } from 'lucide-react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Loader2, Download, Eye, Trash2 } from "lucide-react";
+import { toIndianDateString, toIndianDateTimeString } from "@/lib/formatDate";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 interface Submission {
   _id: string;
@@ -29,8 +48,10 @@ interface RegistrationTemplate {
 export default function RegistrationSubmissionsViewer() {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filterForm, setFilterForm] = useState<string>('all');
-  const [viewingSubmission, setViewingSubmission] = useState<Submission | null>(null);
+  const [filterForm, setFilterForm] = useState<string>("all");
+  const [viewingSubmission, setViewingSubmission] = useState<Submission | null>(
+    null
+  );
   const [formSlugs, setFormSlugs] = useState<string[]>([]);
   const [templates, setTemplates] = useState<RegistrationTemplate[]>([]);
 
@@ -41,52 +62,57 @@ export default function RegistrationSubmissionsViewer() {
 
   const fetchTemplates = async () => {
     try {
-      const response = await fetch('/api/admin/registration-templates');
+      const response = await fetch("/api/admin/registration-templates");
       if (response.ok) {
         const data = await response.json();
         setTemplates(data);
       }
     } catch (error) {
-      console.error('Error fetching templates:', error);
+      console.error("Error fetching templates:", error);
     }
   };
 
   const fetchSubmissions = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/admin/registration-submissions');
+      const response = await fetch("/api/admin/registration-submissions");
       if (response.ok) {
         const data = await response.json();
         setSubmissions(data);
-        
+
         // Extract unique form slugs
-        const slugs = [...new Set(data.map((s: Submission) => s.registrationSlug))] as string[];
+        const slugs = [
+          ...new Set(data.map((s: Submission) => s.registrationSlug)),
+        ] as string[];
         setFormSlugs(slugs);
       }
     } catch (error) {
-      console.error('Error fetching submissions:', error);
+      console.error("Error fetching submissions:", error);
     } finally {
       setLoading(false);
     }
   };
 
   const deleteSubmission = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this submission?')) return;
+    if (!confirm("Are you sure you want to delete this submission?")) return;
 
     try {
-      const response = await fetch(`/api/admin/registration-submissions?id=${id}`, {
-        method: 'DELETE'
-      });
+      const response = await fetch(
+        `/api/admin/registration-submissions?id=${id}`,
+        {
+          method: "DELETE",
+        }
+      );
 
       if (response.ok) {
-        setSubmissions(submissions.filter(s => s._id !== id));
+        setSubmissions(submissions.filter((s) => s._id !== id));
       } else {
         const error = await response.json();
-        alert(error.error || 'Failed to delete submission');
+        alert(error.error || "Failed to delete submission");
       }
     } catch (error) {
-      console.error('Error deleting submission:', error);
-      alert('Failed to delete submission');
+      console.error("Error deleting submission:", error);
+      alert("Failed to delete submission");
     }
   };
 
@@ -96,9 +122,9 @@ export default function RegistrationSubmissionsViewer() {
 
     // Get field labels from template
     const getFieldLabel = (key: string, slug: string): string => {
-      const template = templates.find(t => t.slug === slug);
+      const template = templates.find((t) => t.slug === slug);
       if (template) {
-        const field = template.fields.find(f => f.key === key);
+        const field = template.fields.find((f) => f.key === key);
         if (field) return field.label;
       }
       return key; // fallback to key if label not found
@@ -106,44 +132,50 @@ export default function RegistrationSubmissionsViewer() {
 
     // Get all unique keys from submissions
     const allKeys = new Set<string>();
-    filtered.forEach(sub => {
-      Object.keys(sub.data).forEach(key => allKeys.add(key));
+    filtered.forEach((sub) => {
+      Object.keys(sub.data).forEach((key) => allKeys.add(key));
     });
 
     // Use labels for headers
-    const headers = ['Submission ID', 'Form', 'Submitted At', ...Array.from(allKeys).map(key => {
-      // Get label from the first submission's template
-      const firstSlug = filtered[0]?.registrationSlug;
-      return getFieldLabel(key, firstSlug);
-    })];
-    
-    const rows = filtered.map(sub => [
+    const headers = [
+      "Submission ID",
+      "Form",
+      "Submitted At",
+      ...Array.from(allKeys).map((key) => {
+        // Get label from the first submission's template
+        const firstSlug = filtered[0]?.registrationSlug;
+        return getFieldLabel(key, firstSlug);
+      }),
+    ];
+
+    const rows = filtered.map((sub) => [
       sub._id,
       sub.registrationSlug,
-      new Date(sub.submittedAt).toLocaleString(),
-      ...Array.from(allKeys).map(key => {
+      toIndianDateTimeString(sub.submittedAt),
+      ...Array.from(allKeys).map((key) => {
         const value = sub.data[key];
-        return Array.isArray(value) ? value.join(', ') : value || '';
-      })
+        return Array.isArray(value) ? value.join(", ") : value || "";
+      }),
     ]);
 
     const csv = [
-      headers.join(','),
-      ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
-    ].join('\n');
+      headers.join(","),
+      ...rows.map((row) => row.map((cell) => `"${cell}"`).join(",")),
+    ].join("\n");
 
-    const blob = new Blob([csv], { type: 'text/csv' });
+    const blob = new Blob([csv], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
-    a.download = `registration-submissions-${filterForm}-${new Date().toLocaleString('en-IN')}.csv`;
+    a.download = `registration-submissions-${filterForm}-${toIndianDateTimeString(new Date())}.csv`;
     a.click();
     URL.revokeObjectURL(url);
   };
 
   const getFilteredSubmissions = () => {
-    return submissions.filter(sub => {
-      if (filterForm !== 'all' && sub.registrationSlug !== filterForm) return false;
+    return submissions.filter((sub) => {
+      if (filterForm !== "all" && sub.registrationSlug !== filterForm)
+        return false;
       return true;
     });
   };
@@ -170,8 +202,10 @@ export default function RegistrationSubmissionsViewer() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Forms</SelectItem>
-                {formSlugs.map(slug => (
-                  <SelectItem key={slug} value={slug}>{slug}</SelectItem>
+                {formSlugs.map((slug) => (
+                  <SelectItem key={slug} value={slug}>
+                    {slug}
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>
@@ -182,7 +216,9 @@ export default function RegistrationSubmissionsViewer() {
               <Loader2 className="w-8 h-8 animate-spin" />
             </div>
           ) : filtered.length === 0 ? (
-            <p className="text-center text-gray-500 py-8">No submissions found</p>
+            <p className="text-center text-gray-500 py-8">
+              No submissions found
+            </p>
           ) : (
             <div className="overflow-x-auto">
               <Table>
@@ -199,11 +235,15 @@ export default function RegistrationSubmissionsViewer() {
                 <TableBody>
                   {filtered.map((submission) => (
                     <TableRow key={submission._id}>
-                      <TableCell className="font-medium">{submission.registrationSlug}</TableCell>
-                      <TableCell>{submission.data.name || '-'}</TableCell>
-                      <TableCell>{submission.data.email || '-'}</TableCell>
-                      <TableCell>{submission.data.phone || '-'}</TableCell>
-                      <TableCell>{new Date(submission.submittedAt).toLocaleDateString()}</TableCell>
+                      <TableCell className="font-medium">
+                        {submission.registrationSlug}
+                      </TableCell>
+                      <TableCell>{submission.data.name || "-"}</TableCell>
+                      <TableCell>{submission.data.email || "-"}</TableCell>
+                      <TableCell>{submission.data.phone || "-"}</TableCell>
+                      <TableCell>
+                        {toIndianDateString(submission.submittedAt)}
+                      </TableCell>
                       <TableCell>
                         <div className="flex gap-2">
                           <Button
@@ -231,7 +271,10 @@ export default function RegistrationSubmissionsViewer() {
         </CardContent>
       </Card>
 
-      <Dialog open={!!viewingSubmission} onOpenChange={() => setViewingSubmission(null)}>
+      <Dialog
+        open={!!viewingSubmission}
+        onOpenChange={() => setViewingSubmission(null)}
+      >
         <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Submission Details</DialogTitle>
@@ -240,30 +283,48 @@ export default function RegistrationSubmissionsViewer() {
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Registration Form</p>
-                  <p className="text-sm">{viewingSubmission.registrationSlug}</p>
+                  <p className="text-sm font-medium text-gray-500">
+                    Registration Form
+                  </p>
+                  <p className="text-sm">
+                    {viewingSubmission.registrationSlug}
+                  </p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Submitted At</p>
-                  <p className="text-sm">{new Date(viewingSubmission.submittedAt).toLocaleString()}</p>
+                  <p className="text-sm font-medium text-gray-500">
+                    Submitted At
+                  </p>
+                  <p className="text-sm">
+                    {toIndianDateTimeString(viewingSubmission.submittedAt)}
+                  </p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Email Verified</p>
-                  <p className="text-sm">{viewingSubmission.metadata.emailVerified ? 'Yes' : 'No'}</p>
+                  <p className="text-sm font-medium text-gray-500">
+                    Email Verified
+                  </p>
+                  <p className="text-sm">
+                    {viewingSubmission.metadata.emailVerified ? "Yes" : "No"}
+                  </p>
                 </div>
               </div>
 
               <div className="border-t pt-4">
                 <h4 className="font-medium mb-3">Form Data</h4>
                 <div className="space-y-3">
-                  {Object.entries(viewingSubmission.data).map(([key, value]) => (
-                    <div key={key}>
-                      <p className="text-sm font-medium text-gray-500 capitalize">{key}</p>
-                      <p className="text-sm">
-                        {Array.isArray(value) ? value.join(', ') : String(value)}
-                      </p>
-                    </div>
-                  ))}
+                  {Object.entries(viewingSubmission.data).map(
+                    ([key, value]) => (
+                      <div key={key}>
+                        <p className="text-sm font-medium text-gray-500 capitalize">
+                          {key}
+                        </p>
+                        <p className="text-sm">
+                          {Array.isArray(value)
+                            ? value.join(", ")
+                            : String(value)}
+                        </p>
+                      </div>
+                    )
+                  )}
                 </div>
               </div>
             </div>

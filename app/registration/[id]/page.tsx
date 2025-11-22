@@ -1,62 +1,63 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from 'react'
-import { useParams, useRouter } from 'next/navigation'
-import Image from 'next/image'
-import { Loader2, Calendar, Users, ArrowLeft, FileText } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import Link from 'next/link'
-import DynamicRegistrationForm from '@/components/registration/DynamicRegistrationForm'
+import { useState, useEffect } from "react";
+import { useParams, useRouter } from "next/navigation";
+import Image from "next/image";
+import { Loader2, Calendar, Users, ArrowLeft, FileText } from "lucide-react";
+import { toIndianDateString } from "@/lib/formatDate";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import Link from "next/link";
+import DynamicRegistrationForm from "@/components/registration/DynamicRegistrationForm";
 
 interface RegistrationTemplate {
-  _id: string
-  name: string
-  slug: string
-  description: string
-  image?: string
-  fields: any[]
-  active: boolean
-  emailRestriction: 'all' | 'iitp'
-  createdAt: string
+  _id: string;
+  name: string;
+  slug: string;
+  description: string;
+  image?: string;
+  fields: any[];
+  active: boolean;
+  emailRestriction: "all" | "iitp";
+  createdAt: string;
 }
 
 export default function RegistrationFormPage() {
-  const params = useParams()
-  const router = useRouter()
-  const slug = params.id as string
-  
-  const [template, setTemplate] = useState<RegistrationTemplate | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
+  const params = useParams();
+  const router = useRouter();
+  const slug = params.id as string;
+
+  const [template, setTemplate] = useState<RegistrationTemplate | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchTemplate = async () => {
       try {
-        const response = await fetch(`/api/registration/${slug}`)
+        const response = await fetch(`/api/registration/${slug}`);
         if (response.ok) {
-          const data = await response.json()
-          setTemplate(data)
+          const data = await response.json();
+          setTemplate(data);
         } else {
-          setError(true)
+          setError(true);
         }
       } catch (err) {
-        console.error('Error fetching form:', err)
-        setError(true)
+        console.error("Error fetching form:", err);
+        setError(true);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
-    
-    fetchTemplate()
-  }, [slug])
+    };
+
+    fetchTemplate();
+  }, [slug]);
 
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center">
         <Loader2 className="w-12 h-12 animate-spin text-[#1a4b8c]" />
       </div>
-    )
+    );
   }
 
   if (error || !template) {
@@ -64,8 +65,12 @@ export default function RegistrationFormPage() {
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center p-4">
         <Card className="max-w-md w-full p-8 text-center">
           <FileText className="w-16 h-16 mx-auto mb-4 text-gray-300" />
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Form Not Found</h2>
-          <p className="text-gray-600 mb-6">This registration form does not exist or is no longer available.</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            Form Not Found
+          </h2>
+          <p className="text-gray-600 mb-6">
+            This registration form does not exist or is no longer available.
+          </p>
           <Link href="/registration">
             <Button className="bg-[#0f2a4d] hover:bg-[#1a4b8c]">
               <ArrowLeft className="w-4 h-4 mr-2" />
@@ -74,7 +79,7 @@ export default function RegistrationFormPage() {
           </Link>
         </Card>
       </div>
-    )
+    );
   }
 
   return (
@@ -116,20 +121,16 @@ export default function RegistrationFormPage() {
                   </p>
                 </div>
 
-                  <div className="flex items-center text-sm text-gray-600">
-                    <Calendar className="w-4 h-4 mr-3 text-[#1a4b8c]" />
-                    <span>
-                      Created {new Date(template.createdAt).toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                        year: 'numeric'
-                      })}
-                    </span>
-                  </div>
+                <div className="flex items-center text-sm text-gray-600">
+                  <Calendar className="w-4 h-4 mr-3 text-[#1a4b8c]" />
+                  <span>Created {toIndianDateString(template.createdAt)}</span>
+                </div>
 
                 <div className="pt-4 border-t border-gray-200">
                   <div className="bg-blue-50 rounded-lg p-4">
-                    <h3 className="font-semibold text-[#0f2a4d] mb-2 text-sm">📋 Instructions</h3>
+                    <h3 className="font-semibold text-[#0f2a4d] mb-2 text-sm">
+                      📋 Instructions
+                    </h3>
                     <ul className="text-sm text-gray-700 space-y-1">
                       <li>• Fill all required fields</li>
                       <li>• Verify your email with OTP</li>
@@ -148,5 +149,5 @@ export default function RegistrationFormPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

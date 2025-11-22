@@ -1,18 +1,19 @@
-import mongoose, {Schema} from 'mongoose';
-import { redirect } from 'next/dist/server/api-utils';
+import mongoose, { Schema } from "mongoose";
+import { redirect } from "next/dist/server/api-utils";
 
 const NotificationsSchema = new Schema({
-   title: { type: String, required: true },
-   content: { type: String, required: true },
-   imageUrl: String,
-   imageFileId: String,
-   redirectLink: String,
-   redirectLabel: String,
-   createdAt: { type: Date, default: Date.now },
-   uploadedBy: { type: String, required: true },
-   isImportant: { type: Boolean, default: false },
-   expireAt: Date
+  title: { type: String, required: true },
+  content: { type: String, required: true },
+  imageUrl: String,
+  imageFileId: String,
+  redirectLink: String,
+  redirectLabel: String,
+  createdAt: { type: Date, default: Date.now },
+  uploadedBy: { type: String, required: true },
+  isImportant: { type: Boolean, default: false },
 });
 
-const Notifications = mongoose.models.Notifications || mongoose.model('Notifications', NotificationsSchema);
+const Notifications =
+  mongoose.models.Notifications ||
+  mongoose.model("Notifications", NotificationsSchema);
 export default Notifications;

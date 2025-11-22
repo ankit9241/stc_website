@@ -16,6 +16,7 @@ import Link from "next/link";
 import Image from "next/image";
 import CompanyCards from "@/components/CompanyCards";
 import { useState, useEffect, Fragment } from "react";
+import { toIndianDateString } from "@/lib/formatDate";
 
 interface Event {
   _id: string;
@@ -31,7 +32,6 @@ interface Event {
   redirectLabel?: string;
   resourcesLink?: string;
   resourcesLabel?: string;
-  // Internal properties added during processing
   _eventDate?: Date;
   _expireDate?: Date;
   _isRegistrationOpen?: boolean;
@@ -248,11 +248,7 @@ export default function EventsPage() {
   };
 
   const formatEventDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    });
+    return toIndianDateString(dateString);
   };
 
   return (
@@ -393,33 +389,6 @@ export default function EventsPage() {
                                 <Download className="w-4 h-4" />
                                 {event.resourcesLabel || "Rulebook"}
                               </Link>
-                            )}
-                          </div>
-
-                          <div className="mt-4 text-xs text-center text-gray-500">
-                            <Clock className="w-3.5 h-3.5 inline-block mr-1.5" />
-                            {event._isEventEnded ? (
-                              <span className="text-red-500 font-medium">
-                                Event Ended
-                              </span>
-                            ) : !event._isRegistrationOpen ? (
-                              <span>
-                                Registration closed on{" "}
-                                <span className="font-bold text-red-500">
-                                  {event.expireAt
-                                    ? formatEventDate(event.expireAt)
-                                    : formatEventDate(event.eventDate)}
-                                </span>
-                              </span>
-                            ) : (
-                              <span>
-                                Registration open until{" "}
-                                <span className="font-bold text-blue-600">
-                                  {event.expireAt
-                                    ? formatEventDate(event.expireAt)
-                                    : formatEventDate(event.eventDate)}
-                                </span>
-                              </span>
                             )}
                           </div>
                         </div>
@@ -639,8 +608,8 @@ export default function EventsPage() {
                               isWinner
                                 ? "bg-yellow-100 text-yellow-800 border border-yellow-300"
                                 : isFirstRunner
-                                ? "bg-gray-100 text-gray-800 border border-gray-300"
-                                : "bg-orange-100 text-orange-800 border border-orange-300"
+                                  ? "bg-gray-100 text-gray-800 border border-gray-300"
+                                  : "bg-orange-100 text-orange-800 border border-orange-300"
                             }
                           `}
                         >
@@ -661,13 +630,15 @@ export default function EventsPage() {
                         <h4 className="text-2xl font-bold text-gray-900 mb-1">
                           {winner.teamName}
                         </h4>
-                        <p className={`text-lg font-semibold ${
-                          isWinner
-                            ? "text-yellow-600"
-                            : isFirstRunner
-                            ? "text-gray-700"
-                            : "text-orange-600"
-                        }`}>
+                        <p
+                          className={`text-lg font-semibold ${
+                            isWinner
+                              ? "text-yellow-600"
+                              : isFirstRunner
+                                ? "text-gray-700"
+                                : "text-orange-600"
+                          }`}
+                        >
                           {winner.prize}
                         </p>
                       </div>
@@ -687,7 +658,10 @@ export default function EventsPage() {
                         </h5>
                         <ul className="space-y-1.5">
                           {winner.members.map((member, memberIndex) => (
-                            <li key={memberIndex} className="text-sm text-gray-700 flex items-center gap-2">
+                            <li
+                              key={memberIndex}
+                              className="text-sm text-gray-700 flex items-center gap-2"
+                            >
                               <span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span>
                               {member}
                             </li>
@@ -695,7 +669,6 @@ export default function EventsPage() {
                         </ul>
                       </div>
                     </CardContent>
-
                   </Card>
                 );
               })}
@@ -774,8 +747,12 @@ export default function EventsPage() {
               <div className="flex items-center">
                 <style jsx global>{`
                   @keyframes scroll {
-                    0% { transform: translateX(0); }
-                    100% { transform: translateX(-50%); }
+                    0% {
+                      transform: translateX(0);
+                    }
+                    100% {
+                      transform: translateX(-50%);
+                    }
                   }
                   .animate-scroll {
                     animation: scroll 60s linear infinite;
@@ -808,7 +785,10 @@ export default function EventsPage() {
                   {[...Array(4)].map((_, i) => (
                     <Fragment key={`set-${i}`}>
                       {internshipCompanies.map((company, index) => (
-                        <div key={`${i}-${index}`} className="logo-container flex-shrink-0 mx-6">
+                        <div
+                          key={`${i}-${index}`}
+                          className="logo-container flex-shrink-0 mx-6"
+                        >
                           <Image
                             src={company.image}
                             alt={company.name}
