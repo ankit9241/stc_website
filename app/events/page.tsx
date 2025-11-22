@@ -608,73 +608,97 @@ export default function EventsPage() {
             </div>
           </div>
 
-          {/* Winners Section */}
-          <div className="mb-16">
-            <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+          <div className="mb-24">
+            <h3 className="text-4xl font-extrabold text-gray-900 text-center mb-14 tracking-tight">
               Hackathon Winners
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {hackathonWinners.map((winner, index) => (
-                <Card
-                  key={index}
-                  className={`group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 ${
-                    winner.position === "Winner" ? "ring-2 ring-yellow-400" : ""
-                  }`}
-                >
-                  <CardContent className="p-6">
-                    <div className="text-center mb-4">
-                      <div
-                        className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold mb-4 ${
-                          winner.position === "Winner"
-                            ? "bg-yellow-100 text-yellow-800"
-                            : winner.position === "1st Runner Up"
-                              ? "bg-gray-100 text-gray-800"
-                              : "bg-orange-100 text-orange-800"
-                        }`}
-                      >
-                        <Trophy className="w-4 h-4 mr-1" />
-                        {winner.position}
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+              {hackathonWinners.map((winner, index) => {
+                const isWinner = winner.position === "Winner";
+                const isFirstRunner = winner.position === "1st Runner Up";
+
+                return (
+                  <Card
+                    key={index}
+                    className={`
+                      group relative overflow-hidden rounded-3xl 
+                      bg-white shadow-lg border border-gray-100
+                      transition-all duration-500 hover:-translate-y-2 
+                      hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)]
+                      ${isWinner ? "ring-4 ring-yellow-400/60" : ""}
+                    `}
+                  >
+                    <CardContent className="p-8">
+                      <div className="flex justify-center">
+                        <div
+                          className={`
+                            px-4 py-1.5 rounded-full text-sm font-semibold mb-6 shadow
+                            flex items-center gap-1.5
+                            ${
+                              isWinner
+                                ? "bg-yellow-100 text-yellow-800 border border-yellow-300"
+                                : isFirstRunner
+                                ? "bg-gray-100 text-gray-800 border border-gray-300"
+                                : "bg-orange-100 text-orange-800 border border-orange-300"
+                            }
+                          `}
+                        >
+                          <Trophy className="w-4 h-4" />
+                          {winner.position}
+                        </div>
                       </div>
-                      <img
-                        src={winner.image || "/placeholder.svg"}
-                        alt={`${winner.teamName} team`}
-                        className="w-full h-48 object-cover rounded-lg mb-4"
-                      />
-                      <h4 className="text-xl font-bold text-gray-900 mb-2">
-                        {winner.teamName}
-                      </h4>
-                      <p className="text-lg font-semibold text-blue-600 mb-4">
-                        {winner.prize}
-                      </p>
-                    </div>
 
-                    <div className="mb-4">
-                      <h5 className="font-semibold text-gray-900 mb-2">
-                        Project:
-                      </h5>
-                      <p className="text-gray-700 text-sm mb-4">
-                        {winner.project}
-                      </p>
-                    </div>
+                      <div className="w-full h-56 mb-6 rounded-2xl overflow-hidden border border-gray-200 shadow-sm bg-gray-50 group-hover:shadow-xl transition-all duration-500">
+                        <img
+                          src={winner.image || "/placeholder.svg"}
+                          alt={`${winner.teamName} team`}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
 
-                    <div>
-                      <h5 className="font-semibold text-gray-900 mb-2">
-                        Team Members:
-                      </h5>
-                      <ul className="space-y-1">
-                        {winner.members.map((member, memberIndex) => (
-                          <li
-                            key={memberIndex}
-                            className="text-sm text-gray-600"
-                          >
-                            {member}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                      <div className="text-center mb-8">
+                        <h4 className="text-2xl font-bold text-gray-900 mb-1">
+                          {winner.teamName}
+                        </h4>
+                        <p className={`text-lg font-semibold ${
+                          isWinner
+                            ? "text-yellow-600"
+                            : isFirstRunner
+                            ? "text-gray-700"
+                            : "text-orange-600"
+                        }`}>
+                          {winner.prize}
+                        </p>
+                      </div>
+
+                      <div className="mb-8">
+                        <h5 className="font-semibold text-gray-900 mb-2 text-base">
+                          Project
+                        </h5>
+                        <p className="text-gray-600 text-sm leading-relaxed">
+                          {winner.project}
+                        </p>
+                      </div>
+
+                      <div>
+                        <h5 className="font-semibold text-gray-900 mb-3 text-base">
+                          Team Members
+                        </h5>
+                        <ul className="space-y-1.5">
+                          {winner.members.map((member, memberIndex) => (
+                            <li key={memberIndex} className="text-sm text-gray-700 flex items-center gap-2">
+                              <span className="w-1.5 h-1.5 bg-blue-600 rounded-full"></span>
+                              {member}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </CardContent>
+
+                  </Card>
+                );
+              })}
             </div>
           </div>
         </div>
