@@ -122,10 +122,10 @@ const Notifications = () => {
                         <div className="absolute top-3 right-3">
                           <Badge
                             variant="destructive"
-                            className="flex items-center gap-1 bg-red-600 text-white"
+                            className="flex items-center gap-1 bg-green-600 text-white"
                           >
                             <AlertCircle className="w-3 h-3" />
-                            Important
+                            Registration Live
                           </Badge>
                         </div>
                       )}

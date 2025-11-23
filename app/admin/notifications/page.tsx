@@ -276,8 +276,8 @@ export default function AdminNotificationsPage() {
             {notification.title}
           </h3>
           {notification.isImportant && (
-            <span className="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded ml-2">
-              Important
+            <span className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded ml-2">
+              Registration Live
             </span>
           )}
         </div>
@@ -530,7 +530,7 @@ export default function AdminNotificationsPage() {
                 }
                 className="w-4 h-4"
               />
-              <Label htmlFor="isImportant">Mark as Important</Label>
+              <Label htmlFor="isImportant">Registration Live</Label>
             </div>
 
             <div className="flex gap-2 pt-4">
