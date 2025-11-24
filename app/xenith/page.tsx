@@ -984,7 +984,7 @@ const Page = () => {
                         </h3>
 
                         <p className="text-gray-400 text-sm md:text-base text-center mb-4 group-hover:text-gray-300 transition-colors">
-                          Official Sponsor
+                          AI Sponsor
                         </p>
                       </div>
                       <div className="absolute inset-0 rounded-2xl border-2 border-[#ba9efe]/0 group-hover:border-[#ba9efe]/30 group-hover:scale-105 transition-all duration-700"></div>
