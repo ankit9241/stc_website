@@ -165,16 +165,6 @@ const developers = [
       "Played a key role in development, providing technical direction and implementing critical features that elevated the website's capabilities.",
   },
   {
-    name: "Hridyanand Gupta",
-    designation: "Treasurer",
-    department: "STC Development Team",
-    image: "/hridyanand.png",
-    email: "hridayanand_2312res301@iitp.ac.in",
-    linkedin: "https://www.linkedin.com/in/hridayanand-gupta-abb501304/",
-    description:
-      "Provided strategic oversight and quality assurance, ensuring the website met the highest standards of functionality and design excellence.",
-  },
-  {
     name: "Vatsal Srivastava",
     designation: "Webwiser Member",
     department: "STC Development Team",
