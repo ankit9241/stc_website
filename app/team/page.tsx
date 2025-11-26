@@ -4,9 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Linkedin, Mail, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-
-// Metadata must be in a server component
-// This will be handled by the layout or page component
+import AppConfig from "@/config/appConfig";
+import domains from "@/DataStore/store";
 
 const coreTeam = [
   {
@@ -112,708 +111,71 @@ const councilMembers = [
     description:
       "Leading the Arthniti Cell and coordinating its activities. Skilled in financial analysis and team leadership.",
   }
-]
-
-const _teamMembers = [
-  // Creatives Team Members
-  {
-    name: "Shivam Kumar",
-    designation: "Graphic Designer",
-    department: "Creatives Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "shivam.kumar@iitp.ac.in",
-    linkedin: "#",
-    team: "Creatives",
-  },
-  {
-    name: "Sudhanshu Kumar",
-    designation: "Graphic Designer",
-    department: "Creatives Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "sudhanshu.kumar@iitp.ac.in",
-    linkedin: "#",
-    team: "Creatives",
-  },
-  {
-    name: "Shashank Bharti",
-    designation: "Graphic Designer",
-    department: "Creatives Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "shashank.bharti@iitp.ac.in",
-    linkedin: "#",
-    team: "Creatives",
-  },
-  {
-    name: "Badal Raj",
-    designation: "UX Mentor",
-    department: "Creatives Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "badal.raj@iitp.ac.in",
-    linkedin: "#",
-    team: "Creatives",
-  },
-  {
-    name: "Akshay Bolan",
-    designation: "Graphic Designer",
-    department: "Creatives Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "akshay.bolan@iitp.ac.in",
-    linkedin: "#",
-    team: "Creatives",
-  },
-  {
-    name: "Yuvraj",
-    designation: "Video Editor",
-    department: "Creatives Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "yuvraj@iitp.ac.in",
-    linkedin: "#",
-    team: "Creatives",
-  },
-  {
-    name: "Aryan Kumar",
-    designation: "Video Editor",
-    department: "Creatives Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "aryan.kumar@iitp.ac.in",
-    linkedin: "#",
-    team: "Creatives",
-  },
-
-  // PR and External Team Members
-  {
-    name: "Krishna Mittal",
-    designation: "PR Team Member",
-    department: "PR & External Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "krishna.mittal@iitp.ac.in",
-    linkedin: "#",
-    team: "PR & External",
-  },
-  {
-    name: "Kriti Kri. Bhalotiya",
-    designation: "PR Team Member",
-    department: "PR & External Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "kriti.bhalotiya@iitp.ac.in",
-    linkedin: "#",
-    team: "PR & External",
-  },
-  {
-    name: "Prateek Sharma",
-    designation: "PR Team Member",
-    department: "PR & External Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "prateek.sharma@iitp.ac.in",
-    linkedin: "#",
-    team: "PR & External",
-  },
-
-  // Event & Management Team Members
-  {
-    name: "Alquama",
-    designation: "Onsite Manager",
-    department: "Event & Management Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "alquama@iitp.ac.in",
-    linkedin: "#",
-    team: "Event & Management",
-  },
-  {
-    name: "Shaibu",
-    designation: "Onsite & Outreach",
-    department: "Event & Management Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "shaibu@iitp.ac.in",
-    linkedin: "#",
-    team: "Event & Management",
-  },
-  {
-    name: "Tushar Parihar",
-    designation: "Management",
-    department: "Event & Management Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "tushar.parihar@iitp.ac.in",
-    linkedin: "#",
-    team: "Event & Management",
-  },
-  {
-    name: "Hrishikesh Nayak",
-    designation: "Audience & Outreach",
-    department: "Event & Management Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "hrishikesh.nayak@iitp.ac.in",
-    linkedin: "#",
-    team: "Event & Management",
-  },
-  {
-    name: "Harshit",
-    designation: "Support Crew",
-    department: "Event & Management Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "harshit@iitp.ac.in",
-    linkedin: "#",
-    team: "Event & Management",
-  },
-  {
-    name: "Aadarsh Gopal Kumar",
-    designation: "Management",
-    department: "Event & Management Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "aadarsh.gopal@iitp.ac.in",
-    linkedin: "#",
-    team: "Event & Management",
-  },
-  {
-    name: "Krishna Kumar",
-    designation: "Management",
-    department: "Event & Management Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "krishna.kumar@iitp.ac.in",
-    linkedin: "#",
-    team: "Event & Management",
-  },
-
-  // Finance Team Members
-  {
-    name: "Shivansh Verma",
-    designation: "Finance & Management",
-    department: "Finance Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "shivansh.verma@iitp.ac.in",
-    linkedin: "#",
-    team: "Finance",
-  },
-  {
-    name: "Rishabh Yadav",
-    designation: "Finance & Management",
-    department: "Finance Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "rishabh.yadav@iitp.ac.in",
-    linkedin: "#",
-    team: "Finance",
-  },
-
-  // WebWiser Team Members
-  {
-    name: "Mohammad Hasan",
-    designation: "Web Developer",
-    department: "WebWiser Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "mohammad.hasan@iitp.ac.in",
-    linkedin: "#",
-    team: "WebWiser",
-  },
-  {
-    name: "Anupriya Kumari",
-    designation: "Web Developer",
-    department: "WebWiser Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "anupriya.kumari@iitp.ac.in",
-    linkedin: "#",
-    team: "WebWiser",
-  },
-  {
-    name: "Sanu Kumar",
-    designation: "Web Developer",
-    department: "WebWiser Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "sanu.kumar@iitp.ac.in",
-    linkedin: "#",
-    team: "WebWiser",
-  },
-  {
-    name: "Vatsal Srivastava",
-    designation: "Web Developer",
-    department: "WebWiser Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "vatsal.srivastava@iitp.ac.in",
-    linkedin: "#",
-    team: "WebWiser",
-  },
-
-  // Pixelerate Team Members
-  {
-    name: "Tannu",
-    designation: "UI/UX Designer",
-    department: "Pixelerate Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "tannu@iitp.ac.in",
-    linkedin: "#",
-    team: "Pixelerate",
-  },
-
-  // Coding & CP Team Members
-  {
-    name: "Ansh Raj",
-    designation: "Competitive Programmer",
-    department: "Coding & CP Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "ansh.raj@iitp.ac.in",
-    linkedin: "#",
-    team: "Coding & CP",
-  },
-  {
-    name: "Rahul Raj",
-    designation: "Competitive Programmer",
-    department: "Coding & CP Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "rahul.raj@iitp.ac.in",
-    linkedin: "#",
-    team: "Coding & CP",
-  },
-
-  // Synapse Team Members
-  {
-    name: "Purnasha Priya",
-    designation: "AI/ML Developer",
-    department: "Synapse Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "purnasha.priya@iitp.ac.in",
-    linkedin: "#",
-    team: "Synapse",
-  },
-  {
-    name: "Ashank Gupta",
-    designation: "AI/ML Developer",
-    department: "Synapse Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "ashank.gupta@iitp.ac.in",
-    linkedin: "#",
-    team: "Synapse",
-  },
-
-  // Analytical Arena Team Members
-  {
-    name: "Rajeev Kumar",
-    designation: "Data Scientist",
-    department: "Analytical Arena Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "rajeev.kumar@iitp.ac.in",
-    linkedin: "#",
-    team: "Analytical Arena",
-  },
-  {
-    name: "Anurag Varma",
-    designation: "Data Scientist",
-    department: "Analytical Arena Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "anurag.varma@iitp.ac.in",
-    linkedin: "#",
-    team: "Analytical Arena",
-  },
-  {
-    name: "Alok Ranjan",
-    designation: "Data Scientist",
-    department: "Analytical Arena Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "alok.ranjan@iitp.ac.in",
-    linkedin: "#",
-    team: "Analytical Arena",
-  },
-  {
-    name: "Aditya Mahto",
-    designation: "Data Scientist",
-    department: "Analytical Arena Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "aditya.mahto@iitp.ac.in",
-    linkedin: "#",
-    team: "Analytical Arena",
-  },
-  {
-    name: "Gaurav Kumar",
-    designation: "Data Scientist",
-    department: "Analytical Arena Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "gaurav.kumar@iitp.ac.in",
-    linkedin: "#",
-    team: "Analytical Arena",
-  },
-
-  // Cybersecurity Team Members
-  {
-    name: "Goutam Kr. Sah",
-    designation: "Cybersecurity Specialist",
-    department: "Cybersecurity Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "goutam.sah@iitp.ac.in",
-    linkedin: "#",
-    team: "Cybersecurity",
-  },
-  {
-    name: "Hariom Kumar",
-    designation: "Cybersecurity Specialist",
-    department: "Cybersecurity Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "hariom.kumar@iitp.ac.in",
-    linkedin: "#",
-    team: "Cybersecurity",
-  },
-
-  // App Dev Team Members
-  {
-    name: "Aditya Kumar",
-    designation: "App Developer",
-    department: "App Dev Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "aditya.kumar@iitp.ac.in",
-    linkedin: "#",
-    team: "App Dev",
-  },
-  {
-    name: "Rishabh Raj",
-    designation: "App Developer",
-    department: "App Dev Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "rishabh.raj@iitp.ac.in",
-    linkedin: "#",
-    team: "App Dev",
-  },
-
-  // Session & Webinar Team Members
-  {
-    name: "Vikas Kr. Garg",
-    designation: "Session Coordinator",
-    department: "Session & Webinar Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "vikas.garg@iitp.ac.in",
-    linkedin: "#",
-    team: "Session & Webinar",
-  },
-  {
-    name: "Sumit Kr. Thakur",
-    designation: "Session Coordinator",
-    department: "Session & Webinar Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "sumit.thakur@iitp.ac.in",
-    linkedin: "#",
-    team: "Session & Webinar",
-  },
-
-  // Hackathon Team Members
-  {
-    name: "Ritik Kumar",
-    designation: "Hackathon Organizer",
-    department: "Hackathon Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "ritik.kumar@iitp.ac.in",
-    linkedin: "#",
-    team: "Hackathon",
-  },
-  {
-    name: "Arya Singh",
-    designation: "Hackathon Organizer",
-    department: "Hackathon Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "arya.singh@iitp.ac.in",
-    linkedin: "#",
-    team: "Hackathon",
-  },
-
-  // Tech News Team Members
-  {
-    name: "Shreya Anand",
-    designation: "Content Writer",
-    department: "Tech News Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "shreya.anand@iitp.ac.in",
-    linkedin: "#",
-    team: "Tech News",
-  },
-  {
-    name: "Rishik Kr. Chaurasiya",
-    designation: "Content Writer",
-    department: "Tech News Team",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "rishik.chaurasiya@iitp.ac.in",
-    linkedin: "#",
-    team: "Tech News",
-  },
 ];
 
-const _teamLeads = [
-  // Creatives Team
+const developers = [
   {
-    name: "Satyam Kumar",
-    designation: "Creatives Team Lead",
-    department: "Graphic Design",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "satyam.kumar@iitp.ac.in",
-    linkedin: "#",
-    team: "Creatives",
+    name: "Ankit Kumar",
+    designation: "Pixelerate Sub-Coordinator",
+    department: "Website Development Team",
+    image: AppConfig.imageUrls.Ankit,
+    email: "ankit_24a12res103@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/ankit-kumar-0435b8257",
+    description: "Led Frontend development and provided crucial Backend support, ensuring seamless integration and optimal performance across the website.",
   },
   {
-    name: "Sahil Kumar",
-    designation: "Creatives Team Co-Lead",
-    department: "Graphic Design",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "sahil.kumar@iitp.ac.in",
-    linkedin: "#",
-    team: "Creatives",
-  },
-
-  // PR and External Team
-  {
-    name: "Sahil Raj",
-    designation: "PR & External Coordinator",
-    department: "Public Relations",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "sahil.raj@iitp.ac.in",
-    linkedin: "#",
-    team: "PR & External",
-  },
-  {
-    name: "Krishan Raj",
-    designation: "PR & External Sub-Coordinator",
-    department: "Public Relations",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "krishan.raj@iitp.ac.in",
-    linkedin: "#",
-    team: "PR & External",
-  },
-
-  // Event & Management Team
-  {
-    name: "Shubhanshu",
-    designation: "Event & Management Lead",
-    department: "Event Management",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "shubhanshu@iitp.ac.in",
-    linkedin: "#",
-    team: "Event & Management",
-  },
-  {
-    name: "Aayush Kumar",
-    designation: "Event & Management Co-Lead",
-    department: "Event Management",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "aayush.kumar@iitp.ac.in",
-    linkedin: "#",
-    team: "Event & Management",
-  },
-
-  // Finance Team
-  {
-    name: "Ayush Jha",
-    designation: "Finance Team Lead",
-    department: "Finance & Management",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "ayush.jha@iitp.ac.in",
-    linkedin: "#",
-    team: "Finance",
-  },
-  {
-    name: "Aditya Ghosh",
-    designation: "Finance Team Co-Lead",
-    department: "Finance & Management",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "aditya.ghosh@iitp.ac.in",
-    linkedin: "#",
-    team: "Finance",
-  },
-];
-
-const _technicalLeads = [
-  // WebWiser (Web Dev) Team
-  {
-    name: "Hridyanand Gupta",
-    designation: "WebWiser Coordinator",
-    department: "Web Development",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "hridyanand.gupta@iitp.ac.in",
-    linkedin: "#",
-    team: "WebWiser",
+    name: "Mandeep Nagar",
+    designation: "WebWiser Member",
+    department: "Website Development Team",
+    image: AppConfig.imageUrls.Mandeep,
+    email: "mandeep_25s12res200@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/mandeepnagar",
+    description: "Spearheaded Backend architecture while contributing to frontend components, focusing on creating a robust and scalable web application.",
   },
   {
     name: "Mohit Kumar",
-    designation: "WebWiser Sub-Coordinator",
-    department: "Web Development",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "mohit.kumar@iitp.ac.in",
-    linkedin: "#",
-    team: "WebWiser",
-  },
-
-  // Pixelerate (UI/UX) Team
-  {
-    name: "Aryan Singh",
-    designation: "Pixelerate Coordinator",
-    department: "UI/UX Design",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "aryan.singh@iitp.ac.in",
-    linkedin: "#",
-    team: "Pixelerate",
-  },
-  {
-    name: "Pratap Kr. Singh",
-    designation: "Pixelerate Sub-Coordinator",
-    department: "UI/UX Design",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "pratap.singh@iitp.ac.in",
-    linkedin: "#",
-    team: "Pixelerate",
-  },
-
-  // Coding and CP Team
-  {
-    name: "Ramdeep Singh",
-    designation: "Coding & CP Coordinator",
-    department: "Competitive Programming",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "ramdeep.singh@iitp.ac.in",
-    linkedin: "#",
-    team: "Coding & CP",
+    designation: "WebWiser Coordinator",
+    department: "Website Development Team",
+    image: AppConfig.imageUrls.MohitWebWiser,
+    email: "mohit_2312res394@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/mohiitp",
+    description: "Provided expert guidance and technical insights throughout the development process, helping shape the website's architecture and features.",
   },
   {
     name: "Abhijeet Kumar",
-    designation: "Coding & CP Sub-Coordinator",
-    department: "Competitive Programming",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "abhijeet.kumar@iitp.ac.in",
-    linkedin: "#",
-    team: "Coding & CP",
-  },
-
-  // Synapse (AI/ML/DL) Team
-  {
-    name: "Ankit Kumar",
-    designation: "Synapse Coordinator",
-    department: "AI/ML/Deep Learning",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "ankit.kumar@iitp.ac.in",
-    linkedin: "#",
-    team: "Synapse",
+    designation: "Codered Sub-Coordinator",
+    department: "Website Development Team",
+    image: AppConfig.imageUrls.AbhijeetKumar,
+    email: "abhijeet_2312res11@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/abhijeetiitp/",
+    description: "Contributed valuable expertise in web development, offering solutions and optimizations that enhanced the website's functionality and user experience.",
   },
   {
-    name: "Harsh Kumar",
-    designation: "Synapse Sub-Coordinator",
-    department: "AI/ML/Deep Learning",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "harsh.kumar@iitp.ac.in",
-    linkedin: "#",
-    team: "Synapse",
-  },
-
-  // Analytical Arena (Data Science) Team
-  {
-    name: "Alok Kr. Choudhary",
-    designation: "Analytical Arena Coordinator",
-    department: "Data Science",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "alok.choudhary@iitp.ac.in",
-    linkedin: "#",
-    team: "Analytical Arena",
+    name: "Abhishek Mohanty",
+    designation: "WebWiser Sub-Coordinator",
+    department: "Website Development Team",
+    image: AppConfig.imageUrls.Abhishek,
+    email: "abhishek_2312res891@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/abhishekiitp891",
+    description: "Played a key role in development, providing technical direction and implementing critical features that elevated the website's capabilities.",
   },
   {
-    name: "Shruti Kumari",
-    designation: "Analytical Arena Sub-Coordinator",
-    department: "Data Science",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "shruti.kumari@iitp.ac.in",
-    linkedin: "#",
-    team: "Analytical Arena",
-  },
-
-  // Cybersecurity Team
-  {
-    name: "Piyush Bhuyan",
-    designation: "Cybersecurity Coordinator",
-    department: "Cybersecurity",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "piyush.bhuyan@iitp.ac.in",
-    linkedin: "#",
-    team: "Cybersecurity",
+    name: "Hridyanand Gupta",
+    designation: "Treasurer",
+    department: "Website Development Team",
+    image: "/hridyanand.png",
+    email: "hridayanand_2312res301@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/hridayanand-gupta-abb501304/",
+    description: "Provided strategic oversight and quality assurance, ensuring the website met the highest standards of functionality and design excellence.",
   },
   {
-    name: "Vishnu Kr. Dhoni",
-    designation: "Cybersecurity Sub-Coordinator",
-    department: "Cybersecurity",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "vishnu.dhoni@iitp.ac.in",
-    linkedin: "#",
-    team: "Cybersecurity",
-  },
-
-  // App Dev Team
-  {
-    name: "Aaditya Sah",
-    designation: "App Dev Coordinator",
-    department: "Mobile App Development",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "aaditya.sah@iitp.ac.in",
-    linkedin: "#",
-    team: "App Dev",
-  },
-  {
-    name: "Aditya Prakash",
-    designation: "App Dev Sub-Coordinator",
-    department: "Mobile App Development",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "aditya.prakash@iitp.ac.in",
-    linkedin: "#",
-    team: "App Dev",
-  },
-];
-
-const _specializedTeams = [
-  // Session & Webinar Team
-  {
-    name: "Kumar Aayush",
-    designation: "Session & Webinar Coordinator",
-    department: "Educational Programs",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "kumar.aayush@iitp.ac.in",
-    linkedin: "#",
-    team: "Session & Webinar",
-  },
-  {
-    name: "Swastika Shukla",
-    designation: "Session & Webinar Sub-Coordinator",
-    department: "Educational Programs",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "swastika.shukla@iitp.ac.in",
-    linkedin: "#",
-    team: "Session & Webinar",
-  },
-
-  // Hackathon Team
-  {
-    name: "Ritu Raj",
-    designation: "Hackathon Coordinator",
-    department: "Competitive Events",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "ritu.raj@iitp.ac.in",
-    linkedin: "#",
-    team: "Hackathon",
-  },
-  {
-    name: "Prakriti Tripathi",
-    designation: "Hackathon Sub-Coordinator",
-    department: "Competitive Events",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "prakriti.tripathi@iitp.ac.in",
-    linkedin: "#",
-    team: "Hackathon",
-  },
-
-  // Tech News Team
-  {
-    name: "Udit Raj",
-    designation: "Tech News Coordinator",
-    department: "Content & Media",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "udit.raj@iitp.ac.in",
-    linkedin: "#",
-    team: "Tech News",
-  },
-  {
-    name: "Shakshi Kumari",
-    designation: "Tech News Sub-Coordinator",
-    department: "Content & Media",
-    image: "/placeholder.svg?height=300&width=300",
-    email: "shakshi.kumari@iitp.ac.in",
-    linkedin: "#",
-    team: "Tech News",
+    name: "Vatsal Srivastava",
+    designation: "Webwiser Member",
+    department: "Website Development Team",
+    image: AppConfig.imageUrls.VatsalWebWiser,
+    email: "vatsal_2313res728@iitp.ac.in",
+    linkedin: "https://www.linkedin.com/in/vatsalsrivastava-iitp",
+    description: "Delivered essential technical contributions and innovative solutions that were instrumental in the successful deployment of key website features.",
   },
 ];
 
@@ -997,6 +359,26 @@ export default function TeamPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
             {councilMembers.map((member, index) => (
+              <TeamMemberCard key={member.name} member={member} index={index} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/*Developers*/}
+      <section className="py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Our Developers
+            </h2>
+            <p className="text-xl text-gray-600">
+              Meet the Core Developers of Student Technical Council IIT Patna Hybrid Programs
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+            {developers.map((member, index) => (
               <TeamMemberCard key={member.name} member={member} index={index} />
             ))}
           </div>
