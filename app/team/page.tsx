@@ -69,7 +69,7 @@ const councilMembers = [
     email: "satyam_24a12res597@iitp.ac.in",
     linkedin: "https://www.linkedin.com/in/satyamkumariitp/",
     description:
-      "Overseeing editorial content and communications. Skilled in technical writing and media relations.",   
+      "Overseeing editorial content and communications. Skilled in technical writing and media relations.",
   },
   {
     name: "Ayush Jha",
@@ -110,72 +110,79 @@ const councilMembers = [
     linkedin: "https://www.linkedin.com/in/raunak-verma-7b365a2a3/",
     description:
       "Leading the Arthniti Cell and coordinating its activities. Skilled in financial analysis and team leadership.",
-  }
+  },
 ];
 
 const developers = [
   {
     name: "Ankit Kumar",
     designation: "Pixelerate Sub-Coordinator",
-    department: "Website Development Team",
+    department: "STC Development Team",
     image: AppConfig.imageUrls.Ankit,
     email: "ankit_24a12res103@iitp.ac.in",
     linkedin: "https://www.linkedin.com/in/ankit-kumar-0435b8257",
-    description: "Led Frontend development and provided crucial Backend support, ensuring seamless integration and optimal performance across the website.",
+    description:
+      "Led Frontend development and provided crucial Backend support, ensuring seamless integration and optimal performance across the website.",
   },
   {
     name: "Mandeep Nagar",
     designation: "WebWiser Member",
-    department: "Website Development Team",
+    department: "STC Development Team",
     image: AppConfig.imageUrls.Mandeep,
     email: "mandeep_25s12res200@iitp.ac.in",
     linkedin: "https://www.linkedin.com/in/mandeepnagar",
-    description: "Spearheaded Backend architecture while contributing to frontend components, focusing on creating a robust and scalable web application.",
+    description:
+      "Spearheaded Backend architecture while contributing to frontend components, focusing on creating a robust and scalable web application.",
   },
   {
     name: "Mohit Kumar",
     designation: "WebWiser Coordinator",
-    department: "Website Development Team",
+    department: "STC Development Team",
     image: AppConfig.imageUrls.MohitWebWiser,
     email: "mohit_2312res394@iitp.ac.in",
     linkedin: "https://www.linkedin.com/in/mohiitp",
-    description: "Provided expert guidance and technical insights throughout the development process, helping shape the website's architecture and features.",
+    description:
+      "Provided expert guidance and technical insights throughout the development process, helping shape the website's architecture and features.",
   },
   {
     name: "Abhijeet Kumar",
     designation: "Codered Sub-Coordinator",
-    department: "Website Development Team",
+    department: "STC Development Team",
     image: AppConfig.imageUrls.AbhijeetKumar,
     email: "abhijeet_2312res11@iitp.ac.in",
     linkedin: "https://www.linkedin.com/in/abhijeetiitp/",
-    description: "Contributed valuable expertise in web development, offering solutions and optimizations that enhanced the website's functionality and user experience.",
+    description:
+      "Contributed valuable expertise in web development, offering solutions and optimizations that enhanced the website's functionality and user experience.",
   },
   {
     name: "Abhishek Mohanty",
     designation: "WebWiser Sub-Coordinator",
-    department: "Website Development Team",
+    department: "STC Development Team",
     image: AppConfig.imageUrls.Abhishek,
     email: "abhishek_2312res891@iitp.ac.in",
     linkedin: "https://www.linkedin.com/in/abhishekiitp891",
-    description: "Played a key role in development, providing technical direction and implementing critical features that elevated the website's capabilities.",
+    description:
+      "Played a key role in development, providing technical direction and implementing critical features that elevated the website's capabilities.",
   },
   {
     name: "Hridyanand Gupta",
     designation: "Treasurer",
-    department: "Website Development Team",
+    department: "STC Development Team",
     image: "/hridyanand.png",
     email: "hridayanand_2312res301@iitp.ac.in",
     linkedin: "https://www.linkedin.com/in/hridayanand-gupta-abb501304/",
-    description: "Provided strategic oversight and quality assurance, ensuring the website met the highest standards of functionality and design excellence.",
+    description:
+      "Provided strategic oversight and quality assurance, ensuring the website met the highest standards of functionality and design excellence.",
   },
   {
     name: "Vatsal Srivastava",
     designation: "Webwiser Member",
-    department: "Website Development Team",
+    department: "STC Development Team",
     image: AppConfig.imageUrls.VatsalWebWiser,
     email: "vatsal_2313res728@iitp.ac.in",
     linkedin: "https://www.linkedin.com/in/vatsalsrivastava-iitp",
-    description: "Delivered essential technical contributions and innovative solutions that were instrumental in the successful deployment of key website features.",
+    description:
+      "Delivered essential technical contributions and innovative solutions that were instrumental in the successful deployment of key website features.",
   },
 ];
 
@@ -218,7 +225,6 @@ function TeamMemberCard({
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50 opacity-90 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-
       <div className="relative z-10 p-8">
         <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
           {/* Avatar */}
@@ -259,9 +265,7 @@ function TeamMemberCard({
           {/* Content */}
           <div className="flex-1 text-center md:text-left">
             <div className="mb-2">
-              <h3
-                className="text-2xl font-bold text-[#2e86c1] mb-1 group-hover:translate-x-1 transition-transform duration-300"
-              >
+              <h3 className="text-2xl font-bold text-[#2e86c1] mb-1 group-hover:translate-x-1 transition-transform duration-300">
                 {member.name}
               </h3>
               <p className="text-lg font-medium text-muted-foreground mb-1">
@@ -328,10 +332,18 @@ export default function TeamPage() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2
+              className="
+      text-4xl md:text-5xl font-extrabold 
+      text-[#1d4ed8] 
+      drop-shadow-sm 
+      mb-4 tracking-tight
+    "
+            >
               Core Leadership Team
             </h2>
-            <p className="text-xl text-gray-600">
+
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
               The executive leadership providing strategic direction and
               governance
             </p>
@@ -346,14 +358,23 @@ export default function TeamPage() {
       </section>
 
       {/* council Team */}
-       <section className="py-10">
+      <section className="py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2
+              className="
+      text-4xl md:text-5xl font-extrabold 
+      text-[#1d4ed8] 
+      drop-shadow-sm 
+      mb-4 tracking-tight
+    "
+            >
               Council Team
             </h2>
-            <p className="text-xl text-gray-600">
-              Meet the council team of Student Technical Council IIT Patna Hybrid Programs
+
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Meet the council team of Student Technical Council IIT Patna
+              Hybrid Programs
             </p>
           </div>
 
@@ -369,11 +390,20 @@ export default function TeamPage() {
       <section className="py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2
+              className="
+       text-4xl md:text-5xl font-extrabold 
+      text-[#1d4ed8] 
+      drop-shadow-sm 
+      mb-4 tracking-tight
+    "
+            >
               Our Developers
             </h2>
-            <p className="text-xl text-gray-600">
-              Meet the Core Developers of Student Technical Council IIT Patna Hybrid Programs
+
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Meet the Core Developers of Student Technical Council IIT Patna
+              Hybrid Programs
             </p>
           </div>
 
