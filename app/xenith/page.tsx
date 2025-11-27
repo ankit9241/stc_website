@@ -38,10 +38,15 @@ interface Event {
 
 // Xenith Countdown component
 const Countdown: React.FC = () => {
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
-    const target = new Date('2025-12-03T00:00:00').getTime();
+    const target = new Date("2025-12-03T00:00:00").getTime();
     const update = () => {
       const now = Date.now();
       const diff = target - now;
@@ -62,34 +67,119 @@ const Countdown: React.FC = () => {
   }, []);
 
   const units = [
-    { label: 'Days', value: timeLeft.days },
-    { label: 'Hours', value: timeLeft.hours },
-    { label: 'Minutes', value: timeLeft.minutes },
-    { label: 'Seconds', value: timeLeft.seconds },
+    { label: "Days", value: timeLeft.days },
+    { label: "Hours", value: timeLeft.hours },
+    { label: "Minutes", value: timeLeft.minutes },
+    { label: "Seconds", value: timeLeft.seconds },
   ];
 
   return (
-    <div className="mb-12">
-      <div className="max-w-4xl mx-auto text-center">
-        <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#ba9efe] via-[#d4b3ff] to-[#ba9efe]">
-          Xenith Countdown
-        </h3>
-        <p className="text-gray-300 mt-2">Event starts on December 3, 2025</p>
+    <div className="max-w-4xl mx-auto py-8 px-4">
+      <div className="mb-8 text-center">
+        <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 bg-gradient-to-r from-[#22143a]/40 to-[#0b1228]/40 border border-white/10 backdrop-blur-sm shadow-[0_0_18px_rgba(167,139,250,0.25)]">
+          <svg
+            className="w-4 h-4 text-[#e8d8ff] drop-shadow-[0_0_6px_rgba(212,179,255,0.9)]"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden
+          >
+            <circle
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeOpacity="0.8"
+              strokeWidth="1.8"
+            />
+            <path
+              d="M12 7v6l4 2"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
 
-        <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-          {units.map((u) => (
-            <div key={u.label} className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#ba9efe]/10 to-[#6366f1]/10 rounded-2xl blur-xl"></div>
-              <div className="relative bg-gradient-to-br from-[#0c1228]/80 to-[#071027]/80 border border-[#ba9efe]/20 rounded-2xl p-6">
-                <div className="text-3xl md:text-4xl font-mono font-bold text-transparent bg-clip-text bg-gradient-to-br from-[#ba9efe] to-[#6366f1]">
-                  {String(u.value).padStart(2, '0')}
-                </div>
-                <div className="text-sm text-gray-400 uppercase mt-2">{u.label}</div>
-              </div>
-            </div>
-          ))}
+          <span className="text-sm text-gray-300">
+            Event starts on <b>Dec 3, 2025</b>
+          </span>
         </div>
       </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-24">
+        {units.map((u) => (
+          <div
+            key={u.label}
+            className="relative flex items-center justify-center"
+          >
+            <div className="w-full">
+              <div
+                className={`
+              rounded-2xl p-5 text-center
+              bg-gradient-to-b from-white/5 to-white/2
+              border border-white/10 backdrop-blur-sm
+
+              /* constant glow always visible */
+              shadow-[0_0_22px_rgba(167,139,250,0.28)]
+
+              /* slightly stronger glow on hover */
+              hover:shadow-[0_0_45px_rgba(167,139,250,0.45)]
+              hover:border-white/20
+
+              transition-all duration-300 ease-out
+            `}
+              >
+                <div className="flex items-center justify-center" aria-hidden>
+                  <div className="relative">
+                    <div
+                      className="absolute inset-0 rounded-full blur-2xl animate-pulse-slow"
+                      style={{
+                        background:
+                          "linear-gradient(135deg,#ba9efe33,#6366f120)",
+                      }}
+                    />
+                    <div
+                      className="relative text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight"
+                      style={{
+                        background:
+                          "linear-gradient(90deg,#ba9efe 0%, #d4b3ff 40%, #6366f1 100%)",
+                        WebkitBackgroundClip: "text",
+                        color: "transparent",
+                      }}
+                    >
+                      {String(u.value).padStart(2, "0")}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-3 text-xs md:text-sm uppercase tracking-wider text-gray-300">
+                  {u.label}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <style jsx>{`
+        .animate-pulse-slow {
+          animation: pulseSlow 3.6s ease-in-out infinite;
+        }
+        @keyframes pulseSlow {
+          0% {
+            transform: scale(1);
+            opacity: 0.85;
+          }
+          50% {
+            transform: scale(1.06);
+            opacity: 0.6;
+          }
+          100% {
+            transform: scale(1);
+            opacity: 0.85;
+          }
+        }
+      `}</style>
     </div>
   );
 };
@@ -387,7 +477,7 @@ const Page = () => {
 
             {/* Events section */}
             <div
-              className="min-h-screen w-full bg-black relative overflow-hidden py-20"
+              className="min-h-screen w-full bg-black relative overflow-hidden py-10"
               id="events"
             >
               <div className="absolute inset-0 pointer-events-none">
