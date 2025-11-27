@@ -32,7 +32,7 @@ const XenithNav = () => {
           {['About', 'Events', 'Sponsors', 'Contact'].map((item) => (
             <Link 
               key={item}
-              href={`#${item.toLowerCase()}`} 
+              href={`/xenith#${item.toLowerCase()}`} 
               className="relative px-5 py-3 text-base font-semibold text-gray-200 hover:text-white transition-all duration-300 group"
               onClick={closeMenu}
             >
