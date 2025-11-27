@@ -36,6 +36,64 @@ interface Event {
   _isEventEnded?: boolean;
 }
 
+// Xenith Countdown component
+const Countdown: React.FC = () => {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    const target = new Date('2025-12-03T00:00:00').getTime();
+    const update = () => {
+      const now = Date.now();
+      const diff = target - now;
+      if (diff <= 0) {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        return;
+      }
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+      setTimeLeft({ days, hours, minutes, seconds });
+    };
+
+    update();
+    const t = setInterval(update, 1000);
+    return () => clearInterval(t);
+  }, []);
+
+  const units = [
+    { label: 'Days', value: timeLeft.days },
+    { label: 'Hours', value: timeLeft.hours },
+    { label: 'Minutes', value: timeLeft.minutes },
+    { label: 'Seconds', value: timeLeft.seconds },
+  ];
+
+  return (
+    <div className="mb-12">
+      <div className="max-w-4xl mx-auto text-center">
+        <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#ba9efe] via-[#d4b3ff] to-[#ba9efe]">
+          Xenith Countdown
+        </h3>
+        <p className="text-gray-300 mt-2">Event starts on December 3, 2025</p>
+
+        <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+          {units.map((u) => (
+            <div key={u.label} className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#ba9efe]/10 to-[#6366f1]/10 rounded-2xl blur-xl"></div>
+              <div className="relative bg-gradient-to-br from-[#0c1228]/80 to-[#071027]/80 border border-[#ba9efe]/20 rounded-2xl p-6">
+                <div className="text-3xl md:text-4xl font-mono font-bold text-transparent bg-clip-text bg-gradient-to-br from-[#ba9efe] to-[#6366f1]">
+                  {String(u.value).padStart(2, '0')}
+                </div>
+                <div className="text-sm text-gray-400 uppercase mt-2">{u.label}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Page = () => {
   const { scrollYProgress } = useScroll();
   const translateY = useTransform(scrollYProgress, [0, 0.3], ["0%", "100%"]);
@@ -334,7 +392,6 @@ const Page = () => {
             >
               <div className="absolute inset-0 pointer-events-none">
                 {Array.from({ length: 200 }).map((_, index) => {
-                  // Use a simple hash function to generate deterministic values based on index
                   const hash = (index * 9301 + 49297) % 233280;
                   const random = (seed: number) => {
                     const x = Math.sin(seed) * 10000;
@@ -365,6 +422,7 @@ const Page = () => {
               </div>
 
               <div className="relative z-10 container mx-auto px-4 md:px-12 lg:px-20 pt-4">
+                <Countdown />
                 <div className="text-center mb-12 md:mb-16">
                   <div className="flex items-center justify-center gap-3 mb-4">
                     <div className="h-1 w-8 md:w-12 bg-gradient-to-r from-transparent to-[#ba9efe]"></div>
